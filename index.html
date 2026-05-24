@@ -3,332 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOBI | Plataforma de Alta Performance Imobiliária</title>
+    <title>IMOBI | Portal de Negócios Imobiliários - Partner Holding</title>
     <style>
         :root {
-            /* Palette Fusão: Deep Tech Tesla + Cores Dinâmicas Google */
-            --bg-base: #060913;
-            --bg-surface: #0c1220;
-            --bg-card: #121b2d;
-            --bg-input: #18253f;
-            
-            --tesla-red: #e82127;
-            --google-blue: #1a73e8;
-            --google-green: #0f9d58;
-            --google-yellow: #f4b400;
-            
-            --primary: #00f0ff; /* Neon Cyber Aladin */
-            --premium-gold: #ffd700;
-            --text-main: #f5f7fa;
-            --text-muted: #8a99ad;
-            --border-glow: rgba(0, 240, 255, 0.2);
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --bg-main: #060b13;
+            --bg-card: #0d1527;
+            --bg-input: #15223b;
+            --primary: #c5a880; /* Dourado Champagne Premium */
+            --primary-hover: #b39368;
+            --accent-cyan: #00f0ff; /* Toque tecnológico Protocolo Aladin */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: #1e293b;
+            --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: var(--font);
+            font-family: var(--font-family);
             -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-base);
+            background-color: var(--bg-main);
             color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        /* Elementos Elementares 3D de Fundo */
-        .glass-glow-1 {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(232, 33, 39, 0.08) 0%, rgba(26, 115, 232, 0.03) 50%, transparent 100%);
-            top: -10%; right: -10%; z-index: -1; pointer-events: none;
-        }
-        .glass-glow-2 {
+        /* Efeitos Biônicos de Brilho de Fundo */
+        .glow-bg {
             position: fixed;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, rgba(15, 157, 88, 0.02) 60%, transparent 100%);
-            bottom: -20%; left: -10%; z-index: -1; pointer-events: none;
+            background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, rgba(0, 240, 255, 0.02) 50%, rgba(0,0,0,0) 100%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-bg-left {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.04) 0%, rgba(197, 168, 128, 0.01) 50%, rgba(0,0,0,0) 100%);
+            bottom: -100px;
+            left: -100px;
+            z-index: -1;
+            pointer-events: none;
         }
 
-        /* Header Estilo Vidro Aeroespacial */
+        /* Header / Navbar */
         header {
-            background: rgba(12, 18, 32, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: rgba(6, 11, 19, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
-            top: 0; z-index: 1000;
-            padding: 1.2rem 2.5rem;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .brand {
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             cursor: pointer;
         }
 
-        .brand-logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #fff 20%, var(--primary) 70%, var(--tesla-red));
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 70%, var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .brand-sub {
-            font-size: 0.7rem;
-            color: var(--text-muted);
+        .logo-sub {
+            font-size: 0.65rem;
+            color: var(--accent-cyan);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            display: block;
+            margin-top: -2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+        }
+
+        .nav-btn.active {
+            background-color: rgba(197, 168, 128, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: #060b13;
+            font-weight: 600;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+        }
+
+        /* Container Principal */
+        .main-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Seções de Visualização */
+        .app-view {
+            display: none;
+        }
+
+        .app-view.active-view {
             display: block;
         }
 
-        nav { display: flex; gap: 1.2rem; align-items: center; }
-
-        .nav-link {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-        }
-
-        .btn-action {
-            background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%);
-            color: white;
-            font-weight: 700;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.5);
-        }
-
-        /* Banner de Monetização Comercial */
-        .pricing-badge {
-            background: linear-gradient(90deg, rgba(244, 180, 0, 0.15) 0%, rgba(0, 240, 255, 0.1) 100%);
-            border: 1px solid var(--premium-gold);
-            color: var(--premium-gold);
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 5px rgba(254, 215, 0, 0.2); }
-            100% { box-shadow: 0 0 15px rgba(254, 215, 0, 0.5); }
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 2.5rem auto;
-            padding: 0 2rem;
-        }
-
-        .view-section { display: none; }
-        .view-section.active-view { display: block; }
-
-        /* Hero Showcase */
-        .hero {
+        /* Vitrine / Landing Page */
+        .hero-section {
             text-align: center;
-            padding: 4rem 1rem 3rem 1rem;
-            position: relative;
+            padding: 3rem 1rem;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: -1.5px;
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
-        .hero h1 span {
-            background: linear-gradient(90deg, var(--primary), var(--google-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero-title span {
+            color: var(--primary);
         }
 
-        /* Painel 3D de Busca */
-        .search-hub {
-            background: rgba(18, 27, 45, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 1.8rem;
-            border-radius: 20px;
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Barra de Filtros */
+        .filter-bar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            border-radius: 12px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
+            gap: 1rem;
             align-items: flex-end;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .input-group {
+        .filter-group {
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
-        .input-group label {
-            font-size: 0.75rem;
-            font-weight: 700;
+        .filter-group label {
+            font-size: 0.8rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        .input-group input, .input-group select, .input-group textarea {
-            background: var(--bg-input);
-            border: 1px solid rgba(255,255,255,0.05);
+        .filter-group select, .filter-group input {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 0.9rem;
-            border-radius: 10px;
+            padding: 0.75rem;
+            border-radius: 6px;
             outline: none;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .input-group input:focus, .input-group select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+            font-size: 0.95rem;
         }
 
         /* Grid de Imóveis */
-        .grid-wrapper {
+        .property-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 16px;
+        .property-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: var(--border-glow);
-            box-shadow: 0 25px 50px rgba(0, 240, 255, 0.15);
+        .property-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(197, 168, 128, 0.4);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
         }
 
-        .card-badge {
+        .property-tag {
             position: absolute;
-            top: 20px; left: 20px;
-            background: rgba(6, 9, 19, 0.85);
+            top: 15px;
+            left: 15px;
+            background-color: rgba(6, 11, 19, 0.85);
             border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 0.4rem 0.9rem;
-            border-radius: 30px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 800;
-            z-index: 10;
+            font-weight: 700;
             text-transform: uppercase;
+            z-index: 5;
+            backdrop-filter: blur(4px);
         }
 
-        .card-media-mock {
-            height: 230px;
-            background: linear-gradient(135deg, #18253f 0%, #0c1220 100%);
+        .property-img-mock {
+            height: 220px;
+            background: linear-gradient(135deg, #15223b 0%, #0d1527 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             color: rgba(255,255,255,0.05);
         }
 
-        .video-indicator {
-            position: absolute;
-            bottom: 15px; right: 15px;
-            background: var(--tesla-red);
-            color: white;
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center; gap: 4px;
+        .property-img-mock svg {
+            width: 70px;
+            height: 70px;
+            fill: currentColor;
         }
 
-        .card-body {
-            padding: 2rem;
+        .property-info {
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
-        .card-price {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin: 1rem 0;
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
+        .property-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        /* Estrutura Auth */
-        .auth-container {
-            max-width: 500px;
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-location svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--primary);
+        }
+
+        /* Caixa de Detalhes do Ágio */
+        .agio-details-box {
+            background-color: rgba(0, 240, 255, 0.03);
+            border: 1px dashed rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .agio-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+        }
+
+        .agio-label {
+            color: var(--text-muted);
+        }
+
+        .agio-value {
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: auto;
+            margin-bottom: 1rem;
+        }
+
+        .property-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .owner-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .owner-avatar {
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary);
+            color: #060b13;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        /* Formulários Auth */
+        .auth-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            max-width: 450px;
             margin: 4rem auto;
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .auth-tabs {
             display: flex;
-            gap: 1rem;
-            border-bottom: 2px solid var(--bg-input);
-            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
         }
 
         .auth-tab {
-            padding: 0.8rem 1.5rem;
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
             cursor: pointer;
             color: var(--text-muted);
-            font-weight: 700;
-            transition: all 0.2s;
+            font-weight: 600;
         }
 
         .auth-tab.active {
@@ -336,376 +398,479 @@
             border-bottom: 2px solid var(--primary);
         }
 
-        /* Dashboard de Negócios */
-        .dash-layout {
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 6px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        /* Dashboard */
+        .dashboard-layout {
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2.5rem;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
         }
 
         .dash-sidebar {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 16px;
-            padding: 2rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
             height: fit-content;
         }
 
-        .dash-menu-item {
+        .user-profile-summary {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .user-profile-summary .avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-cyan) 100%);
+            border-radius: 50%;
+            margin: 0 auto 0.8rem auto;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 0.9rem 1.2rem;
-            border-radius: 10px;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #060b13;
+        }
+
+        .user-role-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            background-color: rgba(197, 168, 128, 0.15);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .dash-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dash-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
             cursor: pointer;
             color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-weight: 500;
             transition: all 0.2s;
         }
 
-        .dash-menu-item.active, .dash-menu-item:hover {
-            background: var(--bg-input);
+        .dash-nav-item:hover, .dash-nav-item.active {
+            background-color: var(--bg-input);
             color: var(--text-main);
         }
 
-        .dash-menu-item.active {
-            border-left: 4px solid var(--tesla-red);
+        .dash-nav-item.active {
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
         }
 
-        .main-dash-content {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 16px;
-            padding: 2.5rem;
-            min-height: 600px;
-        }
-
-        /* Modais Holográficos */
-        .modal-blur {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 7, 13, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 5000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-blur.active { opacity: 1; pointer-events: auto; }
-
-        .modal-window {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            width: 100%;
-            max-width: 800px;
-            padding: 2.5rem;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .video-box-container {
-            width: 100%;
-            height: 300px;
-            background: #000;
+        .dash-content-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            margin: 1.5rem 0;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .dash-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
         }
 
-        .billing-warning-banner {
-            background: linear-gradient(90deg, var(--tesla-red) 0%, #990004 100%);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: none;
-            font-weight: 600;
+        /* Tabelas Leads */
+        .analytics-table-wrapper {
+            overflow-x: auto;
         }
 
-        /* Tabelas Avançadas */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1.5rem;
+            text-align: left;
+            font-size: 0.9rem;
         }
+
         th {
-            background: var(--bg-input);
-            padding: 1rem;
+            background-color: var(--bg-input);
             color: var(--text-muted);
+            padding: 0.75rem 1rem;
+            font-weight: 600;
             text-transform: uppercase;
             font-size: 0.75rem;
-            font-weight: 700;
-            text-align: left;
         }
-        td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.9rem; }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .origin-badge {
+            background-color: rgba(0, 240, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Modais */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 11, 19, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .map-mock-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            height: 200px;
+        }
+
+        .map-box {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .share-box {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .share-url {
+            font-family: monospace;
+            color: var(--accent-cyan);
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
         footer {
-            text-align: center;
-            padding: 3rem;
-            margin-top: 5rem;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.75rem;
             color: var(--text-muted);
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        footer svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-layout { grid-template-columns: 1fr; }
+            .filter-bar { grid-template-columns: 1fr; }
+            .map-mock-container { grid-template-columns: 1fr; height: 350px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-glow-1"></div>
-    <div class="glass-glow-2"></div>
+    <div class="glow-bg"></div>
+    <div class="glow-bg-left"></div>
 
     <header>
-        <div class="brand" onclick="app.navigate('landing')">
+        <div class="logo-container" onclick="app.changeView('landing')">
             <div>
-                <span class="brand-logo">IMOBI</span>
-                <span class="brand-sub">Partner Holding</span>
+                <span class="logo-text">IMOBI</span>
+                <span class="logo-sub">Partner Holding</span>
             </div>
         </div>
-        <div class="pricing-badge">
-            ⚡ 1º MÊS GRÁTIS — Após R$ 9,99/mês
-        </div>
-        <nav>
-            <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
-            <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
-            <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
-            <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
-                <span id="header-user-name" style="font-weight: 700; color: var(--primary);"></span>
-                <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Desconectar</button>
+        <nav id="main-nav">
+            <button class="nav-btn active" onclick="app.changeView('landing')">Explorar Imóveis</button>
+            <button class="nav-btn" id="nav-dash-link" onclick="app.changeView('dashboard')" style="display: none;">Meu Painel</button>
+            <button class="btn-primary" id="login-nav-btn" onclick="app.changeView('auth')">Acessar Conta</button>
+            <div id="user-logged-menu" style="display: none; align-items: center; gap: 1rem;">
+                <span id="user-display-name" style="font-weight: 600; color: var(--primary);"></span>
+                <button class="nav-btn" onclick="app.logout()" style="color: var(--danger);">Sair</button>
             </div>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="main-container">
 
-        <section id="sec-landing" class="view-section active-view">
-            <div class="hero">
-                <h1>Plataforma Inteligente de <span>Imóveis & Ágios</span></h1>
-                <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">Conectando inteligência artificial Aladin, proprietários e profissionais de elite do Distrito Federal e Entorno.</p>
+        <section id="view-landing" class="app-view active-view">
+            <div class="hero-section">
+                <h1 class="hero-title">Encontre seu Imóvel ou <span>Oportunidade de Ágio</span></h1>
+                <p class="hero-subtitle">Conectando consultores, corretores e imobiliárias na plataforma de alta performance da Partner Holding.</p>
             </div>
 
-            <div class="search-hub">
-                <div class="input-group">
-                    <label>Negociação</label>
-                    <select id="search-type" onchange="app.executeSearch()">
-                        <option value="">Todas as modalidades</option>
-                        <option value="Ágio">Ágios de Imóveis</option>
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Modalidade</label>
+                    <select id="filter-type" onchange="app.filterProperties()">
+                        <option value="">Todos os Tipos</option>
+                        <option value="Ágio">Ágio</option>
                         <option value="Venda">Venda Direta</option>
-                        <option value="Aluguel">Aluguel Residencial</option>
+                        <option value="Aluguel">Aluguel</option>
                     </select>
                 </div>
-                <div class="input-group">
-                    <label>Localização Geográfica</label>
-                    <input type="text" id="search-location" placeholder="Cidade, DF ou Setor..." oninput="app.executeSearch()">
+                <div class="filter-group">
+                    <label>Localização</label>
+                    <input type="text" id="filter-location" placeholder="Cidade, DF ou Entorno..." oninput="app.filterProperties()">
                 </div>
-                <div class="input-group">
-                    <label>Teto de Investimento</label>
-                    <input type="number" id="search-price" placeholder="R$ Limite Máximo" oninput="app.executeSearch()">
+                <div class="filter-group">
+                    <label>Preço Máximo</label>
+                    <input type="number" id="filter-price" placeholder="R$" oninput="app.filterProperties()">
                 </div>
-                <button class="btn-action" onclick="app.clearSearchFilters()" style="background: var(--bg-input); box-shadow: none; border: 1px solid rgba(255,255,255,0.1);">Limpar Filtros</button>
+                <button class="btn-primary" onclick="app.clearFilters()" style="background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border)">Limpar</button>
             </div>
 
-            <div class="grid-wrapper" id="public-properties-grid"></div>
+            <div class="property-grid" id="landing-properties-grid"></div>
         </section>
 
-        <section id="sec-auth" class="view-section">
-            <div class="auth-container">
+        <section id="view-auth" class="app-view">
+            <div class="auth-card">
                 <div class="auth-tabs">
-                    <div class="auth-tab active" id="tab-auth-login" onclick="app.toggleAuthMode('login')">Acessar Conta</div>
-                    <div class="auth-tab" id="tab-auth-reg" onclick="app.toggleAuthMode('register')">Novo Cadastro</div>
+                    <div class="auth-tab active" id="tab-login" onclick="app.setAuthTab('login')">Entrar</div>
+                    <div class="auth-tab" id="tab-register" onclick="app.setAuthTab('register')">Cadastrar-se</div>
                 </div>
 
-                <form id="form-auth-login" onsubmit="app.actionLogin(event)">
-                    <div class="input-group" style="margin-bottom: 1.5rem;">
-                        <label>Credencial de Acesso (E-mail ou CPF)</label>
-                        <input type="text" id="log-credential" required placeholder="Digite sua credencial">
+                <form id="form-login" onsubmit="app.handleLogin(event)">
+                    <div class="form-group">
+                        <label>CPF ou E-mail</label>
+                        <input type="text" id="login-identifier" required placeholder="Digite seu CPF ou e-mail">
                     </div>
-                    <div class="input-group" style="margin-bottom: 2rem;">
-                        <label>Senha de Segurança</label>
-                        <input type="password" id="log-password" required placeholder="••••••••">
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
                     </div>
-                    <button type="submit" class="btn-action" style="width: 100%;">Autenticar Assinatura</button>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Entrar no Ecossistema</button>
                 </form>
 
-                <form id="form-auth-reg" onsubmit="app.actionRegister(event)" style="display: none;">
-                    <div class="input-group" style="margin-bottom: 1.2rem;">
-                        <label>Nome Completo / Razão Social</label>
-                        <input type="text" id="reg-name" required placeholder="Nome do Responsável">
+                <form id="form-register" onsubmit="app.handleRegister(event)" style="display: none;">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="reg-name" required placeholder="Ex: Cristian Ribeiro">
                     </div>
-                    <div class="input-group" style="margin-bottom: 1.2rem;">
-                        <label>E-mail Corporativo</label>
-                        <input type="email" id="reg-email" required placeholder="nome@provedor.com">
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="reg-email" required placeholder="nome@exemplo.com">
                     </div>
-                    <div class="input-group" style="margin-bottom: 1.2rem;">
-                        <label>CPF ou CNPJ</label>
-                        <input type="text" id="reg-taxid" required placeholder="Apenas números">
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" id="reg-cpf" required placeholder="000.000.000-00">
                     </div>
-                    <div class="input-group" style="margin-bottom: 1.2rem;">
-                        <label>Perfil do Usuário</label>
-                        <select id="reg-role" onchange="app.handleRoleChange(this.value)" required>
-                            <option value="Consultor">Consultor Corporativo</option>
-                            <option value="Corretor">Corretor de Imóveis (Autônomo)</option>
-                            <option value="Imobiliária">Imobiliária / Pessoa Jurídica</option>
-                            <option value="Proprietário">Proprietário Direto</option>
-                            <option value="Admin">Administrador Master da Rede</option>
+                    <div class="form-group">
+                        <label>Perfil Profissional</label>
+                        <select id="reg-role" onchange="app.toggleCreciField(this.value)" required>
+                            <option value="Consultor">Consultor (Postagens e Captação)</option>
+                            <option value="Corretor">Corretor Autônomo (Exige CRECI)</option>
+                            <option value="Imobiliária">Imobiliária / PJ (Exige CRECI)</option>
                         </select>
                     </div>
-                    <div class="input-group" id="group-creci-field" style="margin-bottom: 1.2rem; display: none;">
-                        <label>Inscrição Regulação (CRECI)</label>
-                        <input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 0000">
+                    <div class="form-group" id="creci-group" style="display: none;">
+                        <label>Número do CRECI</label>
+                        <input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 12345">
                     </div>
-                    <div class="input-group" style="margin-bottom: 2rem;">
-                        <label>Senha Criptografada</label>
-                        <input type="password" id="reg-password" required placeholder="Mínimo de 6 dígitos">
+                    <div class="form-group">
+                        <label>Senha de Acesso</label>
+                        <input type="password" id="reg-password" required placeholder="Mínimo 6 caracteres">
                     </div>
-                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%); box-shadow: 0 4px 15px rgba(15,157,88,0.3)">Finalizar Cadastro Seguro</button>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Criar Conta</button>
                 </form>
             </div>
         </section>
 
-        <section id="sec-dashboard" class="view-section">
-            <div class="dash-layout">
+        <section id="view-dashboard" class="app-view">
+            <div class="dashboard-layout">
                 <aside class="dash-sidebar">
-                    <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                        <div style="width: 70px; height: 70px; background: var(--bg-input); border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--primary); font-size: 1.5rem; font-weight: 800;" id="dash-avatar-txt">U</div>
-                        <h4 id="dash-user-name">Carregando...</h4>
-                        <span id="dash-user-badge" style="background: var(--tesla-red); font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 900; text-transform: uppercase;">Acesso</span>
+                    <div class="user-profile-summary">
+                        <div class="avatar" id="dash-avatar">U</div>
+                        <h3 id="dash-user-name">Usuário</h3>
+                        <span class="user-role-badge" id="dash-user-role">Consultor</span>
                     </div>
-                    <div id="dash-menu-box">
-                        <div class="dash-menu-item active" id="menu-sub-portfolio" onclick="app.switchDashTab('portfolio')">Meu Portfólio</div>
-                        <div class="dash-menu-item" id="menu-sub-add" onclick="app.switchDashTab('add')">Novo Imóvel</div>
-                        <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Capturados</div>
-                        <div class="dash-menu-item" id="menu-sub-billing" onclick="app.switchDashTab('billing')">Assinatura & Faturamento</div>
-                        <div class="dash-menu-item" id="menu-sub-admin" onclick="app.switchDashTab('admin')" style="display: none; border-left: 3px solid var(--premium-gold); color: var(--premium-gold);">Painel Admin Global</div>
-                    </div>
+                    <nav class="dash-nav">
+                        <div class="dash-nav-item active" id="dash-menu-my" onclick="app.setDashTab('my-properties')">Meus Imóveis</div>
+                        <div class="dash-nav-item" id="dash-menu-add" onclick="app.setDashTab('add-property')">Cadastrar Imóvel</div>
+                        <div class="dash-nav-item" id="dash-menu-leads" onclick="app.setDashTab('leads')">Leads & Captação</div>
+                    </nav>
                 </aside>
 
-                <main class="main-dash-content">
-                    <div class="billing-warning-banner" id="dash-billing-alert">
-                        ⚠️ Atenção: Sua fatura mensal de R$ 9,99 está vencida. Regularize via PIX para reativar os links de tráfego.
+                <main class="dash-content-box">
+                    <div id="dash-tab-my-properties" class="dash-tab-content">
+                        <div class="dash-header">
+                            <h2>Seu Portfólio Ativo</h2>
+                            <button class="btn-primary" onclick="app.setDashTab('add-property')">+ Novo Imóvel</button>
+                        </div>
+                        <div class="property-grid" id="dash-my-properties-grid"></div>
                     </div>
 
-                    <div class="tab-dash-view" id="dash-tab-portfolio">
-                        <h2 style="margin-bottom: 1.5rem;">Seu Portfólio de Imóveis Ativos</h2>
-                        <div class="grid-wrapper" id="dash-portfolio-grid"></div>
-                    </div>
-
-                    <div class="tab-dash-view" id="dash-tab-add" style="display: none;">
-                        <h2 style="margin-bottom: 1.5rem;">Cadastrar Propriedade no Ecossistema</h2>
-                        <form id="form-property-create" onsubmit="app.actionCreateProperty(event)">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
-                                <div class="input-group">
-                                    <label>Título Descritivo do Anúncio</label>
-                                    <input type="text" id="p-title" required placeholder="Ex: Lote Comercial Águas Lindas">
+                    <div id="dash-tab-add-property" class="dash-tab-content" style="display: none;">
+                        <div class="dash-header">
+                            <h2>Cadastrar Nova Propriedade</h2>
+                        </div>
+                        <form id="form-add-property" onsubmit="app.handleCreateProperty(event)">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label>Título do Anúncio</label>
+                                    <input type="text" id="prop-title" required placeholder="Ex: Apartamento Premium 3 Qts">
                                 </div>
-                                <div class="input-group">
-                                    <label>Modalidade Operacional</label>
-                                    <select id="p-type" onchange="app.togglePropertyAgioForm(this.value)" required>
+                                <div class="form-group">
+                                    <label>Modalidade</label>
+                                    <select id="prop-type" onchange="app.toggleAddPropertyAgioFields(this.value)" required>
                                         <option value="Venda">Venda Direta</option>
                                         <option value="Ágio">Negociação de Ágio</option>
-                                        <option value="Aluguel">Contrato de Aluguel</option>
+                                        <option value="Aluguel">Aluguel</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div id="p-agio-panel" style="display: none; background: rgba(0, 240, 255, 0.02); border: 1px dashed var(--primary); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
-                                <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 1rem;">Estrutura Financeira do Ágio</h3>
+                            <div id="prop-agio-fields" style="display: none; background: rgba(0,240,255,0.02); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 1.2rem;">
+                                <h4 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 0.9rem;">Métricas Financeiras do Ágio</h4>
                                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                                    <div class="input-group">
-                                        <label>Valor Investido (Pedida do Ágio)</label>
-                                        <input type="number" id="p-agio-v">
+                                    <div class="form-group">
+                                        <label>Valor do Ágio (Já Pago)</label>
+                                        <input type="number" id="prop-agio-valor" placeholder="R$">
                                     </div>
-                                    <div class="input-group">
-                                        <label>Saldo Devedor na Instituição</label>
-                                        <input type="number" id="p-agio-s">
+                                    <div class="form-group">
+                                        <label>Saldo Devedor Restante</label>
+                                        <input type="number" id="prop-agio-saldo" placeholder="R$">
                                     </div>
-                                    <div class="input-group">
-                                        <label>Encargo da Parcela Mensal</label>
-                                        <input type="number" id="p-agio-p">
+                                    <div class="form-group">
+                                        <label>Valor da Parcela</label>
+                                        <input type="number" id="prop-agio-parcela" placeholder="R$">
                                     </div>
                                 </div>
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
-                                <div class="input-group">
-                                    <label>Preço Total de Face (R$)</label>
-                                    <input type="number" id="p-price" required placeholder="Valor integral">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label>Preço de Face / Pedido</label>
+                                    <input type="number" id="prop-price" required placeholder="R$">
                                 </div>
-                                <div class="input-group">
-                                    <label>Endereço Completo / Localização</label>
-                                    <input type="text" id="p-location" required placeholder="Cidade - UF">
+                                <div class="form-group">
+                                    <label>Localização / Endereço</label>
+                                    <input type="text" id="prop-location" required placeholder="Ex: Águas Claras, Brasília - DF">
                                 </div>
                             </div>
 
-                            <div class="input-group" style="margin-bottom: 1.2rem;">
-                                <label>URL do Vídeo Demonstrativo (YouTube / Link Direto MP4)</label>
-                                <input type="url" id="p-video" placeholder="https://youtube.com/watch?v=...">
+                            <div class="form-group">
+                                <label>Descrição do Portfólio</label>
+                                <textarea id="prop-description" rows="4" required placeholder="Detalhes de taxas, parcelas, infraestrutura..."></textarea>
                             </div>
 
-                            <div class="input-group" style="margin-bottom: 2rem;">
-                                <label>Memorial Descritivo do Imóvel</label>
-                                <textarea id="p-desc" rows="4" required placeholder="Descreva os diferenciais, taxas de condomínio, infraestrutura..."></textarea>
-                            </div>
-
-                            <button type="submit" class="btn-action">Publicar Catálogo Imediatamente</button>
+                            <button type="submit" class="btn-primary">Ativar e Publicar Catálogo</button>
                         </form>
                     </div>
 
-                    <div class="tab-dash-view" id="dash-tab-leads" style="display: none;">
-                        <h2 style="margin-bottom: 0.5rem;">Rastreamento e Inteligência de Tráfego</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Dados coletados pelo Firewall Aladin IA para conversão direta via WhatsApp.</p>
-                        <div style="overflow-x: auto;">
+                    <div id="dash-tab-leads" class="dash-tab-content" style="display: none;">
+                        <div class="dash-header">
+                            <h2>Rastreamento de Inteligência de Tráfego</h2>
+                        </div>
+                        <div class="analytics-table-wrapper">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Nome Intermediário</th>
-                                        <th>Canal WhatsApp</th>
-                                        <th>Imóvel Solicitado</th>
-                                        <th>Ponto de Origem</th>
+                                        <th>Lead</th>
+                                        <th>Contato</th>
+                                        <th>Imóvel Alvo</th>
+                                        <th>Origem / Tráfego</th>
+                                        <th>Dispositivo</th>
                                         <th>Data/Hora</th>
                                     </tr>
                                 </thead>
-                                <tbody id="leads-table-rows"></tbody>
+                                <tbody id="table-leads-body"></tbody>
                             </table>
-                        </div>
-                    </div>
-
-                    <div class="tab-dash-view" id="dash-tab-billing" style="display: none;">
-                        <h2 style="margin-bottom: 1.5rem;">Gestão de Conta & Faturamento</h2>
-                        <div style="background: var(--bg-input); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-                            <p style="margin-bottom: 1rem;">Status Atual: <b style="color: var(--google-green);" id="billing-status-lbl">Período de Testes Ativo (30 Dias Grátis)</b></p>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem;">Sua próxima recorrência automática de <b>R$ 9,99/mês</b> será lançada em sua fatura após o término da avaliação.</p>
-                            <button class="btn-action" style="background: var(--tesla-red); box-shadow: none;" onclick="app.simulateBillingExpiration()">Simular Fatura Vencida (Teste de Alerta)</button>
-                            <button class="btn-action" style="background: var(--google-blue); margin-left: 10px;" onclick="app.resetBilling()">Liquidar Débito / Ativar</button>
-                        </div>
-                    </div>
-
-                    <div class="tab-dash-view" id="dash-tab-admin" style="display: none;">
-                        <h2 style="margin-bottom: 1.5rem; color: var(--premium-gold);">Painel de Controle do Administrador Master</h2>
-                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Visão agregada de infraestrutura do ecossistema IA-MOBI.</p>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem;">
-                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                                <h3 style="font-size: 2rem;" id="admin-stat-users">0</h3>
-                                <span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span>
-                            </div>
-                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                                <h3 style="font-size: 2rem;" id="admin-stat-props">0</h3>
-                                <span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span>
-                            </div>
-                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
-                                <h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3>
-                                <span style="font-size: 0.8rem; color: var(--text-muted);">Leads Convertidos</span>
-                            </div>
                         </div>
                     </div>
                 </main>
@@ -714,506 +879,389 @@
 
     </div>
 
-    <div class="modal-blur" id="modal-gate-capture">
-        <div class="modal-window" style="max-width: 460px;">
-            <h2 style="margin-bottom: 1rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">🔒 Desbloquear Informações</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">O protocolo de segurança exige a verificação de intenção para abrir os dados estratégicos de localização, parcelas de ágio e mídia em alta definição.</p>
-            <form onsubmit="app.submitLeadCapture(event)">
-                <div class="input-group" style="margin-bottom: 1.2rem;">
-                    <label>Seu Nome Completo</label>
-                    <input type="text" id="lead-name" required placeholder="Nome do interessado">
-                </div>
-                <div class="input-group" style="margin-bottom: 2rem;">
-                    <label>Canal WhatsApp para Contato</label>
-                    <input type="tel" id="lead-phone" required placeholder="(61) 99999-0000">
-                </div>
-                <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--primary) 0%, var(--google-blue) 100%); color: #000; font-weight: 800;">Acessar Ficha Completa</button>
-            </form>
+    <div class="modal-overlay" id="modal-lead-capture">
+        <div class="modal-container" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>🔒 Desbloquear Dados Completos</h3>
+                <button class="modal-close" onclick="app.closeModal('modal-lead-capture')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados iniciais de contato para liberar localização exata, simulação de parcelas de ágio e visão do Google Street View.</p>
+                <form id="form-lead-capture" onsubmit="app.handleLeadSubmit(event)">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="lead-name" required placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp</label>
+                        <input type="tel" id="lead-phone" required placeholder="(61) 99999-0000">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Liberar Catálogo de Imóveis</button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <div class="modal-blur" id="modal-property-detail">
-        <div class="modal-window">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                <div>
-                    <span id="md-badge" class="card-badge" style="position: static; display: inline-block; margin-bottom: 0.8rem;">Venda</span>
-                    <h2 id="md-title">Título do Imóvel</h2>
-                </div>
-                <button onclick="app.closeModal('modal-property-detail')" style="background: transparent; border: none; color: var(--text-muted); font-size: 2rem; cursor: pointer;">&times;</button>
+    <div class="modal-overlay" id="modal-property-detail">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="md-title">Título</h3>
+                <button class="modal-close" onclick="app.closeModal('modal-property-detail')">&times;</button>
             </div>
-            
-            <p id="md-location" style="color: var(--primary); font-weight: 600; margin-bottom: 1rem;"></p>
-            
-            <div id="md-agio-box" style="display: none; background: rgba(0,240,255,0.03); border: 1px dashed rgba(0,240,255,0.3); padding: 1.2rem; border-radius: 10px; margin-bottom: 1.5rem;"></div>
+            <div class="modal-body">
+                <div id="md-tag" class="property-tag" style="position: static; display: inline-block; margin-bottom: 1rem;">Venda</div>
+                <p id="md-location" style="color: var(--text-muted); margin-bottom: 1rem;"></p>
+                
+                <div id="md-agio-box" class="agio-details-box" style="display: none;"></div>
 
-            <div style="font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 1.5rem;" id="md-price"></div>
+                <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem;" id="md-price"></div>
 
-            <h4 style="margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.8rem; color: var(--text-muted);">Apresentação e Detalhes de Mídia</h4>
-            <p id="md-desc" style="color: #cbd5e1; line-height: 1.6; margin-bottom: 1.5rem;"></p>
+                <h4 style="margin-bottom: 0.5rem;">Descrição de Mercado</h4>
+                <p id="md-description" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;"></p>
 
-            <h4>🎬 Tour Virtual por Vídeo Incorporado</h4>
-            <div class="video-box-container" id="md-video-container">
+                <h4>Mapeamento Holográfico (Google Street View)</h4>
+                <div class="map-mock-container">
+                    <div class="map-box">🗺️ Visualizador Google Maps Integrado</div>
+                    <div class="map-box" style="background: #15223b; color: var(--accent-cyan)">📸 Renderizador Google Street View Pro</div>
                 </div>
 
-            <div style="background: var(--bg-input); padding: 1.2rem; border-radius: 10px; margin-top: 2rem;">
-                <h5 style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.4rem;">Responsável pela Distribuição</h5>
-                <p id="md-owner" style="font-weight: 700;"></p>
-            </div>
+                <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Gestor Responsável</h4>
+                <div style="background-color: var(--bg-input); padding: 1rem; border-radius: 8px;" id="md-owner-info"></div>
 
-            <div style="margin-top: 1.5rem; display: flex; gap: 10px; background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; align-items: center;">
-                <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">Link Exclusivo de Conversão:</span>
-                <span id="md-share-url" style="font-family: monospace; color: var(--primary); font-size: 0.85rem; flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
-                <button class="btn-action" onclick="app.copyConversionLink()" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Copiar Link</button>
+                <div class="share-box">
+                    <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Link de Tráfego:</span>
+                    <span class="share-url" id="md-share-url"></span>
+                    <button class="btn-primary" onclick="app.copyShareUrl()" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Copiar Link</button>
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
-        🔒 Infraestrutura Criptografada SandxCDD & Protocolo Aladin — Partner Holding 2026
+        <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.94,15.19 13.91,14 12,14C10.09,14 8.06,15.19 6.87,17C8.25,18.81 10.03,20 12,20C13.97,20 15.75,18.81 17.13,17Z"/></svg>
+        Infraestrutura Protegida por Protocolo Aladin & SandxCDD - Partner Holding © 2026
     </footer>
 
     <script>
-        class IaMobiEngine {
+        class IaMobiApp {
             constructor() {
                 this.state = {
-                    users: JSON.parse(localStorage.getItem('iamobi_core_users')) || [],
-                    properties: JSON.parse(localStorage.getItem('iamobi_core_props')) || [],
-                    leads: JSON.parse(localStorage.getItem('iamobi_core_leads')) || [],
-                    currentUser: JSON.parse(localStorage.getItem('iamobi_core_session')) || null,
-                    billingExpired: JSON.parse(localStorage.getItem('iamobi_core_billing')) || false,
-                    selectedPropertyId: null
+                    users: JSON.parse(localStorage.getItem('iamobi_users')) || [],
+                    properties: JSON.parse(localStorage.getItem('iamobi_properties')) || [],
+                    leads: JSON.parse(localStorage.getItem('iamobi_leads')) || [],
+                    currentUser: JSON.parse(localStorage.getItem('iamobi_current_user')) || null,
+                    activeView: 'landing',
+                    activeDashTab: 'my-properties',
+                    selectedPropertyForLead: null
                 };
-                this.seedDatabase();
+                this.initSeedData();
             }
 
             init() {
-                this.renderPublicGrid();
-                this.syncSessionUI();
-                this.catchUrlDeepLink();
+                this.renderProperties();
+                this.updateAuthUI();
+                this.checkUrlHash();
             }
 
-            seedDatabase() {
+            initSeedData() {
                 if (this.state.properties.length === 0) {
-                    const defaultProps = [
+                    const seed = [
                         {
-                            id: 'p-seed-1',
-                            title: 'Ágio Incrível de Apartamento — Total Ville Residencial',
+                            id: 'prop-1',
+                            title: 'Ágio Exclusivo Residencial Total Ville',
                             type: 'Ágio',
-                            price: 48000,
-                            agioV: 48000,
-                            agioS: 125000,
-                            agioP: 740,
-                            location: 'Valparaíso — Entorno DF',
-                            desc: 'Oportunidade ideal de investimento. Sem consulta bancária inicial, parcelas decrescentes de financiamento ativo.',
-                            video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-                            ownerId: 'admin-seed',
-                            ownerName: 'Cristian Ribeiro [Master]',
-                            ownerRole: 'Administrador da Rede'
+                            price: 45000,
+                            agioValor: 45000,
+                            agioSaldo: 135000,
+                            agioParcela: 790,
+                            location: 'Valparaíso - Entorno DF',
+                            description: 'Transferência imediata sem burocracia de banco. Condomínio fechado, segurança 24h e lazer completo.',
+                            ownerId: 'seed-user',
+                            ownerName: 'Cristian Performance',
+                            ownerRole: 'Corretor (CRECI-DF 99887)'
                         },
                         {
-                            id: 'p-seed-2',
-                            title: 'Casa Inteligente de Alto Padrão Tesla Concept',
+                            id: 'prop-2',
+                            title: 'Mansão Smart Alto Padrão',
                             type: 'Venda',
-                            price: 920000,
-                            location: 'Setor Recreio de Mansões, Águas Lindas - GO',
-                            desc: 'Fino acabamento, usina solar integrada, automação residencial total controlável por voz.',
-                            video: '',
-                            ownerId: 'admin-seed',
-                            ownerName: 'Cristian Ribeiro [Master]',
-                            ownerRole: 'Administrador da Rede'
+                            price: 850000,
+                            location: 'Setor de Mansões, Águas Lindas - GO',
+                            description: 'Casa tecnológica com automação, 4 suítes, acabamento em porcelanato e piscina aquecida.',
+                            ownerId: 'seed-user',
+                            ownerName: 'Cristian Performance',
+                            ownerRole: 'Corretor (CRECI-DF 99887)'
                         }
                     ];
-                    this.state.properties = defaultProps;
-                    localStorage.setItem('iamobi_core_props', JSON.stringify(defaultProps));
+                    this.state.properties = seed;
+                    localStorage.setItem('iamobi_properties', JSON.stringify(seed));
                 }
             }
 
-            navigate(viewId) {
-                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
-                document.querySelectorAll('nav .nav-link').forEach(l => l.classList.remove('active'));
-
-                const target = document.getElementById(`sec-${viewId}`);
+            changeView(viewId) {
+                document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active-view'));
+                document.querySelectorAll('#main-nav .nav-btn').forEach(b => b.classList.remove('active'));
+                
+                const target = document.getElementById(`view-${viewId}`);
                 if (target) target.classList.add('active-view');
 
-                const navBtn = document.getElementById(`menu-btn-${viewId === 'landing' ? 'explore' : viewId}`);
-                if (navBtn) navBtn.classList.add('active');
-
-                if (viewId === 'landing') this.renderPublicGrid();
-                if (viewId === 'dashboard') {
-                    if (!this.state.currentUser) { this.navigate('auth'); return; }
-                    this.renderDashboardLayout();
+                if (viewId === 'landing') {
+                    document.querySelector('nav .nav-btn[onclick*="landing"]').classList.add('active');
+                    this.renderProperties();
+                } else if (viewId === 'dashboard') {
+                    if (!this.state.currentUser) { this.changeView('auth'); return; }
+                    document.getElementById('nav-dash-link').classList.add('active');
+                    this.renderDashboard();
                 }
             }
 
-            toggleAuthMode(mode) {
-                document.getElementById('tab-auth-login').classList.toggle('active', mode === 'login');
-                document.getElementById('tab-auth-reg').classList.toggle('active', mode === 'register');
-                document.getElementById('form-auth-login').style.display = mode === 'login' ? 'block' : 'none';
-                document.getElementById('form-auth-reg').style.display = mode === 'register' ? 'block' : 'none';
+            setAuthTab(tab) {
+                document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+                document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+                document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
+                document.getElementById('form-register').style.display = tab === 'register' ? 'block' : 'none';
             }
 
-            handleRoleChange(role) {
-                document.getElementById('group-creci-field').style.display = (role === 'Corretor' || role === 'Imobiliária') ? 'block' : 'none';
+            toggleCreciField(role) {
+                document.getElementById('creci-group').style.display = (role !== 'Consultor') ? 'block' : 'none';
             }
 
-            actionRegister(e) {
+            toggleAddPropertyAgioFields(type) {
+                document.getElementById('prop-agio-fields').style.display = (type === 'Ágio') ? 'block' : 'none';
+            }
+
+            setDashTab(tabId) {
+                document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.dash-tab-content').forEach(c => c.style.display = 'none');
+                
+                document.getElementById(`dash-menu-${tabId.split('-')[0]}`).classList.add('active');
+                document.getElementById(`dash-tab-${tabId}`).style.display = 'block';
+
+                if (tabId === 'my-properties') this.renderMyProperties();
+                if (tabId === 'leads') this.renderLeadsTable();
+            }
+
+            updateAuthUI() {
+                if (this.state.currentUser) {
+                    document.getElementById('login-nav-btn').style.display = 'none';
+                    document.getElementById('user-logged-menu').style.display = 'flex';
+                    document.getElementById('nav-dash-link').style.display = 'block';
+                    document.getElementById('user-display-name').innerText = this.state.currentUser.name;
+                } else {
+                    document.getElementById('login-nav-btn').style.display = 'inline-flex';
+                    document.getElementById('user-logged-menu').style.display = 'none';
+                    document.getElementById('nav-dash-link').style.display = 'none';
+                }
+            }
+
+            handleRegister(e) {
                 e.preventDefault();
                 const name = document.getElementById('reg-name').value;
                 const email = document.getElementById('reg-email').value;
-                const taxid = document.getElementById('reg-taxid').value;
+                const cpf = document.getElementById('reg-cpf').value;
                 const role = document.getElementById('reg-role').value;
                 const creci = document.getElementById('reg-creci').value;
                 const password = document.getElementById('reg-password').value;
 
-                if (this.state.users.some(u => u.email === email || u.taxid === taxid)) {
-                    alert('Usuário ou documento fiscal já registrado no sistema.');
-                    return;
-                }
-
-                const newUser = { id: 'usr-' + Date.now(), name, email, taxid, role, creci, password };
+                const newUser = { id: 'user-' + Date.now(), name, email, cpf, role, creci, password };
                 this.state.users.push(newUser);
-                localStorage.setItem('iamobi_core_users', JSON.stringify(this.state.users));
-                
+                localStorage.setItem('iamobi_users', JSON.stringify(this.state.users));
                 this.state.currentUser = newUser;
-                localStorage.setItem('iamobi_core_session', JSON.stringify(newUser));
-
-                document.getElementById('form-auth-reg').reset();
-                this.syncSessionUI();
-                this.navigate('dashboard');
-            }
-
-            actionLogin(e) {
-                e.preventDefault();
-                const cred = document.getElementById('log-credential').value;
-                const pass = document.getElementById('log-password').value;
-
-                // Override de Homologação / Administrador Direto
-                if (cred === 'cristian' || cred === 'admin') {
-                    this.state.currentUser = { id: 'admin-seed', name: 'Cristian Ribeiro [Master]', role: 'Admin', creci: 'Master Global', email: 'cristian@partner.com' };
-                    localStorage.setItem('iamobi_core_session', JSON.stringify(this.state.currentUser));
-                    this.syncSessionUI();
-                    this.navigate('dashboard');
-                    return;
-                }
-
-                const matchedUser = this.state.users.find(u => (u.email === cred || u.taxid === cred) && u.password === pass);
-                if (!matchedUser) {
-                    alert('Falha na autenticação. Verifique os dados inseridos.');
-                    return;
-                }
-
-                this.state.currentUser = matchedUser;
-                localStorage.setItem('iamobi_core_session', JSON.stringify(matchedUser));
-                this.syncSessionUI();
-                this.navigate('dashboard');
-            }
-
-            actionLogout() {
-                this.state.currentUser = null;
-                localStorage.removeItem('iamobi_core_session');
-                this.syncSessionUI();
-                this.navigate('landing');
-            }
-
-            syncSessionUI() {
-                if (this.state.currentUser) {
-                    document.getElementById('menu-btn-auth').style.display = 'none';
-                    document.getElementById('menu-user-profile').style.display = 'flex';
-                    document.getElementById('menu-btn-dash').style.display = 'block';
-                    document.getElementById('header-user-name').innerText = this.state.currentUser.name;
-                } else {
-                    document.getElementById('menu-btn-auth').style.display = 'inline-flex';
-                    document.getElementById('menu-user-profile').style.display = 'none';
-                    document.getElementById('menu-btn-dash').style.display = 'none';
-                }
-            }
-
-            renderPublicGrid(filteredList = null) {
-                const container = document.getElementById('public-properties-grid');
-                container.innerHTML = '';
-                const list = filteredList || this.state.properties;
-
-                if (list.length === 0) {
-                    container.innerHTML = `<p style="color: var(--text-muted); text-align: center; grid-column: 1/-1; padding: 3rem;">Nenhum imóvel encontrado correspondente aos parâmetros de busca.</p>`;
-                    return;
-                }
-
-                list.forEach(p => {
-                    const el = document.createElement('div');
-                    el.className = 'card';
-                    el.innerHTML = `
-                        <span class="card-badge">${p.type}</span>
-                        <div class="card-media-mock">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L2 12h3v8h4v-6h6v6h4v-8h3L12 3z"/></svg>
-                            ${p.video ? `<span class="video-indicator">▶ POSSUI VÍDEO</span>` : ''}
-                        </div>
-                        <div class="card-body">
-                            <h3 style="font-size: 1.25rem; font-weight: 700; line-height: 1.3; min-height: 52px;">${p.title}</h3>
-                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.4rem;">📍 ${p.location}</p>
-                            <div class="card-price">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</div>
-                            <button class="btn-action" style="width: 100%; text-align: center; justify-content: center;" onclick="app.gateCheckProperty('${p.id}')">Analisar Proposta</button>
-                        </div>
-                    `;
-                    container.appendChild(el);
-                });
-            }
-
-            executeSearch() {
-                const type = document.getElementById('search-type').value;
-                const loc = document.getElementById('search-location').value.toLowerCase();
-                const price = parseFloat(document.getElementById('search-price').value);
-
-                const results = this.state.properties.filter(p => {
-                    const matchType = !type || p.type === type;
-                    const matchLoc = !loc || p.location.toLowerCase().includes(loc);
-                    const matchPrice = !price || parseFloat(p.price) <= price;
-                    return matchType && matchLoc && matchPrice;
-                });
-                this.renderPublicGrid(results);
-            }
-
-            clearSearchFilters() {
-                document.getElementById('search-type').value = '';
-                document.getElementById('search-location').value = '';
-                document.getElementById('search-price').value = '';
-                this.renderPublicGrid();
-            }
-
-            switchDashTab(tabId) {
-                document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
-                document.querySelectorAll('.tab-dash-view').forEach(t => t.style.display = 'none');
-
-                const menuEl = document.getElementById(`menu-sub-${tabId}`);
-                if (menuEl) menuEl.classList.add('active');
+                localStorage.setItem('iamobi_current_user', JSON.stringify(newUser));
                 
-                const tabEl = document.getElementById(`dash-tab-${tabId}`);
-                if (tabEl) tabEl.style.display = 'block';
-
-                if (tabId === 'portfolio') this.renderUserPortfolio();
-                if (tabId === 'leads') this.renderLeadsDashboard();
-                if (tabId === 'admin') this.calculateAdminSummary();
+                this.updateAuthUI();
+                this.changeView('dashboard');
             }
 
-            renderDashboardLayout() {
-                document.getElementById('dash-user-name').innerText = this.state.currentUser.name;
-                document.getElementById('dash-user-badge').innerText = this.state.currentUser.role;
-                document.getElementById('dash-avatar-txt').innerText = this.state.currentUser.name.charAt(0);
-
-                if (this.state.billingExpired) {
-                    document.getElementById('dash-billing-alert').style.display = 'block';
-                } else {
-                    document.getElementById('dash-billing-alert').style.display = 'none';
-                }
-
-                // Habilitar visão administrativa caso o perfil seja Admin
-                if (this.state.currentUser.role === 'Admin') {
-                    document.getElementById('menu-sub-admin').style.display = 'flex';
-                } else {
-                    document.getElementById('menu-sub-admin').style.display = 'none';
-                }
-
-                this.switchDashTab('portfolio');
-            }
-
-            togglePropertyAgioForm(type) {
-                document.getElementById('p-agio-panel').style.display = (type === 'Ágio') ? 'block' : 'none';
-            }
-
-            actionCreateProperty(e) {
+            handleLogin(e) {
                 e.preventDefault();
-                if (this.state.billingExpired) {
-                    alert('Incapaz de publicar novos ativos. Sua conta possui pendências financeiras de faturamento.');
-                    return;
+                const iden = document.getElementById('login-identifier').value;
+                const pass = document.getElementById('login-password').value;
+
+                if (iden === 'cristian' || iden === 'admin') {
+                    this.state.currentUser = { id: 'seed-user', name: 'Cristian Performance', role: 'Corretor', creci: 'CRECI-DF 99887' };
+                    localStorage.setItem('iamobi_current_user', JSON.stringify(this.state.currentUser));
+                    this.updateAuthUI(); this.changeView('dashboard'); return;
                 }
 
-                const title = document.getElementById('p-title').value;
-                const type = document.getElementById('p-type').value;
-                const price = document.getElementById('p-price').value;
-                const location = document.getElementById('p-location').value;
-                const video = document.getElementById('p-video').value;
-                const desc = document.getElementById('p-desc').value;
+                const user = this.state.users.find(u => (u.email === iden || u.cpf === iden) && u.password === pass);
+                if (!user) { alert('Acesso negado.'); return; }
 
-                const newProperty = {
+                this.state.currentUser = user;
+                localStorage.setItem('iamobi_current_user', JSON.stringify(user));
+                this.updateAuthUI();
+                this.changeView('dashboard');
+            }
+
+            logout() {
+                this.state.currentUser = null;
+                localStorage.removeItem('iamobi_current_user');
+                this.updateAuthUI();
+                this.changeView('landing');
+            }
+
+            handleCreateProperty(e) {
+                e.preventDefault();
+                const title = document.getElementById('prop-title').value;
+                const type = document.getElementById('prop-type').value;
+                const price = parseFloat(document.getElementById('prop-price').value);
+                const location = document.getElementById('prop-location').value;
+                const description = document.getElementById('prop-description').value;
+
+                const newProp = {
                     id: 'prop-' + Date.now(),
-                    title, type, price, location, video, desc,
+                    title, type, price, location, description,
                     ownerId: this.state.currentUser.id,
                     ownerName: this.state.currentUser.name,
-                    ownerRole: `${this.state.currentUser.role} ${this.state.currentUser.creci ? `(${this.state.currentUser.creci})` : ''}`,
-                    agioV: document.getElementById('p-agio-v').value || 0,
-                    agioS: document.getElementById('p-agio-s').value || 0,
-                    agioP: document.getElementById('p-agio-p').value || 0
+                    ownerRole: this.state.currentUser.role + (this.state.currentUser.creci ? ` (${this.state.currentUser.creci})` : ''),
+                    agioValor: parseFloat(document.getElementById('prop-agio-valor').value) || 0,
+                    agioSaldo: parseFloat(document.getElementById('prop-agio-saldo').value) || 0,
+                    agioParcela: parseFloat(document.getElementById('prop-agio-parcela').value) || 0
                 };
 
-                this.state.properties.push(newProperty);
-                localStorage.setItem('iamobi_core_props', JSON.stringify(this.state.properties));
-                
-                document.getElementById('form-property-create').reset();
-                this.switchDashTab('portfolio');
+                this.state.properties.push(newProp);
+                localStorage.setItem('iamobi_properties', JSON.stringify(this.state.properties));
+                document.getElementById('form-add-property').reset();
+                this.setDashTab('my-properties');
             }
 
-            renderUserPortfolio() {
-                const grid = document.getElementById('dash-portfolio-grid');
+            renderProperties(filtered = null) {
+                const grid = document.getElementById('landing-properties-grid');
                 grid.innerHTML = '';
-                
-                const myItems = this.state.properties.filter(p => p.ownerId === this.state.currentUser.id || this.state.currentUser.role === 'Admin');
+                const list = filtered || this.state.properties;
 
-                if (myItems.length === 0) {
-                    grid.innerHTML = `<p style="color: var(--text-muted); padding: 2rem;">Você ainda não registrou nenhum imóvel neste portfólio.</p>`;
-                    return;
-                }
-
-                myItems.forEach(p => {
-                    const el = document.createElement('div');
-                    el.className = 'card';
-                    el.innerHTML = `
-                        <div class="card-body">
-                            <h4 style="font-size: 1.1rem; font-weight: 700;">${p.title}</h4>
-                            <p style="color: var(--primary); font-size: 0.9rem; font-weight: bold; margin-top: 0.5rem;">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</p>
-                            <button class="btn-action" style="margin-top: 1rem; width: 100%; background: var(--bg-input); border: 1px solid rgba(255,255,255,0.1);" onclick="app.showFullPropertyDetail('${p.id}')">Visualizar Link Comercial</button>
+                list.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'property-card';
+                    card.innerHTML = `
+                        <span class="property-tag">${p.type}</span>
+                        <div class="property-img-mock"><svg viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg></div>
+                        <div class="property-info">
+                            <h3 class="property-title">${p.title}</h3>
+                            <div class="property-location">📍 ${p.location}</div>
+                            <div class="property-price">R$ ${p.price.toLocaleString('pt-BR')}</div>
+                            <button class="btn-primary" onclick="app.openPropertyGate('${p.id}')">Ver Detalhes</button>
                         </div>
                     `;
-                    grid.appendChild(el);
+                    grid.appendChild(card);
                 });
             }
 
-            renderLeadsDashboard() {
-                const tbody = document.getElementById('leads-table-rows');
-                tbody.innerHTML = '';
+            filterProperties() {
+                const type = document.getElementById('filter-type').value;
+                const loc = document.getElementById('filter-location').value.toLowerCase();
+                const price = parseFloat(document.getElementById('filter-price').value);
 
-                // Filtrar leads dos imóveis do usuário autenticado (ou todos se for admin)
-                const myPropsIds = this.state.properties.filter(p => p.ownerId === this.state.currentUser.id || this.state.currentUser.role === 'Admin').map(p => p.id);
-                const filteredLeads = this.state.leads.filter(l => myPropsIds.includes(l.propertyId));
+                const res = this.state.properties.filter(p => {
+                    return (!type || p.type === type) && (!loc || p.location.toLowerCase().includes(loc)) && (!price || p.price <= price);
+                });
+                this.renderProperties(res);
+            }
 
-                if (filteredLeads.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Nenhum lead interceptado até o momento.</td></tr>`;
-                    return;
-                }
+            clearFilters() {
+                document.getElementById('filter-type').value = '';
+                document.getElementById('filter-location').value = '';
+                document.getElementById('filter-price').value = '';
+                this.renderProperties();
+            }
 
-                filteredLeads.forEach(l => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td><b>${l.name}</b></td>
-                        <td><a href="https://wa.me/${l.phone.replace(/\D/g,'')}" target="_blank" style="color: var(--google-green); font-weight: bold; text-decoration: none;">🟢 ${l.phone}</a></td>
-                        <td>${l.propertyTitle}</td>
-                        <td><span style="background: var(--bg-input); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">${l.origin}</span></td>
-                        <td>${l.timestamp}</td>
+            renderDashboard() {
+                document.getElementById('dash-user-name').innerText = this.state.currentUser.name;
+                document.getElementById('dash-user-role').innerText = this.state.currentUser.role;
+                document.getElementById('dash-avatar').innerText = this.state.currentUser.name.charAt(0);
+                this.setDashTab('my-properties');
+            }
+
+            renderMyProperties() {
+                const grid = document.getElementById('dash-my-properties-grid');
+                grid.innerHTML = '';
+                const myProps = this.state.properties.filter(p => p.ownerId === this.state.currentUser.id || this.state.currentUser.id === 'seed-user');
+
+                myProps.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'property-card';
+                    card.innerHTML = `
+                        <div class="property-info">
+                            <h4>${p.title}</h4>
+                            <p>R$ ${p.price.toLocaleString('pt-BR')}</p>
+                            <button class="btn-primary" style="margin-top:0.5rem;" onclick="app.openPropertyDetailDirect('${p.id}')">Ver Link</button>
+                        </div>
                     `;
+                    grid.appendChild(card);
+                });
+            }
+
+            renderLeadsTable() {
+                const tbody = document.getElementById('table-leads-body');
+                tbody.innerHTML = '';
+                this.state.leads.forEach(l => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td><b>${l.name}</b></td><td>${l.phone}</td><td>${l.prop}</td><td><span class="origin-badge">${l.ref}</span></td><td>${l.dev}</td><td>${l.time}</td>`;
                     tbody.appendChild(tr);
                 });
             }
 
-            calculateAdminSummary() {
-                document.getElementById('admin-stat-users').innerText = this.state.users.length + 1; // +1 Semente Master
-                document.getElementById('admin-stat-props').innerText = this.state.properties.length;
-                document.getElementById('admin-stat-leads').innerText = this.state.leads.length;
+            openPropertyGate(id) {
+                this.state.selectedPropertyForLead = id;
+                this.openModal('modal-lead-capture');
             }
 
-            simulateBillingExpiration() {
-                this.state.billingExpired = true;
-                localStorage.setItem('iamobi_core_billing', JSON.stringify(true));
-                document.getElementById('dash-billing-alert').style.display = 'block';
-                document.getElementById('billing-status-lbl').innerText = "Bloqueado por inadimplência";
-                document.getElementById('billing-status-lbl').style.color = "var(--tesla-red)";
-                alert("Simulação Concluída: O sistema bloqueou recursos de tráfego externos.");
-            }
-
-            resetBilling() {
-                this.state.billingExpired = false;
-                localStorage.setItem('iamobi_core_billing', JSON.stringify(false));
-                document.getElementById('dash-billing-alert').style.display = 'none';
-                document.getElementById('billing-status-lbl').innerText = "Assinatura Mensal Ativa (R$ 9,99/mês)";
-                document.getElementById('billing-status-lbl').style.color = "var(--google-green)";
-                alert("Faturamento liquidado via PIX com sucesso!");
-            }
-
-            gateCheckProperty(id) {
-                this.state.selectedPropertyId = id;
-                this.openModal('modal-gate-capture');
-            }
-
-            submitLeadCapture(e) {
+            handleLeadSubmit(e) {
                 e.preventDefault();
                 const name = document.getElementById('lead-name').value;
                 const phone = document.getElementById('lead-phone').value;
-                const prop = this.state.properties.find(p => p.id === this.state.selectedPropertyId);
+                const p = this.state.properties.find(prop => prop.id === this.state.selectedPropertyForLead);
 
+                const ref = document.referrer || "Tráfego Direto / Catálogo Compartilhado";
+                const dev = /Android|iPhone|iPad/i.test(navigator.userAgent) ? "Mobile Smartphone" : "Desktop PC";
                 const now = new Date();
-                const timestamp = `${now.toLocaleDateString('pt-BR')} ${now.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}`;
+                const time = `${now.getDate()}/${now.getMonth()+1} ${now.getHours()}:${now.getMinutes()}`;
 
-                this.state.leads.unshift({
-                    name, phone,
-                    propertyId: this.state.selectedPropertyId,
-                    propertyTitle: prop ? prop.title : 'Catálogo Geral',
-                    origin: window.location.hash ? "Link Direto / Campanha" : "Tráfego Orgânico Vitrine",
-                    timestamp
-                });
+                this.state.leads.unshift({ name, phone, prop: p ? p.title : 'Geral', ref, dev, time });
+                localStorage.setItem('iamobi_leads', JSON.stringify(this.state.leads));
 
-                localStorage.setItem('iamobi_core_leads', JSON.stringify(this.state.leads));
-                this.closeModal('modal-gate-capture');
-                
-                // Redireciona para exibir a ficha do imóvel solicitada
-                this.showFullPropertyDetail(this.state.selectedPropertyId);
+                this.closeModal('modal-lead-capture');
+                this.openPropertyDetailDirect(this.state.selectedPropertyForLead);
             }
 
-            showFullPropertyDetail(id) {
-                const prop = this.state.properties.find(p => p.id === id);
-                if (!prop) return;
+            openPropertyDetailDirect(id) {
+                const p = this.state.properties.find(prop => prop.id === id);
+                if (!p) return;
 
-                document.getElementById('md-title').innerText = prop.title;
-                document.getElementById('md-location').innerText = `📍 Localização Mapeada: ${prop.location}`;
-                document.getElementById('md-price').innerText = `R$ ${parseFloat(prop.price).toLocaleString('pt-BR')}`;
-                document.getElementById('md-desc').innerText = prop.desc;
-                document.getElementById('md-badge').innerText = prop.type;
-                document.getElementById('md-owner').innerText = `${prop.ownerName} — ${prop.ownerRole}`;
-                
-                const hashUrl = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
-                document.getElementById('md-share-url').innerText = hashUrl;
+                document.getElementById('md-title').innerText = p.title;
+                document.getElementById('md-location').innerText = `📍 Endereço: ${p.location}`;
+                document.getElementById('md-price').innerText = `R$ ${p.price.toLocaleString('pt-BR')}`;
+                document.getElementById('md-description').innerText = p.description;
+                document.getElementById('md-tag').innerText = p.type;
 
-                const agioBox = document.getElementById('md-agio-box');
-                if (prop.type === 'Ágio') {
-                    agioBox.style.display = 'block';
-                    agioBox.innerHTML = `
-                        <p style="margin-bottom:0.4rem; font-size:0.9rem;">🪙 <b>Pedida do Ágio:</b> R$ ${parseFloat(prop.agioV).toLocaleString('pt-BR')}</p>
-                        <p style="margin-bottom:0.4rem; font-size:0.9rem;">📉 <b>Saldo Devedor Restante:</b> R$ ${parseFloat(prop.agioS).toLocaleString('pt-BR')}</p>
-                        <p style="font-size:0.9rem;">🗓️ <b>Encargo Mensal da Parcela:</b> R$ ${parseFloat(prop.agioP).toLocaleString('pt-BR')}</p>
-                    `;
-                } else {
-                    agioBox.style.display = 'none';
-                }
+                const box = document.getElementById('md-agio-box');
+                if (p.type === 'Ágio') {
+                    box.style.display = 'block';
+                    box.innerHTML = `<div class="agio-row"><span class="agio-label">Ágio Pago:</span><span class="agio-value">R$ ${p.agioValor.toLocaleString('pt-BR')}</span></div>
+                                     <div class="agio-row"><span class="agio-label">Saldo Devedor:</span><span class="agio-value">R$ ${p.agioSaldo.toLocaleString('pt-BR')}</span></div>
+                                     <div class="agio-row"><span class="agio-label">Parcela:</span><span class="agio-value">R$ ${p.agioParcela.toLocaleString('pt-BR')}</span></div>`;
+                } else { box.style.display = 'none'; }
 
-                // Renderizador do Player de Vídeo Dinâmico (Tratando Links Convencionais do YouTube)
-                const videoContainer = document.getElementById('md-video-container');
-                if (prop.video) {
-                    let embedUrl = prop.video;
-                    if(embedUrl.includes('watch?v=')) {
-                        embedUrl = embedUrl.replace('watch?v=', 'embed/');
-                    }
-                    videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
-                } else {
-                    videoContainer.innerHTML = `<div style="color: var(--text-muted); font-size:0.9rem; text-align:center;">📷 Mídia Fotográfica Padrão — Proprietário não anexou vídeo de tour virtual.</div>`;
-                }
+                document.getElementById('md-owner-info').innerText = `${p.ownerName} - ${p.ownerRole}`;
+                document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}#property-${p.id}`;
 
                 this.openModal('modal-property-detail');
             }
 
-            copyConversionLink() {
-                const url = document.getElementById('md-share-url').innerText;
-                navigator.clipboard.writeText(url);
-                alert('Link de conversão de tráfego copiado com sucesso!');
-            }
-
-            catchUrlDeepLink() {
-                if (window.location.hash && window.location.hash.startsWith('#view-prop-')) {
-                    const targetId = window.location.hash.replace('#view-prop-', '');
-                    this.gateCheckProperty(targetId);
-                }
+            copyShareUrl() {
+                navigator.clipboard.writeText(document.getElementById('md-share-url').innerText);
+                alert('Link de alta conversão copiado!');
             }
 
             openModal(mId) { document.getElementById(mId).classList.add('active'); }
             closeModal(mId) { document.getElementById(mId).classList.remove('active'); }
+            checkUrlHash() {
+                if (window.location.hash.startsWith('#property-')) {
+                    this.openPropertyGate(window.location.hash.replace('#property-', ''));
+                }
+            }
         }
 
-        const app = new IaMobiEngine();
+        const app = new IaMobiApp();
         window.onload = () => app.init();
     </script>
 </body>
