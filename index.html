@@ -3,874 +3,768 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOBI | Portal de Negócios Imobiliários - Partner Holding</title>
+    <title>IMOBI | Plataforma de Alta Performance Imobiliária</title>
     <style>
         :root {
-            --bg-main: #060b13;
-            --bg-card: #0d1527;
-            --bg-input: #15223b;
-            --primary: #c5a880; /* Dourado Champagne Premium */
-            --primary-hover: #b39368;
-            --accent-cyan: #00f0ff; /* Toque tecnológico Protocolo Aladin */
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --success: #10b981;
-            --danger: #ef4444;
-            --border: #1e293b;
-            --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            /* Nova Palette: Cores Claras do Google + Elementos Espelhados Reflexivos */
+            --bg-base: #f8f9fa;
+            --bg-surface: rgba(255, 255, 255, 0.75);
+            --bg-card: #ffffff;
+            --bg-input: #f1f3f4;
+            
+            --tesla-red: #d92128;
+            --google-blue: #1a73e8;
+            --google-green: #1e8e3e;
+            --google-yellow: #f9ab00;
+            
+            --primary: #1a73e8; 
+            --premium-gold: #f4b400;
+            --text-main: #202124;
+            --text-muted: #5f6368;
+            --border-glow: rgba(26, 115, 232, 0.2);
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: var(--font-family);
+            font-family: var(--font);
             -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-main);
+            background-color: var(--bg-base);
             color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
+            background-image: linear-gradient(135deg, rgba(26, 115, 232, 0.03) 0%, rgba(30, 142, 62, 0.02) 100%);
         }
 
-        /* Efeitos Biônicos de Brilho de Fundo */
-        .glow-bg {
+        /* Elementos Espelhados e Reflexos de Fundo */
+        .glass-glow-1 {
             position: fixed;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, rgba(0, 240, 255, 0.02) 50%, rgba(0,0,0,0) 100%);
-            top: -200px;
-            right: -200px;
-            z-index: -1;
-            pointer-events: none;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(249, 171, 0, 0.04) 50%, transparent 100%);
+            top: -10%; right: -10%; z-index: -1; pointer-events: none;
+            filter: blur(40px);
         }
-        .glow-bg-left {
+        .glass-glow-2 {
             position: fixed;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.04) 0%, rgba(197, 168, 128, 0.01) 50%, rgba(0,0,0,0) 100%);
-            bottom: -100px;
-            left: -100px;
-            z-index: -1;
-            pointer-events: none;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(30, 142, 62, 0.06) 0%, rgba(217, 33, 40, 0.03) 60%, transparent 100%);
+            bottom: -20%; left: -10%; z-index: -1; pointer-events: none;
+            filter: blur(40px);
         }
 
-        /* Header / Navbar */
+        /* Header Estilo Vidro Aeroespacial Claro */
         header {
-            background-color: rgba(6, 11, 19, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 2rem;
+            top: 0; z-index: 1000;
+            padding: 1.2rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
 
-        .logo-container {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             cursor: pointer;
         }
 
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 70%, var(--accent-cyan));
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--google-blue) 20%, var(--google-green) 70%, var(--tesla-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .logo-sub {
-            font-size: 0.65rem;
-            color: var(--accent-cyan);
+        .brand-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             display: block;
-            margin-top: -2px;
+            font-weight: 700;
         }
 
-        nav {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
+        nav { display: flex; gap: 1.2rem; align-items: center; }
 
-        .nav-btn {
+        .nav-link {
             background: transparent;
             border: none;
-            color: var(--text-main);
+            color: var(--text-muted);
             font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-        }
-
-        .nav-btn:hover {
-            color: var(--primary);
-        }
-
-        .nav-btn.active {
-            background-color: rgba(197, 168, 128, 0.1);
-            color: var(--primary);
-            border: 1px solid rgba(197, 168, 128, 0.2);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-            color: #060b13;
             font-weight: 600;
-            border: none;
-            padding: 0.6rem 1.4rem;
-            border-radius: 6px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--google-blue);
+            background: rgba(26, 115, 232, 0.08);
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%);
+            color: white;
+            font-weight: 700;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35);
+        }
+
+        /* Banner de Monetização Comercial */
+        .pricing-badge {
+            background: linear-gradient(90deg, rgba(249, 171, 0, 0.15) 0%, rgba(26, 115, 232, 0.1) 100%);
+            border: 1px solid var(--premium-gold);
+            color: #b06000;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            animation: pulseGlow 2s infinite alternate;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px rgba(244, 180, 0, 0.2); }
+            100% { box-shadow: 0 0 15px rgba(244, 180, 0, 0.4); }
         }
 
-        /* Container Principal */
-        .main-container {
-            max-width: 1300px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+        .container {
+            max-width: 1400px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
         }
 
-        /* Seções de Visualização */
-        .app-view {
-            display: none;
-        }
+        .view-section { display: none; }
+        .view-section.active-view { display: block; }
 
-        .app-view.active-view {
-            display: block;
-        }
-
-        /* Vitrine / Landing Page */
-        .hero-section {
+        /* Hero Showcase */
+        .hero {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem 3rem 1rem;
+            position: relative;
         }
 
-        .hero-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: #1f2024;
         }
 
-        .hero-title span {
-            color: var(--primary);
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-        }
-
-        /* Barra de Filtros */
-        .filter-bar {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 1.2rem;
-            border-radius: 12px;
+        /* Painel Espelhado de Busca */
+        .search-hub {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 1.8rem;
+            border-radius: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
+            gap: 1.2rem;
             align-items: flex-end;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
         }
 
-        .filter-group {
+        .input-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
-        .filter-group label {
-            font-size: 0.8rem;
+        .input-group label {
+            font-size: 0.75rem;
+            font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
         }
 
-        .filter-group select, .filter-group input {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border);
+        .input-group input, .input-group select, .input-group textarea {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.12);
             color: var(--text-main);
-            padding: 0.75rem;
-            border-radius: 6px;
+            padding: 0.9rem;
+            border-radius: 10px;
             outline: none;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--google-blue);
+            box-shadow: 0 0 10px rgba(26, 115, 232, 0.15);
+        }
+
+        /* Gestor Dinâmico de Fotos por Link */
+        .image-url-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .images-preview-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            background: #f1f3f4;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px dashed rgba(0,0,0,0.12);
+        }
+        .preview-image-item {
+            position: relative;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        .preview-image-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .btn-remove-img {
+            position: absolute;
+            top: 4px; right: 4px;
+            background: rgba(217, 33, 40, 0.9);
+            color: white; border: none;
+            width: 22px; height: 22px;
+            border-radius: 50%; cursor: pointer;
+            font-size: 0.75rem; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
         }
 
         /* Grid de Imóveis */
-        .property-grid {
+        .grid-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
         }
 
-        .property-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .property-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(197, 168, 128, 0.4);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(26, 115, 232, 0.3);
+            box-shadow: 0 20px 40px rgba(26, 115, 232, 0.08);
         }
 
-        .property-tag {
+        .card-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: rgba(6, 11, 19, 0.85);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            top: 20px; left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--google-blue);
+            color: var(--google-blue);
+            padding: 0.4rem 0.9rem;
+            border-radius: 30px;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 800;
+            z-index: 10;
             text-transform: uppercase;
-            z-index: 5;
-            backdrop-filter: blur(4px);
         }
 
-        .property-img-mock {
-            height: 220px;
-            background: linear-gradient(135deg, #15223b 0%, #0d1527 100%);
+        .card-media-mock {
+            height: 230px;
+            background: linear-gradient(135deg, #e8eaed 0%, #f1f3f4 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-media-mock img {
+            width: 100%; height: 100%; object-fit: cover;
         }
 
-        .property-img-mock svg {
-            width: 70px;
-            height: 70px;
-            fill: currentColor;
+        .video-indicator {
+            position: absolute;
+            bottom: 15px; right: 15px;
+            background: var(--tesla-red);
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center; gap: 4px;
         }
 
-        .property-info {
-            padding: 1.5rem;
+        .card-body {
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
-        .property-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .property-location {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-
-        .property-location svg {
-            width: 14px;
-            height: 14px;
-            fill: var(--primary);
-        }
-
-        /* Caixa de Detalhes do Ágio */
-        .agio-details-box {
-            background-color: rgba(0, 240, 255, 0.03);
-            border: 1px dashed rgba(0, 240, 255, 0.2);
-            border-radius: 8px;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-        }
-
-        .agio-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.3rem;
-        }
-
-        .agio-label {
-            color: var(--text-muted);
-        }
-
-        .agio-value {
-            font-weight: 600;
-            color: var(--accent-cyan);
-        }
-
-        .property-price {
-            font-size: 1.5rem;
+        .card-price {
+            font-size: 1.8rem;
             font-weight: 800;
-            color: var(--primary);
-            margin-top: auto;
-            margin-bottom: 1rem;
-        }
-
-        .property-footer {
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-            margin-top: auto;
+            color: var(--text-main);
+            margin: 1rem 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            align-items: baseline;
+            gap: 4px;
         }
 
-        .owner-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .owner-avatar {
-            width: 24px;
-            height: 24px;
-            background-color: var(--primary);
-            color: #060b13;
-            font-weight: 700;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-
-        /* Formulários Auth */
-        .auth-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            max-width: 450px;
+        /* Estrutura Auth */
+        .auth-container {
+            max-width: 500px;
             margin: 4rem auto;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
         }
 
         .auth-tabs {
             display: flex;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+            border-bottom: 2px solid var(--bg-input);
+            margin-bottom: 2rem;
         }
 
         .auth-tab {
-            flex: 1;
-            text-align: center;
-            padding: 0.75rem;
+            padding: 0.8rem 1.5rem;
             cursor: pointer;
             color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .auth-tab.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 0.75rem;
-            border-radius: 6px;
-            outline: none;
-            font-size: 0.95rem;
-        }
-
-        /* Dashboard */
-        .dashboard-layout {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 2rem;
-        }
-
-        .dash-sidebar {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            height: fit-content;
-        }
-
-        .user-profile-summary {
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .user-profile-summary .avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-cyan) 100%);
-            border-radius: 50%;
-            margin: 0 auto 0.8rem auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
             font-weight: 700;
-            color: #060b13;
-        }
-
-        .user-role-badge {
-            display: inline-block;
-            font-size: 0.7rem;
-            background-color: rgba(197, 168, 128, 0.15);
-            color: var(--primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .dash-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .dash-nav-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            color: var(--text-muted);
-            font-weight: 500;
             transition: all 0.2s;
         }
 
-        .dash-nav-item:hover, .dash-nav-item.active {
-            background-color: var(--bg-input);
+        .auth-tab.active {
+            color: var(--google-blue);
+            border-bottom: 2px solid var(--google-blue);
+        }
+
+        /* Dashboard de Negócios */
+        .dash-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+        }
+
+        .dash-sidebar {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 2rem;
+            height: fit-content;
+        }
+
+        .dash-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .dash-menu-item.active, .dash-menu-item:hover {
+            background: var(--bg-input);
             color: var(--text-main);
         }
 
-        .dash-nav-item.active {
-            border-left: 3px solid var(--primary);
-            color: var(--primary);
+        .dash-menu-item.active {
+            border-left: 4px solid var(--tesla-red);
+            color: var(--google-blue);
         }
 
-        .dash-content-box {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            min-height: 500px;
+        .main-dash-content {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            padding: 2.5rem;
+            min-height: 600px;
         }
 
-        .dash-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
+        .billing-warning-banner {
+            background: linear-gradient(90deg, var(--tesla-red) 0%, #b81419 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-weight: 600;
         }
 
-        /* Tabelas Leads */
-        .analytics-table-wrapper {
-            overflow-x: auto;
-        }
-
+        /* Tabelas Avançadas */
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
+            margin-top: 1.5rem;
         }
-
         th {
-            background-color: var(--bg-input);
+            background: var(--bg-input);
+            padding: 1rem;
             color: var(--text-muted);
-            padding: 0.75rem 1rem;
-            font-weight: 600;
             text-transform: uppercase;
             font-size: 0.75rem;
+            font-weight: 700;
+            text-align: left;
         }
+        td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.9rem; }
 
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .origin-badge {
-            background-color: rgba(0, 240, 255, 0.1);
-            color: var(--accent-cyan);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-        }
-
-        /* Modais */
-        .modal-overlay {
+        /* Modais Holográficos Claros */
+        .modal-blur {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(6, 11, 19, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 200;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 5000;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            pointer-events: none;
+            opacity: 0; pointer-events: none;
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-blur.active { opacity: 1; pointer-events: auto; }
 
-        .modal-container {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+        .modal-window {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 24px;
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
+            padding: 2.5rem;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.1);
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-close {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .map-mock-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            height: 200px;
-        }
-
-        .map-box {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+        .video-box-container {
+            width: 100%;
+            height: 340px;
+            background: #000;
+            border-radius: 12px;
+            margin: 1.5rem 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        .share-box {
-            background-color: var(--bg-input);
-            border: 1px solid var(--border);
-            padding: 1rem;
-            border-radius: 8px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 1rem;
-        }
-
-        .share-url {
-            font-family: monospace;
-            color: var(--accent-cyan);
-            flex-grow: 1;
             overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         footer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 0.75rem;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-top: 4rem;
-            padding: 2rem;
-            border-top: 1px solid var(--border);
-            text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        footer svg {
-            width: 14px;
-            height: 14px;
-            fill: var(--accent-cyan);
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-layout { grid-template-columns: 1fr; }
-            .filter-bar { grid-template-columns: 1fr; }
-            .map-mock-container { grid-template-columns: 1fr; height: 350px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
-    <div class="glow-bg-left"></div>
+    <div class="glass-glow-1"></div>
+    <div class="glass-glow-2"></div>
 
     <header>
-        <div class="logo-container" onclick="app.changeView('landing')">
+        <div class="brand" onclick="app.navigate('landing')">
             <div>
-                <span class="logo-text">IMOBI</span>
-                <span class="logo-sub">Partner Holding</span>
+                <span class="brand-logo">IMOBI</span>
+                <span class="brand-sub">Partner Holding</span>
             </div>
         </div>
-        <nav id="main-nav">
-            <button class="nav-btn active" onclick="app.changeView('landing')">Explorar Imóveis</button>
-            <button class="nav-btn" id="nav-dash-link" onclick="app.changeView('dashboard')" style="display: none;">Meu Painel</button>
-            <button class="btn-primary" id="login-nav-btn" onclick="app.changeView('auth')">Acessar Conta</button>
-            <div id="user-logged-menu" style="display: none; align-items: center; gap: 1rem;">
-                <span id="user-display-name" style="font-weight: 600; color: var(--primary);"></span>
-                <button class="nav-btn" onclick="app.logout()" style="color: var(--danger);">Sair</button>
+        <div class="pricing-badge">
+            ⚡ 1º MÊS GRÁTIS — Após R$ 9,99/mês
+        </div>
+        <nav>
+            <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
+            <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
+            <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
+            <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
+                <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
+                <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Desconectar</button>
             </div>
         </nav>
     </header>
 
-    <div class="main-container">
+    <div class="container">
 
-        <section id="view-landing" class="app-view active-view">
-            <div class="hero-section">
-                <h1 class="hero-title">Encontre seu Imóvel ou <span>Oportunidade de Ágio</span></h1>
-                <p class="hero-subtitle">Conectando consultores, corretores e imobiliárias na plataforma de alta performance da Partner Holding.</p>
+        <section id="sec-landing" class="view-section active-view">
+            <div class="hero">
+                <h1>Plataforma Inteligente de <span>Imóveis & Ágios</span></h1>
+                <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">Conectando inteligência artificial Aladin, proprietários e profissionais de elite do Distrito Federal e Entorno.</p>
             </div>
 
-            <div class="filter-bar">
-                <div class="filter-group">
-                    <label>Modalidade</label>
-                    <select id="filter-type" onchange="app.filterProperties()">
-                        <option value="">Todos os Tipos</option>
-                        <option value="Ágio">Ágio</option>
+            <div class="search-hub">
+                <div class="input-group">
+                    <label>Negociação</label>
+                    <select id="search-type" onchange="app.executeSearch()">
+                        <option value="">Todas as modalidades</option>
+                        <option value="Ágio">Ágios de Imóveis</option>
                         <option value="Venda">Venda Direta</option>
-                        <option value="Aluguel">Aluguel</option>
+                        <option value="Aluguel">Aluguel Residencial</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                    <label>Localização</label>
-                    <input type="text" id="filter-location" placeholder="Cidade, DF ou Entorno..." oninput="app.filterProperties()">
+                <div class="input-group">
+                    <label>Localização Geográfica</label>
+                    <input type="text" id="search-location" placeholder="Cidade, DF ou Setor..." oninput="app.executeSearch()">
                 </div>
-                <div class="filter-group">
-                    <label>Preço Máximo</label>
-                    <input type="number" id="filter-price" placeholder="R$" oninput="app.filterProperties()">
+                <div class="input-group">
+                    <label>Teto de Investimento</label>
+                    <input type="number" id="search-price" placeholder="R$ Limite Máximo" oninput="app.executeSearch()">
                 </div>
-                <button class="btn-primary" onclick="app.clearFilters()" style="background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border)">Limpar</button>
+                <button class="btn-action" onclick="app.clearSearchFilters()" style="background: var(--bg-input); color: var(--text-main); box-shadow: none; border: 1px solid rgba(0,0,0,0.12);">Limpar Filtros</button>
             </div>
 
-            <div class="property-grid" id="landing-properties-grid"></div>
+            <div class="grid-wrapper" id="public-properties-grid"></div>
         </section>
 
-        <section id="view-auth" class="app-view">
-            <div class="auth-card">
+        <section id="sec-auth" class="view-section">
+            <div class="auth-container">
                 <div class="auth-tabs">
-                    <div class="auth-tab active" id="tab-login" onclick="app.setAuthTab('login')">Entrar</div>
-                    <div class="auth-tab" id="tab-register" onclick="app.setAuthTab('register')">Cadastrar-se</div>
+                    <div class="auth-tab active" id="tab-auth-login" onclick="app.toggleAuthMode('login')">Acessar Conta</div>
+                    <div class="auth-tab" id="tab-auth-reg" onclick="app.toggleAuthMode('register')">Novo Cadastro</div>
                 </div>
 
-                <form id="form-login" onsubmit="app.handleLogin(event)">
-                    <div class="form-group">
-                        <label>CPF ou E-mail</label>
-                        <input type="text" id="login-identifier" required placeholder="Digite seu CPF ou e-mail">
+                <form id="form-auth-login" onsubmit="app.actionLogin(event)">
+                    <div class="input-group" style="margin-bottom: 1.5rem;">
+                        <label>Credencial de Acesso (E-mail ou CPF)</label>
+                        <input type="text" id="log-credential" required placeholder="Digite sua credencial">
                     </div>
-                    <div class="form-group">
-                        <label>Senha</label>
-                        <input type="password" id="login-password" required placeholder="••••••••">
+                    <div class="input-group" style="margin-bottom: 2rem;">
+                        <label>Senha de Segurança</label>
+                        <input type="password" id="log-password" required placeholder="••••••••">
                     </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Entrar no Ecossistema</button>
+                    <button type="submit" class="btn-action" style="width: 100%;">Autenticar Assinatura</button>
                 </form>
 
-                <form id="form-register" onsubmit="app.handleRegister(event)" style="display: none;">
-                    <div class="form-group">
-                        <label>Nome Completo</label>
-                        <input type="text" id="reg-name" required placeholder="Ex: Cristian Ribeiro">
+                <form id="form-auth-reg" onsubmit="app.actionRegister(event)" style="display: none;">
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>Nome Completo / Razão Social</label>
+                        <input type="text" id="reg-name" required placeholder="Nome do Responsável">
                     </div>
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="email" id="reg-email" required placeholder="nome@exemplo.com">
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>E-mail Corporativo</label>
+                        <input type="email" id="reg-email" required placeholder="nome@provedor.com">
                     </div>
-                    <div class="form-group">
-                        <label>CPF</label>
-                        <input type="text" id="reg-cpf" required placeholder="000.000.000-00">
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>CPF ou CNPJ</label>
+                        <input type="text" id="reg-taxid" required placeholder="Apenas números">
                     </div>
-                    <div class="form-group">
-                        <label>Perfil Profissional</label>
-                        <select id="reg-role" onchange="app.toggleCreciField(this.value)" required>
-                            <option value="Consultor">Consultor (Postagens e Captação)</option>
-                            <option value="Corretor">Corretor Autônomo (Exige CRECI)</option>
-                            <option value="Imobiliária">Imobiliária / PJ (Exige CRECI)</option>
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>Perfil do Usuário</label>
+                        <select id="reg-role" onchange="app.handleRoleChange(this.value)" required>
+                            <option value="Consultor">Consultor Corporativo</option>
+                            <option value="Corretor">Corretor de Imóveis (Autônomo)</option>
+                            <option value="Imobiliária">Imobiliária / Pessoa Jurídica</option>
+                            <option value="Proprietário">Proprietário Direto</option>
+                            <option value="Admin">Administrador Master da Rede</option>
                         </select>
                     </div>
-                    <div class="form-group" id="creci-group" style="display: none;">
-                        <label>Número do CRECI</label>
-                        <input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 12345">
+                    <div class="input-group" id="group-creci-field" style="margin-bottom: 1.2rem; display: none;">
+                        <label>Inscrição Regulação (CRECI)</label>
+                        <input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 0000">
                     </div>
-                    <div class="form-group">
-                        <label>Senha de Acesso</label>
-                        <input type="password" id="reg-password" required placeholder="Mínimo 6 caracteres">
+                    <div class="input-group" style="margin-bottom: 2rem;">
+                        <label>Senha Criptografada</label>
+                        <input type="password" id="reg-password" required placeholder="Mínimo de 6 dígitos">
                     </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Criar Conta</button>
+                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #13692e 100%); box-shadow: 0 4px 15px rgba(30,142,62,0.2)">Finalizar Cadastro Seguro</button>
                 </form>
             </div>
         </section>
 
-        <section id="view-dashboard" class="app-view">
-            <div class="dashboard-layout">
+        <section id="sec-dashboard" class="view-section">
+            <div class="dash-layout">
                 <aside class="dash-sidebar">
-                    <div class="user-profile-summary">
-                        <div class="avatar" id="dash-avatar">U</div>
-                        <h3 id="dash-user-name">Usuário</h3>
-                        <span class="user-role-badge" id="dash-user-role">Consultor</span>
+                    <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.06);">
+                        <div style="width: 70px; height: 70px; background: var(--bg-input); border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--google-blue); font-size: 1.5rem; font-weight: 800; color: var(--google-blue);" id="dash-avatar-txt">U</div>
+                        <h4 id="dash-user-name" style="color: var(--text-main);">Carregando...</h4>
+                        <span id="dash-user-badge" style="background: var(--tesla-red); color: white; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 900; text-transform: uppercase;">Acesso</span>
                     </div>
-                    <nav class="dash-nav">
-                        <div class="dash-nav-item active" id="dash-menu-my" onclick="app.setDashTab('my-properties')">Meus Imóveis</div>
-                        <div class="dash-nav-item" id="dash-menu-add" onclick="app.setDashTab('add-property')">Cadastrar Imóvel</div>
-                        <div class="dash-nav-item" id="dash-menu-leads" onclick="app.setDashTab('leads')">Leads & Captação</div>
-                    </nav>
+                    <div id="dash-menu-box">
+                        <div class="dash-menu-item active" id="menu-sub-portfolio" onclick="app.switchDashTab('portfolio')">Meu Portfólio</div>
+                        <div class="dash-menu-item" id="menu-sub-add" onclick="app.switchDashTab('add')">Novo Imóvel</div>
+                        <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Capturados</div>
+                        <div class="dash-menu-item" id="menu-sub-billing" onclick="app.switchDashTab('billing')">Assinatura & Faturamento</div>
+                        <div class="dash-menu-item" id="menu-sub-admin" onclick="app.switchDashTab('admin')" style="display: none; border-left: 3px solid var(--premium-gold); color: #b06000;">Painel Admin Global</div>
+                    </div>
                 </aside>
 
-                <main class="dash-content-box">
-                    <div id="dash-tab-my-properties" class="dash-tab-content">
-                        <div class="dash-header">
-                            <h2>Seu Portfólio Ativo</h2>
-                            <button class="btn-primary" onclick="app.setDashTab('add-property')">+ Novo Imóvel</button>
-                        </div>
-                        <div class="property-grid" id="dash-my-properties-grid"></div>
+                <main class="main-dash-content">
+                    <div class="billing-warning-banner" id="dash-billing-alert">
+                        ⚠️ Atenção: Sua fatura mensal de R$ 9,99 está vencida. Regularize via PIX para reativar os links de tráfego.
                     </div>
 
-                    <div id="dash-tab-add-property" class="dash-tab-content" style="display: none;">
-                        <div class="dash-header">
-                            <h2>Cadastrar Nova Propriedade</h2>
-                        </div>
-                        <form id="form-add-property" onsubmit="app.handleCreateProperty(event)">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                <div class="form-group">
-                                    <label>Título do Anúncio</label>
-                                    <input type="text" id="prop-title" required placeholder="Ex: Apartamento Premium 3 Qts">
+                    <div class="tab-dash-view" id="dash-tab-portfolio">
+                        <h2 style="margin-bottom: 1.5rem;">Seu Portfólio de Imóveis Ativos</h2>
+                        <div class="grid-wrapper" id="dash-portfolio-grid"></div>
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-add" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem;">Cadastrar Propriedade no Ecossistema</h2>
+                        <form id="form-property-create" onsubmit="app.actionCreateProperty(event)">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                                <div class="input-group">
+                                    <label>Título Descritivo do Anúncio</label>
+                                    <input type="text" id="p-title" required placeholder="Ex: Lote Comercial Águas Lindas">
                                 </div>
-                                <div class="form-group">
-                                    <label>Modalidade</label>
-                                    <select id="prop-type" onchange="app.toggleAddPropertyAgioFields(this.value)" required>
+                                <div class="input-group">
+                                    <label>Modalidade Operacional</label>
+                                    <select id="p-type" onchange="app.togglePropertyAgioForm(this.value)" required>
                                         <option value="Venda">Venda Direta</option>
                                         <option value="Ágio">Negociação de Ágio</option>
-                                        <option value="Aluguel">Aluguel</option>
+                                        <option value="Aluguel">Contrato de Aluguel</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div id="prop-agio-fields" style="display: none; background: rgba(0,240,255,0.02); border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 1.2rem;">
-                                <h4 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 0.9rem;">Métricas Financeiras do Ágio</h4>
+                            <div id="p-agio-panel" style="display: none; background: rgba(26, 115, 232, 0.02); border: 1px dashed var(--google-blue); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                                <h3 style="font-size: 1rem; color: var(--google-blue); margin-bottom: 1rem;">Estrutura Financeira do Ágio</h3>
                                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                                    <div class="form-group">
-                                        <label>Valor do Ágio (Já Pago)</label>
-                                        <input type="number" id="prop-agio-valor" placeholder="R$">
+                                    <div class="input-group">
+                                        <label>Valor Investido (Pedida do Ágio)</label>
+                                        <input type="number" id="p-agio-v">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Saldo Devedor Restante</label>
-                                        <input type="number" id="prop-agio-saldo" placeholder="R$">
+                                    <div class="input-group">
+                                        <label>Saldo Devedor na Instituição</label>
+                                        <input type="number" id="p-agio-s">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Valor da Parcela</label>
-                                        <input type="number" id="prop-agio-parcela" placeholder="R$">
+                                    <div class="input-group">
+                                        <label>Encargo da Parcela Mensal</label>
+                                        <input type="number" id="p-agio-p">
                                     </div>
                                 </div>
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                <div class="form-group">
-                                    <label>Preço de Face / Pedido</label>
-                                    <input type="number" id="prop-price" required placeholder="R$">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                                <div class="input-group">
+                                    <label>Preço Total de Face (R$)</label>
+                                    <input type="number" id="p-price" required placeholder="Valor integral">
                                 </div>
-                                <div class="form-group">
-                                    <label>Localização / Endereço</label>
-                                    <input type="text" id="prop-location" required placeholder="Ex: Águas Claras, Brasília - DF">
+                                <div class="input-group">
+                                    <label>Endereço Completo / Localização</label>
+                                    <input type="text" id="p-location" required placeholder="Cidade - UF">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Descrição do Portfólio</label>
-                                <textarea id="prop-description" rows="4" required placeholder="Detalhes de taxas, parcelas, infraestrutura..."></textarea>
+                            <div class="input-group" style="margin-bottom: 1.2rem;">
+                                <label>Galeria de Fotos (Links / URLs das Imagens)</label>
+                                <div class="image-url-container">
+                                    <input type="url" id="p-image-url-input" placeholder="https://exemplo.com/foto-imovel.jpg">
+                                    <button type="button" class="btn-action" onclick="app.addImageLink()" style="background: var(--google-green);">+ Incluir Foto</button>
+                                </div>
+                                <div class="images-preview-list" id="p-images-preview-container">
+                                    </div>
                             </div>
 
-                            <button type="submit" class="btn-primary">Ativar e Publicar Catálogo</button>
+                            <div class="input-group" style="margin-bottom: 1.2rem;">
+                                <label>URL do Vídeo Demonstrativo (YouTube / Link Direto MP4)</label>
+                                <input type="url" id="p-video" placeholder="https://youtube.com/watch?v=...">
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 2rem;">
+                                <label>Memorial Descritivo do Imóvel</label>
+                                <textarea id="p-desc" rows="4" required placeholder="Descreva os diferenciais, taxas de condomínio, infraestrutura..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-action">Publicar Catálogo Imediatamente</button>
                         </form>
                     </div>
 
-                    <div id="dash-tab-leads" class="dash-tab-content" style="display: none;">
-                        <div class="dash-header">
-                            <h2>Rastreamento de Inteligência de Tráfego</h2>
-                        </div>
-                        <div class="analytics-table-wrapper">
+                    <div class="tab-dash-view" id="dash-tab-leads" style="display: none;">
+                        <h2 style="margin-bottom: 0.5rem;">Rastreamento e Inteligência de Tráfego</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Dados coletados pelo Firewall Aladin IA para conversão direta via WhatsApp.</p>
+                        <div style="overflow-x: auto;">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Lead</th>
-                                        <th>Contato</th>
-                                        <th>Imóvel Alvo</th>
-                                        <th>Origem / Tráfego</th>
-                                        <th>Dispositivo</th>
+                                        <th>Nome Intermediário</th>
+                                        <th>Canal WhatsApp</th>
+                                        <th>Imóvel Solicitado</th>
+                                        <th>Ponto de Origem</th>
                                         <th>Data/Hora</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-leads-body"></tbody>
+                                <tbody id="leads-table-rows"></tbody>
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-billing" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem;">Gestão de Conta & Faturamento</h2>
+                        <div style="background: var(--bg-input); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
+                            <p style="margin-bottom: 1rem;">Status Atual: <b style="color: var(--google-green);" id="billing-status-lbl">Período de Testes Ativo (30 Dias Grátis)</b></p>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem;">Sua próxima recorrência automática de <b>R$ 9,99/mês</b> será lançada em sua fatura após o término da avaliação.</p>
+                            <button class="btn-action" style="background: var(--tesla-red); box-shadow: none;" onclick="app.simulateBillingExpiration()">Simular Fatura Vencida (Teste de Alerta)</button>
+                            <button class="btn-action" style="background: var(--google-blue); margin-left: 10px;" onclick="app.resetBilling()">Liquidar Débito / Ativar</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-admin" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem; color: #b06000;">Painel de Controle do Administrador Master</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Visão agregada de infraestrutura do ecossistema IA-MOBI.</p>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem;">
+                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                                <h3 style="font-size: 2rem;" id="admin-stat-users">0</h3>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span>
+                            </div>
+                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                                <h3 style="font-size: 2rem;" id="admin-stat-props">0</h3>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span>
+                            </div>
+                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
+                                <h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Leads Convertidos</span>
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -879,389 +773,362 @@
 
     </div>
 
-    <div class="modal-overlay" id="modal-lead-capture">
-        <div class="modal-container" style="max-width: 450px;">
-            <div class="modal-header">
-                <h3>🔒 Desbloquear Dados Completos</h3>
-                <button class="modal-close" onclick="app.closeModal('modal-lead-capture')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados iniciais de contato para liberar localização exata, simulação de parcelas de ágio e visão do Google Street View.</p>
-                <form id="form-lead-capture" onsubmit="app.handleLeadSubmit(event)">
-                    <div class="form-group">
-                        <label>Nome Completo</label>
-                        <input type="text" id="lead-name" required placeholder="Seu nome">
-                    </div>
-                    <div class="form-group">
-                        <label>WhatsApp</label>
-                        <input type="tel" id="lead-phone" required placeholder="(61) 99999-0000">
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Liberar Catálogo de Imóveis</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="modal-property-detail">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 id="md-title">Título</h3>
-                <button class="modal-close" onclick="app.closeModal('modal-property-detail')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="md-tag" class="property-tag" style="position: static; display: inline-block; margin-bottom: 1rem;">Venda</div>
-                <p id="md-location" style="color: var(--text-muted); margin-bottom: 1rem;"></p>
-                
-                <div id="md-agio-box" class="agio-details-box" style="display: none;"></div>
-
-                <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem;" id="md-price"></div>
-
-                <h4 style="margin-bottom: 0.5rem;">Descrição de Mercado</h4>
-                <p id="md-description" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem;"></p>
-
-                <h4>Mapeamento Holográfico (Google Street View)</h4>
-                <div class="map-mock-container">
-                    <div class="map-box">🗺️ Visualizador Google Maps Integrado</div>
-                    <div class="map-box" style="background: #15223b; color: var(--accent-cyan)">📸 Renderizador Google Street View Pro</div>
+    <div class="modal-blur" id="modal-gate-capture">
+        <div class="modal-window" style="max-width: 460px;">
+            <h2 style="margin-bottom: 1rem; font-weight: 800; display: flex; align-items: center; gap: 8px; color: var(--text-main);">🔒 Desbloquear Informações</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">O protocolo de segurança exige a verificação de intenção para abrir os dados estratégicos de localização, parcelas de ágio e mídia em alta definição.</p>
+            
+            <form onsubmit="app.actionCaptureLead(event)">
+                <div class="input-group" style="margin-bottom: 1rem;">
+                    <label>Seu Nome Completo</label>
+                    <input type="text" id="lead-name" required placeholder="Digite seu nome">
                 </div>
-
-                <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Gestor Responsável</h4>
-                <div style="background-color: var(--bg-input); padding: 1rem; border-radius: 8px;" id="md-owner-info"></div>
-
-                <div class="share-box">
-                    <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Link de Tráfego:</span>
-                    <span class="share-url" id="md-share-url"></span>
-                    <button class="btn-primary" onclick="app.copyShareUrl()" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Copiar Link</button>
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <label>WhatsApp Comercial</label>
+                    <input type="tel" id="lead-phone" required placeholder="(61) 99999-0000">
                 </div>
-            </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn-action" onclick="app.closeModal()" style="background: var(--bg-input); color: var(--text-main); box-shadow: none;">Cancelar</button>
+                    <button type="submit" class="btn-action">Acessar com Aladin IA</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <footer>
-        <svg viewBox="0 0 24 24"><path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.94,15.19 13.91,14 12,14C10.09,14 8.06,15.19 6.87,17C8.25,18.81 10.03,20 12,20C13.97,20 15.75,18.81 17.13,17Z"/></svg>
-        Infraestrutura Protegida por Protocolo Aladin & SandxCDD - Partner Holding © 2026
+        &copy; 2026 IMOBI | Partner Holding - IA-MOBI Infrastructure. Todos os direitos reservados.
     </footer>
 
     <script>
-        class IaMobiApp {
+        class ImobiApp {
             constructor() {
-                this.state = {
-                    users: JSON.parse(localStorage.getItem('iamobi_users')) || [],
-                    properties: JSON.parse(localStorage.getItem('iamobi_properties')) || [],
-                    leads: JSON.parse(localStorage.getItem('iamobi_leads')) || [],
-                    currentUser: JSON.parse(localStorage.getItem('iamobi_current_user')) || null,
-                    activeView: 'landing',
-                    activeDashTab: 'my-properties',
-                    selectedPropertyForLead: null
-                };
-                this.initSeedData();
+                this.currentUser = null;
+                this.uploadedImages = []; // Armazena temporariamente os links das fotos do novo imóvel
+                this.properties = [
+                    {
+                        id: 1,
+                        title: "Ágio Lote Residencial Premium",
+                        type: "Ágio",
+                        price: 180000,
+                        agioV: 45000,
+                        agioS: 135000,
+                        agioP: 890,
+                        location: "Águas Lindas de Goiás - GO",
+                        desc: "Excelente oportunidade de lote regularizado no Entorno do DF. Infraestrutura completa.",
+                        images: ["https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=500"],
+                        video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                        owner: "Cristian Ribeiro"
+                    },
+                    {
+                        id: 2,
+                        title: "Apartamento 2 Quartos Plano Diretor",
+                        type: "Venda",
+                        price: 320000,
+                        location: "Distrito Federal - DF",
+                        desc: "Imóvel pronto para morar, aceita financiamento bancário e FGTS.",
+                        images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500"],
+                        video: "",
+                        owner: "Mikaele R."
+                    }
+                ];
+                this.leads = [
+                    { name: "Gabriel Silva", phone: "61992341234", property: "Ágio Lote Residencial", source: "Facebook Ads", time: "24/05/2026 14:22" }
+                ];
+                this.selectedPropertyId = null;
             }
 
             init() {
-                this.renderProperties();
-                this.updateAuthUI();
-                this.checkUrlHash();
+                this.renderPublicProperties();
+                this.updateAdminStats();
             }
 
-            initSeedData() {
-                if (this.state.properties.length === 0) {
-                    const seed = [
-                        {
-                            id: 'prop-1',
-                            title: 'Ágio Exclusivo Residencial Total Ville',
-                            type: 'Ágio',
-                            price: 45000,
-                            agioValor: 45000,
-                            agioSaldo: 135000,
-                            agioParcela: 790,
-                            location: 'Valparaíso - Entorno DF',
-                            description: 'Transferência imediata sem burocracia de banco. Condomínio fechado, segurança 24h e lazer completo.',
-                            ownerId: 'seed-user',
-                            ownerName: 'Cristian Performance',
-                            ownerRole: 'Corretor (CRECI-DF 99887)'
-                        },
-                        {
-                            id: 'prop-2',
-                            title: 'Mansão Smart Alto Padrão',
-                            type: 'Venda',
-                            price: 850000,
-                            location: 'Setor de Mansões, Águas Lindas - GO',
-                            description: 'Casa tecnológica com automação, 4 suítes, acabamento em porcelanato e piscina aquecida.',
-                            ownerId: 'seed-user',
-                            ownerName: 'Cristian Performance',
-                            ownerRole: 'Corretor (CRECI-DF 99887)'
-                        }
-                    ];
-                    this.state.properties = seed;
-                    localStorage.setItem('iamobi_properties', JSON.stringify(seed));
-                }
-            }
-
-            changeView(viewId) {
-                document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active-view'));
-                document.querySelectorAll('#main-nav .nav-btn').forEach(b => b.classList.remove('active'));
+            navigate(view) {
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 
-                const target = document.getElementById(`view-${viewId}`);
-                if (target) target.classList.add('active-view');
-
-                if (viewId === 'landing') {
-                    document.querySelector('nav .nav-btn[onclick*="landing"]').classList.add('active');
-                    this.renderProperties();
-                } else if (viewId === 'dashboard') {
-                    if (!this.state.currentUser) { this.changeView('auth'); return; }
-                    document.getElementById('nav-dash-link').classList.add('active');
-                    this.renderDashboard();
-                }
-            }
-
-            setAuthTab(tab) {
-                document.getElementById('tab-login').classList.toggle('active', tab === 'login');
-                document.getElementById('tab-register').classList.toggle('active', tab === 'register');
-                document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
-                document.getElementById('form-register').style.display = tab === 'register' ? 'block' : 'none';
-            }
-
-            toggleCreciField(role) {
-                document.getElementById('creci-group').style.display = (role !== 'Consultor') ? 'block' : 'none';
-            }
-
-            toggleAddPropertyAgioFields(type) {
-                document.getElementById('prop-agio-fields').style.display = (type === 'Ágio') ? 'block' : 'none';
-            }
-
-            setDashTab(tabId) {
-                document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
-                document.querySelectorAll('.dash-tab-content').forEach(c => c.style.display = 'none');
+                const targetSec = document.getElementById(`sec-${view}`);
+                if (targetSec) targetSec.classList.add('active-view');
                 
-                document.getElementById(`dash-menu-${tabId.split('-')[0]}`).classList.add('active');
-                document.getElementById(`dash-tab-${tabId}`).style.display = 'block';
-
-                if (tabId === 'my-properties') this.renderMyProperties();
-                if (tabId === 'leads') this.renderLeadsTable();
+                if (view === 'landing') document.getElementById('menu-btn-explore').classList.add('active');
+                if (view === 'auth') document.getElementById('menu-btn-auth').classList.add('active');
             }
 
-            updateAuthUI() {
-                if (this.state.currentUser) {
-                    document.getElementById('login-nav-btn').style.display = 'none';
-                    document.getElementById('user-logged-menu').style.display = 'flex';
-                    document.getElementById('nav-dash-link').style.display = 'block';
-                    document.getElementById('user-display-name').innerText = this.state.currentUser.name;
-                } else {
-                    document.getElementById('login-nav-btn').style.display = 'inline-flex';
-                    document.getElementById('user-logged-menu').style.display = 'none';
-                    document.getElementById('nav-dash-link').style.display = 'none';
-                }
+            toggleAuthMode(mode) {
+                document.getElementById('tab-auth-login').classList.toggle('active', mode === 'login');
+                document.getElementById('tab-auth-reg').classList.toggle('active', mode === 'register');
+                document.getElementById('form-auth-login').style.display = mode === 'login' ? 'block' : 'none';
+                document.getElementById('form-auth-reg').style.display = mode === 'register' ? 'block' : 'none';
             }
 
-            handleRegister(e) {
+            handleRoleChange(role) {
+                const creciField = document.getElementById('group-creci-field');
+                creciField.style.display = (role === 'Corretor' || role === 'Imobiliária') ? 'block' : 'none';
+            }
+
+            actionLogin(e) {
                 e.preventDefault();
-                const name = document.getElementById('reg-name').value;
-                const email = document.getElementById('reg-email').value;
-                const cpf = document.getElementById('reg-cpf').value;
-                const role = document.getElementById('reg-role').value;
-                const creci = document.getElementById('reg-creci').value;
-                const password = document.getElementById('reg-password').value;
-
-                const newUser = { id: 'user-' + Date.now(), name, email, cpf, role, creci, password };
-                this.state.users.push(newUser);
-                localStorage.setItem('iamobi_users', JSON.stringify(this.state.users));
-                this.state.currentUser = newUser;
-                localStorage.setItem('iamobi_current_user', JSON.stringify(newUser));
+                const credential = document.getElementById('log-credential').value;
                 
-                this.updateAuthUI();
-                this.changeView('dashboard');
-            }
-
-            handleLogin(e) {
-                e.preventDefault();
-                const iden = document.getElementById('login-identifier').value;
-                const pass = document.getElementById('login-password').value;
-
-                if (iden === 'cristian' || iden === 'admin') {
-                    this.state.currentUser = { id: 'seed-user', name: 'Cristian Performance', role: 'Corretor', creci: 'CRECI-DF 99887' };
-                    localStorage.setItem('iamobi_current_user', JSON.stringify(this.state.currentUser));
-                    this.updateAuthUI(); this.changeView('dashboard'); return;
-                }
-
-                const user = this.state.users.find(u => (u.email === iden || u.cpf === iden) && u.password === pass);
-                if (!user) { alert('Acesso negado.'); return; }
-
-                this.state.currentUser = user;
-                localStorage.setItem('iamobi_current_user', JSON.stringify(user));
-                this.updateAuthUI();
-                this.changeView('dashboard');
-            }
-
-            logout() {
-                this.state.currentUser = null;
-                localStorage.removeItem('iamobi_current_user');
-                this.updateAuthUI();
-                this.changeView('landing');
-            }
-
-            handleCreateProperty(e) {
-                e.preventDefault();
-                const title = document.getElementById('prop-title').value;
-                const type = document.getElementById('prop-type').value;
-                const price = parseFloat(document.getElementById('prop-price').value);
-                const location = document.getElementById('prop-location').value;
-                const description = document.getElementById('prop-description').value;
-
-                const newProp = {
-                    id: 'prop-' + Date.now(),
-                    title, type, price, location, description,
-                    ownerId: this.state.currentUser.id,
-                    ownerName: this.state.currentUser.name,
-                    ownerRole: this.state.currentUser.role + (this.state.currentUser.creci ? ` (${this.state.currentUser.creci})` : ''),
-                    agioValor: parseFloat(document.getElementById('prop-agio-valor').value) || 0,
-                    agioSaldo: parseFloat(document.getElementById('prop-agio-saldo').value) || 0,
-                    agioParcela: parseFloat(document.getElementById('prop-agio-parcela').value) || 0
+                this.currentUser = {
+                    name: credential.includes('@') ? credential.split('@')[0] : "Cristian Ribeiro",
+                    role: credential.toLowerCase() === 'admin' ? 'Admin' : 'Consultor'
                 };
 
-                this.state.properties.push(newProp);
-                localStorage.setItem('iamobi_properties', JSON.stringify(this.state.properties));
-                document.getElementById('form-add-property').reset();
-                this.setDashTab('my-properties');
+                document.getElementById('menu-btn-auth').style.display = 'none';
+                document.getElementById('menu-btn-dash').style.display = 'block';
+                document.getElementById('menu-user-profile').style.display = 'flex';
+                document.getElementById('header-user-name').innerText = this.currentUser.name;
+
+                // Preencher dados dashboard
+                document.getElementById('dash-user-name').innerText = this.currentUser.name;
+                document.getElementById('dash-user-badge').innerText = this.currentUser.role;
+                document.getElementById('dash-avatar-txt').innerText = this.currentUser.name.charAt(0).toUpperCase();
+
+                if (this.currentUser.role === 'Admin') {
+                    document.getElementById('menu-sub-admin').style.display = 'flex';
+                }
+
+                this.renderPortfolio();
+                this.renderLeads();
+                this.navigate('dashboard');
             }
 
-            renderProperties(filtered = null) {
-                const grid = document.getElementById('landing-properties-grid');
-                grid.innerHTML = '';
-                const list = filtered || this.state.properties;
+            actionRegister(e) {
+                e.preventDefault();
+                alert("Cadastro validado juridicamente via ICP-Brasil no Sandbox IMOBI!");
+                this.toggleAuthMode('login');
+            }
 
-                list.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'property-card';
-                    card.innerHTML = `
-                        <span class="property-tag">${p.type}</span>
-                        <div class="property-img-mock"><svg viewBox="0 0 24 24"><path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg></div>
-                        <div class="property-info">
-                            <h3 class="property-title">${p.title}</h3>
-                            <div class="property-location">📍 ${p.location}</div>
-                            <div class="property-price">R$ ${p.price.toLocaleString('pt-BR')}</div>
-                            <button class="btn-primary" onclick="app.openPropertyGate('${p.id}')">Ver Detalhes</button>
-                        </div>
+            actionLogout() {
+                this.currentUser = null;
+                document.getElementById('menu-btn-auth').style.display = 'block';
+                document.getElementById('menu-btn-dash').style.display = 'none';
+                document.getElementById('menu-user-profile').style.display = 'none';
+                document.getElementById('menu-sub-admin').style.display = 'none';
+                this.navigate('landing');
+            }
+
+            switchDashTab(tabName) {
+                document.querySelectorAll('.tab-dash-view').forEach(t => t.style.display = 'none');
+                document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
+                
+                document.getElementById(`dash-tab-${tabName}`).style.display = 'block';
+                document.getElementById(`menu-sub-${tabName}`).classList.add('active');
+            }
+
+            togglePropertyAgioForm(type) {
+                document.getElementById('p-agio-panel').style.display = type === 'Ágio' ? 'block' : 'none';
+            }
+
+            // ADICIONAR LINK DE FOTO DENTRO DA LISTA
+            addImageLink() {
+                const urlInput = document.getElementById('p-image-url-input');
+                const urlValue = urlInput.value.trim();
+
+                if (!urlValue) {
+                    alert("Por favor, insira uma URL de imagem válida.");
+                    return;
+                }
+
+                this.uploadedImages.push(urlValue);
+                urlInput.value = ""; // Limpa input
+                this.renderImagesPreview();
+            }
+
+            // REMOVER LINK DE FOTO DA LISTA
+            removeImageLink(index) {
+                this.uploadedImages.splice(index, 1);
+                this.renderImagesPreview();
+            }
+
+            // RECONSTRUIR VISUALIZAÇÃO DAS MINIATURAS DAS IMAGENS CADASTRADAS
+            renderImagesPreview() {
+                const container = document.getElementById('p-images-preview-container');
+                container.innerHTML = "";
+
+                if (this.uploadedImages.length === 0) {
+                    container.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">Nenhuma foto vinculada por link ainda.</span>`;
+                    return;
+                }
+
+                this.uploadedImages.forEach((url, index) => {
+                    const item = document.createElement('div');
+                    item.className = "preview-image-item";
+                    item.innerHTML = `
+                        <img src="${url}" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200'">
+                        <button type="button" class="btn-remove-img" onclick="app.removeImageLink(${index})">×</button>
                     `;
-                    grid.appendChild(card);
+                    container.appendChild(item);
                 });
             }
 
-            filterProperties() {
-                const type = document.getElementById('filter-type').value;
-                const loc = document.getElementById('filter-location').value.toLowerCase();
-                const price = parseFloat(document.getElementById('filter-price').value);
+            actionCreateProperty(e) {
+                e.preventDefault();
+                
+                const newProp = {
+                    id: Date.now(),
+                    title: document.getElementById('p-title').value,
+                    type: document.getElementById('p-type').value,
+                    price: parseFloat(document.getElementById('p-price').value),
+                    agioV: parseFloat(document.getElementById('p-agio-v')?.value || 0),
+                    agioS: parseFloat(document.getElementById('p-agio-s')?.value || 0),
+                    agioP: parseFloat(document.getElementById('p-agio-p')?.value || 0),
+                    location: document.getElementById('p-location').value,
+                    desc: document.getElementById('p-desc').value,
+                    images: this.uploadedImages.length > 0 ? [...this.uploadedImages] : ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500"],
+                    video: document.getElementById('p-video').value,
+                    owner: this.currentUser ? this.currentUser.name : "Anônimo"
+                };
 
-                const res = this.state.properties.filter(p => {
-                    return (!type || p.type === type) && (!loc || p.location.toLowerCase().includes(loc)) && (!price || p.price <= price);
+                this.properties.unshift(newProp);
+                this.uploadedImages = []; // Reseta galeria temporária
+                document.getElementById('form-property-create').reset();
+                this.renderImagesPreview();
+                
+                alert("Propriedade integrada ao ecossistema com sucesso!");
+                this.init();
+                this.renderPortfolio();
+                this.switchDashTab('portfolio');
+            }
+
+            renderPublicProperties() {
+                const grid = document.getElementById('public-properties-grid');
+                grid.innerHTML = "";
+                this.properties.forEach(p => {
+                    grid.appendChild(this.createCardElement(p, false));
                 });
-                this.renderProperties(res);
             }
 
-            clearFilters() {
-                document.getElementById('filter-type').value = '';
-                document.getElementById('filter-location').value = '';
-                document.getElementById('filter-price').value = '';
-                this.renderProperties();
+            renderPortfolio() {
+                const grid = document.getElementById('dash-portfolio-grid');
+                grid.innerHTML = "";
+                this.properties.forEach(p => {
+                    grid.appendChild(this.createCardElement(p, true));
+                });
             }
 
-            renderDashboard() {
-                document.getElementById('dash-user-name').innerText = this.state.currentUser.name;
-                document.getElementById('dash-user-role').innerText = this.state.currentUser.role;
-                document.getElementById('dash-avatar').innerText = this.state.currentUser.name.charAt(0);
-                this.setDashTab('my-properties');
-            }
+            createCardElement(p, isDashboard) {
+                const card = document.createElement('div');
+                card.className = "card";
+                
+                let extraAgioInfo = "";
+                if (p.type === "Ágio") {
+                    extraAgioInfo = `<div style="font-size:0.85rem; color:var(--google-blue); margin-top:4px;">Pedida do Ágio: R$ ${p.agioV.toLocaleString('pt-BR')}</div>`;
+                }
 
-            renderMyProperties() {
-                const grid = document.getElementById('dash-my-properties-grid');
-                grid.innerHTML = '';
-                const myProps = this.state.properties.filter(p => p.ownerId === this.state.currentUser.id || this.state.currentUser.id === 'seed-user');
-
-                myProps.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'property-card';
-                    card.innerHTML = `
-                        <div class="property-info">
-                            <h4>${p.title}</h4>
-                            <p>R$ ${p.price.toLocaleString('pt-BR')}</p>
-                            <button class="btn-primary" style="margin-top:0.5rem;" onclick="app.openPropertyDetailDirect('${p.id}')">Ver Link</button>
+                card.innerHTML = `
+                    <div class="card-badge">${p.type}</div>
+                    <div class="card-media-mock">
+                        <img src="${p.images[0]}" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500'">
+                        ${p.video ? `<div class="video-indicator">▶ Vídeo</div>` : ''}
+                    </div>
+                    <div class="card-body">
+                        <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem;">${p.title}</h3>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">📍 ${p.location}</p>
+                        <p style="font-size:0.9rem; line-height:1.4; color:var(--text-main); margin-bottom:1rem;">${p.desc.substring(0, 100)}...</p>
+                        <div class="card-price">
+                            <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">Preço Face:</span> 
+                            R$ ${p.price.toLocaleString('pt-BR')}
                         </div>
-                    `;
-                    grid.appendChild(card);
-                });
+                        ${extraAgioInfo}
+                        ${!isDashboard ? `<button class="btn-action" onclick="app.openLeadGate(${p.id})" style="margin-top:1.5rem; width:100%;">Garantir Negociação</button>` : ''}
+                    </div>
+                `;
+                return card;
             }
 
-            renderLeadsTable() {
-                const tbody = document.getElementById('table-leads-body');
-                tbody.innerHTML = '';
-                this.state.leads.forEach(l => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td><b>${l.name}</b></td><td>${l.phone}</td><td>${l.prop}</td><td><span class="origin-badge">${l.ref}</span></td><td>${l.dev}</td><td>${l.time}</td>`;
-                    tbody.appendChild(tr);
-                });
+            openLeadGate(id) {
+                this.selectedPropertyId = id;
+                document.getElementById('modal-gate-capture').classList.add('active');
             }
 
-            openPropertyGate(id) {
-                this.state.selectedPropertyForLead = id;
-                this.openModal('modal-lead-capture');
+            closeModal() {
+                document.getElementById('modal-gate-capture').classList.remove('active');
             }
 
-            handleLeadSubmit(e) {
+            actionCaptureLead(e) {
                 e.preventDefault();
                 const name = document.getElementById('lead-name').value;
                 const phone = document.getElementById('lead-phone').value;
-                const p = this.state.properties.find(prop => prop.id === this.state.selectedPropertyForLead);
+                const targetProp = this.properties.find(p => p.id === this.selectedPropertyId);
 
-                const ref = document.referrer || "Tráfego Direto / Catálogo Compartilhado";
-                const dev = /Android|iPhone|iPad/i.test(navigator.userAgent) ? "Mobile Smartphone" : "Desktop PC";
-                const now = new Date();
-                const time = `${now.getDate()}/${now.getMonth()+1} ${now.getHours()}:${now.getMinutes()}`;
+                const newLead = {
+                    name: name,
+                    phone: phone,
+                    property: targetProp ? targetProp.title : "Imóvel Geral",
+                    source: "Tráfego Direto Aladin",
+                    time: new Date().toLocaleString('pt-BR')
+                };
 
-                this.state.leads.unshift({ name, phone, prop: p ? p.title : 'Geral', ref, dev, time });
-                localStorage.setItem('iamobi_leads', JSON.stringify(this.state.leads));
-
-                this.closeModal('modal-lead-capture');
-                this.openPropertyDetailDirect(this.state.selectedPropertyForLead);
+                this.leads.unshift(newLead);
+                this.closeModal();
+                this.updateAdminStats();
+                
+                // Redirecionamento simulação WhatsApp
+                const text = `Olá, vim através da IA da Plataforma IMOBI e estou altamente interessado no imóvel: ${newLead.property}.`;
+                window.open(`https://api.whatsapp.com/send?phone=5561999999999&text=${encodeURIComponent(text)}`, '_blank');
             }
 
-            openPropertyDetailDirect(id) {
-                const p = this.state.properties.find(prop => prop.id === id);
-                if (!p) return;
-
-                document.getElementById('md-title').innerText = p.title;
-                document.getElementById('md-location').innerText = `📍 Endereço: ${p.location}`;
-                document.getElementById('md-price').innerText = `R$ ${p.price.toLocaleString('pt-BR')}`;
-                document.getElementById('md-description').innerText = p.description;
-                document.getElementById('md-tag').innerText = p.type;
-
-                const box = document.getElementById('md-agio-box');
-                if (p.type === 'Ágio') {
-                    box.style.display = 'block';
-                    box.innerHTML = `<div class="agio-row"><span class="agio-label">Ágio Pago:</span><span class="agio-value">R$ ${p.agioValor.toLocaleString('pt-BR')}</span></div>
-                                     <div class="agio-row"><span class="agio-label">Saldo Devedor:</span><span class="agio-value">R$ ${p.agioSaldo.toLocaleString('pt-BR')}</span></div>
-                                     <div class="agio-row"><span class="agio-label">Parcela:</span><span class="agio-value">R$ ${p.agioParcela.toLocaleString('pt-BR')}</span></div>`;
-                } else { box.style.display = 'none'; }
-
-                document.getElementById('md-owner-info').innerText = `${p.ownerName} - ${p.ownerRole}`;
-                document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}#property-${p.id}`;
-
-                this.openModal('modal-property-detail');
+            renderLeads() {
+                const tbody = document.getElementById('leads-table-rows');
+                tbody.innerHTML = "";
+                this.leads.forEach(l => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><b>${l.name}</b></td>
+                        <td><a href="https://wa.me/${l.phone}" target="_blank" style="color: var(--google-green); font-weight:700; text-decoration:none;">🟢 Iniciar (${l.phone})</a></td>
+                        <td>${l.property}</td>
+                        <td><span style="background:#e8eaed; padding:4px 8px; border-radius:4px; font-size:0.75rem;">${l.source}</span></td>
+                        <td>${l.time}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
             }
 
-            copyShareUrl() {
-                navigator.clipboard.writeText(document.getElementById('md-share-url').innerText);
-                alert('Link de alta conversão copiado!');
+            executeSearch() {
+                const type = document.getElementById('search-type').value;
+                const location = document.getElementById('search-location').value.toLowerCase();
+                const price = parseFloat(document.getElementById('search-price').value || Infinity);
+
+                const filtered = this.properties.filter(p => {
+                    const matchesType = type === "" || p.type === type;
+                    const matchesLocation = p.location.toLowerCase().includes(location);
+                    const matchesPrice = p.price <= price;
+                    return matchesType && matchesLocation && matchesPrice;
+                });
+
+                const grid = document.getElementById('public-properties-grid');
+                grid.innerHTML = "";
+                filtered.forEach(p => grid.appendChild(this.createCardElement(p, false)));
             }
 
-            openModal(mId) { document.getElementById(mId).classList.add('active'); }
-            closeModal(mId) { document.getElementById(mId).classList.remove('active'); }
-            checkUrlHash() {
-                if (window.location.hash.startsWith('#property-')) {
-                    this.openPropertyGate(window.location.hash.replace('#property-', ''));
-                }
+            clearSearchFilters() {
+                document.getElementById('search-type').value = "";
+                document.getElementById('search-location').value = "";
+                document.getElementById('search-price').value = "";
+                this.renderPublicProperties();
+            }
+
+            simulateBillingExpiration() {
+                document.getElementById('dash-billing-alert').style.display = 'block';
+                document.getElementById('billing-status-lbl').innerHTML = `<span style="color:var(--tesla-red);">Fatura Inadimplente (Bloqueado)</span>`;
+            }
+
+            resetBilling() {
+                document.getElementById('dash-billing-alert').style.display = 'none';
+                document.getElementById('billing-status-lbl').innerHTML = `<span style="color:var(--google-green);">Assinatura Ativa (Regularizada)</span>`;
+                alert("Faturamento liquidado instantaneamente via chave PIX Partner Holding.");
+            }
+
+            updateAdminStats() {
+                document.getElementById('admin-stat-users').innerText = "14";
+                document.getElementById('admin-stat-props').innerText = this.properties.length;
+                document.getElementById('admin-stat-leads').innerText = this.leads.length;
             }
         }
 
-        const app = new IaMobiApp();
+        // Instanciar aplicação global
+        const app = new ImobiApp();
         window.onload = () => app.init();
     </script>
 </body>
