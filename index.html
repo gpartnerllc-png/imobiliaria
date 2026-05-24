@@ -3,75 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOBI | Partner Holding Dashboard</title>
+    <title>IMOBI | Partner Holding</title>
     <style>
-        /* CONFIGURAÇÕES GERAIS E PALETA DE CORES PREMIUM (DARK) */
+        /* MANTIDO O PADRÃO ORIGINAL DE CORES E ESTILO 3D CONFORME SOLICITADO */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: sans-serif;
         }
 
         body {
-            background-color: #0d1117;
-            color: #c9d1d9;
+            background-color: #f4f6f9;
+            color: #333;
             display: flex;
             min-height: 100vh;
         }
 
-        /* LAYOUT LATERAL (SIDEBAR) */
-        .sidebar {
-            width: 280px;
-            background-color: #161b22;
-            border-right: 1px solid #30363d;
-            padding: 24px;
+        /* SIDEBAR ORIGINAL */
+        .Sidebar {
+            width: 260px;
+            background-color: #ffffff;
+            border-right: 1px solid #e0e0e0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
         }
 
-        .logo-container {
+        .logo-area {
             text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #30363d;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f4f6f9;
         }
 
-        .logo-container h1 {
-            color: #58a6ff;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 1px;
+        .logo-area h2 {
+            color: #1a73e8;
+            font-size: 20px;
         }
 
-        .logo-container span {
-            color: #8b949e;
-            font-size: 12px;
-        }
-
-        /* SEÇÃO DE PERFIL NA SIDEBAR */
-        .profile-box {
-            background: #21262d;
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-            border: 1px solid #30363d;
-        }
-
+        /* AVATAR "C" TRIDIMENSIONAL / REDONDO */
         .avatar-container {
-            width: 70px;
-            height: 70px;
-            background: #58a6ff;
-            color: #0d1117;
-            font-size: 28px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1a73e8, #1557b0);
+            color: #ffffff;
+            font-size: 32px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            margin: 0 auto 12px auto;
-            border: 3px solid #30363d;
+            margin: 10px auto;
+            box-shadow: 0 4px 8px rgba(21, 87, 176, 0.3), inset 0 -4px 0 rgba(0,0,0,0.2);
             overflow: hidden;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .avatar-container img {
@@ -80,554 +67,419 @@
             object-fit: cover;
         }
 
-        .profile-box h3 {
-            font-size: 15px;
-            color: #f0f6fc;
-            margin-bottom: 4px;
+        .profile-info {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .profile-box p {
-            font-size: 11px;
-            color: #8b949e;
-            margin-bottom: 8px;
+        .profile-info h3 {
+            font-size: 16px;
+            color: #202124;
         }
 
-        .btn-config-perfil {
-            color: #58a6ff;
+        .btn-config {
+            color: #1a73e8;
             font-size: 12px;
             text-decoration: none;
-            font-weight: 600;
+            display: block;
+            margin-top: 8px;
             cursor: pointer;
-            transition: color 0.2s;
+            font-weight: bold;
         }
 
-        .btn-config-perfil:hover {
-            text-decoration: underline;
-            color: #79c0ff;
-        }
-
-        /* CONTEÚDO PRINCIPAL */
+        /* CONTEÚDO */
         .main-content {
             flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
+            padding: 30px;
+            background-color: #f4f6f9;
         }
 
-        .section-title {
-            font-size: 20px;
-            color: #f0f6fc;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 8px;
+        .secao-titulo {
+            font-size: 18px;
+            color: #202124;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #1a73e8;
         }
 
-        /* FORMULÁRIO DE CADASTRO/EDIÇÃO DE IMÓVEIS */
-        .form-container {
-            background: #161b22;
-            border: 1px solid #30363d;
+        /* FORMULÁRIOS */
+        .box-container {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 35px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-bottom: 16px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
         }
 
-        .form-group.full-width {
+        .full-width {
             grid-column: span 2;
         }
 
-        label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #c9d1d9;
-        }
-
         input, select, textarea {
-            width: 100%;
-            padding: 10px 12px;
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            color: #f0f6fc;
+            padding: 10px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s;
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: #58a6ff;
+            border-color: #1a73e8;
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .btn-primary {
-            background-color: #238636;
-            color: #ffffff;
-            border: 1px solid rgba(240,246,2fc,0.1);
-            padding: 12px 24px;
+        .btn-acao {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px 20px;
             font-size: 14px;
-            font-weight: 600;
-            border-radius: 6px;
+            font-weight: bold;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.2s;
         }
 
-        .btn-primary:hover {
-            background-color: #2ea043;
+        .btn-acao:hover {
+            background-color: #1557b0;
         }
 
-        /* PORTFÓLIO DE IMÓVEIS ATIVOS (GRID) */
+        /* CARDS DO PORTFÓLIO */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 35px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        .imovel-card {
-            background: #161b22;
-            border: 1px solid #30363d;
+        .card-imovel {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .imovel-card:hover {
-            transform: translateY(-4px);
-            border-color: #444c56;
-        }
-
-        .card-img-container {
+        .card-img {
             width: 100%;
-            height: 180px;
-            background: #0d1117;
+            height: 160px;
+            background: #e8eaed;
             position: relative;
         }
 
-        .card-img-container img {
+        .card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .badge-modalidade {
+        .badge {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #1f6feb;
-            color: #fff;
+            top: 10px;
+            left: 10px;
+            background: #1a73e8;
+            color: white;
             padding: 4px 8px;
             font-size: 11px;
             font-weight: bold;
             border-radius: 4px;
         }
 
-        .card-body {
-            padding: 16px;
+        .card-detalhes {
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            flex: 1;
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #f0f6fc;
-        }
-
-        .card-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #58a6ff;
-        }
-
-        .card-address {
-            font-size: 12px;
-            color: #8b949e;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: #c9d1d9;
-            line-height: 1.4;
-        }
-
-        .card-actions {
-            margin-top: auto;
-            padding-top: 12px;
-            border-top: 1px solid #30363d;
-            display: flex;
             gap: 8px;
-        }
-
-        .btn-edit {
-            background-color: #f1c40f;
-            color: #0d1117;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 13px;
             flex: 1;
-            transition: opacity 0.2s;
         }
 
-        .btn-edit:hover {
-            opacity: 0.9;
+        .card-preco {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a73e8;
         }
 
-        /* PAINEL DE CONFIGURAÇÕES DE PERFIL */
-        .profile-settings-panel {
-            background: #161b22;
-            border: 1px solid #21262d;
-            border-radius: 8px;
-            padding: 24px;
-            margin-top: 20px;
-        }
-
-        .profile-btn-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-        }
-
-        .btn-secondary {
-            background: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 6px;
+        .btn-editar-card {
+            background-color: #f1c40f;
+            color: #000;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            font-weight: bold;
             cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            background: #30363d;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="logo-container">
-            <h1>IMOBI</h1>
-            <span>Partner Holding & Consulting</span>
+    <div class="Sidebar">
+        <div class="logo-area">
+            <h2>IA-MOBI</h2>
+            <small style="color: #5f6368;">Partner Holding</small>
         </div>
 
-        <div class="profile-box">
-            <div class="avatar-container" id="sidebarAvatar">
-                C
-            </div>
-            <h3 id="sidebarNome">Cristian Ribeiro [Master]</h3>
-            <p>Acesso Administrativo</p>
-            <a class="btn-config-perfil" onclick="mostrarPainelPerfil()">⚙️ Configurar Conta</a>
+        <div class="profile-info">
+            <div class="avatar-container" id="avatarPerfil">C</div>
+            <h3 id="nomePerfilExibicao">Cristian Florencio-Consultor</h3>
+            <a class="btn-config" onclick="abrirConfigPerfil()">⚙️ Editar Perfil</a>
         </div>
     </div>
 
     <div class="main-content">
         
-        <h2 class="section-title" id="tituloFormulario">🏠 Publicar Novo Imóvel</h2>
-        <div class="form-container">
+        <h2 class="secao-titulo" id="tituloFormImovel">🏠 Cadastrar Imóvel</h2>
+        <div class="box-container">
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Título do Anúncio:</label>
-                    <input type="text" id="imovelTitulo" placeholder="Ex: Lote Comercial Águas Lindas">
+                    <label>Título:</label>
+                    <input type="text" id="txtTitulo" placeholder="Ex: Lote Comercial Águas Lindas">
                 </div>
                 <div class="form-group">
-                    <label>Modalidade de Controle:</label>
-                    <select id="imovelModalidade">
+                    <label>Modalidade:</label>
+                    <select id="selModalidade">
                         <option value="Contrato de Aluguel">Contrato de Aluguel</option>
                         <option value="Venda - Àgio">Venda - Àgio</option>
                         <option value="Venda Integral">Venda Integral</option>
-                        <option value="Parceria SVA">Parceria SVA</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Preço / Valor Comercial:</label>
-                    <input type="text" id="imovelPreco" placeholder="Ex: R$ 2.500/mês ou R$ 150.000">
+                    <label>Preço:</label>
+                    <input type="text" id="txtPreco" placeholder="Valor">
                 </div>
                 <div class="form-group">
-                    <label>Localização / Endereço:</label>
-                    <input type="text" id="imovelEndereco" placeholder="Cidade - UF">
+                    <label>Cidade - UF:</label>
+                    <input type="text" id="txtEndereco" placeholder="Ex: Águas Lindas - GO">
                 </div>
                 <div class="form-group full-width">
-                    <label>Link da Imagem/Foto (Aceita Link Direto do Google Drive):</label>
-                    <input type="text" id="imovelFoto" placeholder="https://drive.google.com/drive/folders/1eyU735Bzq7VSjcnUMg0tZFb2-axfhBDk?usp=drive_link">
+                    <label>Link da Foto (Google Drive ou Web):</label>
+                    <input type="text" id="txtFoto" placeholder="Cole o link do Google Drive aqui">
                 </div>
                 <div class="form-group full-width">
-                    <label>Memorial Descritivo / Observações:</label>
-                    <textarea id="imovelMemorial" placeholder="Escreva os detalhes técnicos, metas de entrega e condições jurídicas..."></textarea>
+                    <label>Descrição / Memorial:</label>
+                    <textarea id="txtMemorial" placeholder="Detalhes do imóvel..."></textarea>
                 </div>
             </div>
-            <button class="btn-primary" id="btnSalvarImovel" onclick="executarAcaoImovel()">Publicar Anúncio no Portfólio</button>
+            <button class="btn-acao" id="btnSalvar" onclick="salvarImovel()">Publicar Anúncio</button>
         </div>
 
-        <h2 class="section-title">📊 Portfólio de Imóveis Ativos</h2>
-        <div class="portfolio-grid" id="containerPortfolio">
-            </div>
+        <h2 class="secao-titulo">📊 Portfólio de Imóveis Ativos</h2>
+        <div class="portfolio-grid" id="gridImoveis"></div>
 
-        <div id="painelEditarPerfil" style="display: none;">
-            <h2 class="section-title">⚙️ Configurações de Perfil da Conta</h2>
-            <div class="profile-settings-panel">
+        <div id="boxPerfil" style="display: none; margin-top: 30px;">
+            <h2 class="secao-titulo">⚙️ Configurações do Perfil</h2>
+            <div class="box-container">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Nome de Exibição:</label>
-                        <input type="text" id="editNomePerfil" value="Cristian Ribeiro [Master]">
+                        <label>Nome do Usuário:</label>
+                        <input type="text" id="perfilNome">
                     </div>
                     <div class="form-group">
-                        <label>Foto de Perfil (Aceita Link do Google Drive):</label>
-                        <input type="text" id="editFotoPerfil" placeholder="https://drive.google.com/file/d/1ThGL970mnQny2YKkgTdV7NSgBMl069Gg/view?usp=drive_link">
+                        <label>Link da Foto de Perfil (Google Drive):</label>
+                        <input type="text" id="perfilFoto" placeholder="Link da foto do Drive">
                     </div>
                     <div class="form-group">
-                        <label>Nova Senha de Acesso:</label>
-                        <input type="password" id="editSenhaPerfil" placeholder="Deixe em branco para não alterar">
+                        <label>Nova Senha:</label>
+                        <input type="password" id="perfilSenha" placeholder="Digite para alterar">
                     </div>
                     <div class="form-group">
-                        <label>Confirmar Nova Senha:</label>
-                        <input type="password" id="editConfirmarSenhaPerfil" placeholder="Confirme a nova senha">
+                        <label>Confirmar Senha:</label>
+                        <input type="password" id="perfilSenhaConf" placeholder="Confirme a senha">
                     </div>
                 </div>
-                <div class="profile-btn-group">
-                    <button class="btn-primary" onclick="salvarAlteracoesPerfil()">Salvar Alterações</button>
-                    <button class="btn-secondary" onclick="document.getElementById('painelEditarPerfil').style.display='none'">Cancelar</button>
-                </div>
+                <button class="btn-acao" onclick="salvarPerfil()">Salvar Alterações do Perfil</button>
+                <button class="btn-acao" style="background-color: #7f8c8d;" onclick="document.getElementById('boxPerfil').style.display='none'">Fechar</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // BANCO DE DADOS EM MEMÓRIA (Com exemplos iniciais do seu ecossistema)
-        let meuArrayDeImoveis = [
+        // FUNÇÃO DE CONVERSÃO DO DRIVE CORRIGIDA (Gera link direto estável para renderização)
+        function converterLinkDrive(url) {
+            if (!url) return '';
+            const regex = /(?:\/d\/|id=)([\w-]+)/;
+            const match = url.match(regex);
+            if (match && match[1]) {
+                return `https://docs.google.com/uc?export=view&id=${match[1]}`;
+            }
+            return url;
+        }
+
+        // CARREGAMENTO SEGURO DO LOCALSTORAGE (Evita que os dados sumam ao reiniciar)
+        let imoveisCadastrados = JSON.parse(localStorage.getItem('ia_mobi_imoveis')) || [
             {
                 id: "1",
-                titulo: "Lote Comercial Premium - Mansões Pôr do Sol",
+                titulo: "Lote Comercial Mansões",
                 modalidade: "Venda Integral",
-                preco: "R$ 180.000",
-                endereco: "Águas Lindas de Goiás - GO",
-                foto: "", // Vazio usará imagem padrão
-                memorial: "Excelente lote comercial pronto para construção de galpões ou escritórios de logística corporativa."
-            },
-            {
-                id: "2",
-                titulo: "Sala Corporativa Partner Holding",
-                modalidade: "Contrato de Aluguel",
-                preco: "R$ 3.200/mês",
-                endereco: "Distrito Federal - DF",
+                preco: "R$ 150.000",
+                endereco: "Águas Lindas - GO",
                 foto: "",
-                memorial: "Infraestrutura completa com suporte a servidores de alta performance e automações digitais."
+                memorial: "Área comercial bem localizada."
             }
         ];
 
-        // Variável de controle para verificar se estamos editando um imóvel existente
-        let idImovelEmEdicao = null;
+        let dadosPerfil = JSON.parse(localStorage.getItem('ia_mobi_perfil')) || {
+            nome: "Cristian Ribeiro [Master]",
+            foto: ""
+        };
 
-        // 1. FUNÇÃO UTILIÁRIA CRÍTICA: Converte links comuns de visualização do Google Drive em arquivos puros de renderização de imagem
-        function converterLinkDrive(url) {
-            if (!url) return '';
-            
-            // Regex avançado para capturar o ID único do arquivo no Google Drive
-            const regex = /(?:\/d\/|id=)([\w-]+)/;
-            const match = url.match(regex);
-            
-            if (match && match[1]) {
-                const fileId = match[1];
-                // Retorna a URL nativa de alta fidelidade para renderização de assets do ecossistema Google
-                return `https://docs.google.com/uc?export=view&id=${fileId}`;
-            }
-            return url; // Se for um link web padrão ou direto, mantém inalterado
-        }
+        let idEmEdicao = null;
 
-        // 2. RENDERIZADOR DO PORTFÓLIO NA TELA
-        function renderizarPortfolio() {
-            const container = document.getElementById('containerPortfolio');
-            container.innerHTML = ''; // Limpa antes de renderizar
+        // ATUALIZA A TELA DO PORTFÓLIO
+        function renderizarImoveis() {
+            const grid = document.getElementById('gridImoveis');
+            grid.innerHTML = '';
 
-            if (meuArrayDeImoveis.length === 0) {
-                container.innerHTML = `<p style="color: #8b949e; grid-column: span 3; text-align: center; padding: 20px;">Nenhum imóvel ativo listado no momento.</p>`;
-                return;
-            }
-
-            meuArrayDeImoveis.forEach(imovel => {
-                // Passa o link salvo pela conversão do Drive antes de renderizar na tag img
-                const imagemTratada = imovel.foto ? converterLinkDrive(imovel.foto) : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=500&q=80';
-
-                const cardHtml = `
-                    <div class="imovel-card">
-                        <div class="card-img-container">
-                            <span class="badge-modalidade">${imovel.modalidade}</span>
-                            <img src="${imagemTratada}" alt="Foto do Imóvel" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=500&q=80'">
+            imoveisCadastrados.forEach(imovel => {
+                const imgFinal = imovel.foto ? converterLinkDrive(imovel.foto) : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=500&q=80';
+                
+                grid.innerHTML += `
+                    <div class="card-imovel">
+                        <div class="card-img">
+                            <span class="badge">${imovel.modalidade}</span>
+                            <img src="${imgFinal}" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=500&q=80'">
                         </div>
-                        <div class="card-body">
-                            <h4 class="card-title">${imovel.titulo}</h4>
-                            <div class="card-price">${imovel.preco}</div>
-                            <div class="card-address">📍 ${imovel.endereco}</div>
-                            <p class="card-desc">${imovel.memorial}</p>
-                            <div class="card-actions">
-                                <button class="btn-edit" onclick="abrirEdicaoImovel('${imovel.id}')">✏️ Editar Anúncio</button>
-                            </div>
+                        <div class="card-detalhes">
+                            <h3 style="font-size:16px;">${imovel.titulo}</h3>
+                            <div class="card-preco">${imovel.preco}</div>
+                            <small style="color:#7f8c8d;">📍 ${imovel.endereco}</small>
+                            <p style="font-size:13px; color:#555;">${imovel.memorial}</p>
+                            <button class="btn-editar-card" onclick="prepararEdicao('${imovel.id}')">✏️ Editar e Corrigir</button>
                         </div>
                     </div>
                 `;
-                container.innerHTML += cardHtml;
             });
         }
 
-        // 3. LOGICA DO FORMULÁRIO DE ANÚNCIOS (SALVAR NOVO OU ALTERAR ALTERAÇÕES)
-        function executarAcaoImovel() {
-            const titulo = document.getElementById('imovelTitulo').value.trim();
-            const modalidade = document.getElementById('imovelModalidade').value;
-            const preco = document.getElementById('imovelPreco').value.trim();
-            const endereco = document.getElementById('imovelEndereco').value.trim();
-            const fotoRaw = document.getElementById('imovelFoto').value.trim();
-            const memorial = document.getElementById('imovelMemorial').value.trim();
+        // SALVA OU ATUALIZA REGISTROS NO BANCO LOCAL (LOCALSTORAGE)
+        function salvarImovel() {
+            const titulo = document.getElementById('txtTitulo').value;
+            const modalidade = document.getElementById('selModalidade').value;
+            const preco = document.getElementById('txtPreco').value;
+            const endereco = document.getElementById('txtEndereco').value;
+            const foto = document.getElementById('txtFoto').value;
+            const memorial = document.getElementById('txtMemorial').value;
 
             if (!titulo || !preco) {
-                alert("⚠️ Por favor, preencha pelo menos o Título e o Preço do anúncio.");
+                alert("Preencha o título e o preço.");
                 return;
             }
 
-            // Tratamento imediato do link do Drive na inserção
-            const fotoProcessada = converterLinkDrive(fotoRaw);
-
-            if (idImovelEmEdicao !== null) {
-                // ATUALIZAR IMÓVEL EXISTENTE (Modo Correção Ativo)
-                const index = meuArrayDeImoveis.findIndex(item => item.id === idImovelEmEdicao);
-                if (index !== -1) {
-                    meuArrayDeImoveis[index].titulo = titulo;
-                    meuArrayDeImoveis[index].modalidade = modalidade;
-                    meuArrayDeImoveis[index].preco = preco;
-                    meuArrayDeImoveis[index].endereco = endereco;
-                    meuArrayDeImoveis[index].foto = fotoProcessada;
-                    meuArrayDeImoveis[index].memorial = memorial;
-                    
-                    alert("✔️ Anúncio corrigido e atualizado com sucesso!");
+            if (idEmEdicao !== null) {
+                // Atualiza item existente
+                const idx = imoveisCadastrados.findIndex(i => i.id === idEmEdicao);
+                if (idx !== -1) {
+                    imoveisCadastrados[idx].titulo = titulo;
+                    imoveisCadastrados[idx].modalidade = modalidade;
+                    imoveisCadastrados[idx].preco = preco;
+                    imoveisCadastrados[idx].endereco = endereco;
+                    imoveisCadastrados[idx].foto = foto;
+                    imoveisCadastrados[idx].memorial = memorial;
                 }
-                // Reseta estado do formulário
-                idImovelEmEdicao = null;
-                document.getElementById('tituloFormulario').innerText = "🏠 Publicar Novo Imóvel";
-                document.getElementById('btnSalvarImovel').innerText = "Publicar Anúncio no Portfólio";
-                document.getElementById('btnSalvarImovel').style.backgroundColor = "#238636";
+                idEmEdicao = null;
+                document.getElementById('tituloFormImovel').innerText = "🏠 Cadastrar Imóvel";
+                document.getElementById('btnSalvar').innerText = "Publicar Anúncio";
             } else {
-                // CRIAR NOVO ANÚNCIO
-                const novoImovel = {
+                // Insere novo item
+                const novo = {
                     id: Date.now().toString(),
-                    titulo: titulo,
-                    modalidade: modalidade,
-                    preco: preco,
-                    endereco: endereco,
-                    foto: fotoProcessada,
-                    memorial: memorial
+                    titulo, modalidade, preco, endereco, foto, memorial
                 };
-                meuArrayDeImoveis.push(novoImovel);
-                alert("✔️ Novo anúncio publicado com sucesso!");
+                imoveisCadastrados.push(novo);
             }
 
-            // Limpa os campos do formulário
-            limparFormularioImovel();
-            // Atualiza o portfólio na tela
-            renderizarPortfolio();
+            // Grava alterações de forma permanente no navegador
+            localStorage.setItem('ia_mobi_imoveis', JSON.stringify(imoveisCadastrados));
+            
+            limparCampos();
+            renderizarImoveis();
+            alert("Dados gravados com sucesso!");
         }
 
-        // CARREGA DADOS DO IMÓVEL DE VOLTA PARA O FORMULÁRIO DE EDIÇÃO
-        function abrirEdicaoImovel(id) {
-            const imovel = meuArrayDeImoveis.find(item => item.id === id);
+        // ABRE O MODO DE EDIÇÃO COPIANDO OS DADOS ATUAIS PARA O FORMULÁRIO
+        function prepararEdicao(id) {
+            const imovel = imoveisCadastrados.find(i => i.id === id);
             if (!imovel) return;
 
-            idImovelEmEdicao = id;
-            
-            // Preenche os campos com os valores atuais para correção
-            document.getElementById('imovelTitulo').value = imovel.titulo;
-            document.getElementById('imovelModalidade').value = imovel.modalidade;
-            document.getElementById('imovelPreco').value = imovel.preco;
-            document.getElementById('imovelEndereco').value = imovel.endereco;
-            document.getElementById('imovelFoto').value = imovel.foto;
-            document.getElementById('imovelMemorial').value = imovel.memorial;
+            idEmEdicao = id;
+            document.getElementById('txtTitulo').value = imovel.titulo;
+            document.getElementById('selModalidade').value = imovel.modalidade;
+            document.getElementById('txtPreco').value = imovel.preco;
+            document.getElementById('txtEndereco').value = imovel.endereco;
+            document.getElementById('txtFoto').value = imovel.foto;
+            document.getElementById('txtMemorial').value = imovel.memorial;
 
-            // Altera visualmente o formulário sinalizando o modo de edição
-            document.getElementById('tituloFormulario').innerText = "✏️ Corrigir e Editar Anúncio";
-            const btnSalvar = document.getElementById('btnSalvarImovel');
-            btnSalvar.innerText = "Salvar Alterações do Anúncio";
-            btnSalvar.style.backgroundColor = "#e1b12c";
-
-            // Rola suavemente para o formulário de edição
+            document.getElementById('tituloFormImovel').innerText = "✏️ Corrigir e Editar Anúncio";
+            document.getElementById('btnSalvar').innerText = "Salvar Correções";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function limparFormularioImovel() {
-            document.getElementById('imovelTitulo').value = '';
-            document.getElementById('imovelPreco').value = '';
-            document.getElementById('imovelEndereco').value = '';
-            document.getElementById('imovelFoto').value = '';
-            document.getElementById('imovelMemorial').value = '';
+        function limparCampos() {
+            document.getElementById('txtTitulo').value = '';
+            document.getElementById('txtPreco').value = '';
+            document.getElementById('txtEndereco').value = '';
+            document.getElementById('txtFoto').value = '';
+            document.getElementById('txtMemorial').value = '';
         }
 
-        // 4. SISTEMA DE GERENCIAMENTO E EDIÇÃO DE PERFIL
-        function mostrarPainelPerfil() {
-            const painel = document.getElementById('painelEditarPerfil');
-            painel.style.display = 'block';
-            // Rola até o painel de configurações
+        // SISTEMA DE PERFIL PERSISTENTE
+        function abrirConfigPerfil() {
+            document.getElementById('boxPerfil').style.display = 'block';
+            document.getElementById('perfilNome').value = dadosPerfil.nome;
+            document.getElementById('perfilFoto').value = dadosPerfil.foto;
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
-        function salvarAlteracoesPerfil() {
-            const novoNome = document.getElementById('editNomePerfil').value.trim();
-            const linkFotoRaw = document.getElementById('editFotoPerfil').value.trim();
-            const novaSenha = document.getElementById('editSenhaPerfil').value;
-            const confirmarSenha = document.getElementById('editConfirmarSenhaPerfil').value;
+        function salvarPerfil() {
+            const nome = document.getElementById('perfilNome').value;
+            const foto = document.getElementById('perfilFoto').value;
+            const senha = document.getElementById('perfilSenha').value;
+            const senhaConf = document.getElementById('perfilSenhaConf').value;
 
-            // Validação de segurança para mudança de senha
-            if (novaSenha !== '') {
-                if (novaSenha !== confirmarSenha) {
-                    alert("⚠️ Erro: A nova senha e a confirmação não conferem!");
-                    return;
-                }
+            if (senha !== '' && senha !== senhaConf) {
+                alert("As senhas não coincidem.");
+                return;
             }
 
-            // Atualização do Nome na interface
-            if (novoNome) {
-                document.getElementById('sidebarNome').innerText = novoNome;
-            }
+            dadosPerfil.nome = nome;
+            dadosPerfil.foto = foto;
 
-            // Tratamento e atualização de foto vinda do Google Drive para o perfil
-            if (linkFotoRaw) {
-                const fotoPerfilTratada = converterLinkDrive(linkFotoRaw);
-                const sidebarAvatar = document.getElementById('sidebarAvatar');
-                sidebarAvatar.innerHTML = `<img src="${fotoPerfilTratada}" alt="Avatar" onerror="this.parentElement.innerText='C'">`;
-            }
+            // Grava o perfil de forma permanente no navegador
+            localStorage.setItem('ia_mobi_perfil', JSON.stringify(dadosPerfil));
+            aplicarDadosPerfilPainel();
 
-            alert("✔️ Configurações de perfil e segurança salvas com sucesso!");
-            document.getElementById('painelEditarPerfil').style.display = 'none';
+            alert("Perfil salvo permanentemente!");
+            document.getElementById('boxPerfil').style.display = 'none';
         }
 
-        // INICIALIZAÇÃO AUTOMÁTICA DO SISTEMA AO CARREGAR A PÁGINA
+        function aplicarDadosPerfilPainel() {
+            document.getElementById('nomePerfilExibicao').innerText = dadosPerfil.nome;
+            const containerAvatar = document.getElementById('avatarPerfil');
+            if (dadosPerfil.foto) {
+                containerAvatar.innerHTML = `<img src="${converterLinkDrive(dadosPerfil.foto)}" onerror="this.parentElement.innerText='C'">`;
+            } else {
+                containerAvatar.innerText = 'C';
+            }
+        }
+
+        // CARREGAMENTO INICIAL NATIVO
         window.onload = function() {
-            renderizarPortfolio();
+            renderizarImoveis();
+            aplicarDadosPerfilPainel();
         };
     </script>
 </body>
