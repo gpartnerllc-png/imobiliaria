@@ -3,484 +3,837 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOBI | Partner Holding</title>
+    <title>IMOBI | Plataforma de Alta Performance Imobiliária</title>
     <style>
-        /* MANTIDO O PADRÃO ORIGINAL DE CORES E ESTILO 3D CONFORME SOLICITADO */
+        :root {
+            /* Nova Palette: Cores Claras do Google + Elementos Espelhados Reflexivos */
+            --bg-base: #f8f9fa;
+            --bg-surface: rgba(255, 255, 255, 0.75);
+            --bg-card: #ffffff;
+            --bg-input: #f1f3f4;
+            
+            --tesla-red: #d92128;
+            --google-blue: #1a73e8;
+            --google-green: #1e8e3e;
+            --google-yellow: #f9ab00;
+            
+            --primary: #1a73e8; 
+            --premium-gold: #f4b400;
+            --text-main: #202124;
+            --text-muted: #5f6368;
+            --border-glow: rgba(26, 115, 232, 0.2);
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+            /* Novas variáveis para Profundidade Tridimensional (Efeito 3D e Vidro Espelhado) */
+            --shadow-3d-flat: 0 10px 30px rgba(0, 0, 0, 0.03);
+            --shadow-3d-float: 0 30px 60px rgba(26, 115, 232, 0.12), 0 10px 20px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            --shadow-btn-3d: 0 4px 15px rgba(26, 115, 232, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: sans-serif;
+            font-family: var(--font);
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: #f4f6f9;
-            color: #333;
-            display: flex;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
             min-height: 100vh;
+            perspective: 1000px; /* Habilita profundidade 3D para elementos internos */
+            background-image: radial-gradient(circle at 50% 0%, rgba(26, 115, 232, 0.05) 0%, transparent 50%),
+                              linear-gradient(135deg, rgba(26, 115, 232, 0.03) 0%, rgba(30, 142, 62, 0.02) 100%);
         }
 
-        /* SIDEBAR ORIGINAL */
-        .Sidebar {
-            width: 260px;
-            background-color: #ffffff;
-            border-right: 1px solid #e0e0e0;
-            padding: 20px;
+        /* Elementos Espelhados e Reflexos de Fundo Ambientais */
+        .glass-glow-1 {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.12) 0%, rgba(249, 171, 0, 0.06) 50%, transparent 100%);
+            top: -10%; right: -10%; z-index: -1; pointer-events: none;
+            filter: blur(60px);
+            animation: floatingGlow 12s infinite alternate ease-in-out;
+        }
+        .glass-glow-2 {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(30, 142, 62, 0.08) 0%, rgba(217, 33, 40, 0.04) 60%, transparent 100%);
+            bottom: -20%; left: -10%; z-index: -1; pointer-events: none;
+            filter: blur(60px);
+            animation: floatingGlow 16s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatingGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.1); }
+        }
+
+        /* Header Estilo Vidro Aeroespacial Claro Alto Reflexo */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-bottom: var(--glass-border);
+            position: sticky;
+            top: 0; z-index: 1000;
+            padding: 1.2rem 2.5rem;
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), inset 0 -1px 0 rgba(255, 255, 255, 0.5);
         }
 
-        .logo-area {
-            text-align: center;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f4f6f9;
-        }
-
-        .logo-area h2 {
-            color: #1a73e8;
-            font-size: 20px;
-        }
-
-        /* AVATAR "C" TRIDIMENSIONAL / REDONDO */
-        .avatar-container {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #1a73e8, #1557b0);
-            color: #ffffff;
-            font-size: 32px;
-            font-weight: bold;
+        .brand {
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin: 10px auto;
-            box-shadow: 0 4px 8px rgba(21, 87, 176, 0.3), inset 0 -4px 0 rgba(0,0,0,0.2);
-            overflow: hidden;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            gap: 12px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .brand:hover {
+            transform: scale(1.02);
         }
 
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--google-blue) 20%, var(--google-green) 70%, var(--tesla-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(26, 115, 232, 0.1));
         }
 
-        .profile-info {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .profile-info h3 {
-            font-size: 16px;
-            color: #202124;
-        }
-
-        .btn-config {
-            color: #1a73e8;
-            font-size: 12px;
-            text-decoration: none;
+        .brand-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
             display: block;
-            margin-top: 8px;
-            cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
         }
 
-        /* CONTEÚDO */
-        .main-content {
-            flex: 1;
-            padding: 30px;
-            background-color: #f4f6f9;
-        }
+        nav { display: flex; gap: 1.2rem; align-items: center; }
 
-        .secao-titulo {
-            font-size: 18px;
-            color: #202124;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #1a73e8;
-        }
-
-        /* FORMULÁRIOS */
-        .box-container {
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .full-width {
-            grid-column: span 2;
-        }
-
-        input, select, textarea {
-            padding: 10px;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            font-size: 14px;
-            outline: none;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: #1a73e8;
-        }
-
-        .btn-acao {
-            background-color: #1a73e8;
-            color: white;
+        .nav-link {
+            background: transparent;
             border: none;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 4px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
             cursor: pointer;
-        }
-
-        .btn-acao:hover {
-            background-color: #1557b0;
-        }
-
-        /* CARDS DO PORTFÓLIO */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card-imovel {
-            background: #ffffff;
-            border: 1px solid #e0e0e0;
+            padding: 0.6rem 1.2rem;
             border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 160px;
-            background: #e8eaed;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .nav-link:hover, .nav-link.active {
+            color: var(--google-blue);
+            background: rgba(26, 115, 232, 0.08);
+            transform: translateY(-1px);
         }
 
-        .badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #1a73e8;
+        .btn-action {
+            background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%);
             color: white;
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 4px;
+            font-weight: 700;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: var(--shadow-btn-3d);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        .card-detalhes {
-            padding: 15px;
+        .btn-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(26, 115, 232, 0.35), inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-action:active {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-btn-3d);
+        }
+
+        /* Banner de Monetização Comercial Tridimensional */
+        .pricing-badge {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--premium-gold);
+            color: #b06000;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px rgba(244, 180, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.9);
+            animation: pulseGlow 2s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 4px 10px rgba(244, 180, 0, 0.15); transform: scale(1); }
+            100% { box-shadow: 0 8px 25px rgba(244, 180, 0, 0.35); transform: scale(1.02); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+        }
+
+        .view-section { display: none; }
+        .view-section.active-view { display: block; animation: fadeIn 0.5s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Showcase Espacial */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 3rem 1rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: #1f2024;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Painel Espelhado Flutuante de Busca (3D Hub) */
+        .search-hub {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: var(--glass-border);
+            padding: 2rem;
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
+            gap: 1.5rem;
+            align-items: flex-end;
+            box-shadow: var(--shadow-3d-float);
+            margin-bottom: 4rem;
+            transform: style-3d;
+        }
+
+        .input-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            flex: 1;
+            gap: 0.6rem;
         }
 
-        .card-preco {
-            font-size: 18px;
-            font-weight: bold;
-            color: #1a73e8;
+        .input-group label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-left: 4px;
         }
 
-        .btn-editar-card {
-            background-color: #f1c40f;
-            color: #000;
-            border: none;
-            padding: 8px;
-            border-radius: 4px;
-            font-weight: bold;
+        .input-group input, .input-group select, .input-group textarea {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--text-main);
+            padding: 0.9rem;
+            border-radius: 12px;
+            outline: none;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+            border-color: var(--google-blue);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.15), inset 0 2px 4px rgba(0,0,0,0.01);
+            transform: translateY(-1px);
+        }
+
+        /* Gestor Dinâmico de Fotos por Link Tridimensional */
+        .image-url-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .images-preview-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            background: rgba(241, 243, 244, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 1rem;
+            border-radius: 14px;
+            border: 2px dashed rgba(0,0,0,0.08);
+        }
+        .preview-image-item {
+            position: relative;
+            height: 95px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: var(--glass-border);
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .preview-image-item:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+        .preview-image-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .btn-remove-img {
+            position: absolute;
+            top: 6px; right: 6px;
+            background: rgba(217, 33, 40, 0.95);
+            color: white; border: none;
+            width: 24px; height: 24px;
+            border-radius: 50%; cursor: pointer;
+            font-size: 0.75rem; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        .btn-remove-img:hover { transform: scale(1.15); }
+
+        /* Grid de Imóveis e Efeitos Holográficos 3D nos Cards */
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-3d-flat);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02) rotateX(1deg);
+            border-color: rgba(26, 115, 232, 0.25);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08), 0 10px 20px rgba(26,115,232,0.04);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 20px; left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--google-blue);
+            color: var(--google-blue);
+            padding: 0.4rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            z-index: 10;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .card-media-mock {
+            height: 240px;
+            background: linear-gradient(135deg, #e8eaed 0%, #f1f3f4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-media-mock img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card:hover .card-media-mock img {
+            transform: scale(1.06);
+        }
+
+        .video-indicator {
+            position: absolute;
+            bottom: 15px; right: 15px;
+            background: var(--tesla-red);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center; gap: 4px;
+            box-shadow: 0 4px 10px rgba(217,33,40,0.3);
+        }
+
+        .card-body {
+            padding: 2.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-price {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 1rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        /* Estrutura Auth Espelhada Clássica */
+        .auth-container {
+            max-width: 500px;
+            margin: 4rem auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-3d-float);
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid var(--bg-input);
+            margin-bottom: 2rem;
+        }
+
+        .auth-tab {
+            padding: 0.8rem 1.5rem;
             cursor: pointer;
-            margin-top: auto;
+            color: var(--text-muted);
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            color: var(--google-blue);
+            border-bottom: 3px solid var(--google-blue);
+            transform: translateY(1px);
+        }
+
+        /* Dashboard de Negócios Arquitetura Flutuante */
+        .dash-layout {
+            display: grid;
+            grid-template-columns: 290px 1fr;
+            gap: 2.5rem;
+        }
+
+        .dash-sidebar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            height: fit-content;
+            box-shadow: var(--shadow-3d-flat);
+        }
+
+        .dash-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dash-menu-item.active, .dash-menu-item:hover {
+            background: #ffffff;
+            color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transform: translateX(4px);
+        }
+
+        .dash-menu-item.active {
+            border-left: 4px solid var(--tesla-red);
+            color: var(--google-blue);
+            background: rgba(26, 115, 232, 0.05);
+        }
+
+        .main-dash-content {
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 24px;
+            padding: 2.5rem;
+            min-height: 600px;
+            box-shadow: var(--shadow-3d-flat);
+        }
+
+        .billing-warning-banner {
+            background: linear-gradient(90deg, var(--tesla-red) 0%, #b81419 100%);
+            color: white;
+            padding: 1.2rem 1.8rem;
+            border-radius: 14px;
+            margin-bottom: 1.8rem;
+            display: none;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(217, 33, 40, 0.25);
+            animation: shake 0.5s ease-in-out infinite alternate;
+        }
+
+        /* Tabelas Corporativas Limpas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        th {
+            background: var(--bg-input);
+            padding: 1.1rem 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: left;
+            border-radius: 6px;
+        }
+        td { 
+            padding: 1.3rem 1rem; 
+            border-bottom: 1px solid rgba(0,0,0,0.03); 
+            font-size: 0.9rem; 
+        }
+        tr:hover td {
+            background: rgba(26, 115, 232, 0.01);
+        }
+
+        /* Modais Holográficos Flutuantes de Alta Performance */
+        .modal-blur {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(248, 249, 250, 0.6);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-blur.active { opacity: 1; pointer-events: auto; }
+
+        .modal-window {
+            background: #ffffff;
+            border: var(--glass-border);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.12), 0 15px 30px rgba(26,115,232,0.05);
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modal-blur.active .modal-window {
+            transform: translateY(0);
+        }
+
+        .video-box-container {
+            width: 100%;
+            height: 360px;
+            background: #000;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(0,0,0,0.04);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div class="Sidebar">
-        <div class="logo-area">
-            <h2>IA-MOBI</h2>
-            <small style="color: #5f6368;">Partner Holding</small>
-        </div>
+    <div class="glass-glow-1"></div>
+    <div class="glass-glow-2"></div>
 
-        <div class="profile-info">
-            <div class="avatar-container" id="avatarPerfil">C</div>
-            <h3 id="nomePerfilExibicao">Cristian Florencio-Consultor</h3>
-            <a class="btn-config" onclick="abrirConfigPerfil()">⚙️ Editar Perfil</a>
+    <header>
+        <div class="brand" onclick="app.navigate('landing')">
+            <div>
+                <span class="brand-logo">IMOBI</span>
+                <span class="brand-sub">Partner Holding</span>
+            </div>
         </div>
-    </div>
+        <div class="pricing-badge">
+            ⚡ 1º MÊS GRÁTIS — Após R$ 9,99/mês
+        </div>
+        <nav>
+            <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
+            <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
+            <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
+            <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
+                <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
+                <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Desconectar</button>
+            </div>
+        </nav>
+    </header>
 
-    <div class="main-content">
-        
-        <h2 class="secao-titulo" id="tituloFormImovel">🏠 Cadastrar Imóvel</h2>
-        <div class="box-container">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Título:</label>
-                    <input type="text" id="txtTitulo" placeholder="Ex: Lote Comercial Águas Lindas">
-                </div>
-                <div class="form-group">
-                    <label>Modalidade:</label>
-                    <select id="selModalidade">
-                        <option value="Contrato de Aluguel">Contrato de Aluguel</option>
-                        <option value="Venda - Àgio">Venda - Àgio</option>
-                        <option value="Venda Integral">Venda Integral</option>
+    <div class="container">
+
+        <section id="sec-landing" class="view-section active-view">
+            <div class="hero">
+                <h1>Plataforma Inteligente de <span>Imóveis & Ágios</span></h1>
+                <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto;">Conectando inteligência artificial Aladin, proprietários e profissionais de elite do Distrito Federal e Entorno.</p>
+            </div>
+
+            <div class="search-hub">
+                <div class="input-group">
+                    <label>Negociação</label>
+                    <select id="search-type" onchange="app.executeSearch()">
+                        <option value="">Todas as modalidades</option>
+                        <option value="Ágio">Ágios de Imóveis</option>
+                        <option value="Venda">Venda Direta</option>
+                        <option value="Aluguel">Aluguel Residencial</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Preço:</label>
-                    <input type="text" id="txtPreco" placeholder="Valor">
+                <div class="input-group">
+                    <label>Localização Geográfica</label>
+                    <input type="text" id="search-location" placeholder="Cidade, DF ou Setor..." oninput="app.executeSearch()">
                 </div>
-                <div class="form-group">
-                    <label>Cidade - UF:</label>
-                    <input type="text" id="txtEndereco" placeholder="Ex: Águas Lindas - GO">
+                <div class="input-group">
+                    <label>Teto de Investimento</label>
+                    <input type="number" id="search-price" placeholder="R$ Limite Máximo" oninput="app.executeSearch()">
                 </div>
-                <div class="form-group full-width">
-                    <label>Link da Foto (Google Drive ou Web):</label>
-                    <input type="text" id="txtFoto" placeholder="Cole o link do Google Drive aqui">
-                </div>
-                <div class="form-group full-width">
-                    <label>Descrição / Memorial:</label>
-                    <textarea id="txtMemorial" placeholder="Detalhes do imóvel..."></textarea>
-                </div>
+                <button class="btn-action" onclick="app.clearSearchFilters()" style="background: var(--bg-input); color: var(--text-main); box-shadow: none; border: 1px solid rgba(0,0,0,0.12);">Limpar Filtros</button>
             </div>
-            <button class="btn-acao" id="btnSalvar" onclick="salvarImovel()">Publicar Anúncio</button>
-        </div>
 
-        <h2 class="secao-titulo">📊 Portfólio de Imóveis Ativos</h2>
-        <div class="portfolio-grid" id="gridImoveis"></div>
+            <div class="grid-wrapper" id="public-properties-grid"></div>
+        </section>
 
-        <div id="boxPerfil" style="display: none; margin-top: 30px;">
-            <h2 class="secao-titulo">⚙️ Configurações do Perfil</h2>
-            <div class="box-container">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Nome do Usuário:</label>
-                        <input type="text" id="perfilNome">
-                    </div>
-                    <div class="form-group">
-                        <label>Link da Foto de Perfil (Google Drive):</label>
-                        <input type="text" id="perfilFoto" placeholder="Link da foto do Drive">
-                    </div>
-                    <div class="form-group">
-                        <label>Nova Senha:</label>
-                        <input type="password" id="perfilSenha" placeholder="Digite para alterar">
-                    </div>
-                    <div class="form-group">
-                        <label>Confirmar Senha:</label>
-                        <input type="password" id="perfilSenhaConf" placeholder="Confirme a senha">
-                    </div>
+        <section id="sec-auth" class="view-section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="tab-auth-login" onclick="app.toggleAuthMode('login')">Acessar Conta</div>
+                    <div class="auth-tab" id="tab-auth-reg" onclick="app.toggleAuthMode('register')">Novo Cadastro</div>
                 </div>
-                <button class="btn-acao" onclick="salvarPerfil()">Salvar Alterações do Perfil</button>
-                <button class="btn-acao" style="background-color: #7f8c8d;" onclick="document.getElementById('boxPerfil').style.display='none'">Fechar</button>
-            </div>
-        </div>
 
+                <form id="form-auth-login" onsubmit="app.actionLogin(event)">
+                    <div class="input-group" style="margin-bottom: 1.5rem;">
+                        <label>Credencial de Acesso (E-mail ou CPF)</label>
+                        <input type="text" id="log-credential" required placeholder="Digite sua credencial">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 2rem;">
+                        <label>Senha de Segurança</label>
+                        <input type="password" id="log-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-action" style="width: 100%;">Autenticar Assinatura</button>
+                </form>
+
+                <form id="form-auth-reg" onsubmit="app.actionRegister(event)" style="display: none;">
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>Nome Completo / Razão Social</label>
+                        <input type="text" id="reg-name" required placeholder="Nome do Responsável">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>E-mail Corporativo</label>
+                        <input type="email" id="reg-email" required placeholder="nome@provedor.com">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>CPF ou CNPJ</label>
+                        <input type="text" id="reg-taxid" required placeholder="Apenas números">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 1.2rem;">
+                        <label>Perfil do Usuário</label>
+                        <select id="reg-role" onchange="app.handleRoleChange(this.value)" required>
+                            <option value="Consultor">Consultor Corporativo</option>
+                            <option value="Corretor">Corretor de Imóveis (Autônomo)</option>
+                            <option value="Imobiliária">Imobiliária / Pessoa Jurídica</option>
+                            <option value="Proprietário">Proprietário Direto</option>
+                            <option value="Admin">Administrador Master da Rede</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="group-creci-field" style="margin-bottom: 1.2rem; display: none;">
+                        <label>Inscrição Regulação (CRECI)</label>
+                        <input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 0000">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 2rem;">
+                        <label>Senha Criptografada</label>
+                        <input type="password" id="reg-password" required placeholder="Mínimo de 6 dígitos">
+                    </div>
+                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #13692e 100%); box-shadow: 0 4px 15px rgba(30,142,62,0.2)">Finalizar Cadastro Seguro</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="sec-dashboard" class="view-section">
+            <div class="dash-layout">
+                <aside class="dash-sidebar">
+                    <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.06);">
+                        <div style="width: 70px; height: 70px; background: var(--bg-input); border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--google-blue); font-size: 1.5rem; font-weight: 800; color: var(--google-blue);" id="dash-avatar-txt">U</div>
+                        <h4 id="dash-user-name" style="color: var(--text-main);">Carregando...</h4>
+                        <span id="dash-user-badge" style="background: var(--tesla-red); color: white; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 900; text-transform: uppercase;">Acesso</span>
+                    </div>
+                    <div id="dash-menu-box">
+                        <div class="dash-menu-item active" id="menu-sub-portfolio" onclick="app.switchDashTab('portfolio')">Meu Portfólio</div>
+                        <div class="dash-menu-item" id="menu-sub-add" onclick="app.switchDashTab('add')">Novo Imóvel</div>
+                        <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Capturados</div>
+                        <div class="dash-menu-item" id="menu-sub-billing" onclick="app.switchDashTab('billing')">Assinatura & Faturamento</div>
+                        <div class="dash-menu-item" id="menu-sub-admin" onclick="app.switchDashTab('admin')" style="display: none; border-left: 3px solid var(--premium-gold); color: #b06000;">Painel Admin Global</div>
+                    </div>
+                </aside>
+
+                <main class="main-dash-content">
+                    <div class="billing-warning-banner" id="dash-billing-alert">
+                        ⚠️ Atenção: Sua fatura mensal de R$ 9,99 está vencida. Regularize via PIX para reativar os links de tráfego.
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-portfolio">
+                        <h2 style="margin-bottom: 1.5rem;">Seu Portfólio de Imóveis Ativos</h2>
+                        <div class="grid-wrapper" id="dash-portfolio-grid"></div>
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-add" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem;">Cadastrar Propriedade no Ecossistema</h2>
+                        <form id="form-property-create" onsubmit="app.actionCreateProperty(event)">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                                <div class="input-group">
+                                    <label>Título Descritivo do Anúncio</label>
+                                    <input type="text" id="p-title" required placeholder="Ex: Lote Comercial Águas Lindas">
+                                </div>
+                                <div class="input-group">
+                                    <label>Modalidade Operacional</label>
+                                    <select id="p-type" onchange="app.togglePropertyAgioForm(this.value)" required>
+                                        <option value="Venda">Venda Direta</option>
+                                        <option value="Ágio">Negociação de Ágio</option>
+                                        <option value="Aluguel">Contrato de Aluguel</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="p-agio-panel" style="display: none; background: rgba(26, 115, 232, 0.02); border: 1px dashed var(--google-blue); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                                <h3 style="font-size: 1rem; color: var(--google-blue); margin-bottom: 1rem;">Estrutura Financeira do Ágio</h3>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                                    <div class="input-group">
+                                        <label>Valor Investido (Pedida do Ágio)</label>
+                                        <input type="number" id="p-agio-v">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Saldo Devedor na Instituição</label>
+                                        <input type="number" id="p-agio-s">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Encargo da Parcela Mensal</label>
+                                        <input type="number" id="p-agio-p">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                                <div class="input-group">
+                                    <label>Preço Total de Face (R$)</label>
+                                    <input type="number" id="p-price" required placeholder="Valor integral">
+                                </div>
+                                <div class="input-group">
+                                    <label>Endereço Completo / Localização</label>
+                                    <input type="text" id="p-location" required placeholder="Cidade - UF">
+                                </div>
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 1.2rem;">
+                                <label>Galeria de Fotos (Links / URLs das Imagens)</label>
+                                <div class="image-url-container">
+                                    <input type="url" id="p-image-url-input" placeholder="https://exemplo.com/foto-imovel.jpg">
+                                    <button type="button" class="btn-action" onclick="app.addImageLink()" style="background: var(--google-green);">+ Incluir Foto</button>
+                                </div>
+                                <div class="images-preview-list" id="p-images-preview-container"></div>
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 1.2rem;">
+                                <label>URL do Vídeo Demonstrativo (YouTube / Link Direto MP4)</label>
+                                <input type="url" id="p-video" placeholder="https://youtube.com/watch?v=...">
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 2rem;">
+                                <label>Memorial Descritivo do Imóvel</label>
+                                <textarea id="p-desc" rows="4" required placeholder="Descreva os diferenciais, taxas de condomínio, infraestrutura..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-action">Publicar Catálogo Imediatamente</button>
+                        </form>
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-leads" style="display: none;">
+                        <h2 style="margin-bottom: 0.5rem;">Rastreamento e Inteligência de Tráfego</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Dados coletados pelo Firewall Aladin IA para conversão direta via WhatsApp.</p>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nome Intermediário</th>
+                                        <th>Canal WhatsApp</th>
+                                        <th>Imóvel Solicitado</th>
+                                        <th>Ponto de Origem</th>
+                                        <th>Data/Hora</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leads-table-rows"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-dash-view" id="dash-tab-billing" style="display: none;">
+                        <h2 style="margin-bottom: 1.5rem;">Gestão de Conta & Faturamento</h2>
+                        <div style="background: var(--bg-input); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
+                            <p style="margin-bottom: 1rem;">Status Atual: <b style="color: var(--google-green);" id="billing-status-lbl">Período de Testes Ativo (30 Dias Grátis)</b></p>
+                            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem;">Sua próxima recorrência automática de <b>R$ 9,99/mês</b> será lançada em sua fatura após o término da avaliação.</p>
+                            <button class="btn-action" style="background: var(--tesla-red); box-shadow: none;" onclick="app.simulateBillingExpiration()">Simular Fatura Vencida (Teste de Alerta)</button>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
     </div>
 
-    <script>
-        // FUNÇÃO DE CONVERSÃO DO DRIVE CORRIGIDA (Gera link direto estável para renderização)
-        function converterLinkDrive(url) {
-            if (!url) return '';
-            const regex = /(?:\/d\/|id=)([\w-]+)/;
-            const match = url.match(regex);
-            if (match && match[1]) {
-                return `https://docs.google.com/uc?export=view&id=${match[1]}`;
-            }
-            return url;
-        }
+    <footer>
+        &copy; 2026 Partner Holding | IMOBI Hub - Todos os direitos reservados.
+    </footer>
 
-        // CARREGAMENTO SEGURO DO LOCALSTORAGE (Evita que os dados sumam ao reiniciar)
-        let imoveisCadastrados = JSON.parse(localStorage.getItem('ia_mobi_imoveis')) || [
-            {
-                id: "1",
-                titulo: "Lote Comercial Mansões",
-                modalidade: "Venda Integral",
-                preco: "R$ 150.000",
-                endereco: "Águas Lindas - GO",
-                foto: "",
-                memorial: "Área comercial bem localizada."
-            }
-        ];
-
-        let dadosPerfil = JSON.parse(localStorage.getItem('ia_mobi_perfil')) || {
-            nome: "Cristian Ribeiro [Master]",
-            foto: ""
-        };
-
-        let idEmEdicao = null;
-
-        // ATUALIZA A TELA DO PORTFÓLIO
-        function renderizarImoveis() {
-            const grid = document.getElementById('gridImoveis');
-            grid.innerHTML = '';
-
-            imoveisCadastrados.forEach(imovel => {
-                const imgFinal = imovel.foto ? converterLinkDrive(imovel.foto) : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=500&q=80';
-                
-                grid.innerHTML += `
-                    <div class="card-imovel">
-                        <div class="card-img">
-                            <span class="badge">${imovel.modalidade}</span>
-                            <img src="${imgFinal}" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=500&q=80'">
-                        </div>
-                        <div class="card-detalhes">
-                            <h3 style="font-size:16px;">${imovel.titulo}</h3>
-                            <div class="card-preco">${imovel.preco}</div>
-                            <small style="color:#7f8c8d;">📍 ${imovel.endereco}</small>
-                            <p style="font-size:13px; color:#555;">${imovel.memorial}</p>
-                            <button class="btn-editar-card" onclick="prepararEdicao('${imovel.id}')">✏️ Editar e Corrigir</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        // SALVA OU ATUALIZA REGISTROS NO BANCO LOCAL (LOCALSTORAGE)
-        function salvarImovel() {
-            const titulo = document.getElementById('txtTitulo').value;
-            const modalidade = document.getElementById('selModalidade').value;
-            const preco = document.getElementById('txtPreco').value;
-            const endereco = document.getElementById('txtEndereco').value;
-            const foto = document.getElementById('txtFoto').value;
-            const memorial = document.getElementById('txtMemorial').value;
-
-            if (!titulo || !preco) {
-                alert("Preencha o título e o preço.");
-                return;
-            }
-
-            if (idEmEdicao !== null) {
-                // Atualiza item existente
-                const idx = imoveisCadastrados.findIndex(i => i.id === idEmEdicao);
-                if (idx !== -1) {
-                    imoveisCadastrados[idx].titulo = titulo;
-                    imoveisCadastrados[idx].modalidade = modalidade;
-                    imoveisCadastrados[idx].preco = preco;
-                    imoveisCadastrados[idx].endereco = endereco;
-                    imoveisCadastrados[idx].foto = foto;
-                    imoveisCadastrados[idx].memorial = memorial;
-                }
-                idEmEdicao = null;
-                document.getElementById('tituloFormImovel').innerText = "🏠 Cadastrar Imóvel";
-                document.getElementById('btnSalvar').innerText = "Publicar Anúncio";
-            } else {
-                // Insere novo item
-                const novo = {
-                    id: Date.now().toString(),
-                    titulo, modalidade, preco, endereco, foto, memorial
-                };
-                imoveisCadastrados.push(novo);
-            }
-
-            // Grava alterações de forma permanente no navegador
-            localStorage.setItem('ia_mobi_imoveis', JSON.stringify(imoveisCadastrados));
-            
-            limparCampos();
-            renderizarImoveis();
-            alert("Dados gravados com sucesso!");
-        }
-
-        // ABRE O MODO DE EDIÇÃO COPIANDO OS DADOS ATUAIS PARA O FORMULÁRIO
-        function prepararEdicao(id) {
-            const imovel = imoveisCadastrados.find(i => i.id === id);
-            if (!imovel) return;
-
-            idEmEdicao = id;
-            document.getElementById('txtTitulo').value = imovel.titulo;
-            document.getElementById('selModalidade').value = imovel.modalidade;
-            document.getElementById('txtPreco').value = imovel.preco;
-            document.getElementById('txtEndereco').value = imovel.endereco;
-            document.getElementById('txtFoto').value = imovel.foto;
-            document.getElementById('txtMemorial').value = imovel.memorial;
-
-            document.getElementById('tituloFormImovel').innerText = "✏️ Corrigir e Editar Anúncio";
-            document.getElementById('btnSalvar').innerText = "Salvar Correções";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function limparCampos() {
-            document.getElementById('txtTitulo').value = '';
-            document.getElementById('txtPreco').value = '';
-            document.getElementById('txtEndereco').value = '';
-            document.getElementById('txtFoto').value = '';
-            document.getElementById('txtMemorial').value = '';
-        }
-
-        // SISTEMA DE PERFIL PERSISTENTE
-        function abrirConfigPerfil() {
-            document.getElementById('boxPerfil').style.display = 'block';
-            document.getElementById('perfilNome').value = dadosPerfil.nome;
-            document.getElementById('perfilFoto').value = dadosPerfil.foto;
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-
-        function salvarPerfil() {
-            const nome = document.getElementById('perfilNome').value;
-            const foto = document.getElementById('perfilFoto').value;
-            const senha = document.getElementById('perfilSenha').value;
-            const senhaConf = document.getElementById('perfilSenhaConf').value;
-
-            if (senha !== '' && senha !== senhaConf) {
-                alert("As senhas não coincidem.");
-                return;
-            }
-
-            dadosPerfil.nome = nome;
-            dadosPerfil.foto = foto;
-
-            // Grava o perfil de forma permanente no navegador
-            localStorage.setItem('ia_mobi_perfil', JSON.stringify(dadosPerfil));
-            aplicarDadosPerfilPainel();
-
-            alert("Perfil salvo permanentemente!");
-            document.getElementById('boxPerfil').style.display = 'none';
-        }
-
-        function aplicarDadosPerfilPainel() {
-            document.getElementById('nomePerfilExibicao').innerText = dadosPerfil.nome;
-            const containerAvatar = document.getElementById('avatarPerfil');
-            if (dadosPerfil.foto) {
-                containerAvatar.innerHTML = `<img src="${converterLinkDrive(dadosPerfil.foto)}" onerror="this.parentElement.innerText='C'">`;
-            } else {
-                containerAvatar.innerText = 'C';
-            }
-        }
-
-        // CARREGAMENTO INICIAL NATIVO
-        window.onload = function() {
-            renderizarImoveis();
-            aplicarDadosPerfilPainel();
-        };
-    </script>
 </body>
 </html>
