@@ -59,20 +59,14 @@
             width: 500px;
             height: 500px;
             background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%);
-            top: -10%;
-            right: -10%; 
-            z-index: -1; 
-            pointer-events: none;
+            top: -10%; right: -10%; z-index: -1; pointer-events: none;
         }
         .glass-glow-2 {
             position: fixed;
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%);
-            bottom: -20%;
-            left: -10%; 
-            z-index: -1; 
-            pointer-events: none;
+            bottom: -20%; left: -10%; z-index: -1; pointer-events: none;
         }
 
         /* Header Estilo Vidro Transparente */
@@ -82,8 +76,7 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(128, 128, 128, 0.1);
             position: sticky;
-            top: 0; 
-            z-index: 1000;
+            top: 0; z-index: 1000;
             padding: 1.2rem 2.5rem;
             display: flex;
             justify-content: space-between;
@@ -115,11 +108,7 @@
             display: block;
         }
 
-        nav { 
-            display: flex;
-            gap: 1.2rem; 
-            align-items: center; 
-        }
+        nav { display: flex; gap: 1.2rem; align-items: center; }
 
         .nav-link {
             background: transparent;
@@ -187,12 +176,8 @@
             padding: 0 2rem;
         }
 
-        .view-section { 
-            display: none;
-        }
-        .view-section.active-view { 
-            display: block;
-        }
+        .view-section { display: none; }
+        .view-section.active-view { display: block; }
 
         /* Banner Alerta de Faturamento */
         .billing-warning-banner {
@@ -300,8 +285,7 @@
 
         .card-badge {
             position: absolute;
-            top: 20px; 
-            left: 20px;
+            top: 20px; left: 20px;
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid var(--google-blue);
             color: var(--google-blue);
@@ -316,19 +300,16 @@
         .card-media-mock {
             height: 240px;
             background-color: #e2e8f0;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
 
         .video-indicator {
             position: absolute;
-            bottom: 15px; 
-            right: 15px;
+            bottom: 15px; right: 15px;
             background: var(--tesla-red);
             color: white;
             padding: 0.3rem 0.7rem;
@@ -336,8 +317,9 @@
             font-size: 0.7rem;
             font-weight: 700;
             display: flex;
-            align-items: center; 
-            gap: 4px;
+            align-items: center; gap: 4px;
+            z-index: 12;
+            cursor: pointer;
         }
 
         .card-body {
@@ -425,7 +407,7 @@
 
         .main-dash-content {
             background: var(--bg-surface);
-            border: 1px solid rgba(128, 128, 128, 0.15);
+            border: 1px solid rgba(128, 128, 128, 0.05);
             border-radius: 16px;
             padding: 2.5rem;
             min-height: 600px;
@@ -442,15 +424,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0; 
-            pointer-events: none;
+            opacity: 0; pointer-events: none;
             transition: opacity 0.3s ease;
         }
 
-        .modal-blur.active { 
-            opacity: 1; 
-            pointer-events: auto;
-        }
+        .modal-blur.active { opacity: 1; pointer-events: auto; }
 
         .modal-window {
             background: var(--bg-surface);
@@ -563,7 +541,7 @@
 
         <section id="sec-landing" class="view-section active-view">
             <div class="hero">
-                <h1>Plataforma de Alta Performance <span>Imóveis & Ágios</span></h1>
+                <h1>Plataforma de<span>Imóveis & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
 
@@ -834,17 +812,21 @@
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
                     <div class="input-group">
-                        <label>URL da Imagem Principal</label>
+                        <label>URLs das Imagens (Até 12 fotos, separadas por vírgula)</label>
                         <div style="display: flex; gap: 8px;">
                             <input type="url" id="p-image" placeholder="https://link.com/foto.jpg" style="flex-grow: 1;">
                             <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none; font-size: 0.85rem; white-space: nowrap;">Nuvem Partner</button>
+                            <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none; font-size: 0.85rem; white-space: nowrap;">📂 Computador</button>
+                            <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
                         </div>
                     </div>
                     <div class="input-group">
-                        <label>URL do Vídeo (Tour Virtual)</label>
+                        <label>URL do Vídeo (Link Web ou Nuvem)</label>
                         <div style="display: flex; gap: 8px;">
                             <input type="url" id="p-video" placeholder="https://youtube.com/embed/..." style="flex-grow: 1;">
                             <button type="button" class="btn-action" onclick="app.openDrivePicker('p-video')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none; font-size: 0.85rem; white-space: nowrap;">Nuvem Partner</button>
+                            <button type="button" class="btn-action" onclick="document.getElementById('p-video-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none; font-size: 0.85rem; white-space: nowrap;">📂 Computador</button>
+                            <input type="file" id="p-video-file" accept="video/*" style="display: none;" onchange="app.handleLocalVideo(this)">
                         </div>
                     </div>
                 </div>
@@ -877,6 +859,9 @@
     <script>
         class IaMobiEngine {
             constructor() {
+                // Instancia o mapeador de índices ativos para os carrosséis
+                this.carouselIndices = {};
+
                 // Massa de Dados de Usuários
                 this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [
                     { name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", creci: "CRECI-DF Master" }
@@ -901,7 +886,7 @@
                     }
                 ];
 
-                // Massa de Dados de Leads Base (Mikaele Nascimento Cadastrada no Firewall)
+                // Massa de Dados de Leads Base
                 this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [
                     { 
                         name: "Mikaele Nascimento", 
@@ -928,6 +913,7 @@
                 this.updateAuthHeader();
                 this.applySavedTheme();
                 this.checkBillingStatusUI();
+                this.initAutoCarousel();
                 
                 if (this.currentUser) {
                     this.renderDashboard();
@@ -943,6 +929,72 @@
                 localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
                 localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
                 localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
+            }
+
+            // EXTRACTOR AUTOMÁTICO DE LINKS DO GOOGLE DRIVE
+            getImagesArray(imageStr) {
+                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
+                return imageStr.split(',').map(url => {
+                    url = url.trim();
+                    if (url.includes('drive.google.com')) {
+                        const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+                        if (match && match[1]) {
+                            return `https://docs.google.com/uc?export=view&id=${match[1]}`;
+                        }
+                    }
+                    return url;
+                });
+            }
+
+            // GESTÃO DOS CARROSSEIS (Setas manuais + Transições Dinâmicas)
+            moveCarousel(id, direction, total) {
+                if (total <= 1) return;
+                if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
+                this.carouselIndices[id] = (this.carouselIndices[id] + direction + total) % total;
+                
+                const sliders = document.querySelectorAll(`.carousel-slider-${id}`);
+                sliders.forEach(slider => {
+                    slider.style.transform = `translateX(-${this.carouselIndices[id] * 100}%)`;
+                });
+            }
+
+            initAutoCarousel() {
+                setInterval(() => {
+                    this.properties.forEach(p => {
+                        const images = this.getImagesArray(p.image);
+                        if (images.length > 1) {
+                            this.moveCarousel(p.id, 1, images.length);
+                        }
+                    });
+                }, 5000); // Passagem programada a cada 5 segundos
+            }
+
+            // SELETORES DE ARQUIVOS FISICOS DO COMPUTADOR (DOWNLOADS)
+            handleLocalImages(input) {
+                if (!input.files || input.files.length === 0) return;
+                const files = Array.from(input.files).slice(0, 12); // Limite de 12 fotos
+                const promises = files.map(file => {
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    });
+                });
+                Promise.all(promises).then(base64Images => {
+                    document.getElementById('p-image').value = base64Images.join(',');
+                    alert(`Sucesso: ${base64Images.length} fotos carregadas do computador local.`);
+                });
+            }
+
+            handleLocalVideo(input) {
+                if (!input.files || input.files.length === 0) return;
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('p-video').value = e.target.result;
+                    alert('Vídeo local carregado com sucesso!');
+                };
+                reader.readAsDataURL(file);
             }
 
             // SISTEMA DE TEMAS DE ALTA PERFORMANCE (FUSÃO CLARO/ESCURO)
@@ -987,7 +1039,7 @@
                 }
             }
 
-            // RENDERIZADOR DO MARKETPLACE PÚBLICO
+            // RENDERIZADOR DO MARKETPLACE PÚBLICO COM CARROSSEL EMBUTIDO
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
                 grid.innerHTML = '';
@@ -1002,20 +1054,43 @@
                     const card = document.createElement('div');
                     card.className = 'card';
                     
+                    const images = this.getImagesArray(p.image);
+                    if (!this.carouselIndices[p.id]) this.carouselIndices[p.id] = 0;
+                    const activeIdx = this.carouselIndices[p.id];
+
                     const videoIndicatorHtml = p.video ? `
-                        <div class="video-indicator">
+                        <div class="video-indicator" onclick="event.stopPropagation(); app.gateCheckProperty('${p.id}')">
                             <span>▶ TOUR VÍDEO</span>
                         </div>
                     ` : '';
 
+                    let agioHtml = '';
+                    if (p.type === 'Ágio') {
+                        agioHtml = `
+                            <div style="margin-top: 0.5rem; padding: 0.6rem; background: rgba(26,115,232,0.04); border-radius: 6px; font-size: 0.8rem;">
+                                🪙 <b>Pedida do Ágio:</b> R$ ${(p.agioPaid || 0).toLocaleString('pt-BR')}<br>
+                                📉 <b>Saldo Devedor:</b> R$ ${(p.agioRemaining || 0).toLocaleString('pt-BR')}
+                            </div>
+                        `;
+                    }
+
                     card.innerHTML = `
                         <span class="card-badge">${p.type}</span>
-                        <div class="card-media-mock" style="background-image: url('${p.image || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'}');">
+                        <div class="card-media-mock" style="position:relative; background:#e2e8f0;">
+                            <div class="carousel-slider-${p.id}" style="width:100%; height:100%; display:flex; transition: transform 0.4s ease-out; transform: translateX(-${activeIdx * 100}%);">
+                                ${images.map(img => `<img src="${img}" style="width:100%; height:100%; object-fit:cover; flex-shrink:0;" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'">`).join('')}
+                            </div>
+                            ${images.length > 1 ? `
+                                <button type="button" onclick="event.stopPropagation(); app.moveCarousel('${p.id}', -1, ${images.length})" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-weight:bold; z-index:10; display:flex; align-items:center; justify-content:center;">&#10094;</button>
+                                <button type="button" onclick="event.stopPropagation(); app.moveCarousel('${p.id}', 1, ${images.length})" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; border-radius:50%; width:32px; height:32px; cursor:pointer; font-weight:bold; z-index:10; display:flex; align-items:center; justify-content:center;">&#10095;</button>
+                            ` : ''}
                             ${videoIndicatorHtml}
                         </div>
                         <div class="card-body">
                             <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; line-height: 1.3;">${p.title}</h3>
                             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">📍 ${p.location}</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; line-height:1.4;">${p.description || ''}</p>
+                            ${agioHtml}
                             <div class="card-price">R$ ${Number(p.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
                             <button class="btn-action" style="width: 100%; margin-top: auto; background: var(--text-main);" onclick="app.gateCheckProperty('${p.id}')">Analisar Memorial</button>
                         </div>
@@ -1071,8 +1146,7 @@
                 const phone = document.getElementById('lead-phone').value;
 
                 const newLead = {
-                    name,
-                    phone,
+                    name, phone,
                     propTitle: this.selectedPropertyForLead.title,
                     source: "Firewall Aladin",
                     date: new Date().toLocaleString('pt-BR')
@@ -1083,18 +1157,16 @@
                 this.closeModal('modal-gate-capture');
                 document.getElementById('form-lead-capture').reset();
                 
-                // Desbloqueia e abre o modal de detalhes imediatamente
                 this.openPropertyDetailModal(this.selectedPropertyForLead);
             }
 
-            // MODAL DETALHADO + PLAYER DE TOUR VIRTUAL
+            // MODAL DETALHED + EMBED SUPORTE GOOGLE DRIVE / LOCAL VIDEO
             openPropertyDetailModal(prop) {
                 document.getElementById('md-title').innerText = prop.title;
                 document.getElementById('md-location').innerText = `📍 ${prop.location}`;
                 document.getElementById('md-price').innerText = `R$ ${Number(prop.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
                 document.getElementById('md-description').innerText = prop.description || "Sem memorial adicional informado.";
 
-                // Valida exibição dos campos de Ágio
                 const agioPanel = document.getElementById('md-agio-details');
                 if (prop.type === 'Ágio') {
                     agioPanel.style.display = 'block';
@@ -1106,19 +1178,26 @@
                     agioPanel.style.display = 'none';
                 }
 
-                // Renderiza o Player de Mídia Dinâmico (Tour Virtual)
+                // Renderizador Multi-Formatos de Vídeo (Local, Drive ou Youtube)
                 const videoContainer = document.getElementById('md-video-container');
                 if (prop.video) {
-                    if (prop.video.includes('youtube.com') || prop.video.includes('youtu.be')) {
-                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${prop.video}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
-                    } else {
+                    if (prop.video.startsWith('data:video/')) {
                         videoContainer.innerHTML = `<video src="${prop.video}" controls style="width:100%; height:100%; object-fit:contain;"></video>`;
+                    } else if (prop.video.includes('drive.google.com')) {
+                        const match = prop.video.match(/\/d\/([a-zA-Z0-9_-]+)/) || prop.video.match(/id=([a-zA-Z0-9_-]+)/);
+                        const cleanId = match ? match[1] : '';
+                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="https://drive.google.com/file/d/${cleanId}/preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
+                    } else if (prop.video.includes('youtube.com') || prop.video.includes('youtu.be')) {
+                        let embedUrl = prop.video;
+                        if(prop.video.includes('watch?v=')){ embedUrl = prop.video.replace('watch?v=', 'embed/'); }
+                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
+                    } else {
+                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${prop.video}" title="Video player" frameborder="0" style="border:none;"></iframe>`;
                     }
                 } else {
                     videoContainer.innerHTML = `<div style="color: var(--text-muted); font-size:0.9rem; text-align:center; padding: 2rem;">📷 Mídia Convencional — Nenhum vídeo de tour anexado.</div>`;
                 }
 
-                // Link para Distribuição de Tráfego
                 const shareUrl = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
                 document.getElementById('md-share-url').innerText = shareUrl;
 
@@ -1144,7 +1223,7 @@
                 this.billingInvoiceExpired = false;
                 this.saveState();
                 this.checkBillingStatusUI();
-                alert("Assinatura reativada e faturamento liquidado com sucesso via API Banco Inter PIX (Chave Partner Holding).");
+                alert("Assinatura reativada e faturamento liquidado com sucesso via API Banco Inter PIX.");
             }
 
             checkBillingStatusUI() {
@@ -1257,7 +1336,6 @@
                 document.getElementById('dash-user-title').innerText = this.currentUser.name;
                 document.getElementById('dash-user-subtitle').innerText = `Perfil: ${this.currentUser.role} ${this.currentUser.creci ? `(${this.currentUser.creci})` : ''}`;
 
-                // Se for Administrador Master, exibe métricas completas da rede
                 const masterPanel = document.getElementById('admin-master-panel');
                 if (this.currentUser.role === 'Admin') {
                     masterPanel.style.display = 'block';
@@ -1284,7 +1362,6 @@
                 const tbody = document.getElementById('portfolio-table-rows');
                 tbody.innerHTML = '';
 
-                // Regra: Admin vê tudo, usuários comuns veem apenas o que criaram
                 const userProperties = this.currentUser.role === 'Admin' 
                     ? this.properties 
                     : this.properties.filter(p => p.author === this.currentUser.email);
@@ -1332,7 +1409,7 @@
                 });
             }
 
-            // LÓGICA DO FORMULÁRIO DE IMÓVEIS (SALVAR / EDITAR / EXCLUIR)
+            // FORM CONTROLS (NATIVO COMPLETO)
             togglePropertyAgioForm(type) {
                 document.getElementById('p-agio-panel').style.display = type === 'Ágio' ? 'block' : 'none';
             }
@@ -1420,18 +1497,16 @@
                 }
             }
 
-            // INTEGRADOR DE MÍDIA CLOUD (WORKSPACE SIMULADO)
+            // DRIVE WORKSPACE SIMULATOR
             openDrivePicker(targetInputId) {
                 this.activeDriveTargetInputId = targetInputId;
                 const container = document.getElementById('drive-files-container');
                 container.innerHTML = '';
 
-                // Repositório de arquivos mockados do Drive da Partner Holding
                 const mockFiles = [
                     { name: "📸 Lote_Premium_Fachada.jpg", url: "https://images.unsplash.com/photo-1524813686514-a57563d77d61?auto=format&fit=crop&w=800&q=80", type: "image" },
                     { name: "📸 Casa_Moderna_Interior.jpg", url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80", type: "image" },
-                    { name: "🎬 Tour_Virtual_Loteamento.mp4", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", type: "video" },
-                    { name: "🎬 Interior_Residencial_HD.mp4", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", type: "video" }
+                    { name: "🎬 Tour_Virtual_Loteamento.mp4", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", type: "video" }
                 ];
 
                 mockFiles.forEach(f => {
@@ -1452,7 +1527,6 @@
                 this.closeModal('modal-drive-picker');
             }
 
-            // HELPERS AUXILIARES DE JANELAS MODAIS
             openModal(id) { document.getElementById(id).classList.add('active'); }
             closeModal(id) { document.getElementById(id).classList.remove('active'); }
         }
