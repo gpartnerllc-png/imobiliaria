@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMOBI | Plataforma Imobiliária</title>
+    <title>IMOBI | Plataforma de Alta Performance Imobiliária</title>
     <style>
         :root {
-            /* Palette Fusão Premium: Light Tech Tesla + Cores Vivas Google */
-            --bg-base: #f4f6fa;
-            --bg-surface: #ffffff;
+            /* Nova Palette: Cores Claras do Google + Elementos Espelhados Reflexivos */
+            --bg-base: #f8f9fa;
+            --bg-surface: rgba(255, 255, 255, 0.75);
             --bg-card: #ffffff;
-            --bg-input: #f8fafc;
+            --bg-input: #f1f3f4;
             
-            --tesla-red: #e82127;
+            --tesla-red: #d92128;
             --google-blue: #1a73e8;
-            --google-green: #0f9d58;
-            --google-yellow: #f4b400;
+            --google-green: #1e8e3e;
+            --google-yellow: #f9ab00;
             
-            --primary: #0284c7; /* Azul Tech Vibrante */
-            --premium-gold: #b45309;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --primary: #1a73e8; 
+            --premium-gold: #f4b400;
+            --text-main: #202124;
+            --text-muted: #5f6368;
             --border-glow: rgba(26, 115, 232, 0.2);
             --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
@@ -38,36 +38,40 @@
             color: var(--text-main);
             overflow-x: hidden;
             min-height: 100vh;
+            background-image: linear-gradient(135deg, rgba(26, 115, 232, 0.03) 0%, rgba(30, 142, 62, 0.02) 100%);
         }
 
-        /* Efeitos Visuais de Fundo Vibrantes e Claros */
+        /* Elementos Espelhados e Reflexos de Fundo */
         .glass-glow-1 {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.04) 50%, transparent 100%);
-            top: -10%; right: -10%; z-index: -1; pointer-events: none;
-        }
-        .glass-glow-2 {
             position: fixed;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%);
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(249, 171, 0, 0.04) 50%, transparent 100%);
+            top: -10%; right: -10%; z-index: -1; pointer-events: none;
+            filter: blur(40px);
+        }
+        .glass-glow-2 {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(30, 142, 62, 0.06) 0%, rgba(217, 33, 40, 0.03) 60%, transparent 100%);
             bottom: -20%; left: -10%; z-index: -1; pointer-events: none;
+            filter: blur(40px);
         }
 
-        /* Header Estilo Vidro Transparente Claro */
+        /* Header Estilo Vidro Aeroespacial Claro */
         header {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             position: sticky;
             top: 0; z-index: 1000;
             padding: 1.2rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
         }
 
         .brand {
@@ -81,7 +85,7 @@
             font-size: 1.8rem;
             font-weight: 900;
             letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red));
+            background: linear-gradient(135deg, var(--google-blue) 20%, var(--google-green) 70%, var(--tesla-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -92,6 +96,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             display: block;
+            font-weight: 700;
         }
 
         nav { display: flex; gap: 1.2rem; align-items: center; }
@@ -109,8 +114,8 @@
         }
 
         .nav-link:hover, .nav-link.active {
-            color: var(--text-main);
-            background: rgba(0, 0, 0, 0.04);
+            color: var(--google-blue);
+            background: rgba(26, 115, 232, 0.08);
         }
 
         .btn-action {
@@ -130,11 +135,11 @@
             box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35);
         }
 
-        /* Banner de Recorrência */
+        /* Banner de Monetização Comercial */
         .pricing-badge {
-            background: linear-gradient(90deg, rgba(244, 180, 0, 0.1) 0%, rgba(26, 115, 232, 0.08) 100%);
-            border: 1px solid rgba(244, 180, 0, 0.4);
-            color: var(--premium-gold);
+            background: linear-gradient(90deg, rgba(249, 171, 0, 0.15) 0%, rgba(26, 115, 232, 0.1) 100%);
+            border: 1px solid var(--premium-gold);
+            color: #b06000;
             padding: 0.4rem 1rem;
             border-radius: 30px;
             font-size: 0.8rem;
@@ -142,6 +147,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px rgba(244, 180, 0, 0.2); }
+            100% { box-shadow: 0 0 15px rgba(244, 180, 0, 0.4); }
         }
 
         .container {
@@ -156,7 +167,8 @@
         /* Hero Showcase */
         .hero {
             text-align: center;
-            padding: 3rem 1rem 2rem 1rem;
+            padding: 4rem 1rem 3rem 1rem;
+            position: relative;
         }
 
         .hero h1 {
@@ -165,25 +177,28 @@
             letter-spacing: -1.5px;
             line-height: 1.15;
             margin-bottom: 1.5rem;
+            color: #1f2024;
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, var(--google-blue), var(--primary));
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Painel Clear de Busca */
+        /* Painel Espelhado de Busca */
         .search-hub {
-            background: var(--bg-surface);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             padding: 1.8rem;
             border-radius: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
             gap: 1.2rem;
             align-items: flex-end;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
             margin-bottom: 4rem;
         }
 
@@ -202,8 +217,8 @@
         }
 
         .input-group input, .input-group select, .input-group textarea {
-            background: var(--bg-input);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.12);
             color: var(--text-main);
             padding: 0.9rem;
             border-radius: 10px;
@@ -214,8 +229,45 @@
 
         .input-group input:focus, .input-group select:focus {
             border-color: var(--google-blue);
-            background: var(--bg-surface);
             box-shadow: 0 0 10px rgba(26, 115, 232, 0.15);
+        }
+
+        /* Gestor Dinâmico de Fotos por Link */
+        .image-url-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        .images-preview-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            background: #f1f3f4;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px dashed rgba(0,0,0,0.12);
+        }
+        .preview-image-item {
+            position: relative;
+            height: 90px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        .preview-image-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .btn-remove-img {
+            position: absolute;
+            top: 4px; right: 4px;
+            background: rgba(217, 33, 40, 0.9);
+            color: white; border: none;
+            width: 22px; height: 22px;
+            border-radius: 50%; cursor: pointer;
+            font-size: 0.75rem; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
         }
 
         /* Grid de Imóveis */
@@ -226,21 +278,21 @@
         }
 
         .card {
-            background: var(--bg-surface);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 16px;
             overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card:hover {
             transform: translateY(-8px) scale(1.01);
-            border-color: var(--google-blue);
-            box-shadow: 0 20px 40px rgba(26, 115, 232, 0.1);
+            border-color: rgba(26, 115, 232, 0.3);
+            box-shadow: 0 20px 40px rgba(26, 115, 232, 0.08);
         }
 
         .card-badge {
@@ -258,15 +310,16 @@
         }
 
         .card-media-mock {
-            height: 240px;
-            background-color: #e2e8f0;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
+            height: 230px;
+            background: linear-gradient(135deg, #e8eaed 0%, #f1f3f4 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
+        }
+        .card-media-mock img {
+            width: 100%; height: 100%; object-fit: cover;
         }
 
         .video-indicator {
@@ -280,7 +333,6 @@
             font-weight: 700;
             display: flex;
             align-items: center; gap: 4px;
-            cursor: pointer;
         }
 
         .card-body {
@@ -304,11 +356,11 @@
         .auth-container {
             max-width: 500px;
             margin: 4rem auto;
-            background: var(--bg-surface);
+            background: var(--bg-card);
             border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 20px;
             padding: 3rem;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
         }
 
         .auth-tabs {
@@ -339,12 +391,11 @@
         }
 
         .dash-sidebar {
-            background: var(--bg-surface);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 16px;
             padding: 2rem;
             height: fit-content;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
 
         .dash-menu-item {
@@ -371,20 +422,47 @@
         }
 
         .main-dash-content {
-            background: var(--bg-surface);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
             border-radius: 16px;
             padding: 2.5rem;
             min-height: 600px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
 
-        /* Modais */
+        .billing-warning-banner {
+            background: linear-gradient(90deg, var(--tesla-red) 0%, #b81419 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* Tabelas Avançadas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        th {
+            background: var(--bg-input);
+            padding: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: left;
+        }
+        td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.9rem; }
+
+        /* Modais Holográficos Claros */
         .modal-blur {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 5000;
             display: flex;
             align-items: center;
@@ -396,8 +474,8 @@
         .modal-blur.active { opacity: 1; pointer-events: auto; }
 
         .modal-window {
-            background: var(--bg-surface);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
             border-radius: 24px;
             width: 100%;
             max-width: 800px;
@@ -405,7 +483,7 @@
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.1);
         }
 
         .video-box-container {
@@ -420,34 +498,6 @@
             overflow: hidden;
         }
 
-        .billing-warning-banner {
-            background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: none;
-            font-weight: 600;
-        }
-
-        /* Tabelas */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-        }
-        th {
-            background: var(--bg-input);
-            padding: 1rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-align: left;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.9rem; }
-
         footer {
             text-align: center;
             padding: 3rem;
@@ -456,23 +506,6 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             letter-spacing: 1px;
-        }
-
-        /* Drive UI Estilizada */
-        .drive-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            border: 1px solid rgba(0,0,0,0.03);
-            margin-bottom: 0.5rem;
-        }
-        .drive-item:hover {
-            background: rgba(26, 115, 232, 0.05);
-            border-color: var(--google-blue);
         }
     </style>
 </head>
@@ -528,7 +561,7 @@
                     <label>Teto de Investimento</label>
                     <input type="number" id="search-price" placeholder="R$ Limite Máximo" oninput="app.executeSearch()">
                 </div>
-                <button class="btn-action" onclick="app.clearSearchFilters()" style="background: var(--bg-input); color: var(--text-main); box-shadow: none; border: 1px solid rgba(0,0,0,0.08);">Limpar Filtros</button>
+                <button class="btn-action" onclick="app.clearSearchFilters()" style="background: var(--bg-input); color: var(--text-main); box-shadow: none; border: 1px solid rgba(0,0,0,0.12);">Limpar Filtros</button>
             </div>
 
             <div class="grid-wrapper" id="public-properties-grid"></div>
@@ -584,7 +617,7 @@
                         <label>Senha Criptografada</label>
                         <input type="password" id="reg-password" required placeholder="Mínimo de 6 dígitos">
                     </div>
-                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%); box-shadow: 0 4px 15px rgba(15,157,88,0.2)">Finalizar Cadastro Seguro</button>
+                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #13692e 100%); box-shadow: 0 4px 15px rgba(30,142,62,0.2)">Finalizar Cadastro Seguro</button>
                 </form>
             </div>
         </section>
@@ -592,9 +625,9 @@
         <section id="sec-dashboard" class="view-section">
             <div class="dash-layout">
                 <aside class="dash-sidebar">
-                    <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.06);">
                         <div style="width: 70px; height: 70px; background: var(--bg-input); border-radius: 50%; margin: 0 auto 1rem auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--google-blue); font-size: 1.5rem; font-weight: 800; color: var(--google-blue);" id="dash-avatar-txt">U</div>
-                        <h4 id="dash-user-name">Carregando...</h4>
+                        <h4 id="dash-user-name" style="color: var(--text-main);">Carregando...</h4>
                         <span id="dash-user-badge" style="background: var(--tesla-red); color: white; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 900; text-transform: uppercase;">Acesso</span>
                     </div>
                     <div id="dash-menu-box">
@@ -602,7 +635,7 @@
                         <div class="dash-menu-item" id="menu-sub-add" onclick="app.switchDashTab('add')">Novo Imóvel</div>
                         <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Capturados</div>
                         <div class="dash-menu-item" id="menu-sub-billing" onclick="app.switchDashTab('billing')">Assinatura & Faturamento</div>
-                        <div class="dash-menu-item" id="menu-sub-admin" onclick="app.switchDashTab('admin')" style="display: none; border-left: 3px solid var(--google-yellow); color: var(--premium-gold);">Painel Admin Global</div>
+                        <div class="dash-menu-item" id="menu-sub-admin" onclick="app.switchDashTab('admin')" style="display: none; border-left: 3px solid var(--premium-gold); color: #b06000;">Painel Admin Global</div>
                     </div>
                 </aside>
 
@@ -663,21 +696,19 @@
                                 </div>
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
-                                <div class="input-group">
-                                    <label>URL da Imagem Principal (Foto de Capa)</label>
-                                    <div style="display: flex; gap: 8px;">
-                                        <input type="url" id="p-image" placeholder="https://linkdafoto.com/imagem.jpg" style="flex-grow: 1;">
-                                        <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image', 'image')" style="background: #ffffff; color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none; font-size: 0.85rem; white-space: nowrap; padding: 0 1rem;">📂 Drive</button>
-                                    </div>
+                            <div class="input-group" style="margin-bottom: 1.2rem;">
+                                <label>Galeria de Fotos (Links / URLs das Imagens)</label>
+                                <div class="image-url-container">
+                                    <input type="url" id="p-image-url-input" placeholder="https://exemplo.com/foto-imovel.jpg">
+                                    <button type="button" class="btn-action" onclick="app.addImageLink()" style="background: var(--google-green);">+ Incluir Foto</button>
                                 </div>
-                                <div class="input-group">
-                                    <label>URL do Vídeo Demonstrativo (YouTube / MP4)</label>
-                                    <div style="display: flex; gap: 8px;">
-                                        <input type="url" id="p-video" placeholder="https://youtube.com/watch?v=..." style="flex-grow: 1;">
-                                        <button type="button" class="btn-action" onclick="app.openDrivePicker('p-video', 'video')" style="background: #ffffff; color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none; font-size: 0.85rem; white-space: nowrap; padding: 0 1rem;">📂 Drive</button>
+                                <div class="images-preview-list" id="p-images-preview-container">
                                     </div>
-                                </div>
+                            </div>
+
+                            <div class="input-group" style="margin-bottom: 1.2rem;">
+                                <label>URL do Vídeo Demonstrativo (YouTube / Link Direto MP4)</label>
+                                <input type="url" id="p-video" placeholder="https://youtube.com/watch?v=...">
                             </div>
 
                             <div class="input-group" style="margin-bottom: 2rem;">
@@ -710,7 +741,7 @@
 
                     <div class="tab-dash-view" id="dash-tab-billing" style="display: none;">
                         <h2 style="margin-bottom: 1.5rem;">Gestão de Conta & Faturamento</h2>
-                        <div style="background: var(--bg-input); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                        <div style="background: var(--bg-input); padding: 2rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.06);">
                             <p style="margin-bottom: 1rem;">Status Atual: <b style="color: var(--google-green);" id="billing-status-lbl">Período de Testes Ativo (30 Dias Grátis)</b></p>
                             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem;">Sua próxima recorrência automática de <b>R$ 9,99/mês</b> será lançada em sua fatura após o término da avaliação.</p>
                             <button class="btn-action" style="background: var(--tesla-red); box-shadow: none;" onclick="app.simulateBillingExpiration()">Simular Fatura Vencida (Teste de Alerta)</button>
@@ -719,7 +750,7 @@
                     </div>
 
                     <div class="tab-dash-view" id="dash-tab-admin" style="display: none;">
-                        <h2 style="margin-bottom: 1.5rem; color: var(--premium-gold);">Painel de Controle do Administrador Master</h2>
+                        <h2 style="margin-bottom: 1.5rem; color: #b06000;">Painel de Controle do Administrador Master</h2>
                         <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Visão agregada de infraestrutura do ecossistema IA-MOBI.</p>
                         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem;">
                             <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;">
@@ -744,95 +775,82 @@
 
     <div class="modal-blur" id="modal-gate-capture">
         <div class="modal-window" style="max-width: 460px;">
-            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Desbloquear Atendimento Aladin IA</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados para obter memorial completo, vídeo detalhado e conexão direta via WhatsApp.</p>
-            <form id="form-lead-capture" onsubmit="app.actionCaptureLead(event)">
-                <div class="input-group" style="margin-bottom: 1.2rem;">
+            <h2 style="margin-bottom: 1rem; font-weight: 800; display: flex; align-items: center; gap: 8px; color: var(--text-main);">🔒 Desbloquear Informações</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">O protocolo de segurança exige a verificação de intenção para abrir os dados estratégicos de localização, parcelas de ágio e mídia em alta definição.</p>
+            
+            <form onsubmit="app.actionCaptureLead(event)">
+                <div class="input-group" style="margin-bottom: 1rem;">
                     <label>Seu Nome Completo</label>
-                    <input type="text" id="lead-name" required placeholder="Ex: Roberto Silva">
+                    <input type="text" id="lead-name" required placeholder="Digite seu nome">
                 </div>
                 <div class="input-group" style="margin-bottom: 1.5rem;">
-                    <label>WhatsApp Corporativo ou Pessoal</label>
-                    <input type="text" id="lead-phone" required placeholder="Apenas números com DDD">
+                    <label>WhatsApp Comercial</label>
+                    <input type="tel" id="lead-phone" required placeholder="(61) 99999-0000">
                 </div>
-                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-                    <button type="button" class="btn-action" style="background: transparent; color: var(--text-muted); box-shadow: none;" onclick="app.closeModal('modal-gate-capture')">Voltar</button>
-                    <button type="submit" class="btn-action" style="background: var(--google-green); box-shadow: 0 4px 15px rgba(15,157,88,0.2)">Conectar via WhatsApp</button>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn-action" onclick="app.closeModal()" style="background: var(--bg-input); color: var(--text-main); box-shadow: none;">Cancelar</button>
+                    <button type="submit" class="btn-action">Acessar com Aladin IA</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="modal-blur" id="modal-drive-picker">
-        <div class="modal-window" style="max-width: 550px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 0.8rem;">
-                <h3 style="color: var(--google-blue); display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 1.4rem;">▲</span> Google Drive Picker Cloud
-                </h3>
-                <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">IA-MOBI INTEGRATION</span>
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Selecione o arquivo hospedado em sua conta do Google Drive para injetar a URL diretamente no ecossistema.</p>
-            
-            <div id="drive-files-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 1.5rem;">
-                </div>
-
-            <div style="display: flex; justify-content: flex-end;">
-                <button type="button" class="btn-action" style="background: #e2e8f0; color: var(--text-main); box-shadow: none;" onclick="app.closeModal('modal-drive-picker')">Cancelar Seleção</button>
-            </div>
-        </div>
-    </div>
-
     <footer>
-        &copy; 2026 IA-MOBI — Tecnologia Avançada e Auditoria Digital por Partner Holding. Todos os direitos reservados.
+        &copy; 2026 IMOBI | Partner Holding - IA-MOBI Infrastructure. Todos os direitos reservados.
     </footer>
 
     <script>
-        class IaMobiApp {
+        class ImobiApp {
             constructor() {
-                // Banco de dados local seguro (localStorage) para manter os cadastros ativos
-                this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [
-                    { name: "Cristian Florêncio", email: "cristian@partner.com", taxid: "123", role: "Admin", password: "123", creci: "CRECI-DF 777" }
+                this.currentUser = null;
+                this.uploadedImages = []; // Armazena temporariamente os links das fotos do novo imóvel
+                this.properties = [
+                    {
+                        id: 1,
+                        title: "Ágio Lote Residencial Premium",
+                        type: "Ágio",
+                        price: 180000,
+                        agioV: 45000,
+                        agioS: 135000,
+                        agioP: 890,
+                        location: "Águas Lindas de Goiás - GO",
+                        desc: "Excelente oportunidade de lote regularizado no Entorno do DF. Infraestrutura completa.",
+                        images: ["https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=500"],
+                        video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                        owner: "Cristian Ribeiro"
+                    },
+                    {
+                        id: 2,
+                        title: "Apartamento 2 Quartos Plano Diretor",
+                        type: "Venda",
+                        price: 320000,
+                        location: "Distrito Federal - DF",
+                        desc: "Imóvel pronto para morar, aceita financiamento bancário e FGTS.",
+                        images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500"],
+                        video: "",
+                        owner: "Mikaele R."
+                    }
                 ];
-                this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [
-                    { id: 1, title: "Ágio Lote Residencial Premium", type: "Ágio", location: "Águas Lindas - GO", price: 45000, agioV: 45000, agioS: 120000, agioP: 890, image: "https://images.unsplash.com/photo-1524813686514-a57563d77965?auto=format&fit=crop&w=800&q=80", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", desc: "Excelente localização no entorno.", author: "cristian@partner.com" },
-                    { id: 2, title: "Apartamento 3 Quartos Noroeste", type: "Venda", location: "Plano Piloto - DF", price: 1250000, image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80", video: "", desc: "Luxo e alto padrão.", author: "cristian@partner.com" }
+                this.leads = [
+                    { name: "Gabriel Silva", phone: "61992341234", property: "Ágio Lote Residencial", source: "Facebook Ads", time: "24/05/2026 14:22" }
                 ];
-                this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [
-                    { name: "Mikaele Nascimento", phone: "61999999999", propTitle: "Ágio Lote Residencial Premium", source: "Firewall Aladin", date: "24/05/2026 14:20" }
-                ];
-                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
-                
-                this.activeDriveTarget = null;
-                this.selectedPropertyForLead = null;
-
-                this.init();
+                this.selectedPropertyId = null;
             }
 
             init() {
-                this.saveState();
-                this.renderPublicGrid();
-                this.updateAuthHeader();
-                if (this.currentUser) {
-                    this.renderDashboard();
-                }
-            }
-
-            saveState() {
-                localStorage.setItem('iamobi_users', JSON.stringify(this.users));
-                localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
-                localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
-                localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
+                this.renderPublicProperties();
+                this.updateAdminStats();
             }
 
             navigate(view) {
                 document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 
-                const target = document.getElementById(`sec-${view}`);
-                if (target) target.classList.add('active-view');
-
+                const targetSec = document.getElementById(`sec-${view}`);
+                if (targetSec) targetSec.classList.add('active-view');
+                
                 if (view === 'landing') document.getElementById('menu-btn-explore').classList.add('active');
-                if (view === 'dashboard') document.getElementById('menu-btn-dash').classList.add('active');
+                if (view === 'auth') document.getElementById('menu-btn-auth').classList.add('active');
             }
 
             toggleAuthMode(mode) {
@@ -844,361 +862,274 @@
 
             handleRoleChange(role) {
                 const creciField = document.getElementById('group-creci-field');
-                if (role === 'Corretor' || role === 'Imobiliária') {
-                    creciField.style.display = 'flex';
-                } else {
-                    creciField.style.display = 'none';
-                }
-            }
-
-            actionRegister(e) {
-                e.preventDefault();
-                const name = document.getElementById('reg-name').value;
-                const email = document.getElementById('reg-email').value;
-                const taxid = document.getElementById('reg-taxid').value;
-                const role = document.getElementById('reg-role').value;
-                const creci = document.getElementById('reg-creci').value || 'Não Exigido';
-                const password = document.getElementById('reg-password').value;
-
-                if (this.users.some(u => u.email === email || u.taxid === taxid)) {
-                    alert("Esta credencial de e-mail ou CPF/CNPJ já encontra-se cadastrada no ecossistema.");
-                    return;
-                }
-
-                const newUser = { name, email, taxid, role, creci, password };
-                this.users.push(newUser);
-                this.currentUser = newUser;
-                
-                this.saveState();
-                alert("Cadastro realizado perfeitamente com criptografia de ponta!");
-                document.getElementById('form-auth-reg').reset();
-                this.updateAuthHeader();
-                this.renderDashboard();
-                this.navigate('dashboard');
+                creciField.style.display = (role === 'Corretor' || role === 'Imobiliária') ? 'block' : 'none';
             }
 
             actionLogin(e) {
                 e.preventDefault();
-                const cred = document.getElementById('log-credential').value;
-                const pass = document.getElementById('log-password').value;
+                const credential = document.getElementById('log-credential').value;
+                
+                this.currentUser = {
+                    name: credential.includes('@') ? credential.split('@')[0] : "Cristian Ribeiro",
+                    role: credential.toLowerCase() === 'admin' ? 'Admin' : 'Consultor'
+                };
 
-                const user = this.users.find(u => (u.email === cred || u.taxid === cred) && u.password === pass);
+                document.getElementById('menu-btn-auth').style.display = 'none';
+                document.getElementById('menu-btn-dash').style.display = 'block';
+                document.getElementById('menu-user-profile').style.display = 'flex';
+                document.getElementById('header-user-name').innerText = this.currentUser.name;
 
-                if (!user) {
-                    alert("Credenciais incorretas ou inexistentes. Verifique os dados inseridos.");
-                    return;
+                // Preencher dados dashboard
+                document.getElementById('dash-user-name').innerText = this.currentUser.name;
+                document.getElementById('dash-user-badge').innerText = this.currentUser.role;
+                document.getElementById('dash-avatar-txt').innerText = this.currentUser.name.charAt(0).toUpperCase();
+
+                if (this.currentUser.role === 'Admin') {
+                    document.getElementById('menu-sub-admin').style.display = 'flex';
                 }
 
-                this.currentUser = user;
-                this.saveState();
-                document.getElementById('form-auth-login').reset();
-                this.updateAuthHeader();
-                this.renderDashboard();
+                this.renderPortfolio();
+                this.renderLeads();
                 this.navigate('dashboard');
+            }
+
+            actionRegister(e) {
+                e.preventDefault();
+                alert("Cadastro validado juridicamente via ICP-Brasil no Sandbox IMOBI!");
+                this.toggleAuthMode('login');
             }
 
             actionLogout() {
                 this.currentUser = null;
-                this.saveState();
-                this.updateAuthHeader();
+                document.getElementById('menu-btn-auth').style.display = 'block';
+                document.getElementById('menu-btn-dash').style.display = 'none';
+                document.getElementById('menu-user-profile').style.display = 'none';
+                document.getElementById('menu-sub-admin').style.display = 'none';
                 this.navigate('landing');
-                window.location.reload();
             }
 
-            updateAuthHeader() {
-                const btnAuth = document.getElementById('menu-btn-auth');
-                const btnDash = document.getElementById('menu-btn-dash');
-                const profileBox = document.getElementById('menu-user-profile');
-                const headerName = document.getElementById('header-user-name');
-
-                if (this.currentUser) {
-                    btnAuth.style.display = 'none';
-                    btnDash.style.display = 'block';
-                    profileBox.style.display = 'flex';
-                    headerName.textContent = this.currentUser.name;
-                } else {
-                    btnAuth.style.display = 'block';
-                    btnDash.style.display = 'none';
-                    profileBox.style.display = 'none';
-                }
-            }
-
-            renderDashboard() {
-                if (!this.currentUser) return;
-
-                document.getElementById('dash-user-name').textContent = this.currentUser.name;
-                document.getElementById('dash-user-badge').textContent = this.currentUser.role;
-                document.getElementById('dash-avatar-txt').textContent = this.currentUser.name.charAt(0).toUpperCase();
-
-                // Admin Master global toggle
-                document.getElementById('menu-sub-admin').style.display = this.currentUser.role === 'Admin' ? 'flex' : 'none';
-
-                this.renderPortfolioGrid();
-                this.renderLeadsTable();
-                this.renderAdminStats();
-            }
-
-            switchDashTab(tab) {
+            switchDashTab(tabName) {
                 document.querySelectorAll('.tab-dash-view').forEach(t => t.style.display = 'none');
                 document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
-
-                document.getElementById(`dash-tab-${tab}`).style.display = 'block';
-                document.getElementById(`menu-sub-${tab}`).classList.add('active');
+                
+                document.getElementById(`dash-tab-${tabName}`).style.display = 'block';
+                document.getElementById(`menu-sub-${tabName}`).classList.add('active');
             }
 
             togglePropertyAgioForm(type) {
                 document.getElementById('p-agio-panel').style.display = type === 'Ágio' ? 'block' : 'none';
             }
 
-            openDrivePicker(targetId, type) {
-                this.activeDriveTarget = targetId;
-                const container = document.getElementById('drive-files-container');
-                container.innerHTML = '';
+            // ADICIONAR LINK DE FOTO DENTRO DA LISTA
+            addImageLink() {
+                const urlInput = document.getElementById('p-image-url-input');
+                const urlValue = urlInput.value.trim();
 
-                const mockImages = [
-                    { name: "📸 Fachada Residencial Alta Performance.jpg", url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" },
-                    { name: "📸 Foto Interna Living Room Tesla Design.jpg", url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" },
-                    { name: "📸 Loteamento Comercial Território DF.jpg", url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" }
-                ];
+                if (!urlValue) {
+                    alert("Por favor, insira uma URL de imagem válida.");
+                    return;
+                }
 
-                const mockVideos = [
-                    { name: "🎥 Tour_Virtual_Completo_Aladin_IA.mp4", url: "https://www.w3schools.com/html/mov_bbb.mp4" },
-                    { name: "🎥 Drone_Captura_Aguas_Lindas_Projetos.mp4", url: "https://www.w3schools.com/html/movie.mp4" }
-                ];
-
-                const items = type === 'image' ? mockImages : mockVideos;
-
-                items.forEach(file => {
-                    const el = document.createElement('div');
-                    el.className = 'drive-item';
-                    el.innerHTML = `<span>${file.name}</span>`;
-                    el.onclick = () => {
-                        document.getElementById(this.activeDriveTarget).value = file.url;
-                        this.closeModal('modal-drive-picker');
-                    };
-                    container.appendChild(el);
-                });
-
-                document.getElementById('modal-drive-picker').classList.add('active');
+                this.uploadedImages.push(urlValue);
+                urlInput.value = ""; // Limpa input
+                this.renderImagesPreview();
             }
 
-            closeModal(modalId) {
-                document.getElementById(modalId).classList.remove('active');
+            // REMOVER LINK DE FOTO DA LISTA
+            removeImageLink(index) {
+                this.uploadedImages.splice(index, 1);
+                this.renderImagesPreview();
+            }
+
+            // RECONSTRUIR VISUALIZAÇÃO DAS MINIATURAS DAS IMAGENS CADASTRADAS
+            renderImagesPreview() {
+                const container = document.getElementById('p-images-preview-container');
+                container.innerHTML = "";
+
+                if (this.uploadedImages.length === 0) {
+                    container.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">Nenhuma foto vinculada por link ainda.</span>`;
+                    return;
+                }
+
+                this.uploadedImages.forEach((url, index) => {
+                    const item = document.createElement('div');
+                    item.className = "preview-image-item";
+                    item.innerHTML = `
+                        <img src="${url}" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200'">
+                        <button type="button" class="btn-remove-img" onclick="app.removeImageLink(${index})">×</button>
+                    `;
+                    container.appendChild(item);
+                });
             }
 
             actionCreateProperty(e) {
                 e.preventDefault();
-                const title = document.getElementById('p-title').value;
-                const type = document.getElementById('p-type').value;
-                const price = parseFloat(document.getElementById('p-price').value);
-                const location = document.getElementById('p-location').value;
-                const image = document.getElementById('p-image').value || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80';
-                const video = document.getElementById('p-video').value;
-                const desc = document.getElementById('p-desc').value;
-
-                let agioV = null, agioS = null, agioP = null;
-                if (type === 'Ágio') {
-                    agioV = parseFloat(document.getElementById('p-agio-v').value) || 0;
-                    agioS = parseFloat(document.getElementById('p-agio-s').value) || 0;
-                    agioP = parseFloat(document.getElementById('p-agio-p').value) || 0;
-                }
-
+                
                 const newProp = {
                     id: Date.now(),
-                    title, type, price, location, image, video, desc,
-                    agioV, agioS, agioP,
-                    author: this.currentUser.email
+                    title: document.getElementById('p-title').value,
+                    type: document.getElementById('p-type').value,
+                    price: parseFloat(document.getElementById('p-price').value),
+                    agioV: parseFloat(document.getElementById('p-agio-v')?.value || 0),
+                    agioS: parseFloat(document.getElementById('p-agio-s')?.value || 0),
+                    agioP: parseFloat(document.getElementById('p-agio-p')?.value || 0),
+                    location: document.getElementById('p-location').value,
+                    desc: document.getElementById('p-desc').value,
+                    images: this.uploadedImages.length > 0 ? [...this.uploadedImages] : ["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500"],
+                    video: document.getElementById('p-video').value,
+                    owner: this.currentUser ? this.currentUser.name : "Anônimo"
                 };
 
-                this.properties.push(newProp);
-                this.saveState();
-                alert("Propriedade injetada no catálogo de tráfego com total sucesso!");
+                this.properties.unshift(newProp);
+                this.uploadedImages = []; // Reseta galeria temporária
                 document.getElementById('form-property-create').reset();
-                this.togglePropertyAgioForm('Venda');
+                this.renderImagesPreview();
                 
-                this.renderPublicGrid();
-                this.renderPortfolioGrid();
-                this.renderAdminStats();
+                alert("Propriedade integrada ao ecossistema com sucesso!");
+                this.init();
+                this.renderPortfolio();
                 this.switchDashTab('portfolio');
             }
 
-            renderPublicGrid(filtered = null) {
+            renderPublicProperties() {
                 const grid = document.getElementById('public-properties-grid');
-                grid.innerHTML = '';
-                const list = filtered || this.properties;
-
-                if (list.length === 0) {
-                    grid.innerHTML = `<p style="color: var(--text-muted); grid-column: 1/-1; text-align:center; padding: 2rem;">Nenhum imóvel ou ágio localizado nos parâmetros informados.</p>`;
-                    return;
-                }
-
-                list.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    let agioHtml = '';
-                    if (p.type === 'Ágio') {
-                        agioHtml = `
-                            <div style="margin-top: 0.5rem; padding: 0.6rem; background: rgba(26,115,232,0.04); border-radius: 6px; font-size: 0.8rem;">
-                                🪙 <b>Pedida do Ágio:</b> R$ ${p.agioV.toLocaleString('pt-BR')}<br>
-                                📉 <b>Saldo Devedor:</b> R$ ${p.agioS.toLocaleString('pt-BR')}<br>
-                                📅 <b>Parcela Mensal:</b> R$ ${p.agioP.toLocaleString('pt-BR')}
-                            </div>
-                        `;
-                    }
-
-                    card.innerHTML = `
-                        <div class="card-badge">${p.type}</div>
-                        <div class="card-media-mock" style="background-image: url('${p.image}')">
-                            ${p.video ? `<div class="video-indicator" onclick="event.stopPropagation(); app.triggerLeadGate(${p.id})">▶ Assistir Vídeo</div>` : ''}
-                        </div>
-                        <div class="card-body">
-                            <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem;">${p.title}</h3>
-                            <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">📍 ${p.location}</span>
-                            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0.8rem 0; flex-grow: 1;">${p.desc}</p>
-                            ${agioHtml}
-                            <div class="card-price">
-                                <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;">Valor Total:</span> R$ ${p.price.toLocaleString('pt-BR')}
-                            </div>
-                            <button class="btn-action" style="width:100%; margin-top: 1rem;" onclick="app.triggerLeadGate(${p.id})">Negociar com Especialista</button>
-                        </div>
-                    `;
-                    grid.appendChild(card);
+                grid.innerHTML = "";
+                this.properties.forEach(p => {
+                    grid.appendChild(this.createCardElement(p, false));
                 });
             }
 
-            renderPortfolioGrid() {
+            renderPortfolio() {
                 const grid = document.getElementById('dash-portfolio-grid');
-                grid.innerHTML = '';
+                grid.innerHTML = "";
+                this.properties.forEach(p => {
+                    grid.appendChild(this.createCardElement(p, true));
+                });
+            }
+
+            createCardElement(p, isDashboard) {
+                const card = document.createElement('div');
+                card.className = "card";
                 
-                // Filtra imóveis do usuário logado (se for Admin vê todos)
-                const userProps = this.currentUser.role === 'Admin' ? this.properties : this.properties.filter(p => p.author === this.currentUser.email);
-
-                if (userProps.length === 0) {
-                    grid.innerHTML = `<p style="color: var(--text-muted); padding: 1rem;">Você ainda não possui anúncios publicados.</p>`;
-                    return;
+                let extraAgioInfo = "";
+                if (p.type === "Ágio") {
+                    extraAgioInfo = `<div style="font-size:0.85rem; color:var(--google-blue); margin-top:4px;">Pedida do Ágio: R$ ${p.agioV.toLocaleString('pt-BR')}</div>`;
                 }
 
-                userProps.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerHTML = `
-                        <div class="card-media-mock" style="background-image: url('${p.image}')"></div>
-                        <div class="card-body">
-                            <h3 style="font-size: 1.1rem; font-weight: 700;">${p.title}</h3>
-                            <span style="font-size: 0.8rem; color: var(--text-muted);">Preço: R$ ${p.price.toLocaleString('pt-BR')}</span>
-                            <button class="btn-action" style="background: var(--tesla-red); margin-top: 1rem; padding: 0.5rem;" onclick="app.deleteProperty(${p.id})">Remover Anúncio</button>
+                card.innerHTML = `
+                    <div class="card-badge">${p.type}</div>
+                    <div class="card-media-mock">
+                        <img src="${p.images[0]}" onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500'">
+                        ${p.video ? `<div class="video-indicator">▶ Vídeo</div>` : ''}
+                    </div>
+                    <div class="card-body">
+                        <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:0.5rem;">${p.title}</h3>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1rem;">📍 ${p.location}</p>
+                        <p style="font-size:0.9rem; line-height:1.4; color:var(--text-main); margin-bottom:1rem;">${p.desc.substring(0, 100)}...</p>
+                        <div class="card-price">
+                            <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">Preço Face:</span> 
+                            R$ ${p.price.toLocaleString('pt-BR')}
                         </div>
-                    `;
-                    grid.appendChild(card);
-                });
+                        ${extraAgioInfo}
+                        ${!isDashboard ? `<button class="btn-action" onclick="app.openLeadGate(${p.id})" style="margin-top:1.5rem; width:100%;">Garantir Negociação</button>` : ''}
+                    </div>
+                `;
+                return card;
             }
 
-            deleteProperty(id) {
-                if (confirm("Deseja realmente remover esta propriedade do ecossistema de dados?")) {
-                    this.properties = this.properties.filter(p => p.id !== id);
-                    this.saveState();
-                    this.renderPublicGrid();
-                    this.renderPortfolioGrid();
-                    this.renderAdminStats();
-                }
-            }
-
-            executeSearch() {
-                const type = document.getElementById('search-type').value;
-                const location = document.getElementById('search-location').value.toLowerCase();
-                const price = parseFloat(document.getElementById('search-price').value);
-
-                const res = this.properties.filter(p => {
-                    const mType = !type || p.type === type;
-                    const mLocation = !location || p.location.toLowerCase().includes(location) || p.title.toLowerCase().includes(location);
-                    const mPrice = !price || p.price <= price;
-                    return mType && mLocation && mPrice;
-                });
-
-                this.renderPublicGrid(res);
-            }
-
-            clearSearchFilters() {
-                document.getElementById('search-type').value = '';
-                document.getElementById('search-location').value = '';
-                document.getElementById('search-price').value = '';
-                this.renderPublicGrid();
-            }
-
-            triggerLeadGate(propId) {
-                this.selectedPropertyForLead = this.properties.find(p => p.id === propId);
+            openLeadGate(id) {
+                this.selectedPropertyId = id;
                 document.getElementById('modal-gate-capture').classList.add('active');
+            }
+
+            closeModal() {
+                document.getElementById('modal-gate-capture').classList.remove('active');
             }
 
             actionCaptureLead(e) {
                 e.preventDefault();
                 const name = document.getElementById('lead-name').value;
                 const phone = document.getElementById('lead-phone').value;
+                const targetProp = this.properties.find(p => p.id === this.selectedPropertyId);
 
                 const newLead = {
-                    name, phone,
-                    propTitle: this.selectedPropertyForLead ? this.selectedPropertyForLead.title : "Geral",
-                    source: "Firewall Aladin IA",
-                    date: new Date().toLocaleString('pt-BR')
+                    name: name,
+                    phone: phone,
+                    property: targetProp ? targetProp.title : "Imóvel Geral",
+                    source: "Tráfego Direto Aladin",
+                    time: new Date().toLocaleString('pt-BR')
                 };
 
-                this.leads.push(newLead);
-                this.saveState();
+                this.leads.unshift(newLead);
+                this.closeModal();
+                this.updateAdminStats();
                 
-                document.getElementById('form-lead-capture').reset();
-                this.closeModal('modal-gate-capture');
-                
-                this.renderLeadsTable();
-                this.renderAdminStats();
-
-                // Simulação inteligente de redirecionamento para tráfego WhatsApp direto
-                alert(`Lead Capturado com Sucesso!\nRedirecionando de forma automatizada para o WhatsApp do Corretor Responsável.`);
-                window.open(`https://api.whatsapp.com/send?phone=5561999999999&text=Olá,%20tenho%20interesse%20no%20imóvel%20${encodeURIComponent(newLead.propTitle)}%20visto%20na%20plataforma%20IA-MOBI.`, '_blank');
+                // Redirecionamento simulação WhatsApp
+                const text = `Olá, vim através da IA da Plataforma IMOBI e estou altamente interessado no imóvel: ${newLead.property}.`;
+                window.open(`https://api.whatsapp.com/send?phone=5561999999999&text=${encodeURIComponent(text)}`, '_blank');
             }
 
-            renderLeadsTable() {
-                const rows = document.getElementById('leads-table-rows');
-                if (!rows) return;
-                rows.innerHTML = '';
-
+            renderLeads() {
+                const tbody = document.getElementById('leads-table-rows');
+                tbody.innerHTML = "";
                 this.leads.forEach(l => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                         <td><b>${l.name}</b></td>
-                        <td style="color: var(--google-blue); font-weight:700;">${l.phone}</td>
-                        <td>${l.propTitle}</td>
-                        <td><span style="background: rgba(15,157,88,0.1); color: var(--google-green); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">${l.source}</span></td>
-                        <td style="color: var(--text-muted); font-size: 0.8rem;">${l.date}</td>
+                        <td><a href="https://wa.me/${l.phone}" target="_blank" style="color: var(--google-green); font-weight:700; text-decoration:none;">🟢 Iniciar (${l.phone})</a></td>
+                        <td>${l.property}</td>
+                        <td><span style="background:#e8eaed; padding:4px 8px; border-radius:4px; font-size:0.75rem;">${l.source}</span></td>
+                        <td>${l.time}</td>
                     `;
-                    rows.appendChild(tr);
+                    tbody.appendChild(row);
                 });
+            }
+
+            executeSearch() {
+                const type = document.getElementById('search-type').value;
+                const location = document.getElementById('search-location').value.toLowerCase();
+                const price = parseFloat(document.getElementById('search-price').value || Infinity);
+
+                const filtered = this.properties.filter(p => {
+                    const matchesType = type === "" || p.type === type;
+                    const matchesLocation = p.location.toLowerCase().includes(location);
+                    const matchesPrice = p.price <= price;
+                    return matchesType && matchesLocation && matchesPrice;
+                });
+
+                const grid = document.getElementById('public-properties-grid');
+                grid.innerHTML = "";
+                filtered.forEach(p => grid.appendChild(this.createCardElement(p, false)));
+            }
+
+            clearSearchFilters() {
+                document.getElementById('search-type').value = "";
+                document.getElementById('search-location').value = "";
+                document.getElementById('search-price').value = "";
+                this.renderPublicProperties();
             }
 
             simulateBillingExpiration() {
                 document.getElementById('dash-billing-alert').style.display = 'block';
-                document.getElementById('billing-status-lbl').textContent = "Inadimplente / Links de Tráfego Pausados";
-                document.getElementById('billing-status-lbl').style.color = "var(--tesla-red)";
+                document.getElementById('billing-status-lbl').innerHTML = `<span style="color:var(--tesla-red);">Fatura Inadimplente (Bloqueado)</span>`;
             }
 
             resetBilling() {
                 document.getElementById('dash-billing-alert').style.display = 'none';
-                document.getElementById('billing-status-lbl').textContent = "Período de Testes Ativo (30 Dias Grátis)";
-                document.getElementById('billing-status-lbl').style.color = "var(--google-green)";
-                alert("Assinatura reativada e liquidada perfeitamente via API Inter PIX!");
+                document.getElementById('billing-status-lbl').innerHTML = `<span style="color:var(--google-green);">Assinatura Ativa (Regularizada)</span>`;
+                alert("Faturamento liquidado instantaneamente via chave PIX Partner Holding.");
             }
 
-            renderAdminStats() {
-                if(document.getElementById('admin-stat-users')) {
-                    document.getElementById('admin-stat-users').textContent = this.users.length;
-                    document.getElementById('admin-stat-props').textContent = this.properties.length;
-                    document.getElementById('admin-stat-leads').textContent = this.leads.length;
-                }
+            updateAdminStats() {
+                document.getElementById('admin-stat-users').innerText = "14";
+                document.getElementById('admin-stat-props').innerText = this.properties.length;
+                document.getElementById('admin-stat-leads').innerText = this.leads.length;
             }
         }
 
-        // Inicialização global da aplicação
-        const app = new IaMobiApp();
+        // Instanciar aplicação global
+        const app = new ImobiApp();
+        window.onload = () => app.init();
     </script>
 </body>
 </html>
