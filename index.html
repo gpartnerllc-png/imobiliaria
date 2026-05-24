@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMOBI | Portal de Negócios Imobiliários</title>
+    <style>
+        :root {
+            --bg-main: #060b13;
+            --bg-card: #0d1527;
+            --bg-input: #15223b;
+            --primary: #c5a880; /* Dourado Champagne Premium */
+            --primary-hover: #b39368;
+            --accent-cyan: #00f0ff; /* Toque tecnológico Protocolo Aladin */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: #1e293b;
+            --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Efeitos Biônicos de Brilho de Fundo */
+        .glow-bg {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(197, 168, 128, 0.05) 0%, rgba(0, 240, 255, 0.02) 50%, rgba(0,0,0,0) 100%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .glow-bg-left {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.04) 0%, rgba(197, 168, 128, 0.01) 50%, rgba(0,0,0,0) 100%);
+            bottom: -100px;
+            left: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: rgba(6, 11, 19, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 70%, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-sub {
+            font-size: 0.65rem;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-top: -2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-btn:hover {
+            color: var(--primary);
+        }
+
+        .nav-btn.active {
+            background-color: rgba(197, 168, 128, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: #060b13;
+            font-weight: 600;
+            border: none;
+            padding: 0.6rem 1.4rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+        }
+
+        /* Container Principal */
+        .main-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Seções de Visualização */
+        .app-view {
+            display: none;
+        }
+
+        .app-view.active-view {
+            display: block;
+        }
+
+        /* Vitrine / Landing Page */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Barra de Filtros */
+        .filter-bar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 1.2rem;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
+            gap: 1rem;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .filter-group select, .filter-group input {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 6px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        /* Grid de Imóveis */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
+        }
+
+        .property-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(197, 168, 128, 0.4);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .property-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(6, 11, 19, 0.85);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+        }
+
+        .property-img-mock {
+            height: 220px;
+            background: linear-gradient(135deg, #15223b 0%, #0d1527 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.05);
+        }
+
+        .property-img-mock svg {
+            width: 70px;
+            height: 70px;
+            fill: currentColor;
+        }
+
+        .property-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .property-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .property-location svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--primary);
+        }
+
+        /* Caixa de Detalhes do Ágio */
+        .agio-details-box {
+            background-color: rgba(0, 240, 255, 0.03);
+            border: 1px dashed rgba(0, 240, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .agio-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+        }
+
+        .agio-label {
+            color: var(--text-muted);
+        }
+
+        .agio-value {
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: auto;
+            margin-bottom: 1rem;
+        }
+
+        .property-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .owner-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .owner-avatar {
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary);
+            color: #060b13;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        /* Formulários Auth */
+        .auth-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            max-width: 450px;
+            margin: 4rem auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 6px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        /* Dashboard */
+        .dashboard-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2rem;
+        }
+
+        .dash-sidebar {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+
+        .user-profile-summary {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .user-profile-summary .avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-cyan) 100%);
+            border-radius: 50%;
+            margin: 0 auto 0.8rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #060b13;
+        }
+
+        .user-role-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            background-color: rgba(197, 168, 128, 0.15);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .dash-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dash-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .dash-nav-item:hover, .dash-nav-item.active {
+            background-color: var(--bg-input);
+            color: var(--text-main);
+        }
+
+        .dash-nav-item.active {
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .dash-content-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        /* Tabelas Leads */
+        .analytics-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: var(--bg-input);
+            color: var(--text-muted);
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .origin-badge {
+            background-color: rgba(0, 240, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Modais */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(6, 11, 19, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .map-mock-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            height: 200px;
+        }
+
+        .map-box {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .share-box {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .share-url {
+            font-family: monospace;
+            color: var(--accent-cyan);
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-layout { grid-template-columns: 1fr; }
+            .filter-bar { grid-template-columns: 1fr; }
+            .map-mock-container { grid-template-columns: 1fr; height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg"></div>
+    <div class="glow-bg-left"></div>
+
+    <header>
+        <div class="logo-container" onclick="app.changeView('landing')">
+            <div>
+                <span class="logo-text">IMOBI</span>
+                <span class="logo-sub">Partner Holding</span>
+            </div>
+        </div>
+        <nav id="main-nav">
+            <button class="nav-btn active" onclick="app.changeView('landing')">Explorar Imóveis</button>
+            <button class="nav-btn" id="nav-dash-link" onclick="app.changeView('dashboard')" style="display: none;">Meu Painel</button>
+            <button class="btn-primary" id="login-nav-btn" onclick="app.changeView('auth')">Acessar Conta</button>
+            <div id="user-logged-menu" style="display: none; align-items: center; gap: 1rem;">
+                <span id="user-display-name" style="font-weight: 600; color: var(--primary);"></span>
+                <button class="nav-btn" onclick="app.logout()" style="color: var(--danger);">Sair</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-container">
+
+        <section id="view-landing" class="app-view active-view">
+            <div class="hero-section">
+                <h1 class="hero-title">Encontre seu Imóvel ou <span>Oportunidade de Ágio</span></h1>
+                <p class="hero-subtitle">Conectando consultores, corretores e imobiliárias na plataforma de alta performance da Partner Holding.</p>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Modalidade</label>
+                    <select id="filter-type" onchange="app.filterProperties()">
+                        <option value="">Todos os Tipos</option>
+                        <option value="Ágio">Ágio</option>
+                        <option value="Venda">Venda Direta</option>
+                        <option value="Aluguel">Aluguel</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Localização</label>
+                    <input type="text" id="filter-location" placeholder="Cidade, DF ou Entorno..." oninput="app.filterProperties()">
+                </div>
+                <div class="filter-group">
+                    <label>Preço Máximo</label>
+                    <input type="number" id="filter-price" placeholder="R$" oninput="app.filterProperties()">
+                </div>
+                <button class="btn-primary" onclick="app.clearFilters()" style="background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border)">Limpar</button>
+            </div>
+
+            <div class="property-grid" id="landing-properties-grid"></div>
+        </section>
+
+        <section id="view-auth" class="app-view">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="tab-login" onclick="app.setAuthTab('login')">Entrar</div>
+                    <div class="auth-tab" id="tab-register" onclick="app.setAuthTab('register')">Cadastrar-se</div>
+                </div>
+
+                <form id="form-login" onsubmit="app.handleLogin(event)">
+                    <div class="form-group">
+                        <label>CPF ou E-mail</label>
+                        <input type="text" id="login-identifier" required placeholder="Digite seu CPF ou e-mail">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Entrar no Ecossistema</button>
+                </form>
+
+                <form id="form-register" onsubmit="app.handleRegister(event)" style="display: none;">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="reg-name" required placeholder="Ex: Cristian Ribeiro">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="reg-email" required placeholder="nome@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" id="reg-cpf" required placeholder="000.
