@@ -879,7 +879,7 @@
                         agioRemaining: 100000,
                         agioInstallment: 850,
                         agioBank: "Banco Inter",
-                        image: "https://533aa092c7f3571e13fdc103ba716bdf.r2.cloudflarestorage.com/imoveis",
+                        image: "https://6a13b0d3086634e3699975e1.imgix.net/IMOVEIS/IMG-20260524-WA0018.jpg",
                         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
                         description: "Excelente oportunidade de investimento. Terreno plano com infraestrutura asfáltica completa e rede elétrica pronta.",
                         author: "cristian@partner.com"
@@ -933,7 +933,7 @@
 
             // EXTRACTOR AUTOMÁTICO DE LINKS DO GOOGLE DRIVE
             getImagesArray(imageStr) {
-                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
+                if (!imageStr) return ['https://6a13b0d3086634e3699975e1.imgix.net/IMOVEIS/IMG-20260524-WA0018.jpg'];
                 return imageStr.split(',').map(url => {
                     url = url.trim();
                     if (url.includes('drive.google.com')) {
@@ -1504,7 +1504,7 @@
                 container.innerHTML = '';
 
                 const mockFiles = [
-                    { name: "📸 Lote_Premium_Fachada.jpg", url: "https://images.unsplash.com/photo-1524813686514-a57563d77d61?auto=format&fit=crop&w=800&q=80", type: "image" },
+                    { name: "📸 Lote_Premium_Fachada.jpg", url: "https://6a13b0d3086634e3699975e1.imgix.net/IMOVEIS/IMG-20260524-WA0018.jpg", type: "image" },
                     { name: "📸 Casa_Moderna_Interior.jpg", url: "https://drive.google.com/file/d/1C8H2EFhRwbA0MDwhLDzT6GD5M1WOJ96C/view?usp=drive_link", type: "image" },
                     { name: "🎬 Tour_Virtual_Loteamento.mp4", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", type: "video" }
                 ];
