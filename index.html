@@ -541,7 +541,7 @@
 
         <section id="sec-landing" class="view-section active-view">
             <div class="hero">
-                <h1>Novos-<span>Imóveis & Ágios</span></h1>
+                <h1><span>Imóveis & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
 
@@ -601,6 +601,7 @@
                         <label>Perfil Operacional</label>
                         <select id="reg-role" onchange="app.handleRoleChange(this.value)">
                             <option value="Corretor">Corretor de Imóveis (Autônomo)</option>
+                            <option value="Consultor">Consultor Corporativo</option>
                             <option value="Imobiliária">Imobiliária / Pessoa Jurídica</option>
                             <option value="Proprietário">Proprietário Direto</option>
                             <option value="Admin">Administrador Master</option>
@@ -729,7 +730,7 @@
             <div class="video-box-container" id="md-video-container"></div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-                <button class="btn-action" style="background: var(--google-green);" onclick="alert('Conectando diretamente com o Gerente Responsável via WhatsApp...')">Falar com Corretor Especialista</button>
+                <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista Responsável</button>
                 <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
             </div>
             <div style="margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); text-align: center;" id="md-share-url"></div>
@@ -770,7 +771,7 @@
                     <div class="input-group">
                         <label>Modalidade Comercial</label>
                         <select id="p-type" required onchange="app.togglePropertyAgioForm(this.value)">
-                            <option value="Venda">Venda Direta</option>
+                            <option value="Venda">Venda Directa</option>
                             <option value="Ágio">Negociação de Ágio</option>
                             <option value="Aluguel">Locação Residencial</option>
                         </select>
@@ -812,9 +813,9 @@
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
                     <div class="input-group">
-                        <label>URLs das Imagens (Até 12 fotos, separadas por vírgula)</label>
+                        <label>URLs das Imagens (Separadas por vírgula se forem várias, até 12 fotos)</label>
                         <div style="display: flex; gap: 8px;">
-                            <input type="url" id="p-image" placeholder="https://drive.google.com/file/d/1C8H2EFhRwbA0MDwhLDzT6GD5M1WOJ96C/view?usp=drive_link" style="flex-grow: 1;">
+                            <input type="text" id="p-image" placeholder="Cole os links públicos da Cloud ou Google Drive" style="flex-grow: 1;">
                             <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none; font-size: 0.85rem; white-space: nowrap;">Nuvem Partner</button>
                             <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none; font-size: 0.85rem; white-space: nowrap;">📂 Computador</button>
                             <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
@@ -862,12 +863,12 @@
                 // Instancia o mapeador de índices ativos para os carrosséis
                 this.carouselIndices = {};
 
-                // Massa de Dados de Usuários
+                // Recupera ou inicializa os dados de usuários (Consultores e Corretores)
                 this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [
-                    { name: "Cristian Ribeiro", email: "contato@droppfy.com", password: "878I@hweH878", role: "Admin", creci: "CRECI-DF Master" }
+                    { name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", creci: "CRECI-DF Master" }
                 ];
 
-                // Massa de Dados de Imóveis Base
+                // Recupera ou inicializa os dados de imóveis cadastrados
                 this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [
                     {
                         id: "1",
@@ -879,14 +880,14 @@
                         agioRemaining: 100000,
                         agioInstallment: 850,
                         agioBank: "Banco Inter",
-                        image: "https://6a13b0d3086634e3699975e1.imgix.net/IMOVEIS/IMG-20260524-WA0018.jpg",
+                        image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
                         video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
                         description: "Excelente oportunidade de investimento. Terreno plano com infraestrutura asfáltica completa e rede elétrica pronta.",
                         author: "cristian@partner.com"
                     }
                 ];
 
-                // Massa de Dados de Leads Base
+                // Recupera ou inicializa a lista de leads capturados pelo Firewall Aladin
                 this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [
                     { 
                         name: "Mikaele Nascimento", 
@@ -897,13 +898,12 @@
                     }
                 ];
 
-                // Controle de Estado
+                // Controle de Estado da Sessão
                 this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
                 this.activeDriveTargetInputId = null;
                 this.selectedPropertyForLead = null;
                 this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
 
-                // Inicializar Aplicação
                 this.init();
             }
 
@@ -918,8 +918,6 @@
                 if (this.currentUser) {
                     this.renderDashboard();
                 }
-                
-                // Tráfego Direto / Deep Linking
                 this.catchUrlDeepLink();
             }
 
@@ -931,11 +929,12 @@
                 localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
             }
 
-            // EXTRACTOR AUTOMÁTICO DE LINKS DO GOOGLE DRIVE
+            // TRATAMENTO EXCLUSIVO DE IMAGENS DO CLOUDFLARE R2, DRIVE E GOOGLE USER CONTENT
             getImagesArray(imageStr) {
-                if (!imageStr) return ['https://6a13b0d3086634e3699975e1.imgix.net/IMOVEIS/IMG-20260524-WA0018.jpg'];
+                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
                 return imageStr.split(',').map(url => {
                     url = url.trim();
+                    // Converte links brutos de compartilhamento do Google Drive para stream direto
                     if (url.includes('drive.google.com')) {
                         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
                         if (match && match[1]) {
@@ -946,7 +945,7 @@
                 });
             }
 
-            // GESTÃO DOS CARROSSEIS (Setas manuais + Transições Dinâmicas)
+            // SISTEMA AUTÔNOMO DE CARROSSEL DE ATÉ 12 FOTOS (Navegação manual + passagem a cada 5 segundos)
             moveCarousel(id, direction, total) {
                 if (total <= 1) return;
                 if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
@@ -966,13 +965,13 @@
                             this.moveCarousel(p.id, 1, images.length);
                         }
                     });
-                }, 5000); // Passagem programada a cada 5 segundos
+                }, 5000); // Rotação fixa a cada 5 segundos
             }
 
-            // SELETORES DE ARQUIVOS FISICOS DO COMPUTADOR (DOWNLOADS)
+            // CARREGAMENTO FÍSICO DO COMPUTADOR (Downloads/Arquivos Convertidos em String Segura de Mídia)
             handleLocalImages(input) {
                 if (!input.files || input.files.length === 0) return;
-                const files = Array.from(input.files).slice(0, 12); // Limite de 12 fotos
+                const files = Array.from(input.files).slice(0, 12);
                 const promises = files.map(file => {
                     return new Promise((resolve) => {
                         const reader = new FileReader();
@@ -982,7 +981,7 @@
                 });
                 Promise.all(promises).then(base64Images => {
                     document.getElementById('p-image').value = base64Images.join(',');
-                    alert(`Sucesso: ${base64Images.length} fotos carregadas do computador local.`);
+                    alert(`${base64Images.length} fotos assimiladas com sucesso do computador.`);
                 });
             }
 
@@ -992,61 +991,30 @@
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     document.getElementById('p-video').value = e.target.result;
-                    alert('Vídeo local carregado com sucesso!');
+                    alert('Vídeo local assimilado com sucesso.');
                 };
                 reader.readAsDataURL(file);
             }
 
-            // SISTEMA DE TEMAS DE ALTA PERFORMANCE (FUSÃO CLARO/ESCURO)
-            applySavedTheme() {
-                const savedTheme = localStorage.getItem('iamobi_theme') || 'light';
-                document.documentElement.setAttribute('data-theme', savedTheme);
-            }
-
-            toggleTheme() {
-                const current = document.documentElement.getAttribute('data-theme');
-                const nextTheme = current === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', nextTheme);
-                localStorage.setItem('iamobi_theme', nextTheme);
-            }
-
-            // NAVEGAÇÃO DE VIEWS SINGLE PAGE APPLICATION (SPA)
-            navigate(view) {
-                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            // CONTROLE DE DIRECIONAMENTO PARA O CONSULTOR/CORRETOR DO IMÓVEL
+            contactBrokerResponsible() {
+                if (!this.selectedPropertyForLead) return;
+                const authorEmail = this.selectedPropertyForLead.author;
+                const broker = this.users.find(u => u.email === authorEmail) || { name: "Especialista Partner", phone: "5561999999999" };
                 
-                const targetSection = document.getElementById(`sec-${view}`);
-                if (targetSection) targetSection.classList.add('active-view');
-
-                const targetMenuBtn = document.getElementById(`menu-btn-${view}`);
-                if (targetMenuBtn) targetMenuBtn.classList.add('active');
-
-                if (view === 'dashboard') {
-                    if (!this.currentUser) {
-                        this.navigate('auth');
-                        return;
-                    }
-                    this.renderDashboard();
-                }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                alert(`Conectando você a(o) especialista responsável pelo imóvel: ${broker.name}`);
+                window.open(`https://api.whatsapp.com/send?phone=5561999999999&text=Olá%20${encodeURIComponent(broker.name)},%20gostaria%20de%20informações%20sobre%20o%20imóvel%20${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
             }
 
-            // DETECÇÃO DE LINKS DE TRÁFEGO PROFUNDOS (DEEP LINKING)
-            catchUrlDeepLink() {
-                if (window.location.hash && window.location.hash.startsWith('#view-prop-')) {
-                    const targetId = window.location.hash.replace('#view-prop-', '');
-                    setTimeout(() => this.gateCheckProperty(targetId), 300);
-                }
-            }
-
-            // RENDERIZADOR DO MARKETPLACE PÚBLICO COM CARROSSEL EMBUTIDO
+            // RENDERIZADOR DO MARKETPLACE COM SUPORTE A INFRAESTRUTURA CLOUDFLARE R2
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
+                if(!grid) return;
                 grid.innerHTML = '';
                 const data = filteredData || this.properties;
 
                 if (data.length === 0) {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">Nenhum imóvel localizado nos parâmetros inseridos.</div>`;
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">Nenhum imóvel ou ágio localizado nos parâmetros inseridos.</div>`;
                     return;
                 }
 
@@ -1099,7 +1067,83 @@
                 });
             }
 
-            // EXECUTOR DE BUSCA INTEGRADA
+            // PERSISTÊNCIA REAL E SALVAMENTO DO PAINEL DE CRIAÇÃO/EDIÇÃO
+            actionSaveProperty(e) {
+                e.preventDefault();
+                const id = document.getElementById('p-id').value;
+                const title = document.getElementById('p-title').value;
+                const type = document.getElementById('p-type').value;
+                const price = Number(document.getElementById('p-price').value);
+                const location = document.getElementById('p-location').value;
+                const image = document.getElementById('p-image').value;
+                const video = document.getElementById('p-video').value;
+                const description = document.getElementById('p-description').value;
+
+                let propertyObj = {
+                    id: id || String(Date.now()),
+                    title, type, price, location, image, video, description,
+                    author: id ? (this.properties.find(x => x.id === id).author) : this.currentUser.email
+                };
+
+                if (type === 'Ágio') {
+                    propertyObj.agioPaid = Number(document.getElementById('p-agio-paid').value || 0);
+                    propertyObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value || 0);
+                    propertyObj.agioInstallment = Number(document.getElementById('p-agio-installment').value || 0);
+                    propertyObj.agioBank = document.getElementById('p-agio-bank').value;
+                }
+
+                if (id) {
+                    const idx = this.properties.findIndex(x => x.id === id);
+                    this.properties[idx] = propertyObj;
+                } else {
+                    this.properties.push(propertyObj);
+                }
+
+                this.saveState();
+                this.closeModal('modal-property-form');
+                this.renderPublicGrid();
+                this.renderPortfolioGrid();
+                this.renderDashboard();
+                alert("Anúncio fixado e atualizado no ecossistema com sucesso!");
+            }
+
+            // CONFIGURAÇÕES COMPLEMENTARES DA ENGINE (MANUTENÇÃO DE ESTADO)
+            applySavedTheme() {
+                const savedTheme = localStorage.getItem('iamobi_theme') || 'light';
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+
+            toggleTheme() {
+                const current = document.documentElement.getAttribute('data-theme');
+                const nextTheme = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', nextTheme);
+                localStorage.setItem('iamobi_theme', nextTheme);
+            }
+
+            navigate(view) {
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                const targetSection = document.getElementById(`sec-${view}`);
+                if (targetSection) targetSection.classList.add('active-view');
+
+                const targetMenuBtn = document.getElementById(`menu-btn-${view}`);
+                if (targetMenuBtn) targetMenuBtn.classList.add('active');
+
+                if (view === 'dashboard') {
+                    if (!this.currentUser) { this.navigate('auth'); return; }
+                    this.renderDashboard();
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            catchUrlDeepLink() {
+                if (window.location.hash && window.location.hash.startsWith('#view-prop-')) {
+                    const targetId = window.location.hash.replace('#view-prop-', '');
+                    setTimeout(() => this.gateCheckProperty(targetId), 300);
+                }
+            }
+
             executeSearch() {
                 const type = document.getElementById('search-type').value;
                 const location = document.getElementById('search-location').value.toLowerCase();
@@ -1111,7 +1155,6 @@
                     const matchPrice = price === "" || Number(p.price) <= Number(price);
                     return matchType && matchLocation && matchPrice;
                 });
-
                 this.renderPublicGrid(filtered);
             }
 
@@ -1122,22 +1165,16 @@
                 this.renderPublicGrid();
             }
 
-            // SEGURANÇA: FIREWALL ALADIN LEAD CAPTURE GATE
             gateCheckProperty(id) {
                 const prop = this.properties.find(p => p.id === id);
                 if (!prop) return;
 
                 if (this.billingInvoiceExpired) {
-                    alert("Acesso suspenso: Este link de tráfego está temporariamente pausado devido a pendências na conta do provedor.");
+                    alert("Acesso suspenso temporariamente devido a pendências na conta.");
                     return;
                 }
-
-                if (this.currentUser) {
-                    this.openPropertyDetailModal(prop);
-                } else {
-                    this.selectedPropertyForLead = prop;
-                    this.openModal('modal-gate-capture');
-                }
+                this.selectedPropertyForLead = prop;
+                this.openPropertyDetailModal(prop);
             }
 
             actionCaptureLead(event) {
@@ -1156,16 +1193,14 @@
                 this.saveState();
                 this.closeModal('modal-gate-capture');
                 document.getElementById('form-lead-capture').reset();
-                
                 this.openPropertyDetailModal(this.selectedPropertyForLead);
             }
 
-            // MODAL DETALHED + EMBED SUPORTE GOOGLE DRIVE / LOCAL VIDEO
             openPropertyDetailModal(prop) {
                 document.getElementById('md-title').innerText = prop.title;
                 document.getElementById('md-location').innerText = `📍 ${prop.location}`;
                 document.getElementById('md-price').innerText = `R$ ${Number(prop.price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-                document.getElementById('md-description').innerText = prop.description || "Sem memorial adicional informado.";
+                document.getElementById('md-description').innerText = prop.description || "Sem memorial informado.";
 
                 const agioPanel = document.getElementById('md-agio-details');
                 if (prop.type === 'Ágio') {
@@ -1178,7 +1213,6 @@
                     agioPanel.style.display = 'none';
                 }
 
-                // Renderizador Multi-Formatos de Vídeo (Local, Drive ou Youtube)
                 const videoContainer = document.getElementById('md-video-container');
                 if (prop.video) {
                     if (prop.video.startsWith('data:video/')) {
@@ -1186,50 +1220,45 @@
                     } else if (prop.video.includes('drive.google.com')) {
                         const match = prop.video.match(/\/d\/([a-zA-Z0-9_-]+)/) || prop.video.match(/id=([a-zA-Z0-9_-]+)/);
                         const cleanId = match ? match[1] : '';
-                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="https://drive.google.com/file/d/${cleanId}/preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
-                    } else if (prop.video.includes('youtube.com') || prop.video.includes('youtu.be')) {
+                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="https://drive.google.com/file/d/${cleanId}/preview" frameborder="0" allowfullscreen style="border:none;"></iframe>`;
+                    } else {
                         let embedUrl = prop.video;
                         if(prop.video.includes('watch?v=')){ embedUrl = prop.video.replace('watch?v=', 'embed/'); }
-                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>`;
-                    } else {
-                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${prop.video}" title="Video player" frameborder="0" style="border:none;"></iframe>`;
+                        videoContainer.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" frameborder="0" allowfullscreen style="border:none;"></iframe>`;
                     }
                 } else {
-                    videoContainer.innerHTML = `<div style="color: var(--text-muted); font-size:0.9rem; text-align:center; padding: 2rem;">📷 Mídia Convencional — Nenhum vídeo de tour anexado.</div>`;
+                    videoContainer.innerHTML = `<div style="color: var(--text-muted); font-size:0.9rem; text-align:center; padding: 2rem;">📷 Mídia Fotográfica Tradicional.</div>`;
                 }
 
                 const shareUrl = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
                 document.getElementById('md-share-url').innerText = shareUrl;
-
                 this.openModal('modal-property-detail');
             }
 
             copyConversionLink() {
                 const url = document.getElementById('md-share-url').innerText;
                 navigator.clipboard.writeText(url).then(() => {
-                    alert('Link de conversão de tráfego copiado com sucesso! Pronto para campanhas de anúncios.');
+                    alert('Link de conversão copiado com sucesso para campanhas!');
                 });
             }
 
-            // CONTROLE DE FLUXO FINANCEIRO / MOCK API PIX
             simulateBillingExpiration() {
                 this.billingInvoiceExpired = true;
                 this.saveState();
                 this.checkBillingStatusUI();
-                alert("Simulação de inadimplência ativa. Links públicos bloqueados.");
+                alert("Faturamento pausado.");
             }
 
             resetBilling() {
                 this.billingInvoiceExpired = false;
                 this.saveState();
                 this.checkBillingStatusUI();
-                alert("Assinatura reativada e faturamento liquidado com sucesso via API Banco Inter PIX.");
+                alert("Faturamento regularizado com sucesso!");
             }
 
             checkBillingStatusUI() {
                 const label = document.getElementById('billing-status-lbl');
                 const banner = document.getElementById('global-billing-alert');
-                
                 if (this.billingInvoiceExpired) {
                     if(label) label.innerHTML = `<span style="color:var(--tesla-red);">Fatura Inadimplente (Bloqueado)</span>`;
                     if(banner) banner.style.display = 'flex';
@@ -1239,7 +1268,6 @@
                 }
             }
 
-            // SISTEMA DE CADASTRO E LOGIN (AUTENTICAÇÃO)
             switchAuthMode(mode) {
                 document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
                 if (mode === 'login') {
@@ -1256,9 +1284,9 @@
             handleRoleChange(role) {
                 const creciGroup = document.getElementById('group-creci-field');
                 if (role === 'Corretor' || role === 'Imobiliária') {
-                    creciGroup.style.display = 'flex';
+                    if(creciGroup) creciGroup.style.display = 'flex';
                 } else {
-                    creciGroup.style.display = 'none';
+                    if(creciGroup) creciGroup.style.display = 'none';
                 }
             }
 
@@ -1267,11 +1295,11 @@
                 const name = document.getElementById('reg-name').value;
                 const email = document.getElementById('reg-email').value;
                 const role = document.getElementById('reg-role').value;
-                const creci = document.getElementById('reg-creci').value;
+                const creci = document.getElementById('reg-creci').value || '';
                 const password = document.getElementById('reg-password').value;
 
                 if (this.users.some(u => u.email === email)) {
-                    alert('Este e-mail já está cadastrado na rede.');
+                    alert('Este e-mail corporativo já consta na infraestrutura.');
                     return;
                 }
 
@@ -1279,11 +1307,9 @@
                 this.users.push(newUser);
                 this.currentUser = newUser;
                 this.saveState();
-
-                alert('Conta criada com sucesso!');
+                alert('Acesso autorizado com sucesso!');
                 this.updateAuthHeader();
                 this.navigate('dashboard');
-                document.getElementById('form-register').reset();
             }
 
             actionLogin(e) {
@@ -1292,16 +1318,12 @@
                 const password = document.getElementById('login-password').value;
 
                 const user = this.users.find(u => u.email === email && u.password === password);
-                if (!user) {
-                    alert('Credenciais corporativas inválidas.');
-                    return;
-                }
+                if (!user) { alert('Credenciais inválidas.'); return; }
 
                 this.currentUser = user;
                 this.saveState();
                 this.updateAuthHeader();
                 this.navigate('dashboard');
-                document.getElementById('form-login').reset();
             }
 
             actionLogout() {
@@ -1329,23 +1351,20 @@
                 }
             }
 
-            // GESTÃO DO PAINEL OPERACIONAL
             renderDashboard() {
                 if (!this.currentUser) return;
-                
                 document.getElementById('dash-user-title').innerText = this.currentUser.name;
-                document.getElementById('dash-user-subtitle').innerText = `Perfil: ${this.currentUser.role} ${this.currentUser.creci ? `(${this.currentUser.creci})` : ''}`;
+                document.getElementById('dash-user-subtitle').innerText = `Perfil: ${this.currentUser.role}`;
 
                 const masterPanel = document.getElementById('admin-master-panel');
                 if (this.currentUser.role === 'Admin') {
-                    masterPanel.style.display = 'block';
+                    if(masterPanel) masterPanel.style.display = 'block';
                     document.getElementById('admin-stat-users').innerText = this.users.length;
                     document.getElementById('admin-stat-props').innerText = this.properties.length;
                     document.getElementById('admin-stat-leads').innerText = this.leads.length;
                 } else {
-                    masterPanel.style.display = 'none';
+                    if(masterPanel) masterPanel.style.display = 'none';
                 }
-
                 this.renderPortfolioGrid();
                 this.renderLeadsTable();
             }
@@ -1353,13 +1372,13 @@
             switchDashTab(tab) {
                 document.querySelectorAll('.tab-dash-view').forEach(t => t.style.display = 'none');
                 document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
-                
                 document.getElementById(`dash-tab-${tab}`).style.display = 'block';
                 document.getElementById(`menu-sub-${tab}`).classList.add('active');
             }
 
             renderPortfolioGrid() {
                 const tbody = document.getElementById('portfolio-table-rows');
+                if(!tbody) return;
                 tbody.innerHTML = '';
 
                 const userProperties = this.currentUser.role === 'Admin' 
@@ -1367,7 +1386,7 @@
                     : this.properties.filter(p => p.author === this.currentUser.email);
 
                 if(userProperties.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">Nenhum imóvel cadastrado sob este perfil.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">Nenhum imóvel sob sua custódia.</td></tr>`;
                     return;
                 }
 
@@ -1375,12 +1394,12 @@
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td style="font-weight:700;">${p.title}</td>
-                        <td><span class="pricing-badge" style="font-size:0.7rem; border-color:var(--google-blue); color:var(--google-blue);">${p.type}</span></td>
+                        <td><span class="pricing-badge">${p.type}</span></td>
                         <td>${p.location}</td>
                         <td>R$ ${Number(p.price).toLocaleString('pt-BR')}</td>
                         <td>
-                            <button class="nav-link" style="display:inline; padding:0.2rem 0.5rem; color:var(--google-blue);" onclick="app.openEditPropertyModal('${p.id}')">Editar</button> | 
-                            <button class="nav-link" style="display:inline; padding:0.2rem 0.5rem; color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
+                            <button class="nav-link" style="display:inline; padding:0.2rem;" onclick="app.openEditPropertyModal('${p.id}')">Editar</button> | 
+                            <button class="nav-link" style="display:inline; padding:0.2rem; color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -1389,12 +1408,8 @@
 
             renderLeadsTable() {
                 const tbody = document.getElementById('leads-table-rows');
+                if(!tbody) return;
                 tbody.innerHTML = '';
-
-                if (this.leads.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">Aguardando conversões orgânicas.</td></tr>`;
-                    return;
-                }
 
                 this.leads.forEach(l => {
                     const tr = document.createElement('tr');
@@ -1402,14 +1417,13 @@
                         <td style="font-weight:600;">${l.name}</td>
                         <td style="color:var(--google-green); font-weight:700;">${l.phone}</td>
                         <td>${l.propTitle}</td>
-                        <td><span style="background:rgba(15,157,88,0.1); color:var(--google-green); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:700;">${l.source}</span></td>
-                        <td style="color:var(--text-muted); font-size:0.8rem;">${l.date}</td>
+                        <td><span>${l.source}</span></td>
+                        <td>${l.date}</td>
                     `;
                     tbody.appendChild(tr);
                 });
             }
 
-            // FORM CONTROLS (NATIVO COMPLETO)
             togglePropertyAgioForm(type) {
                 document.getElementById('p-agio-panel').style.display = type === 'Ágio' ? 'block' : 'none';
             }
@@ -1418,7 +1432,6 @@
                 document.getElementById('form-actual-property').reset();
                 document.getElementById('p-id').value = '';
                 document.getElementById('form-prop-title').innerText = "Cadastrar Novo Imóvel";
-                document.getElementById('p-agio-panel').style.display = 'none';
                 this.openModal('modal-property-form');
             }
 
@@ -1435,78 +1448,35 @@
                 document.getElementById('p-video').value = p.video;
                 document.getElementById('p-description').value = p.description;
 
+                this.togglePropertyAgioForm(p.type);
                 if (p.type === 'Ágio') {
-                    document.getElementById('p-agio-panel').style.display = 'block';
                     document.getElementById('p-agio-paid').value = p.agioPaid || '';
                     document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
                     document.getElementById('p-agio-installment').value = p.agioInstallment || '';
                     document.getElementById('p-agio-bank').value = p.agioBank || '';
-                } else {
-                    document.getElementById('p-agio-panel').style.display = 'none';
                 }
 
                 document.getElementById('form-prop-title').innerText = "Modificar Imóvel";
                 this.openModal('modal-property-form');
             }
 
-            actionSaveProperty(e) {
-                e.preventDefault();
-                const id = document.getElementById('p-id').value;
-                const title = document.getElementById('p-title').value;
-                const type = document.getElementById('p-type').value;
-                const price = Number(document.getElementById('p-price').value);
-                const location = document.getElementById('p-location').value;
-                const image = document.getElementById('p-image').value;
-                const video = document.getElementById('p-video').value;
-                const description = document.getElementById('p-description').value;
-
-                let propertyObj = {
-                    id: id || String(Date.now()),
-                    title, type, price, location, image, video, description,
-                    author: id ? (this.properties.find(x=>x.id===id).author) : this.currentUser.email
-                };
-
-                if (type === 'Ágio') {
-                    propertyObj.agioPaid = Number(document.getElementById('p-agio-paid').value || 0);
-                    propertyObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value || 0);
-                    propertyObj.agioInstallment = Number(document.getElementById('p-agio-installment').value || 0);
-                    propertyObj.agioBank = document.getElementById('p-agio-bank').value;
-                }
-
-                if (id) {
-                    const idx = this.properties.findIndex(x => x.id === id);
-                    this.properties[idx] = propertyObj;
-                } else {
-                    this.properties.push(propertyObj);
-                }
-
-                this.saveState();
-                this.closeModal('modal-property-form');
-                this.renderPublicGrid();
-                this.renderPortfolioGrid();
-                this.renderDashboard();
-            }
-
             actionDeleteProperty(id) {
-                if (confirm('Confirma a exclusão permanente deste anúncio?')) {
+                if (confirm('Deseja excluir permanentemente este anúncio de tráfego?')) {
                     this.properties = this.properties.filter(x => x.id !== id);
                     this.saveState();
                     this.renderPublicGrid();
                     this.renderPortfolioGrid();
-                    this.renderDashboard();
                 }
             }
 
-            // DRIVE WORKSPACE SIMULATOR
             openDrivePicker(targetInputId) {
                 this.activeDriveTargetInputId = targetInputId;
                 const container = document.getElementById('drive-files-container');
                 container.innerHTML = '';
 
                 const mockFiles = [
-                    { name: "📸 Lote_Premium_Fachada.jpg", url: "https://6a13b0d3086634e3699975e1.imgix.net/IMOVEIS/IMG-20260524-WA0018.jpg", type: "image" },
-                    { name: "📸 Casa_Moderna_Interior.jpg", url: "https://drive.google.com/file/d/1C8H2EFhRwbA0MDwhLDzT6GD5M1WOJ96C/view?usp=drive_link", type: "image" },
-                    { name: "🎬 Tour_Virtual_Loteamento.mp4", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", type: "video" }
+                    { name: "📸 Lote_Premium_Fachada_R2.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png", type: "image" },
+                    { name: "📸 Casa_Moderna_Nuvem_Partner.jpg", url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80", type: "image" }
                 ];
 
                 mockFiles.forEach(f => {
@@ -1516,22 +1486,21 @@
                     div.onclick = () => this.chooseDriveFile(f.url);
                     container.appendChild(div);
                 });
-
                 this.openModal('modal-drive-picker');
             }
 
             chooseDriveFile(url) {
                 if (this.activeDriveTargetInputId) {
-                    document.getElementById(this.activeDriveTargetInputId).value = url;
+                    const currentVal = document.getElementById(this.activeDriveTargetInputId).value;
+                    document.getElementById(this.activeDriveTargetInputId).value = currentVal ? currentVal + ',' + url : url;
                 }
                 this.closeModal('modal-drive-picker');
             }
 
             openModal(id) { document.getElementById(id).classList.add('active'); }
-            closeModal(id) { document.getElementById(id).classList.remove('active'); }
+            closeModal(id) { document.getElementById(id).classList.remove('remove'); document.getElementById(id).classList.remove('active'); }
         }
 
-        // Inicialização Global da Engine IA-MOBI
         const app = new IaMobiEngine();
         window.onload = () => app.catchUrlDeepLink();
     </script>
