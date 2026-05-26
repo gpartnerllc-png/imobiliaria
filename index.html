@@ -159,24 +159,43 @@
                 <h1>Plataforma de  <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
-            <div class="search-hub">
-                <div class="input-group">
-                    <label>Modalidade</label>
-                    <select id="search-type" onchange="app.executeSearch()">
-                        <option value="">Todas as opções</option>
-                        <option value="Ágio">Negociação de Ágio</option>
-                        <option value="Venda">Venda Directa</option>
-                        <option value="Aluguel">Locação Residencial</option>
-                    </select>
-                </div>
-              
-                <div class="input-group"><label>Cidade / Localização</label><input type="text" id="search-location" placeholder="Ex: Águas Lindas" oninput="app.executeSearch()"></div>
-                <div class="input-group"><label>Preço Máximo (R$)</label><input type="number" id="search-price" placeholder="Qualquer valor" oninput="app.executeSearch()"></div>
-        
-                <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
-            </div>
-            <div class="grid-wrapper" id="public-properties-grid"></div>
-        </section>
+            <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
+    <div class="input-group">
+        <label>Modalidade</label>
+        <select id="search-type">
+            <option value="">Todas as opções</option>
+            <option value="Ágio">Negociação de Ágio</option>
+            <option value="Venda">Venda Direta</option>
+            <option value="Aluguel">Locação Residencial</option>
+        </select>
+    </div>
+    
+    <div class="input-group">
+        <label>Região / Localização</label>
+        <select id="search-location">
+            <option value="">Todas as Regiões</option>
+            <option value="Brasília">Brasília (Plano Piloto)</option>
+            <option value="Taguatinga">Taguatinga</option>
+            <option value="Ceilândia">Ceilândia</option>
+            <option value="Samambaia">Samambaia</option>
+            <option value="Águas Claras">Águas Claras</option>
+            <option value="Guará">Guará</option>
+            <option value="Águas Lindas">Águas Lindas - GO</option>
+            <option value="Valparaíso">Valparaíso - GO</option>
+            <option value="Luziânia">Luziânia - GO</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label>Preço Máximo (R$)</label>
+        <input type="number" id="search-price" placeholder="Qualquer valor">
+    </div>
+
+    <button class="btn-action" style="background: var(--google-blue); height: 50px; font-weight: 800; letter-spacing: 0.5px;" onclick="app.executeSearch()">Buscar Imóveis</button>
+    
+    <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
+</div>
+<div class="grid-wrapper" id="public-properties-grid"></div>
 
         <section id="sec-auth" class="view-section">
             <div class="auth-container">
@@ -559,12 +578,29 @@
                 reader.readAsDataURL(input.files[0]);
             }
 
-            contactBrokerResponsible() {
-                if (!this.selectedPropertyForLead) return;
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
-                alert(`Conectando ao especialista do imóvel: ${broker.name}`);
-                window.open(`https://wa.me/5561983446343${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
-            }
+           contactBrokerResponsible() {
+    if (!this.selectedPropertyForLead) return;
+
+    // Localiza o corretor ou assume o padrão da Partner Holding
+    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { 
+        name: "Especialista Partner", 
+        phone: "5561983446343" 
+    };
+
+    // Sanatiza o telefone: remove qualquer caractere que não seja número (ex: +, -, e espaços)
+    const cleanPhone = broker.phone.replace(/\D/g, '');
+
+    // Cria uma mensagem profissional personalizada de alta conversão
+    const message = `Olá ${broker.name}, tenho interesse no imóvel "${this.selectedPropertyForLead.title}" listado na plataforma IA-MOBI. Poderia me passar mais informações?`;
+
+    alert(`Conectando ao especialista do imóvel: ${broker.name}`);
+
+    // Monta a URL correta usando o parâmetro ?text=
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+
+    // Abre a API do WhatsApp em uma nova aba
+    window.open(whatsappUrl, '_blank');
+}
 
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
