@@ -225,7 +225,7 @@
             </div>
         </div>
      
-        <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 9,99/mês</div>
+        <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
@@ -398,14 +398,14 @@
         <div class="modal-window" style="max-width: 420px; text-align: center;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Renove seu acesso por mais <strong>30 dias</strong> e reative seus imóveis na vitrine pública. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 9,99</strong></p>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Renove seu acesso por mais <strong>30 dias</strong> e reative seus imóveis na vitrine pública. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
             
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=34259998854" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
             </div>
             
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima. A baixa é sistêmica.</p>
-            <button class="btn-action" style="width: 100%; background: var(--google-blue);" onclick="app.processPixPayment()">Simular Pagamento Confirmado (API/Webhook)</button>
+            <button class="btn-action" style="width: 100%; background: var(--google-blue);" onclick="app.processPixPayment()">Pagar Imobi</button>
         </div>
     </div>
     <div class="modal-blur" id="modal-property-detail">
@@ -997,6 +997,55 @@
         }
 
         const app = new IaMobiEngine();
+    </script>
+    <div id="modal-renovacao-container"></div>
+
+    <script>
+        // --- LÓGICA DE CONFIGURAÇÃO DE ENTREGA E PIX ---
+        const CONFIG = {
+            pix: "34259998854",
+            beneficiario: "CRISTIAN R FLORENCIO",
+            cidade: "BRASILIA",
+            valorRenovacao: "9.99"
+        };
+
+        function gerarPixMestre(v) {
+            const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
+            const valStr = parseFloat(v).toFixed(2);
+            const payloadConta = f('00', 'br.gov.bcb.pix') + f('01', CONFIG.pix);
+            let payload = "000201" + f('26', payloadConta) + "52040000" + "5303986" + f('54', valStr) + "5802BR" + f('59', CONFIG.beneficiario.substring(0, 25)) + f('60', CONFIG.cidade.substring(0, 15)) + "62070503***" + "6304";
+            let crc = 0xFFFF;
+            for (let i = 0; i < payload.length; i++) {
+                crc ^= payload.charCodeAt(i) << 8;
+                for (let j = 0; j < 8; j++) {
+                    if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
+                    else crc <<= 1;
+                }
+            }
+            return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        }
+
+        function abrirModalRenovacao() {
+            const copiaEColaPix = gerarPixMestre(CONFIG.valorRenovacao);
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(copiaEColaPix)}`;
+            const container = document.getElementById("modal-renovacao-container");
+            container.innerHTML = `
+                <div class="modal-blur active">
+                    <div class="modal-window">
+                        <h2 style="margin-top:0; color:#0f9d58;">Renovação Inteligente</h2>
+                        <p style="color:#64748b; margin-bottom:1rem;">Renove seu acesso por mais 30 dias.</p>
+                        <img src="${qrCodeUrl}" style="width:200px; height:200px; margin: 15px auto; display:block; border:1px solid #ddd; border-radius:8px;">
+                        <div style="background:#f8fafc; padding:10px; font-size:12px; word-break:break-all; margin:10px 0; border:1px solid #e2e8f0; border-radius:4px;">${copiaEColaPix}</div>
+                        <button onclick="navigator.clipboard.writeText('${copiaEColaPix}').then(()=>alert('Copiado!'));" style="width:100%; padding:12px; background:#1a73e8; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold; margin-bottom:10px;">Copiar Código PIX</button>
+                        <button onclick="document.getElementById('modal-renovacao-container').innerHTML=''" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:0.9rem;">Fechar</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- MANTENDO TODO O SEU SCRIPT ORIGINAL ABAIXO ---
+        // (Certifique-se de colar a lógica do seu app original aqui)
+        
     </script>
 </body>
 </html>
