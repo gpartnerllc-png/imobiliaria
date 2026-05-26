@@ -134,7 +134,7 @@
             </div>
         </div>
      
-        <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 9,99/mês</div>
+        <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
@@ -247,7 +247,7 @@
                             <h4 style="margin-bottom: 0.5rem;">Status de Faturamento da Conta</h4>
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;"><span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span></div>
                             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                <button class="btn-action" style="background: var(--tesla-red); box-shadow: none; font-size: 0.85rem;" onclick="app.simulateBillingExpiration()">Forçar Inadimplência (Teste)</button>
+                                <button class="btn-action" style="background: var(--tesla-red); box-shadow: none; font-size: 0.85rem;" onclick="app.simulateBillingExpiration()">Forçar Inadimplência</button>
                                 <button class="btn-action" style="background: var(--google-green); box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Comprar Pacote PIX</button>
                             </div>
                         </div>
@@ -269,7 +269,7 @@
         <div class="modal-window" style="max-width: 420px; text-align: center;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 9,99</strong></p>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
             
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
                 <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
@@ -279,7 +279,7 @@
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
             
             <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
-            <button class="btn-action" style="width: 100%; background: var(--google-green);" onclick="app.processPixPayment()">Simular Pagamento Confirmado (Baixa Sistêmica)</button>
+            
         </div>
     </div>
 
@@ -404,7 +404,7 @@
                     pix: "34259998854",
                     beneficiario: "CRISTIAN R FLORENCIO",
                     cidade: "BRASILIA",
-                    valorRenovacao: 9.99,
+                    valorRenovacao: 19.99,
                     limiteEntregas: 10
                 };
 
