@@ -40,176 +40,85 @@
             --premium-gold: #ffd700;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased; }
+        body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
 
-        body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; min-height: 100vh;
-        transition: background-color 0.3s, color 0.3s; }
+        .glass-glow-1 { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); top: -10%; right: -10%; z-index: -1; pointer-events: none; }
+        .glass-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%); bottom: -20%; left: -10%; z-index: -1; pointer-events: none; }
 
-        .glass-glow-1 { position: fixed; width: 500px;
-        height: 500px; background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); top: -10%; right: -10%;
-        z-index: -1; pointer-events: none; }
-        .glass-glow-2 { position: fixed; width: 600px; height: 600px;
-        background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%); bottom: -20%; left: -10%; z-index: -1;
-        pointer-events: none; }
+        header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(128, 128, 128, 0.1); position: sticky; top: 0; z-index: 1000; padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); }
+        .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .brand-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand-sub { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: block; }
+        nav { display: flex; gap: 1.2rem; align-items: center; }
 
-        header { background: rgba(var(--bg-surface), 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(128, 128, 128, 0.1); position: sticky; top: 0; z-index: 1000; padding: 1.2rem 2.5rem; display: flex; justify-content: space-between;
-        align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-        }
-        .brand { display: flex; align-items: center; gap: 12px; cursor: pointer;
-        }
-        .brand-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px;
-        background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .brand-sub { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: block;
-        }
-        nav { display: flex; gap: 1.2rem; align-items: center;
-        }
-
-        .nav-link { background: transparent; border: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 600;
-        cursor: pointer; padding: 0.6rem 1.2rem; border-radius: 8px; transition: all 0.25s ease;
-        }
-        .nav-link:hover, .nav-link.active { color: var(--text-main); background: rgba(128, 128, 128, 0.1);
-        }
+        .nav-link { background: transparent; border: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; cursor: pointer; padding: 0.6rem 1.2rem; border-radius: 8px; transition: all 0.25s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--text-main); background: rgba(128, 128, 128, 0.1); }
         
-        .btn-action { background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%);
-        color: white; font-weight: 700; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer;
-        box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2); transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35);
-        }
-        .btn-theme-toggle { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2);
-        color: var(--text-main); padding: 0.6rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem;
-        }
-        .pricing-badge { background: linear-gradient(90deg, rgba(244, 180, 0, 0.1) 0%, rgba(26, 115, 232, 0.08) 100%);
-        border: 1px solid rgba(244, 180, 0, 0.4); color: var(--premium-gold); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 700; display: inline-flex;
-        align-items: center; gap: 6px; }
+        .btn-action { background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); color: white; font-weight: 700; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2); transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35); }
+        .btn-theme-toggle { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.6rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .pricing-badge { background: linear-gradient(90deg, rgba(244, 180, 0, 0.1) 0%, rgba(26, 115, 232, 0.08) 100%); border: 1px solid rgba(244, 180, 0, 0.4); color: var(--premium-gold); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
 
-        .container { max-width: 1400px; margin: 2.5rem auto;
-        padding: 0 2rem; }
-        .view-section { display: none;
-        }
-        .view-section.active-view { display: block;
-        }
-        .billing-warning-banner { background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%); color: white;
-        padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: none; font-weight: 600; justify-content: space-between; align-items: center;
-        box-shadow: 0 4px 15px rgba(232, 33, 39, 0.2); }
+        .container { max-width: 1400px; margin: 2.5rem auto; padding: 0 2rem; }
+        .view-section { display: none; }
+        .view-section.active-view { display: block; }
+        .billing-warning-banner { background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%); color: white; padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: none; font-weight: 600; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(232, 33, 39, 0.2); }
 
-        .hero { text-align: center;
-        padding: 2rem 1rem 2.5rem 1rem; }
-        .hero h1 { font-size: 3.5rem; font-weight: 900;
-        letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1.5rem; }
-        .hero h1 span { background: linear-gradient(90deg, var(--google-blue), var(--google-green));
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero { text-align: center; padding: 2rem 1rem 2.5rem 1rem; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1.5rem; }
+        .hero h1 span { background: linear-gradient(90deg, var(--google-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .search-hub { background: var(--bg-surface);
-        border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 1.2rem;
-        align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
-        .input-group { display: flex;
-        flex-direction: column; gap: 0.6rem; }
-        .input-group label { font-size: 0.75rem; font-weight: 700;
-        color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        .input-group input, .input-group select, .input-group textarea { background: var(--bg-input);
-        border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s;
-        }
-        .input-group input:focus, .input-group select:focus { border-color: var(--google-blue); background: var(--bg-surface);
-        box-shadow: 0 0 10px rgba(26, 115, 232, 0.15); }
+        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
+        .input-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--google-blue); background: var(--bg-surface); box-shadow: 0 0 10px rgba(26, 115, 232, 0.15); }
 
-        .grid-wrapper { display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2.5rem; }
-        .card { background: var(--bg-surface);
-        border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.02); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card:hover { transform: translateY(-8px); border-color: var(--google-blue);
-        box-shadow: 0 20px 40px rgba(26, 115, 232, 0.1); }
-        .card-badge { position: absolute;
-        top: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--google-blue); color: var(--google-blue); padding: 0.4rem 0.9rem; border-radius: 30px;
-        font-size: 0.75rem; font-weight: 800; z-index: 10; text-transform: uppercase; }
-        .card-media-mock { height: 240px;
-        background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
-        }
-        .video-indicator { position: absolute; bottom: 15px; right: 15px; background: var(--tesla-red); color: white;
-        padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 4px; z-index: 12; cursor: pointer;
-        }
-        .card-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1;
-        }
-        .card-price { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin: 1rem 0;
-        }
+        .grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2.5rem; }
+        .card { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.02); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card:hover { transform: translateY(-8px); border-color: var(--google-blue); box-shadow: 0 20px 40px rgba(26, 115, 232, 0.1); }
+        .card-badge { position: absolute; top: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--google-blue); color: var(--google-blue); padding: 0.4rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-weight: 800; z-index: 10; text-transform: uppercase; }
+        .card-media-mock { height: 240px; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .video-indicator { position: absolute; bottom: 15px; right: 15px; background: var(--tesla-red); color: white; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 4px; z-index: 12; cursor: pointer; }
+        .card-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-price { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin: 1rem 0; }
 
-        .auth-container { max-width: 500px; margin: 4rem auto; background: var(--bg-surface);
-        border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 20px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.03);
-        }
-        .auth-tabs { display: flex; gap: 1rem; border-bottom: 2px solid var(--bg-input); margin-bottom: 2rem;
-        }
-        .auth-tab { padding: 0.8rem 1.5rem; cursor: pointer; color: var(--text-muted); font-weight: 700;
-        transition: all 0.2s; }
-        .auth-tab.active { color: var(--google-blue); border-bottom: 2px solid var(--google-blue);
-        }
+        .auth-container { max-width: 500px; margin: 4rem auto; background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 20px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.03); }
+        .auth-tabs { display: flex; gap: 1rem; border-bottom: 2px solid var(--bg-input); margin-bottom: 2rem; }
+        .auth-tab { padding: 0.8rem 1.5rem; cursor: pointer; color: var(--text-muted); font-weight: 700; transition: all 0.2s; }
+        .auth-tab.active { color: var(--google-blue); border-bottom: 2px solid var(--google-blue); }
 
-        .dash-layout { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem;
-        }
-        .dash-sidebar { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15);
-        border-radius: 16px; padding: 2rem; height: fit-content; }
-        .dash-menu-item { display: flex; align-items: center;
-        gap: 12px; padding: 0.9rem 1.2rem; border-radius: 10px; cursor: pointer; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; transition: all 0.2s;
-        }
-        .dash-menu-item.active, .dash-menu-item:hover { background: var(--bg-input); color: var(--text-main);
-        }
-        .dash-menu-item.active { border-left: 4px solid var(--tesla-red); color: var(--google-blue);
-        }
-        .main-dash-content { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.05);
-        border-radius: 16px; padding: 2.5rem; min-height: 600px; }
+        .dash-layout { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; }
+        .dash-sidebar { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 16px; padding: 2rem; height: fit-content; }
+        .dash-menu-item { display: flex; align-items: center; gap: 12px; padding: 0.9rem 1.2rem; border-radius: 10px; cursor: pointer; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; transition: all 0.2s; }
+        .dash-menu-item.active, .dash-menu-item:hover { background: var(--bg-input); color: var(--text-main); }
+        .dash-menu-item.active { border-left: 4px solid var(--tesla-red); color: var(--google-blue); }
+        .main-dash-content { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.05); border-radius: 16px; padding: 2.5rem; min-height: 600px; }
 
-        .modal-blur { position: fixed; top: 0;
-        left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 5000; display: flex;
-        align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem;
-        }
-        .modal-blur.active { opacity: 1; pointer-events: auto;
-        }
-        .modal-window { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.2);
-        border-radius: 24px; width: 100%; max-width: 750px; padding: 2.5rem; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-        }
-        .video-box-container { width: 100%; height: 360px; background: #000; border-radius: 12px;
-        margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; overflow: hidden;
-        }
+        .modal-blur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
+        .modal-blur.active { opacity: 1; pointer-events: auto; }
+        .modal-window { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 24px; width: 100%; max-width: 750px; padding: 2.5rem; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+        .video-box-container { width: 100%; height: 360px; background: #000; border-radius: 12px; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem;
-        }
-        th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem;
-        font-weight: 700; text-align: left; }
-        td { padding: 1.2rem 1rem;
-        border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700; text-align: left; }
+        td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
 
         /* CORREÇÃO DO CONTEXTO DE TABELAS (RESPONSIVO SMARTPHONES) */
         @media (max-width: 768px) {
-            .dash-layout { grid-template-columns: 1fr;
-            }
-            table, thead, tbody, th, td, tr { display: block;
-            width: 100%; }
-            thead { display: none;
-            }
-            tr { margin-bottom: 1.5rem; background: var(--bg-surface);
-            border: 1px solid rgba(128,128,128,0.2); border-radius: 12px; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            }
-            td { text-align: right; padding-left: 50%; position: relative;
-            border-bottom: 1px solid rgba(128,128,128,0.1); padding-top: 0.8rem; padding-bottom: 0.8rem; }
-            td::before { content: attr(data-label);
-            position: absolute; left: 0; top: 0.8rem; text-align: left; font-weight: bold; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;
-            }
-            td:last-child { border-bottom: none;
-            }
+            .dash-layout { grid-template-columns: 1fr; }
+            table, thead, tbody, th, td, tr { display: block; width: 100%; }
+            thead { display: none; }
+            tr { margin-bottom: 1.5rem; background: var(--bg-surface); border: 1px solid rgba(128,128,128,0.2); border-radius: 12px; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            td { text-align: right; padding-left: 50%; position: relative; border-bottom: 1px solid rgba(128,128,128,0.1); padding-top: 0.8rem; padding-bottom: 0.8rem; }
+            td::before { content: attr(data-label); position: absolute; left: 0; top: 0.8rem; text-align: left; font-weight: bold; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; }
+            td:last-child { border-bottom: none; }
         }
 
-        .drive-item { display: flex;
-        align-items: center; gap: 12px; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(128, 128, 128, 0.1);
-        margin-bottom: 0.5rem; }
-        .drive-item:hover { background: rgba(26, 115, 232, 0.08); border-color: var(--google-blue);
-        }
-        footer { text-align: center; padding: 3rem; margin-top: 5rem;
-        border-top: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px;
-        }
+        .drive-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(128, 128, 128, 0.1); margin-bottom: 0.5rem; }
+        .drive-item:hover { background: rgba(26, 115, 232, 0.08); border-color: var(--google-blue); }
+        footer { text-align: center; padding: 3rem; margin-top: 5rem; border-top: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -225,18 +134,15 @@
             </div>
         </div>
      
-        <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
+        <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 9,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
             <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
             <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
-            
-  
-            <div id="menu-user-profile" style="display: none; align-items: center;
-            gap: 1.2rem;">
-                <span id="header-user-name" style="font-weight: 700;
-                color: var(--google-blue);"></span>
+         
+            <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
+                <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
                 <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Sair</button>
             </div>
         </nav>
@@ -244,34 +150,30 @@
 
     <div class="container">
         <div class="billing-warning-banner" id="global-billing-alert">
-            <span>⚠️ Atenção: Sua assinatura encontra-se pendente. Os links públicos de captação de tráfego foram pausados.</span>
-            <button class="btn-action" 
-            style="background: white; color: var(--tesla-red); box-shadow: none;" onclick="app.resetBilling()">Liquidar via Inter PIX</button>
+            <span>⚠️ Atenção: Limite de entregas atingido ou assinatura pendente. Links inativos.</span>
+            <button class="btn-action" style="background: white; color: var(--tesla-red); box-shadow: none;" onclick="app.resetBilling()">Liquidar via PIX</button>
         </div>
 
         <section id="sec-landing" class="view-section active-view">
             <div class="hero">
                 <h1>Plataforma de  <span>Imóveis Novos & Ágios</span></h1>
-                <p style="color: var(--text-muted);
-                max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
+                <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
             <div class="search-hub">
                 <div class="input-group">
                     <label>Modalidade</label>
-                    <select 
-                        id="search-type" onchange="app.executeSearch()">
+                    <select id="search-type" onchange="app.executeSearch()">
                         <option value="">Todas as opções</option>
                         <option value="Ágio">Negociação de Ágio</option>
                         <option value="Venda">Venda Directa</option>
-                   
                         <option value="Aluguel">Locação Residencial</option>
                     </select>
                 </div>
+              
                 <div class="input-group"><label>Cidade / Localização</label><input type="text" id="search-location" placeholder="Ex: Águas Lindas" oninput="app.executeSearch()"></div>
                 <div class="input-group"><label>Preço Máximo (R$)</label><input type="number" id="search-price" placeholder="Qualquer valor" oninput="app.executeSearch()"></div>
         
-                <button class="btn-action" style="background: var(--text-main);
-                height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
+                <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
             </div>
             <div class="grid-wrapper" id="public-properties-grid"></div>
         </section>
@@ -279,38 +181,32 @@
         <section id="sec-auth" class="view-section">
             <div class="auth-container">
                 <div class="auth-tabs">
-                    <div class="auth-tab active" id="tab-auth-login" 
-                        onclick="app.switchAuthMode('login')">Entrar</div>
+                    <div class="auth-tab active" id="tab-auth-login" onclick="app.switchAuthMode('login')">Entrar</div>
                     <div class="auth-tab" id="tab-auth-register" onclick="app.switchAuthMode('register')">Cadastrar Conta</div>
                 </div>
                 <form id="form-login" onsubmit="app.actionLogin(event)">
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail Corporativo</label><input type="email" id="login-email" required placeholder="exemplo@partner.com"></div>
-              
                     <div class="input-group" style="margin-bottom: 2rem;"><label>Senha de Acesso</label><input type="password" id="login-password" required placeholder="Sua senha secreta"></div>
                     <button type="submit" class="btn-action" style="width: 100%;">Acessar Infraestrutura</button>
                 </form>
+    
                 <form id="form-register" onsubmit="app.actionRegister(event)" style="display: none;">
-                    <div class="input-group" 
-                        style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
+                    <div class="input-group" style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail de Trabalho</label><input type="email" id="reg-email" required placeholder="seu@email.com"></div>
+  
                     <div class="input-group" style="margin-bottom: 1.2rem;">
                         <label>Perfil Operacional</label>
-                
                         <select id="reg-role" onchange="app.handleRoleChange(this.value)">
                             <option value="Corretor">Corretor de Imóveis (Autônomo)</option>
                             <option value="Consultor">Consultor Corporativo</option>
-                            
                             <option value="Imobiliária">Imobiliária / Pessoa Jurídica</option>
                             <option value="Proprietário">Proprietário Direto</option>
                             <option value="Admin">Administrador Master</option>
                         </select>
-            
                     </div>
-                    <div class="input-group" id="group-creci-field" style="margin-bottom: 1.2rem;
-                    display: none;"><label>Inscrição de Regulação (CRECI)</label><input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 0000"></div>
+                    <div class="input-group" id="group-creci-field" style="margin-bottom: 1.2rem; display: none;"><label>Inscrição de Regulação (CRECI)</label><input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 0000"></div>
                     <div class="input-group" style="margin-bottom: 2rem;"><label>Senha Segura</label><input type="password" id="reg-password" required placeholder="Mínimo 6 caracteres"></div>
-                    <button type="submit" class="btn-action" style="width: 100%;
-                    background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%);">Finalizar Cadastro</button>
+                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%);">Finalizar Cadastro</button>
                 </form>
             </div>
         </section>
@@ -318,78 +214,53 @@
         <section id="sec-dashboard" class="view-section">
             <div class="dash-layout">
                 <aside class="dash-sidebar">
-                  
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <div style="font-weight: 800;
-                        font-size: 1.1rem;" id="dash-user-title">Carregando...</div>
-                        <div style="font-size: 0.75rem;
-                        color: var(--text-muted);" id="dash-user-subtitle">Acesso Autorizado</div>
+                        <div style="font-weight: 800; font-size: 1.1rem;" id="dash-user-title">Carregando...</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);" id="dash-user-subtitle">Acesso Autorizado</div>
                     </div>
                     <div class="dash-menu-item active" id="menu-sub-portfolio" onclick="app.switchDashTab('portfolio')">Meu Portfólio</div>
                     <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Convertidos</div>
                     <div class="dash-menu-item" id="menu-sub-system" onclick="app.switchDashTab('system')">Configurações & API</div>
-   
                 </aside>
                 <main class="main-dash-content">
                     <div id="dash-tab-portfolio" class="tab-dash-view">
-                        <div style="display: flex;
-                        justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
                             <h2>Gerenciamento de Imóveis</h2>
                             <button class="btn-action" style="background: var(--google-green);" onclick="app.openNewPropertyModal()">+ Novo Imóvel</button>
                         </div>
-   
                         <table id="table-portfolio">
                             <thead><tr><th>Imóvel</th><th>Tipo</th><th>Localização</th><th>Preço Face</th><th>Ações</th></tr></thead>
                             <tbody id="portfolio-table-rows"></tbody>
-                    
                         </table>
                     </div>
                     <div id="dash-tab-leads" class="tab-dash-view" style="display: none;">
                         <h2>Leads Capturados</h2>
-                        
                         <p style="color: var(--text-muted); font-size: 0.9rem;">Controle de tráfego orgânico e conversões de alta intenção.</p>
                         <table>
                             <thead><tr><th>Nome do Lead</th><th>WhatsApp / Telefone</th><th>Imóvel Alvo</th><th>Origem Canal</th><th>Data Captura</th></tr></thead>
-                            <tbody 
-                            id="leads-table-rows"></tbody>
+                            <tbody id="leads-table-rows"></tbody>
                         </table>
                     </div>
                     <div id="dash-tab-system" class="tab-dash-view" style="display: none;">
                         <h2>Infraestrutura Jurídica e Comercial</h2>
-     
-                        <div style="margin-top: 1.5rem;
-                        background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
+                        <div style="margin-top: 1.5rem; background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
                             <h4 style="margin-bottom: 0.5rem;">Status de Faturamento da Conta</h4>
-                            <div style="display: flex;
-                            align-items: center; gap: 12px; margin-bottom: 1rem;"><span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span></div>
-                            <div style="display: flex;
-                            flex-wrap: wrap; gap: 10px;">
-                                <button class="btn-action" style="background: var(--tesla-red);
-                                box-shadow: none; font-size: 0.85rem;" onclick="app.simulateBillingExpiration()">Não Fique Inadimplência</button>
-                                <button class="btn-action" style="background: var(--google-green);
-                                box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Pagamento PIX</button>
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;"><span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span></div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                <button class="btn-action" style="background: var(--tesla-red); box-shadow: none; font-size: 0.85rem;" onclick="app.simulateBillingExpiration()">Forçar Inadimplência (Teste)</button>
+                                <button class="btn-action" style="background: var(--google-green); box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Comprar Pacote PIX</button>
                             </div>
                         </div>
-                        <div id="admin-master-panel" style="display: none;
-                        margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
-                            <h3 style="color: var(--google-blue);
-                            margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
-                            <div style="display: grid;
-                            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
-                                <div style="background: var(--bg-input);
-                                padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-users">0</h3><span style="font-size: 0.8rem;
-                                color: var(--text-muted);">Usuários Cadastrados</span></div>
-                                <div style="background: var(--bg-input);
-                                padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-props">0</h3><span style="font-size: 0.8rem;
-                                color: var(--text-muted);">Imóveis Publicados</span></div>
-                                <div style="background: var(--bg-input);
-                                padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3><span style="font-size: 0.8rem;
-                                color: var(--text-muted);">Leads na Rede</span></div>
+                        <div id="admin-master-panel" style="display: none; margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
+                            <h3 style="color: var(--google-blue); margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
+                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-users">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span></div>
+                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-props">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span></div>
+                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Leads na Rede</span></div>
                             </div>
                         </div>
                     </div>
                 </main>
-         
             </div>
         </section>
     </div>
@@ -398,159 +269,125 @@
         <div class="modal-window" style="max-width: 420px; text-align: center;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Renove seu acesso por mais <strong>30 dias</strong> e reative seus imóveis na vitrine pública. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 9,99</strong></p>
             
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=34259998854" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
+                <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
+                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
             </div>
             
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima. A baixa é sistêmica.</p>
-            <button class="btn-action" style="width: 100%; background: var(--google-blue);" onclick="app.processPixPayment()">Pagar Imobi</button>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
+            
+            <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
+            <button class="btn-action" style="width: 100%; background: var(--google-green);" onclick="app.processPixPayment()">Simular Pagamento Confirmado (Baixa Sistêmica)</button>
         </div>
     </div>
+
     <div class="modal-blur" id="modal-property-detail">
         <div class="modal-window">
-            <button style="position: absolute;
-            top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer;
-            color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
             <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
-            <div id="md-location" style="color: var(--text-muted);
-            font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
+            <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
             
-            <div id="md-agio-details" style="display: none;
-            background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px;
-            margin-bottom: 1.5rem;">
-                <h4 style="color: var(--premium-gold);
-                margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
-                <div style="display: grid;
-                grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
+            <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
                     <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
                     <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
                     <div><strong>Parcela Mensal:</strong> <span id="md-agio-installment"></span></div>
                     <div><strong>Banco Credor:</strong> <span id="md-agio-bank"></span></div>
-  
                </div>
             </div>
 
-            <h3 id="md-price" style="color: var(--google-blue);
-            font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
-            <p id="md-description" style="line-height: 1.6;
-            margin-bottom: 1.5rem;">Descrição completa.</p>
+            <h3 id="md-price" style="color: var(--google-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
+            <p id="md-description" style="line-height: 1.6; margin-bottom: 1.5rem;">Descrição completa.</p>
             
             <h4>▶ Tour Virtual Integrado</h4>
             <div class="video-box-container" id="md-video-container"></div>
 
-            <div style="display: grid;
-            grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
                 <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista</button>
-                <button class="btn-action" style="background: var(--bg-input);
-                color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
+                <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
             </div>
-            <div style="margin-top: 0.8rem;
-            font-size: 0.75rem; color: var(--text-muted); text-align: center; word-break: break-all;" id="md-share-url"></div>
+            <div style="margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; word-break: break-all;" id="md-share-url"></div>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-gate-capture">
         <div class="modal-window" style="max-width: 460px;">
-            <h3 style="margin-bottom: 1rem;
-            color: var(--google-blue);">Desbloquear Atendimento</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;
-            margin-bottom: 1.5rem;">Insira seus dados para aceder imediatamente ao memorial e visita virtual.</p>
+            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Desbloquear Atendimento</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados para aceder imediatamente ao memorial e visita virtual.</p>
             <form id="form-lead-capture" onsubmit="app.actionCaptureLead(event)">
                 <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Digite seu nome"></div>
                 <div class="input-group" style="margin-bottom: 2rem;"><label>WhatsApp / Telefone</label><input type="tel" id="lead-phone" required placeholder="(61) 99999-9999"></div>
-                <button type="submit" class="btn-action" style="width: 100%;
-                background: var(--text-main);">Liberar Conteúdo Exclusivo</button>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Liberar Conteúdo Exclusivo</button>
             </form>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-property-form">
         <div class="modal-window" style="max-width: 800px;">
-            <button style="position: absolute;
-            top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer;
-            color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
             <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Cadastrar Novo Imóvel</h2>
             
             <form id="form-actual-property" onsubmit="app.actionSaveProperty(event)">
                 <input type="hidden" id="p-id">
-                <div style="display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
                     <div class="input-group"><label>Título Comercial</label><input type="text" id="p-title" required placeholder="Ex: Lote Premium"></div>
                     <div class="input-group">
                         <label>Modalidade</label>
-                    
                         <select id="p-type" required onchange="app.togglePropertyAgioForm(this.value)">
                             <option value="Venda">Venda Directa</option>
                             <option value="Ágio">Negociação de Ágio</option>
                             <option value="Aluguel">Locação Residencial</option>
-  
                         </select>
                     </div>
                 </div>
-                <div style="display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
                     <div class="input-group"><label>Preço Face (R$)</label><input type="number" id="p-price" required placeholder="Valor"></div>
                     <div class="input-group"><label>Localização</label><input type="text" id="p-location" required placeholder="Cidade - UF"></div>
                 </div>
 
-                <div id="p-agio-panel" style="display: none;
-                background: rgba(128,128,128,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.2rem;">
-                    <h4 style="margin-bottom: 1rem;
-                    color: var(--premium-gold);">Parâmetros Específicos do Ágio</h4>
-                    <div style="display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                <div id="p-agio-panel" style="display: none; background: rgba(128,128,128,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.2rem;">
+                    <h4 style="margin-bottom: 1rem; color: var(--premium-gold);">Parâmetros Específicos do Ágio</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
                         <div class="input-group"><label>Valor Pago (R$)</label><input type="number" id="p-agio-paid" placeholder="Valor"></div>
                         <div class="input-group"><label>Saldo Restante (R$)</label><input type="number" id="p-agio-remaining" placeholder="Valor"></div>
                         <div class="input-group"><label>Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Valor"></div>
-      
                         <div class="input-group"><label>Banco / Agência</label><input type="text" id="p-agio-bank" placeholder="Instituição"></div>
                     </div>
                 </div>
 
-                <div style="display: grid;
-                grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
                     <div class="input-group">
                         <label>Fotos (Links separados por vírgula. Suporta Drive/Cloudflare/Youtube)</label>
-                        <div style="display: flex;
-                        gap: 8px;">
+                        <div style="display: flex; gap: 8px;">
                             <input type="text" id="p-image" placeholder="Cole os links aqui" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface);
-                            color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none;">Nuvem</button>
-                            <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface);
-                            color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
+                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none;">Nuvem</button>
+                            <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
                             <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
                         </div>
                     </div>
-             
                     <div class="input-group">
                         <label>Vídeo Tour (Link Youtube/Drive/Cloudflare)</label>
-                        <div style="display: flex;
-                        gap: 8px;">
+                        <div style="display: flex; gap: 8px;">
                             <input type="url" id="p-video" placeholder="Link do Vídeo" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="document.getElementById('p-video-file').click()" style="background: var(--bg-surface);
-                            color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
+                            <button type="button" class="btn-action" onclick="document.getElementById('p-video-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
                             <input type="file" id="p-video-file" accept="video/*" style="display: none;" onchange="app.handleLocalVideo(this)">
                         </div>
                     </div>
-              
                 </div>
 
                 <div class="input-group" style="margin-bottom: 2rem;"><label>Memorial / Observações</label><textarea id="p-description" rows="4" placeholder="Detalhes..."></textarea></div>
-                <button type="submit" class="btn-action" style="width: 100%;
-                background: var(--google-blue);">Salvar Anúncio</button>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-blue);">Salvar Anúncio</button>
             </form>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-drive-picker">
         <div class="modal-window" style="max-width: 500px;">
-            <button style="position: absolute;
-            top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer;
-            color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
-            <h3 style="color: var(--google-blue);
-            margin-bottom: 0.5rem;">📂 Partner Cloud Workspace</h3>
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
+            <h3 style="color: var(--google-blue); margin-bottom: 0.5rem;">📂 Partner Cloud Workspace</h3>
             <div id="drive-files-container"></div>
         </div>
     </div>
@@ -562,11 +399,16 @@
             constructor() {
                 this.carouselIndices = {};
 
-                // =========================================================================
-                // CONFIGURAÇÃO FIREBASE (SINCRONIZAÇÃO GLOBAL PC <-> SMARTPHONE)
-                // Para ativar o sincronismo real-time, coloque aqui os dados do seu Firebase.
-                // Enquanto estiver vazio (""), o código continua a usar a memória local perfeitamente.
-                // =========================================================================
+                // --- CONFIGURAÇÃO PIX E KPI (Controle de Entregas) ---
+                this.CONFIG_PIX = {
+                    pix: "34259998854",
+                    beneficiario: "CRISTIAN R FLORENCIO",
+                    cidade: "BRASILIA",
+                    valorRenovacao: 9.99,
+                    limiteEntregas: 10
+                };
+
+                // CONFIGURAÇÃO FIREBASE
                 const firebaseConfig = {
                     apiKey: "", 
                     authDomain: "",
@@ -579,8 +421,7 @@
                 this.useCloud = false;
                 
                 if (firebaseConfig.apiKey !== "") {
-                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig);
-                    }
+                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
                     this.db = firebase.database();
                     this.useCloud = true;
                 }
@@ -594,6 +435,25 @@
                 this.init();
             }
 
+            // Geração PIX (Padrão EMV)
+            gerarPixMestre(v) {
+                const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
+                const valStr = parseFloat(v).toFixed(2);
+                const payloadConta = f('00', 'br.gov.bcb.pix') + f('01', this.CONFIG_PIX.pix);
+                let payload = "000201" + f('26', payloadConta) + "52040000" + "5303986" + 
+                              f('54', valStr) + "5802BR" + f('59', this.CONFIG_PIX.beneficiario.substring(0, 25)) + 
+                              f('60', this.CONFIG_PIX.cidade.substring(0, 15)) + "62070503***" + "6304";
+                let crc = 0xFFFF;
+                for (let i = 0; i < payload.length; i++) {
+                    crc ^= payload.charCodeAt(i) << 8;
+                    for (let j = 0; j < 8; j++) {
+                        if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
+                        else crc <<= 1;
+                    }
+                }
+                return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+            }
+
             init() {
                 this.applySavedTheme();
                 this.catchUrlDeepLink();
@@ -603,14 +463,13 @@
                 if (this.useCloud) {
                     this.db.ref('iamobi_data').on('value', (snapshot) => {
                         const data = snapshot.val() || {};
-                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin" }];
+                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
                         this.properties = data.properties || [];
                         this.leads = data.leads || [];
                         this.refreshAllScreens();
                     });
                 } else {
-                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) ||
-                    [{ name: "Cristian", email: "admin@partner.com", password: "123", role: "Admin" }];
+                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian", email: "admin@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
                     this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
                     this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
                     this.refreshAllScreens();
@@ -639,23 +498,14 @@
             parseExternalLink(url, type = 'image') {
                 if (!url) return '';
                 url = url.trim();
-                
                 if (url.includes('drive.google.com')) {
-                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) ||
-                    url.match(/id=([a-zA-Z0-9_-]+)/);
-                    if (match && match[1]) {
-                        return type === 'image' 
-                            ?
-                            `https://docs.google.com/uc?export=view&id=${match[1]}` 
-                            : `https://drive.google.com/file/d/${match[1]}/preview`;
-                    }
+                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+                    if (match && match[1]) { return type === 'image' ? `https://docs.google.com/uc?export=view&id=${match[1]}` : `https://drive.google.com/file/d/${match[1]}/preview`; }
                 }
-                
                 if (type === 'video') {
                     if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
                     if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
                 }
-                
                 return url;
             }
 
@@ -668,25 +518,18 @@
                 if (total <= 1) return;
                 if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
                 this.carouselIndices[id] = (this.carouselIndices[id] + direction + total) % total;
-                document.querySelectorAll(`.carousel-slider-${id}`).forEach(slider => {
-                    slider.style.transform = `translateX(-${this.carouselIndices[id] * 100}%)`;
-                });
+                document.querySelectorAll(`.carousel-slider-${id}`).forEach(slider => { slider.style.transform = `translateX(-${this.carouselIndices[id] * 100}%)`; });
             }
 
             initAutoCarousel() {
                 setInterval(() => {
                     this.properties.forEach(p => {
                         const images = this.getImagesArray(p.image);
-                    
-                    if (images.length > 1) this.moveCarousel(p.id, 1, images.length);
+                        if (images.length > 1) this.moveCarousel(p.id, 1, images.length);
                     });
                 }, 5000);
             }
 
-            // ==========================================
-            // COMPRESSOR DE IMAGENS YAMPI-STYLE (CANVAS)
-            // Impede estouro de memória no localStorage
-            // ==========================================
             handleLocalImages(input) {
                 if (!input.files || input.files.length === 0) return;
                 const files = Array.from(input.files).slice(0, 12);
@@ -696,13 +539,10 @@
                         const img = new Image();
                         img.onload = () => {
                             const canvas = document.createElement('canvas');
-                            const MAX_WIDTH = 800; // Resolução otimizada para web
+                            const MAX_WIDTH = 800; 
                             const scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
-                            canvas.width = img.width * scaleSize;
-                            canvas.height = img.height * scaleSize;
-                            const ctx = canvas.getContext('2d');
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            // Comprime para JPG 80% qualidade
+                            canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
+                            const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                             resolve(canvas.toDataURL('image/jpeg', 0.8));
                         };
                         img.src = e.target.result;
@@ -730,47 +570,34 @@
                 const grid = document.getElementById('public-properties-grid');
                 if(!grid) return; grid.innerHTML = '';
                 
-                // REGRA DE OURO DA ASSINATURA:
-                // Puxa e-mails válidos (Quem é Admin OU quem tem expiração no futuro)
-                const validEmails = this.users.filter(u => u.role === 'Admin' || (u.expiresAt && u.expiresAt > Date.now())).map(u => u.email);
-
+                // REGRA DA ASSINATURA: Puxa Admin ou quem não tem bloqueio
+                const validEmails = this.users.filter(u => u.role === 'Admin' || !u.isBlocked).map(u => u.email);
                 const data = (filteredData || this.properties).filter(p => validEmails.includes(p.author));
 
-                if (data.length === 0) {
-                    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem;">Nenhum imóvel encontrado no momento.</div>`;
-                    return;
-                }
+                if (data.length === 0) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem;">Nenhum imóvel encontrado no momento.</div>`; return; }
 
                 data.forEach(p => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
+                    const card = document.createElement('div'); card.className = 'card';
                     const images = this.getImagesArray(p.image);
-             
                     const activeIdx = this.carouselIndices[p.id] || 0;
                     const videoHtml = p.video ? `<div class="video-indicator" onclick="event.stopPropagation(); app.gateCheckProperty('${p.id}')"><span>▶ TOUR VÍDEO</span></div>` : '';
                     let agioHtml = p.type === 'Ágio' ? `<div style="margin-top:0.5rem;padding:0.6rem;background:rgba(26,115,232,0.04);border-radius:6px;font-size:0.8rem;">🪙 <b>Ágio:</b> R$ ${(p.agioPaid||0).toLocaleString('pt-BR')}<br>📉 <b>Saldo:</b> R$ ${(p.agioRemaining||0).toLocaleString('pt-BR')}</div>` : '';
 
-                    
                     card.innerHTML = `
                         <span class="card-badge">${p.type}</span>
                         <div class="card-media-mock" style="position:relative;background:#e2e8f0;">
                             <div class="carousel-slider-${p.id}" style="width:100%;height:100%;display:flex;transition:transform 0.4s ease-out;transform:translateX(-${activeIdx*100}%);">
-               
                                  ${images.map(img => `<img src="${img}" style="width:100%;height:100%;object-fit:cover;flex-shrink:0;">`).join('')}
                             </div>
-                            ${images.length>1 ?
-                            `<button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', -1, ${images.length})" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10094;</button><button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', 1, ${images.length})" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10095;</button>` : ''}
+                            ${images.length>1 ? `<button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', -1, ${images.length})" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10094;</button><button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', 1, ${images.length})" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10095;</button>` : ''}
                             ${videoHtml}
                         </div>
                         <div class="card-body">
-           
                             <h3 style="font-size:1.25rem;margin-bottom:0.5rem;">${p.title}</h3>
                             <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">📍 ${p.location}</p>
                             ${agioHtml}
-                        
                             <div class="card-price">R$ ${Number(p.price).toLocaleString('pt-BR')}</div>
-                            <button class="btn-action" style="width:100%;margin-top:auto;background:var(--text-main);"
-                            onclick="app.gateCheckProperty('${p.id}')">Analisar Memorial</button>
+                            <button class="btn-action" style="width:100%;margin-top:auto;background:var(--text-main);" onclick="app.gateCheckProperty('${p.id}')">Analisar Memorial</button>
                         </div>
                     `;
                     grid.appendChild(card);
@@ -779,6 +606,17 @@
 
             actionSaveProperty(e) {
                 e.preventDefault();
+
+                // LÓGICA DE CONTROLE DE ENTREGAS (KPI)
+                if (this.currentUser && this.currentUser.role !== 'Admin') {
+                    this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
+                    if (this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas) {
+                        this.closeModal('modal-property-form');
+                        this.resetBilling();
+                        return; // Impede o salvamento se o pacote acabou
+                    }
+                }
+
                 const id = document.getElementById('p-id').value;
                 const title = document.getElementById('p-title').value;
                 const type = document.getElementById('p-type').value;
@@ -788,40 +626,39 @@
                 const video = document.getElementById('p-video').value;
                 const description = document.getElementById('p-description').value;
 
-                let pObj = { id: id ||
-                String(Date.now()), title, type, price, location, image, video, description, author: id ? this.properties.find(x=>x.id===id).author : this.currentUser.email };
-                if (type === 'Ágio') { pObj.agioPaid = Number(document.getElementById('p-agio-paid').value||0); pObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value||0); pObj.agioInstallment = Number(document.getElementById('p-agio-installment').value||0); pObj.agioBank = document.getElementById('p-agio-bank').value;
-                }
+                let pObj = { id: id || String(Date.now()), title, type, price, location, image, video, description, author: id ? this.properties.find(x=>x.id===id).author : this.currentUser.email };
+                
+                if (type === 'Ágio') { pObj.agioPaid = Number(document.getElementById('p-agio-paid').value||0); pObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value||0); pObj.agioInstallment = Number(document.getElementById('p-agio-installment').value||0); pObj.agioBank = document.getElementById('p-agio-bank').value; }
 
                 if (id) { this.properties[this.properties.findIndex(x=>x.id===id)] = pObj;
-                } else { this.properties.push(pObj); }
+                } else { 
+                    this.properties.push(pObj); 
+                    // Incrementa KPI de uso após salvar novo imóvel
+                    if(this.currentUser.role !== 'Admin') this.currentUser.entregasRealizadas++;
+                }
+
+                // Atualiza o estado global no array de usuários
+                const index = this.users.findIndex(u => u.email === this.currentUser.email);
+                if(index !== -1) { this.users[index].entregasRealizadas = this.currentUser.entregasRealizadas; }
+
                 this.saveState();
-                this.closeModal('modal-property-form'); this.refreshAllScreens(); alert("Imóvel publicado em todos os servidores!");
+                this.closeModal('modal-property-form'); this.refreshAllScreens(); 
+                alert("Imóvel publicado em todos os servidores!");
             }
 
-            applySavedTheme() { document.documentElement.setAttribute('data-theme', localStorage.getItem('iamobi_theme') || 'light');
-            }
-            toggleTheme() { const nT = document.documentElement.getAttribute('data-theme') === 'dark' ?
-            'light' : 'dark'; document.documentElement.setAttribute('data-theme', nT); localStorage.setItem('iamobi_theme', nT); }
-            navigate(view) { document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`sec-${view}`).classList.add('active-view'); const btn = document.getElementById(`menu-btn-${view}`); if(btn) btn.classList.add('active'); if(view === 'dashboard' && !this.currentUser) return this.navigate('auth');
-            window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            catchUrlDeepLink() { if(window.location.hash.startsWith('#view-prop-')) setTimeout(() => this.gateCheckProperty(window.location.hash.replace('#view-prop-', '')), 300);
-            }
-            executeSearch() { const t=document.getElementById('search-type').value, l=document.getElementById('search-location').value.toLowerCase(), p=document.getElementById('search-price').value;
-            this.renderPublicGrid(this.properties.filter(x => (t===""||x.type===t) && (l===""||x.location.toLowerCase().includes(l)) && (p===""||Number(x.price)<=Number(p)))); }
-            clearSearchFilters() { document.getElementById('search-type').value="";
-            document.getElementById('search-location').value=""; document.getElementById('search-price').value=""; this.renderPublicGrid(); }
+            applySavedTheme() { document.documentElement.setAttribute('data-theme', localStorage.getItem('iamobi_theme') || 'light'); }
+            toggleTheme() { const nT = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', nT); localStorage.setItem('iamobi_theme', nT); }
+            navigate(view) { document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view')); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`sec-${view}`).classList.add('active-view'); const btn = document.getElementById(`menu-btn-${view}`); if(btn) btn.classList.add('active'); if(view === 'dashboard' && !this.currentUser) return this.navigate('auth'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            catchUrlDeepLink() { if(window.location.hash.startsWith('#view-prop-')) setTimeout(() => this.gateCheckProperty(window.location.hash.replace('#view-prop-', '')), 300); }
+            executeSearch() { const t=document.getElementById('search-type').value, l=document.getElementById('search-location').value.toLowerCase(), p=document.getElementById('search-price').value; this.renderPublicGrid(this.properties.filter(x => (t===""||x.type===t) && (l===""||x.location.toLowerCase().includes(l)) && (p===""||Number(x.price)<=Number(p)))); }
+            clearSearchFilters() { document.getElementById('search-type').value=""; document.getElementById('search-location').value=""; document.getElementById('search-price').value=""; this.renderPublicGrid(); }
 
             gateCheckProperty(id) {
                 const prop = this.properties.find(p => p.id === id);
                 if (!prop) return;
                 
-                // Puxa se o dono deste imóvel tem permissão de ser visto
                 const dono = this.users.find(u => u.email === prop.author);
-                if (dono && dono.role !== 'Admin' && dono.expiresAt && dono.expiresAt < Date.now()) {
-                    return alert("Acesso indisponível no momento.");
-                }
+                if (dono && dono.role !== 'Admin' && dono.isBlocked) { return alert("Acesso indisponível no momento."); }
 
                 this.selectedPropertyForLead = prop;
                 if(this.currentUser) this.openPropertyDetailModal(prop); else this.openModal('modal-gate-capture');
@@ -837,54 +674,66 @@
                 document.getElementById('md-title').innerText = prop.title;
                 document.getElementById('md-location').innerText = `📍 ${prop.location}`; document.getElementById('md-price').innerText = `R$ ${Number(prop.price).toLocaleString('pt-BR')}`; document.getElementById('md-description').innerText = prop.description || "Sem memorial.";
                 const agioPanel = document.getElementById('md-agio-details');
-                if (prop.type === 'Ágio') { agioPanel.style.display = 'block'; document.getElementById('md-agio-paid').innerText = `R$ ${Number(prop.agioPaid||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-remaining').innerText = `R$ ${Number(prop.agioRemaining||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-installment').innerText = `R$ ${Number(prop.agioInstallment||0).toLocaleString('pt-BR')}`;
-                document.getElementById('md-agio-bank').innerText = prop.agioBank || "Não informado"; } else { agioPanel.style.display = 'none';
-                }
+                if (prop.type === 'Ágio') { agioPanel.style.display = 'block'; document.getElementById('md-agio-paid').innerText = `R$ ${Number(prop.agioPaid||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-remaining').innerText = `R$ ${Number(prop.agioRemaining||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-installment').innerText = `R$ ${Number(prop.agioInstallment||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-bank').innerText = prop.agioBank || "Não informado"; } else { agioPanel.style.display = 'none'; }
                 
                 const vc = document.getElementById('md-video-container');
                 if (prop.video) {
                     const parsedVideo = this.parseExternalLink(prop.video, 'video');
                     if (parsedVideo.startsWith('data:video/')) { vc.innerHTML = `<video src="${parsedVideo}" controls style="width:100%;height:100%;object-fit:contain;"></video>`; } 
-                    else { vc.innerHTML = `<iframe width="100%" height="100%" src="${parsedVideo}" frameborder="0" allowfullscreen style="border:none;"></iframe>`;
-                    }
-                } else { vc.innerHTML = `<div style="color:var(--text-muted);padding:2rem;">📷 Mídia Convencional</div>`;
-                }
+                    else { vc.innerHTML = `<iframe width="100%" height="100%" src="${parsedVideo}" frameborder="0" allowfullscreen style="border:none;"></iframe>`; }
+                } else { vc.innerHTML = `<div style="color:var(--text-muted);padding:2rem;">📷 Mídia Convencional</div>`; }
                 
                 document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
                 this.openModal('modal-property-detail');
             }
 
-            copyConversionLink() { navigator.clipboard.writeText(document.getElementById('md-share-url').innerText); alert('Link copiado!');
-            }
+            copyConversionLink() { navigator.clipboard.writeText(document.getElementById('md-share-url').innerText); alert('Link copiado!'); }
             
             // ==========================================
-            // LOGICA FINANCEIRA DE ASSINATURAS (30 DIAS)
+            // LOGICA FINANCEIRA PIX E CONTROLE DE KPI
             // ==========================================
             simulateBillingExpiration() { 
                 if(this.currentUser) { 
-                    this.currentUser.expiresAt = Date.now() - 1000; // Força vencimento agora
-                    this.saveState(); 
+                    this.currentUser.entregasRealizadas = this.CONFIG_PIX.limiteEntregas; // Força limite atingido
+                    this.saveState();
                     this.checkBillingStatusUI(); 
-                    this.refreshAllScreens(); // Atualiza a vitrine para esconder os imóveis
+                    this.refreshAllScreens(); 
                 }
             }
             
-            resetBilling() { this.openModal('modal-pix-payment'); }
+            resetBilling() { 
+                const copiaEColaPix = this.gerarPixMestre(this.CONFIG_PIX.valorRenovacao);
+                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(copiaEColaPix)}`;
+                
+                document.getElementById('pix-qr-img').src = qrCodeUrl;
+                document.getElementById('pix-payload-container').innerText = copiaEColaPix;
+                document.getElementById('pix-payload-container').style.display = 'block';
+                
+                document.getElementById('pix-copy-btn').onclick = () => {
+                    navigator.clipboard.writeText(copiaEColaPix).then(() => alert('Linha PIX copiada! Cole no app do banco.'));
+                };
+
+                this.openModal('modal-pix-payment');
+            }
             
             processPixPayment() {
                 if(!this.currentUser) return;
-                this.currentUser.expiresAt = Date.now() + (30 * 24 * 60 * 60 * 1000); // Adiciona + 30 dias na data de hoje
+
+                // Zera as entregas realizadas (Renova o pacote)
+                this.currentUser.entregasRealizadas = 0;
+                this.currentUser.isBlocked = false;
                 
                 const index = this.users.findIndex(u => u.email === this.currentUser.email);
                 if(index !== -1) {
-                    this.users[index].expiresAt = this.currentUser.expiresAt;
+                    this.users[index].entregasRealizadas = 0;
+                    this.users[index].isBlocked = false;
                 }
                 
-                this.saveState(); 
+                this.saveState();
                 this.checkBillingStatusUI(); 
                 this.closeModal('modal-pix-payment'); 
-                this.refreshAllScreens(); // Atualiza a vitrine para mostrar os imóveis novamente
-                alert("Pagamento PIX confirmado e baixado com sucesso! Vitrine pública desbloqueada por mais 30 dias.");
+                this.refreshAllScreens(); 
+                alert("Pagamento PIX confirmado e baixado com sucesso! Saldo de entregas renovado.");
             }
 
             checkBillingStatusUI() {
@@ -894,38 +743,30 @@
                 if (!this.currentUser) return;
                 
                 if (this.currentUser.role === 'Admin') {
-                    this.billingInvoiceExpired = false;
                     if(label) label.innerHTML = `<span style="color:var(--google-blue);">Conta Admin (Livre)</span>`;
                     if(banner) banner.style.display = 'none';
                     return;
                 }
 
-                // Se o usuário não tem a variável de vencimento (cadastro antigo), ganha 30 dias agora.
-                if (!this.currentUser.expiresAt) {
-                    this.currentUser.expiresAt = Date.now() + (30 * 24 * 60 * 60 * 1000);
-                    this.saveState();
-                }
-
-                // Checa se o dia de hoje ultrapassou a data de expiração
-                this.billingInvoiceExpired = Date.now() > this.currentUser.expiresAt;
-
-                if (this.billingInvoiceExpired) { 
-                    if(label) label.innerHTML = `<span style="color:var(--tesla-red);">Bloqueado - Pagar PIX</span>`; 
+                this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
+                const pacoteEsgotado = this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas;
+                
+                if (pacoteEsgotado) { 
+                    this.currentUser.isBlocked = true;
+                    if(label) label.innerHTML = `<span style="color:var(--tesla-red);">Bloqueado - Pacote de Entregas Esgotado</span>`;
                     if(banner) { 
-                        banner.style.display = 'flex'; 
-                        banner.querySelector('button').onclick = () => this.openModal('modal-pix-payment'); 
+                        banner.style.display = 'flex';
                     }
                 } else { 
-                    const diasSobra = Math.ceil((this.currentUser.expiresAt - Date.now()) / (1000 * 60 * 60 * 24));
-                    if(label) label.innerHTML = `<span style="color:var(--google-green);">Ativo (${diasSobra} dias restantes)</span>`;
-                    if(banner) banner.style.display = 'none'; 
+                    this.currentUser.isBlocked = false;
+                    const cotaRestante = this.CONFIG_PIX.limiteEntregas - this.currentUser.entregasRealizadas;
+                    if(label) label.innerHTML = `<span style="color:var(--google-green);">Ativo (${cotaRestante} anúncios disponíveis)</span>`;
+                    if(banner) banner.style.display = 'none';
                 }
             }
 
-            switchAuthMode(m) { document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
-            if(m==='login'){document.getElementById('tab-auth-login').classList.add('active');document.getElementById('form-login').style.display='block';document.getElementById('form-register').style.display='none';}else{document.getElementById('tab-auth-register').classList.add('active');document.getElementById('form-login').style.display='none';document.getElementById('form-register').style.display='block';} }
-            handleRoleChange(r) { const c=document.getElementById('group-creci-field');
-            if(c) c.style.display = (r==='Corretor'||r==='Imobiliária') ? 'flex' : 'none'; }
+            switchAuthMode(m) { document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); if(m==='login'){document.getElementById('tab-auth-login').classList.add('active');document.getElementById('form-login').style.display='block';document.getElementById('form-register').style.display='none';}else{document.getElementById('tab-auth-register').classList.add('active');document.getElementById('form-login').style.display='none';document.getElementById('form-register').style.display='block';} }
+            handleRoleChange(r) { const c=document.getElementById('group-creci-field'); if(c) c.style.display = (r==='Corretor'||r==='Imobiliária') ? 'flex' : 'none'; }
             
             actionRegister(e) { 
                 e.preventDefault();
@@ -938,28 +779,17 @@
                     role: document.getElementById('reg-role').value, 
                     creci: document.getElementById('reg-creci').value, 
                     password: document.getElementById('reg-password').value,
-                    expiresAt: Date.now() + (30 * 24 * 60 * 60 * 1000) // Concede +30 dias grátis automático
+                    entregasRealizadas: 0,
+                    isBlocked: false
                 };
-                this.users.push(u); 
-                this.currentUser=u; 
-                this.saveState(); 
-                this.refreshAllScreens(); 
-                this.navigate('dashboard'); 
+                this.users.push(u); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); 
             }
             
-            actionLogin(e) { e.preventDefault();
-            const u = this.users.find(u=>u.email===document.getElementById('login-email').value && u.password===document.getElementById('login-password').value); if(!u) return alert('Credenciais inválidas.'); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard');
-            }
-            actionLogout() { this.currentUser=null; this.saveState(); this.refreshAllScreens(); this.navigate('landing');
-            }
-            updateAuthHeader() { const ba=document.getElementById('menu-btn-auth'), md=document.getElementById('menu-btn-dash'), pa=document.getElementById('menu-user-profile'), un=document.getElementById('header-user-name');
-            if(this.currentUser) { if(ba) ba.style.display='none'; if(md) md.style.display='block'; if(pa) pa.style.display='flex'; if(un) un.innerText=this.currentUser.name; } else { if(ba) ba.style.display='block'; if(md) md.style.display='none'; if(pa) pa.style.display='none';
-            } }
-            renderDashboard() { document.getElementById('dash-user-title').innerText=this.currentUser.name; document.getElementById('dash-user-subtitle').innerText=`Perfil: ${this.currentUser.role}`; const mp=document.getElementById('admin-master-panel');
-            if(this.currentUser.role==='Admin'){ if(mp)mp.style.display='block'; document.getElementById('admin-stat-users').innerText=this.users.length; document.getElementById('admin-stat-props').innerText=this.properties.length; document.getElementById('admin-stat-leads').innerText=this.leads.length; }else{ if(mp)mp.style.display='none'; } this.renderPortfolioGrid(); this.renderLeadsTable();
-            }
-            switchDashTab(t) { document.querySelectorAll('.tab-dash-view').forEach(v=>v.style.display='none'); document.querySelectorAll('.dash-menu-item').forEach(m=>m.classList.remove('active')); document.getElementById(`dash-tab-${t}`).style.display='block'; document.getElementById(`menu-sub-${t}`).classList.add('active');
-            }
+            actionLogin(e) { e.preventDefault(); const u = this.users.find(u=>u.email===document.getElementById('login-email').value && u.password===document.getElementById('login-password').value); if(!u) return alert('Credenciais inválidas.'); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); }
+            actionLogout() { this.currentUser=null; this.saveState(); this.refreshAllScreens(); this.navigate('landing'); }
+            updateAuthHeader() { const ba=document.getElementById('menu-btn-auth'), md=document.getElementById('menu-btn-dash'), pa=document.getElementById('menu-user-profile'), un=document.getElementById('header-user-name'); if(this.currentUser) { if(ba) ba.style.display='none'; if(md) md.style.display='block'; if(pa) pa.style.display='flex'; if(un) un.innerText=this.currentUser.name; } else { if(ba) ba.style.display='block'; if(md) md.style.display='none'; if(pa) pa.style.display='none'; } }
+            renderDashboard() { document.getElementById('dash-user-title').innerText=this.currentUser.name; document.getElementById('dash-user-subtitle').innerText=`Perfil: ${this.currentUser.role}`; const mp=document.getElementById('admin-master-panel'); if(this.currentUser.role==='Admin'){ if(mp)mp.style.display='block'; document.getElementById('admin-stat-users').innerText=this.users.length; document.getElementById('admin-stat-props').innerText=this.properties.length; document.getElementById('admin-stat-leads').innerText=this.leads.length; }else{ if(mp)mp.style.display='none'; } this.renderPortfolioGrid(); this.renderLeadsTable(); }
+            switchDashTab(t) { document.querySelectorAll('.tab-dash-view').forEach(v=>v.style.display='none'); document.querySelectorAll('.dash-menu-item').forEach(m=>m.classList.remove('active')); document.getElementById(`dash-tab-${t}`).style.display='block'; document.getElementById(`menu-sub-${t}`).classList.add('active'); }
             
             renderPortfolioGrid() {
                 const tbody = document.getElementById('portfolio-table-rows');
@@ -975,77 +805,19 @@
                 this.leads.forEach(l => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Nome">${l.name}</td><td data-label="Contato" style="color:var(--google-green);font-weight:bold;">${l.phone}</td><td data-label="Imóvel Alvo">${l.propTitle}</td><td data-label="Origem">${l.source}</td><td data-label="Data">${l.date}</td>`; tbody.appendChild(tr); });
             }
 
-            togglePropertyAgioForm(t) { document.getElementById('p-agio-panel').style.display = t==='Ágio'?'block':'none';
-            }
-            openNewPropertyModal() { document.getElementById('form-actual-property').reset(); document.getElementById('p-id').value=''; document.getElementById('form-prop-title').innerText="Novo Imóvel"; this.openModal('modal-property-form');
-            }
-            openEditPropertyModal(id) { const p=this.properties.find(x=>x.id===id); if(!p)return; document.getElementById('p-id').value=p.id; document.getElementById('p-title').value=p.title; document.getElementById('p-type').value=p.type;
-            document.getElementById('p-price').value=p.price; document.getElementById('p-location').value=p.location; document.getElementById('p-image').value=p.image; document.getElementById('p-video').value=p.video; document.getElementById('p-description').value=p.description; this.togglePropertyAgioForm(p.type); if(p.type==='Ágio'){document.getElementById('p-agio-paid').value=p.agioPaid||'';document.getElementById('p-agio-remaining').value=p.agioRemaining||'';document.getElementById('p-agio-installment').value=p.agioInstallment||'';document.getElementById('p-agio-bank').value=p.agioBank||'';} document.getElementById('form-prop-title').innerText="Editar Imóvel"; this.openModal('modal-property-form');
-            }
-            actionDeleteProperty(id) { if(confirm('Excluir?')) { this.properties = this.properties.filter(x=>x.id!==id); this.saveState();
-            this.refreshAllScreens(); } }
+            togglePropertyAgioForm(t) { document.getElementById('p-agio-panel').style.display = t==='Ágio'?'block':'none'; }
+            openNewPropertyModal() { document.getElementById('form-actual-property').reset(); document.getElementById('p-id').value=''; document.getElementById('form-prop-title').innerText="Novo Imóvel"; this.openModal('modal-property-form'); }
+            openEditPropertyModal(id) { const p=this.properties.find(x=>x.id===id); if(!p)return; document.getElementById('p-id').value=p.id; document.getElementById('p-title').value=p.title; document.getElementById('p-type').value=p.type; document.getElementById('p-price').value=p.price; document.getElementById('p-location').value=p.location; document.getElementById('p-image').value=p.image; document.getElementById('p-video').value=p.video; document.getElementById('p-description').value=p.description; this.togglePropertyAgioForm(p.type); if(p.type==='Ágio'){document.getElementById('p-agio-paid').value=p.agioPaid||'';document.getElementById('p-agio-remaining').value=p.agioRemaining||'';document.getElementById('p-agio-installment').value=p.agioInstallment||'';document.getElementById('p-agio-bank').value=p.agioBank||'';} document.getElementById('form-prop-title').innerText="Editar Imóvel"; this.openModal('modal-property-form'); }
+            actionDeleteProperty(id) { if(confirm('Excluir?')) { this.properties = this.properties.filter(x=>x.id!==id); this.saveState(); this.refreshAllScreens(); } }
 
-            openDrivePicker(tId) { this.activeDriveTargetInputId=tId; const c=document.getElementById('drive-files-container'); c.innerHTML='';
-            const m=[{name:"📸 Cloudflare_Link.jpg", url:"https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}]; m.forEach(f=>{const d=document.createElement('div');d.className='drive-item';d.innerHTML=`<div><b>${f.name}</b><br><small>${f.url}</small></div>`;d.onclick=()=>this.chooseDriveFile(f.url);c.appendChild(d);}); this.openModal('modal-drive-picker'); }
-            chooseDriveFile(url) { if(this.activeDriveTargetInputId){ const cur=document.getElementById(this.activeDriveTargetInputId).value;
-            document.getElementById(this.activeDriveTargetInputId).value = cur ? cur+','+url : url; } this.closeModal('modal-drive-picker'); }
+            openDrivePicker(tId) { this.activeDriveTargetInputId=tId; const c=document.getElementById('drive-files-container'); c.innerHTML=''; const m=[{name:"📸 Cloudflare_Link.jpg", url:"https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}]; m.forEach(f=>{const d=document.createElement('div');d.className='drive-item';d.innerHTML=`<div><b>${f.name}</b><br><small>${f.url}</small></div>`;d.onclick=()=>this.chooseDriveFile(f.url);c.appendChild(d);}); this.openModal('modal-drive-picker'); }
+            chooseDriveFile(url) { if(this.activeDriveTargetInputId){ const cur=document.getElementById(this.activeDriveTargetInputId).value; document.getElementById(this.activeDriveTargetInputId).value = cur ? cur+','+url : url; } this.closeModal('modal-drive-picker'); }
             
-            openModal(id) { document.getElementById(id).classList.add('active');
-            }
-            closeModal(id) { document.getElementById(id).classList.remove('active');
-            }
+            openModal(id) { document.getElementById(id).classList.add('active'); }
+            closeModal(id) { document.getElementById(id).classList.remove('active'); }
         }
 
         const app = new IaMobiEngine();
-    </script>
-    <div id="modal-renovacao-container"></div>
-
-    <script>
-        // --- LÓGICA DE CONFIGURAÇÃO DE ENTREGA E PIX ---
-        const CONFIG = {
-            pix: "34259998854",
-            beneficiario: "CRISTIAN R FLORENCIO",
-            cidade: "BRASILIA",
-            valorRenovacao: "9.99"
-        };
-
-        function gerarPixMestre(v) {
-            const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
-            const valStr = parseFloat(v).toFixed(2);
-            const payloadConta = f('00', 'br.gov.bcb.pix') + f('01', CONFIG.pix);
-            let payload = "000201" + f('26', payloadConta) + "52040000" + "5303986" + f('54', valStr) + "5802BR" + f('59', CONFIG.beneficiario.substring(0, 25)) + f('60', CONFIG.cidade.substring(0, 15)) + "62070503***" + "6304";
-            let crc = 0xFFFF;
-            for (let i = 0; i < payload.length; i++) {
-                crc ^= payload.charCodeAt(i) << 8;
-                for (let j = 0; j < 8; j++) {
-                    if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
-                    else crc <<= 1;
-                }
-            }
-            return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
-        }
-
-        function abrirModalRenovacao() {
-            const copiaEColaPix = gerarPixMestre(CONFIG.valorRenovacao);
-            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(copiaEColaPix)}`;
-            const container = document.getElementById("modal-renovacao-container");
-            container.innerHTML = `
-                <div class="modal-blur active">
-                    <div class="modal-window">
-                        <h2 style="margin-top:0; color:#0f9d58;">Renovação Inteligente</h2>
-                        <p style="color:#64748b; margin-bottom:1rem;">Renove seu acesso por mais 30 dias.</p>
-                        <img src="${qrCodeUrl}" style="width:200px; height:200px; margin: 15px auto; display:block; border:1px solid #ddd; border-radius:8px;">
-                        <div style="background:#f8fafc; padding:10px; font-size:12px; word-break:break-all; margin:10px 0; border:1px solid #e2e8f0; border-radius:4px;">${copiaEColaPix}</div>
-                        <button onclick="navigator.clipboard.writeText('${copiaEColaPix}').then(()=>alert('Copiado!'));" style="width:100%; padding:12px; background:#1a73e8; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold; margin-bottom:10px;">Copiar Código PIX</button>
-                        <button onclick="document.getElementById('modal-renovacao-container').innerHTML=''" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:0.9rem;">Fechar</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        // --- MANTENDO TODO O SEU SCRIPT ORIGINAL ABAIXO ---
-        // (Certifique-se de colar a lógica do seu app original aqui)
-        
     </script>
 </body>
 </html>
