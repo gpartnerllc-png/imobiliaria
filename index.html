@@ -69,7 +69,7 @@
         .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1.5rem; }
         .hero h1 span { background: linear-gradient(90deg, var(--google-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
+        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
         .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
         .input-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
@@ -105,7 +105,6 @@
         th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700; text-align: left; }
         td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
 
-        /* CORREÇÃO DO CONTEXTO DE TABELAS (RESPONSIVO SMARTPHONES) */
         @media (max-width: 768px) {
             .dash-layout { grid-template-columns: 1fr; }
             table, thead, tbody, th, td, tr { display: block; width: 100%; }
@@ -133,14 +132,12 @@
                 <span class="brand-sub">Partner Holding</span>
             </div>
         </div>
-     
         <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
             <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
             <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
-         
             <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
                 <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
                 <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Sair</button>
@@ -156,46 +153,45 @@
 
         <section id="sec-landing" class="view-section active-view">
             <div class="hero">
-                <h1>Plataforma de  <span>Imóveis Novos & Ágios</span></h1>
+                <h1>Plataforma de <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
-            <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
-    <div class="input-group">
-        <label>Modalidade</label>
-        <select id="search-type">
-            <option value="">Todas as opções</option>
-            <option value="Ágio">Negociação de Ágio</option>
-            <option value="Venda">Venda Direta</option>
-            <option value="Aluguel">Locação Residencial</option>
-        </select>
-    </div>
-    
-    <div class="input-group">
-        <label>Região / Localização</label>
-        <select id="search-location">
-            <option value="">Todas as Regiões</option>
-            <option value="Brasília">Brasília (Plano Piloto)</option>
-            <option value="Taguatinga">Taguatinga</option>
-            <option value="Ceilândia">Ceilândia</option>
-            <option value="Samambaia">Samambaia</option>
-            <option value="Águas Claras">Águas Claras</option>
-            <option value="Guará">Guará</option>
-            <option value="Águas Lindas">Águas Lindas - GO</option>
-            <option value="Valparaíso">Valparaíso - GO</option>
-            <option value="Luziânia">Luziânia - GO</option>
-        </select>
-    </div>
-
-    <div class="input-group">
-        <label>Preço Máximo (R$)</label>
-        <input type="number" id="search-price" placeholder="Qualquer valor">
-    </div>
-
-    <button class="btn-action" style="background: var(--google-blue); height: 50px; font-weight: 800; letter-spacing: 0.5px;" onclick="app.executeSearch()">Buscar Imóveis</button>
-    
-    <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
-</div>
-<div class="grid-wrapper" id="public-properties-grid"></div>
+            
+            <div class="search-hub">
+                <div class="input-group">
+                    <label>Modalidade</label>
+                    <select id="search-type">
+                        <option value="">Todas as opções</option>
+                        <option value="Ágio">Negociação de Ágio</option>
+                        <option value="Venda">Venda Direta</option>
+                        <option value="Aluguel">Locação Residencial</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Região / Localização</label>
+                    <select id="search-location">
+                        <option value="">Todas as Regiões</option>
+                        <option value="Brasília">Brasília (Plano Piloto)</option>
+                        <option value="Taguatinga">Taguatinga</option>
+                        <option value="Ceilândia">Ceilândia</option>
+                        <option value="Samambaia">Samambaia</option>
+                        <option value="Águas Claras">Águas Claras</option>
+                        <option value="Guará">Guará</option>
+                        <option value="Águas Lindas">Águas Lindas - GO</option>
+                        <option value="Valparaíso">Valparaíso - GO</option>
+                        <option value="Luziânia">Luziânia - GO</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Preço Máximo (R$)</label>
+                    <input type="number" id="search-price" placeholder="Qualquer valor">
+                </div>
+                <button class="btn-action" style="background: var(--google-blue); height: 50px; font-weight: 800;" onclick="app.executeSearch()">Buscar Imóveis</button>
+                <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
+            </div>
+            
+            <div class="grid-wrapper" id="public-properties-grid"></div>
+        </section>
 
         <section id="sec-auth" class="view-section">
             <div class="auth-container">
@@ -212,7 +208,6 @@
                 <form id="form-register" onsubmit="app.actionRegister(event)" style="display: none;">
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail de Trabalho</label><input type="email" id="reg-email" required placeholder="seu@email.com"></div>
-  
                     <div class="input-group" style="margin-bottom: 1.2rem;">
                         <label>Perfil Operacional</label>
                         <select id="reg-role" onchange="app.handleRoleChange(this.value)">
@@ -288,117 +283,55 @@
         <div class="modal-window" style="max-width: 420px; text-align: center;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
-            
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong>10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
                 <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
-                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
+                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size: 0.75rem; word-break: break-all; border: 1px dashed rgba(128,128,128,0.3); margin-top:10px; border-radius:6px; max-height: 80px; overflow-y:auto;"></div>
             </div>
-            
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
-            
-            <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
-            
-        </div>
-    </div>
-
-    <div class="modal-blur" id="modal-property-detail">
-        <div class="modal-window">
-            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
-            <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
-            <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
-            
-            <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
-                    <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
-                    <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
-                    <div><strong>Parcela Mensal:</strong> <span id="md-agio-installment"></span></div>
-                    <div><strong>Banco Credor:</strong> <span id="md-agio-bank"></span></div>
-               </div>
-            </div>
-
-            <h3 id="md-price" style="color: var(--google-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
-            <p id="md-description" style="line-height: 1.6; margin-bottom: 1.5rem;">Descrição completa.</p>
-            
-            <h4>▶ Tour Virtual Integrado</h4>
-            <div class="video-box-container" id="md-video-container"></div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-                <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista</button>
-                <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
-            </div>
-            <div style="margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; word-break: break-all;" id="md-share-url"></div>
-        </div>
-    </div>
-
-    <div class="modal-blur" id="modal-gate-capture">
-        <div class="modal-window" style="max-width: 460px;">
-            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Desbloquear Atendimento</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados para aceder imediatamente ao memorial e visita virtual.</p>
-            <form id="form-lead-capture" onsubmit="app.actionCaptureLead(event)">
-                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Digite seu nome"></div>
-                <div class="input-group" style="margin-bottom: 2rem;"><label>WhatsApp / Telefone</label><input type="tel" id="lead-phone" required placeholder="(61) 99999-9999"></div>
-                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Liberar Conteúdo Exclusivo</button>
-            </form>
+            <button class="btn-action" style="background: var(--google-blue); width: 100%;" onclick="app.actionCopyPixPayload()">Copiar Código PIX</button>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-property-form">
-        <div class="modal-window" style="max-width: 800px;">
+        <div class="modal-window">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
-            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Cadastrar Novo Imóvel</h2>
-            
-            <form id="form-actual-property" onsubmit="app.actionSaveProperty(event)">
+            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Novo Imóvel</h2>
+            <form id="form-property" onsubmit="app.actionSaveProperty(event)">
                 <input type="hidden" id="p-id">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Título Comercial</label><input type="text" id="p-title" required placeholder="Ex: Lote Premium"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Título Comercial</label><input type="text" id="p-title" required placeholder="Ex: Apartamento 2 Qts"></div>
                     <div class="input-group">
                         <label>Modalidade</label>
-                        <select id="p-type" required onchange="app.togglePropertyAgioForm(this.value)">
-                            <option value="Venda">Venda Directa</option>
+                        <select id="p-type" onchange="app.handleFormTypeChange(this.value)">
                             <option value="Ágio">Negociação de Ágio</option>
+                            <option value="Venda">Venda Direta</option>
                             <option value="Aluguel">Locação Residencial</option>
                         </select>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Preço Face (R$)</label><input type="number" id="p-price" required placeholder="Valor"></div>
-                    <div class="input-group"><label>Localização</label><input type="text" id="p-location" required placeholder="Cidade - UF"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Cidade / UF</label><input type="text" id="p-location" required placeholder="Ex: Águas Lindas - GO"></div>
+                    <div class="input-group"><label>Preço de Face / Pedido (R$)</label><input type="number" id="p-price" required placeholder="Ex: 45000"></div>
                 </div>
 
-                <div id="p-agio-panel" style="display: none; background: rgba(128,128,128,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.2rem;">
-                    <h4 style="margin-bottom: 1rem; color: var(--premium-gold);">Parâmetros Específicos do Ágio</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
-                        <div class="input-group"><label>Valor Pago (R$)</label><input type="number" id="p-agio-paid" placeholder="Valor"></div>
-                        <div class="input-group"><label>Saldo Restante (R$)</label><input type="number" id="p-agio-remaining" placeholder="Valor"></div>
-                        <div class="input-group"><label>Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Valor"></div>
-                        <div class="input-group"><label>Banco / Agência</label><input type="text" id="p-agio-bank" placeholder="Instituição"></div>
+                <div id="section-agio-fields" style="background: rgba(26,115,232,0.03); border: 1px solid rgba(26,115,232,0.15); padding: 1.2rem; border-radius: 12px; margin-bottom: 1.2rem;">
+                    <h4 style="color: var(--google-blue); margin-bottom: 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">Composição Financeira do Ágio</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                        <div class="input-group"><label>Saldo Devedor (R$)</label><input type="number" id="p-agio-remaining" placeholder="Ex: 180000"></div>
+                        <div class="input-group"><label>Valor Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Ex: 850"></div>
+                        <div class="input-group"><label>Banco Financiador</label><input type="text" id="p-agio-bank" placeholder="Ex: Caixa"></div>
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Descrição e Detalhes Importantes</label><textarea id="p-desc" rows="3" placeholder="Infraestrutura interna, armários, lazer..."></textarea></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.5rem;">
                     <div class="input-group">
-                        <label>Fotos (Links separados por vírgula. Suporta Drive/Cloudflare/Youtube)</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" id="p-image" placeholder="Cole os links aqui" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none;">Nuvem</button>
-                            <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
-                            <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
-                        </div>
+                        <label>Fotos (Links Separados por Vírgula)</label>
+                        <div style="display: flex; gap: 6px;"><input type="text" id="p-images" placeholder="https://..." style="flex-grow: 1;"><button type="button" class="btn-action" style="padding: 0.5rem 1rem;" onclick="app.openDrivePicker('p-images')">📁</button></div>
                     </div>
-                    <div class="input-group">
-                        <label>Vídeo Tour (Link Youtube/Drive/Cloudflare)</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="url" id="p-video" placeholder="Link do Vídeo" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="document.getElementById('p-video-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
-                            <input type="file" id="p-video-file" accept="video/*" style="display: none;" onchange="app.handleLocalVideo(this)">
-                        </div>
-                    </div>
+                    <div class="input-group"><label>Link do Vídeo Real (YouTube / M3U8 / MP4)</label><input type="text" id="p-video" placeholder="https://youtube.com/watch?v=..."></div>
                 </div>
-
-                <div class="input-group" style="margin-bottom: 2rem;"><label>Memorial / Observações</label><textarea id="p-description" rows="4" placeholder="Detalhes..."></textarea></div>
-                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-blue);">Salvar Anúncio</button>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Salvar Registro no Banco</button>
             </form>
         </div>
     </div>
@@ -406,454 +339,524 @@
     <div class="modal-blur" id="modal-drive-picker">
         <div class="modal-window" style="max-width: 500px;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
-            <h3 style="color: var(--google-blue); margin-bottom: 0.5rem;">📂 Partner Cloud Workspace</h3>
+            <h3 style="margin-bottom: 1.5rem;">Selecione do Cloud Storage</h3>
             <div id="drive-files-container"></div>
         </div>
     </div>
 
-    <footer>&copy; 2026 IMOBI — Partner Holding.</footer>
+    <div class="modal-blur" id="modal-lead-form">
+        <div class="modal-window" style="max-width: 460px;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-lead-form')">&times;</button>
+            <h2 style="color: var(--google-blue); margin-bottom: 0.5rem;">Manifestar Interesse</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">A incorporadora ou o corretor responsável entrará em contato diretamente via WhatsApp.</p>
+            <form id="form-lead" onsubmit="app.actionSubmitLead(event)">
+                <input type="hidden" id="lead-prop-id">
+                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Como podemos chamar você?"></div>
+                <div class="input-group" style="margin-bottom: 1.5rem;"><label>Número de Telefone (Com WhatsApp)</label><input type="text" id="lead-phone" required placeholder="61999999999"></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-blue);">Enviar Proposta e Abrir Contato</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-media-viewer">
+        <div class="modal-window" style="max-width: 800px; background: #0b0f19; color: white; border-color: #1e293b;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;" onclick="app.closeMediaViewer()">&times;</button>
+            <h3 id="media-viewer-title" style="margin-bottom: 1rem;">Visualização de Mídia</h3>
+            <div class="video-box-container" id="media-viewer-box"></div>
+            <p id="media-viewer-desc" style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-top: 1rem;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IA-MOBI — Partner Holding. Todos os direitos reservados.</p>
+        <p style="font-size: 0.65rem; color: rgba(128,128,128,0.5); margin-top: 5px;">Ambiente de Alta Performance Conectado via Firebase Realtime Database.</p>
+    </footer>
 
     <script>
-        class IaMobiEngine {
+        const FIREBASE_CONFIG = {
+            databaseURL: "https://ia-mobi-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(FIREBASE_CONFIG);
+        const db = firebase.database();
+
+        class ImobiApp {
             constructor() {
-                this.carouselIndices = {};
-
-                // --- CONFIGURAÇÃO PIX E KPI (Controle de Entregas) ---
-                this.CONFIG_PIX = {
-                    pix: "34259998854",
-                    beneficiario: "CRISTIAN R FLORENCIO",
-                    cidade: "BRASILIA",
-                    valorRenovacao: 19.99,
-                    limiteEntregas: 10
-                };
-
-                // CONFIGURAÇÃO FIREBASE
-                const firebaseConfig = {
-                    apiKey: "", 
-                    authDomain: "",
-                    databaseURL: "",
-                    projectId: "",
-                    storageBucket: "",
-                    messagingSenderId: "",
-                    appId: ""
-                };
-                this.useCloud = false;
-                
-                if (firebaseConfig.apiKey !== "") {
-                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-                    this.db = firebase.database();
-                    this.useCloud = true;
-                }
-
-                this.users = [];
+                this.currentUser = null;
                 this.properties = [];
                 this.leads = [];
-                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
-                this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
-                
-                this.init();
-            }
-
-            // Geração PIX (Padrão EMV)
-            gerarPixMestre(v) {
-                const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
-                const valStr = parseFloat(v).toFixed(2);
-                const payloadConta = f('00', 'br.gov.bcb.pix') + f('01', this.CONFIG_PIX.pix);
-                let payload = "000201" + f('26', payloadConta) + "52040000" + "5303986" + 
-                              f('54', valStr) + "5802BR" + f('59', this.CONFIG_PIX.beneficiario.substring(0, 25)) + 
-                              f('60', this.CONFIG_PIX.cidade.substring(0, 15)) + "62070503***" + "6304";
-                let crc = 0xFFFF;
-                for (let i = 0; i < payload.length; i++) {
-                    crc ^= payload.charCodeAt(i) << 8;
-                    for (let j = 0; j < 8; j++) {
-                        if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
-                        else crc <<= 1;
-                    }
-                }
-                return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+                this.usersCount = 0;
+                this.activeDriveTargetInputId = null;
+                this.billingActive = true;
+                this.selectedPropertyForLead = null;
+                this.users = []; 
             }
 
             init() {
-                this.applySavedTheme();
-                this.catchUrlDeepLink();
-                this.initAutoCarousel();
-                this.checkBillingStatusUI();
-
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').on('value', (snapshot) => {
-                        const data = snapshot.val() || {};
-                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
-                        this.properties = data.properties || [];
-                        this.leads = data.leads || [];
-                        this.refreshAllScreens();
-                    });
-                } else {
-                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian", email: "admin@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
-                    this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
-                    this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
-                    this.refreshAllScreens();
-                }
+                this.loadLocalSession();
+                this.syncProperties();
+                this.syncLeadsCount();
+                this.refreshAllScreens();
             }
 
-            refreshAllScreens() {
-                this.updateAuthHeader();
-                this.renderPublicGrid();
-                if (this.currentUser) this.renderDashboard();
+            loadLocalSession() {
+                const u = localStorage.getItem('imobi_user');
+                if(u) { this.currentUser = JSON.parse(u); this.setupUIAfterLogin(); }
+                const b = localStorage.getItem('imobi_billing');
+                this.billingActive = b !== 'expired';
+                this.updateBillingUI();
             }
 
             saveState() {
-                localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
-                localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
+                if(this.currentUser) localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
+                localStorage.setItem('imobi_billing', this.billingActive ? 'active' : 'expired');
+            }
 
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').set({ users: this.users, properties: this.properties, leads: this.leads });
+            setupUIAfterLogin() {
+                document.getElementById('menu-btn-auth').style.display = 'none';
+                document.getElementById('menu-btn-dash').style.display = 'inline-block';
+                document.getElementById('menu-user-profile').style.display = 'flex';
+                document.getElementById('header-user-name').innerText = this.currentUser.name;
+                document.getElementById('dash-user-title').innerText = this.currentUser.name;
+                document.getElementById('dash-user-subtitle').innerText = `${this.currentUser.role} | ${this.currentUser.email}`;
+                if(this.currentUser.role === 'Admin') {
+                    document.getElementById('admin-master-panel').style.display = 'block';
                 } else {
-                    localStorage.setItem('iamobi_users', JSON.stringify(this.users));
-                    localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
-                    localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
+                    document.getElementById('admin-master-panel').style.display = 'none';
                 }
             }
 
-            parseExternalLink(url, type = 'image') {
-                if (!url) return '';
-                url = url.trim();
-                if (url.includes('drive.google.com')) {
-                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-                    if (match && match[1]) { return type === 'image' ? `https://docs.google.com/uc?export=view&id=${match[1]}` : `https://drive.google.com/file/d/${match[1]}/preview`; }
+            syncProperties() {
+                db.ref('properties').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    this.properties = [];
+                    if(data) {
+                        for(let id in data) {
+                            this.properties.push({id, ...data[id]});
+                        }
+                    }
+                    this.refreshAllScreens();
+                });
+            }
+
+            syncLeadsCount() {
+                db.ref('leads').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    this.leads = [];
+                    if(data) {
+                        for(let id in data) {
+                            this.leads.push({id, ...data[id]});
+                        }
+                    }
+                    this.updateAdminStats();
+                    this.renderLeadsTable();
+                });
+                db.ref('users_count').on('value', (snapshot) => {
+                    this.usersCount = snapshot.val() || 0;
+                    this.updateAdminStats();
+                });
+            }
+
+            updateAdminStats() {
+                if(document.getElementById('admin-stat-users')) {
+                    document.getElementById('admin-stat-users').innerText = this.usersCount;
+                    document.getElementById('admin-stat-props').innerText = this.properties.length;
+                    document.getElementById('admin-stat-leads').innerText = this.leads.length;
                 }
-                if (type === 'video') {
-                    if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
-                    if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
-                }
-                return url;
             }
 
-            getImagesArray(imageStr) {
-                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
-                return imageStr.split(',').map(url => this.parseExternalLink(url, 'image'));
+            toggleTheme() {
+                const html = document.documentElement;
+                const current = html.getAttribute('data-theme');
+                html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
             }
 
-            moveCarousel(id, direction, total) {
-                if (total <= 1) return;
-                if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
-                this.carouselIndices[id] = (this.carouselIndices[id] + direction + total) % total;
-                document.querySelectorAll(`.carousel-slider-${id}`).forEach(slider => { slider.style.transform = `translateX(-${this.carouselIndices[id] * 100}%)`; });
-            }
-
-            initAutoCarousel() {
-                setInterval(() => {
-                    this.properties.forEach(p => {
-                        const images = this.getImagesArray(p.image);
-                        if (images.length > 1) this.moveCarousel(p.id, 1, images.length);
-                    });
-                }, 5000);
-            }
-
-            handleLocalImages(input) {
-                if (!input.files || input.files.length === 0) return;
-                const files = Array.from(input.files).slice(0, 12);
-                const promises = files.map(file => new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = new Image();
-                        img.onload = () => {
-                            const canvas = document.createElement('canvas');
-                            const MAX_WIDTH = 800; 
-                            const scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
-                            canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
-                            const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            resolve(canvas.toDataURL('image/jpeg', 0.8));
-                        };
-                        img.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }));
-                Promise.all(promises).then(b64 => { document.getElementById('p-image').value = b64.join(','); alert('Fotos processadas e comprimidas com sucesso!'); });
-            }
-
-            handleLocalVideo(input) {
-                if (!input.files || input.files.length === 0) return;
-                const reader = new FileReader();
-                reader.onload = (e) => { document.getElementById('p-video').value = e.target.result; alert('Vídeo carregado!'); };
-                reader.readAsDataURL(input.files[0]);
-            }
-
-           contactBrokerResponsible() {
-    if (!this.selectedPropertyForLead) return;
-
-    // Localiza o corretor ou assume o padrão da Partner Holding
-    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { 
-        name: "Especialista Partner", 
-        phone: "5561983446343" 
-    };
-
-    // Sanatiza o telefone: remove qualquer caractere que não seja número (ex: +, -, e espaços)
-    const cleanPhone = broker.phone.replace(/\D/g, '');
-
-    // Cria uma mensagem profissional personalizada de alta conversão
-    const message = `Olá ${broker.name}, tenho interesse no imóvel "${this.selectedPropertyForLead.title}" listado na plataforma IA-MOBI. Poderia me passar mais informações?`;
-
-    alert(`Conectando ao especialista do imóvel: ${broker.name}`);
-
-    // Monta a URL correta usando o parâmetro ?text=
-    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
-
-    // Abre a API do WhatsApp em uma nova aba
-    window.open(whatsappUrl, '_blank');
-}
-
-            renderPublicGrid(filteredData = null) {
-                const grid = document.getElementById('public-properties-grid');
-                if(!grid) return; grid.innerHTML = '';
+            navigate(viewId) {
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 
-                // REGRA DA ASSINATURA: Puxa Admin ou quem não tem bloqueio
-                const validEmails = this.users.filter(u => u.role === 'Admin' || !u.isBlocked).map(u => u.email);
-                const data = (filteredData || this.properties).filter(p => validEmails.includes(p.author));
+                document.getElementById(`sec-${viewId}`).classList.add('active-view');
+                if(viewId === 'landing') document.getElementById('menu-btn-explore').classList.add('active');
+                if(viewId === 'dashboard') document.getElementById('menu-btn-dash').classList.add('active');
+            }
 
-                if (data.length === 0) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem;">Nenhum imóvel encontrado no momento.</div>`; return; }
+            switchAuthMode(mode) {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                if(mode === 'login') {
+                    document.getElementById('tab-auth-login').classList.add('active');
+                    document.getElementById('form-login').style.display = 'block';
+                    document.getElementById('form-register').style.display = 'none';
+                } else {
+                    document.getElementById('tab-auth-register').classList.add('active');
+                    document.getElementById('form-login').style.display = 'none';
+                    document.getElementById('form-register').style.display = 'block';
+                }
+            }
 
-                data.forEach(p => {
-                    const card = document.createElement('div'); card.className = 'card';
-                    const images = this.getImagesArray(p.image);
-                    const activeIdx = this.carouselIndices[p.id] || 0;
-                    const videoHtml = p.video ? `<div class="video-indicator" onclick="event.stopPropagation(); app.gateCheckProperty('${p.id}')"><span>▶ TOUR VÍDEO</span></div>` : '';
-                    let agioHtml = p.type === 'Ágio' ? `<div style="margin-top:0.5rem;padding:0.6rem;background:rgba(26,115,232,0.04);border-radius:6px;font-size:0.8rem;">🪙 <b>Ágio:</b> R$ ${(p.agioPaid||0).toLocaleString('pt-BR')}<br>📉 <b>Saldo:</b> R$ ${(p.agioRemaining||0).toLocaleString('pt-BR')}</div>` : '';
+            handleRoleChange(role) {
+                const f = document.getElementById('group-creci-field');
+                if(role === 'Corretor' || role === 'Imobiliária') { f.style.display = 'flex'; }
+                else { f.style.display = 'none'; }
+            }
 
-                    card.innerHTML = `
-                        <span class="card-badge">${p.type}</span>
-                        <div class="card-media-mock" style="position:relative;background:#e2e8f0;">
-                            <div class="carousel-slider-${p.id}" style="width:100%;height:100%;display:flex;transition:transform 0.4s ease-out;transform:translateX(-${activeIdx*100}%);">
-                                 ${images.map(img => `<img src="${img}" style="width:100%;height:100%;object-fit:cover;flex-shrink:0;">`).join('')}
+            switchDashTab(tabId) {
+                document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
+                document.querySelectorAll('.tab-dash-view').forEach(t => t.style.display = 'none');
+                document.getElementById(`menu-sub-${tabId}`).classList.add('active');
+                document.getElementById(`dash-tab-${tabId}`).style.display = 'block';
+            }
+
+            openModal(mId) { document.getElementById(mId).classList.add('active'); }
+            closeModal(mId) { document.getElementById(mId).classList.remove('active'); }
+
+            handleFormTypeChange(type) {
+                const s = document.getElementById('section-agio-fields');
+                s.style.display = (type === 'Ágio') ? 'block' : 'none';
+            }
+
+            updateBillingUI() {
+                const alertBanner = document.getElementById('global-billing-alert');
+                const lbl = document.getElementById('billing-status-lbl');
+                if(!this.billingActive) {
+                    alertBanner.style.display = 'flex';
+                    if(lbl) { lbl.innerText = "Inadimplente (Bloqueado)"; lbl.style.color = "var(--tesla-red)"; }
+                } else {
+                    alertBanner.style.display = 'none';
+                    if(lbl) { lbl.innerText = "Assinatura Ativa (Regularizada)"; lbl.style.color = "var(--google-green)"; }
+                }
+            }
+
+            simulateBillingExpiration() { this.billingActive = false; this.saveState(); this.updateBillingUI(); this.refreshAllScreens(); }
+            resetBilling() { this.billingActive = true; this.saveState(); this.updateBillingUI(); this.closeModal('modal-pix-payment'); this.refreshAllScreens(); }
+
+            actionRegister(e) {
+                e.preventDefault();
+                const email = document.getElementById('reg-email').value;
+                const name = document.getElementById('reg-name').value;
+                const role = document.getElementById('reg-role').value;
+                const creci = document.getElementById('reg-creci').value;
+
+                this.currentUser = { name, email, role, creci };
+                this.saveState();
+                
+                db.ref('users_count').transaction((current) => (current || 0) + 1);
+
+                this.setupUIAfterLogin();
+                this.navigate('dashboard');
+                alert('Infraestrutura de Conta Criada com Sucesso via RTDB!');
+            }
+
+            actionLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                this.currentUser = { name: email.split('@')[0].toUpperCase(), email: email, role: 'Admin', creci: 'N/A' };
+                this.saveState();
+                this.setupUIAfterLogin();
+                this.navigate('dashboard');
+            }
+
+            actionLogout() {
+                localStorage.removeItem('imobi_user');
+                this.currentUser = null;
+                document.getElementById('menu-btn-auth').style.display = 'inline-block';
+                document.getElementById('menu-btn-dash').style.display = 'none';
+                document.getElementById('menu-user-profile').style.display = 'none';
+                this.navigate('landing');
+            }
+
+            refreshAllScreens() {
+                this.renderPublicGrid();
+                this.renderPortfolioTable();
+                this.renderLeadsTable();
+            }
+
+            renderPublicGrid() {
+                const g = document.getElementById('public-properties-grid');
+                if(!g) return;
+                g.innerHTML = '';
+
+                this.properties.forEach(p => {
+                    const c = document.createElement('div');
+                    c.className = 'card';
+                    
+                    let imgHtml = `<div class="card-media-mock" style="background:#cbd5e1; color:#475569; font-weight:bold;">IMÓVEL SEM FOTO</div>`;
+                    if(p.images) {
+                        const firstImg = p.images.split(',')[0];
+                        imgHtml = `<div class="card-media-mock" style="background-image: url('${firstImg}'); background-size: cover; background-position: center;"></div>`;
+                    }
+
+                    let videoBadge = '';
+                    if(p.video) {
+                        videoBadge = `<div class="video-indicator" onclick="event.stopPropagation(); app.openMediaViewer('${p.id}')">▶ MULTIMÍDIA</div>`;
+                    }
+
+                    let specHtml = '';
+                    if(p.type === 'Ágio') {
+                        specHtml = `
+                            <div style="margin: 0.8rem 0; padding: 0.6rem; background: var(--bg-input); border-radius: 6px; font-size: 0.8rem;">
+                                📉 Parcela: <b>R$ ${p.agioInstallment || 'N/A'}</b> | Saldo: <b>R$ ${p.agioRemaining || 'N/A'}</b><br>
+                                🏛 Banco: ${p.agioBank || 'Não informado'}
                             </div>
-                            ${images.length>1 ? `<button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', -1, ${images.length})" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10094;</button><button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', 1, ${images.length})" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10095;</button>` : ''}
-                            ${videoHtml}
-                        </div>
+                        `;
+                    }
+
+                    c.innerHTML = `
+                        <div class="card-badge">${p.type}</div>
+                        ${imgHtml}
+                        ${videoBadge}
                         <div class="card-body">
-                            <h3 style="font-size:1.25rem;margin-bottom:0.5rem;">${p.title}</h3>
-                            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">📍 ${p.location}</p>
-                            ${agioHtml}
-                            <div class="card-price">R$ ${Number(p.price).toLocaleString('pt-BR')}</div>
-                            <button class="btn-action" style="width:100%;margin-top:auto;background:var(--text-main);" onclick="app.gateCheckProperty('${p.id}')">Analisar Memorial</button>
+                            <h3 style="font-size: 1.25rem; font-weight:700;">${p.title}</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">📍 ${p.location}</p>
+                            ${specHtml}
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px; line-height: 1.4; flex-grow:1;">${p.desc || ''}</p>
+                            <div class="card-price">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</div>
+                            <button class="btn-action" style="width: 100%; font-size:0.9rem;" onclick="app.openLeadModal('${p.id}')">Manifestar Interesse</button>
                         </div>
                     `;
-                    grid.appendChild(card);
+                    g.appendChild(c);
                 });
+            }
+
+            executeSearch() {
+                const type = document.getElementById('search-type').value;
+                const loc = document.getElementById('search-location').value.toLowerCase();
+                const maxPrice = parseFloat(document.getElementById('search-price').value);
+
+                db.ref('properties').once('value', (snapshot) => {
+                    const data = snapshot.val();
+                    this.properties = [];
+                    if(data) {
+                        for(let id in data) {
+                            let item = data[id];
+                            if(type && item.type !== type) continue;
+                            if(loc && !item.location.toLowerCase().includes(loc)) continue;
+                            if(maxPrice && parseFloat(item.price) > maxPrice) continue;
+                            this.properties.push({id, ...item});
+                        }
+                    }
+                    this.renderPublicGrid();
+                });
+            }
+
+            clearSearchFilters() {
+                document.getElementById('search-type').value = '';
+                document.getElementById('search-location').value = '';
+                document.getElementById('search-price').value = '';
+                this.syncProperties();
+            }
+
+            openNewPropertyModal() {
+                document.getElementById('form-property').reset();
+                document.getElementById('p-id').value = '';
+                document.getElementById('form-prop-title').innerText = "Novo Imóvel";
+                this.handleFormTypeChange('Ágio');
+                this.openModal('modal-property-form');
             }
 
             actionSaveProperty(e) {
                 e.preventDefault();
-
-                // LÓGICA DE CONTROLE DE ENTREGAS (KPI)
-                if (this.currentUser && this.currentUser.role !== 'Admin') {
-                    this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
-                    if (this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas) {
-                        this.closeModal('modal-property-form');
-                        this.resetBilling();
-                        return; // Impede o salvamento se o pacote acabou
-                    }
-                }
-
                 const id = document.getElementById('p-id').value;
-                const title = document.getElementById('p-title').value;
-                const type = document.getElementById('p-type').value;
-                const price = Number(document.getElementById('p-price').value);
-                const location = document.getElementById('p-location').value;
-                const image = document.getElementById('p-image').value;
-                const video = document.getElementById('p-video').value;
-                const description = document.getElementById('p-description').value;
-
-                let pObj = { id: id || String(Date.now()), title, type, price, location, image, video, description, author: id ? this.properties.find(x=>x.id===id).author : this.currentUser.email };
-                
-                if (type === 'Ágio') { pObj.agioPaid = Number(document.getElementById('p-agio-paid').value||0); pObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value||0); pObj.agioInstallment = Number(document.getElementById('p-agio-installment').value||0); pObj.agioBank = document.getElementById('p-agio-bank').value; }
-
-                if (id) { this.properties[this.properties.findIndex(x=>x.id===id)] = pObj;
-                } else { 
-                    this.properties.push(pObj); 
-                    // Incrementa KPI de uso após salvar novo imóvel
-                    if(this.currentUser.role !== 'Admin') this.currentUser.entregasRealizadas++;
-                }
-
-                // Atualiza o estado global no array de usuários
-                const index = this.users.findIndex(u => u.email === this.currentUser.email);
-                if(index !== -1) { this.users[index].entregasRealizadas = this.currentUser.entregasRealizadas; }
-
-                this.saveState();
-                this.closeModal('modal-property-form'); this.refreshAllScreens(); 
-                alert("Imóvel publicado em todos os servidores!");
-            }
-
-            applySavedTheme() { document.documentElement.setAttribute('data-theme', localStorage.getItem('iamobi_theme') || 'light'); }
-            toggleTheme() { const nT = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', nT); localStorage.setItem('iamobi_theme', nT); }
-            navigate(view) { document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view')); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`sec-${view}`).classList.add('active-view'); const btn = document.getElementById(`menu-btn-${view}`); if(btn) btn.classList.add('active'); if(view === 'dashboard' && !this.currentUser) return this.navigate('auth'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            catchUrlDeepLink() { if(window.location.hash.startsWith('#view-prop-')) setTimeout(() => this.gateCheckProperty(window.location.hash.replace('#view-prop-', '')), 300); }
-            executeSearch() { const t=document.getElementById('search-type').value, l=document.getElementById('search-location').value.toLowerCase(), p=document.getElementById('search-price').value; this.renderPublicGrid(this.properties.filter(x => (t===""||x.type===t) && (l===""||x.location.toLowerCase().includes(l)) && (p===""||Number(x.price)<=Number(p)))); }
-            clearSearchFilters() { document.getElementById('search-type').value=""; document.getElementById('search-location').value=""; document.getElementById('search-price').value=""; this.renderPublicGrid(); }
-
-            gateCheckProperty(id) {
-                const prop = this.properties.find(p => p.id === id);
-                if (!prop) return;
-                
-                const dono = this.users.find(u => u.email === prop.author);
-                if (dono && dono.role !== 'Admin' && dono.isBlocked) { return alert("Acesso indisponível no momento."); }
-
-                this.selectedPropertyForLead = prop;
-                if(this.currentUser) this.openPropertyDetailModal(prop); else this.openModal('modal-gate-capture');
-            }
-
-            actionCaptureLead(e) {
-                e.preventDefault();
-                this.leads.push({ name: document.getElementById('lead-name').value, phone: document.getElementById('lead-phone').value, propTitle: this.selectedPropertyForLead.title, source: "Aladin", date: new Date().toLocaleString('pt-BR') });
-                this.saveState(); this.closeModal('modal-gate-capture'); document.getElementById('form-lead-capture').reset(); this.openPropertyDetailModal(this.selectedPropertyForLead);
-            }
-
-            openPropertyDetailModal(prop) {
-                document.getElementById('md-title').innerText = prop.title;
-                document.getElementById('md-location').innerText = `📍 ${prop.location}`; document.getElementById('md-price').innerText = `R$ ${Number(prop.price).toLocaleString('pt-BR')}`; document.getElementById('md-description').innerText = prop.description || "Sem memorial.";
-                const agioPanel = document.getElementById('md-agio-details');
-                if (prop.type === 'Ágio') { agioPanel.style.display = 'block'; document.getElementById('md-agio-paid').innerText = `R$ ${Number(prop.agioPaid||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-remaining').innerText = `R$ ${Number(prop.agioRemaining||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-installment').innerText = `R$ ${Number(prop.agioInstallment||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-bank').innerText = prop.agioBank || "Não informado"; } else { agioPanel.style.display = 'none'; }
-                
-                const vc = document.getElementById('md-video-container');
-                if (prop.video) {
-                    const parsedVideo = this.parseExternalLink(prop.video, 'video');
-                    if (parsedVideo.startsWith('data:video/')) { vc.innerHTML = `<video src="${parsedVideo}" controls style="width:100%;height:100%;object-fit:contain;"></video>`; } 
-                    else { vc.innerHTML = `<iframe width="100%" height="100%" src="${parsedVideo}" frameborder="0" allowfullscreen style="border:none;"></iframe>`; }
-                } else { vc.innerHTML = `<div style="color:var(--text-muted);padding:2rem;">📷 Mídia Convencional</div>`; }
-                
-                document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
-                this.openModal('modal-property-detail');
-            }
-
-            copyConversionLink() { navigator.clipboard.writeText(document.getElementById('md-share-url').innerText); alert('Link copiado!'); }
-            
-            // ==========================================
-            // LOGICA FINANCEIRA PIX E CONTROLE DE KPI
-            // ==========================================
-            simulateBillingExpiration() { 
-                if(this.currentUser) { 
-                    this.currentUser.entregasRealizadas = this.CONFIG_PIX.limiteEntregas; // Força limite atingido
-                    this.saveState();
-                    this.checkBillingStatusUI(); 
-                    this.refreshAllScreens(); 
-                }
-            }
-            
-            resetBilling() { 
-                const copiaEColaPix = this.gerarPixMestre(this.CONFIG_PIX.valorRenovacao);
-                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(copiaEColaPix)}`;
-                
-                document.getElementById('pix-qr-img').src = qrCodeUrl;
-                document.getElementById('pix-payload-container').innerText = copiaEColaPix;
-                document.getElementById('pix-payload-container').style.display = 'block';
-                
-                document.getElementById('pix-copy-btn').onclick = () => {
-                    navigator.clipboard.writeText(copiaEColaPix).then(() => alert('Linha PIX copiada! Cole no app do banco.'));
+                const propData = {
+                    title: document.getElementById('p-title').value,
+                    type: document.getElementById('p-type').value,
+                    location: document.getElementById('p-location').value,
+                    price: document.getElementById('p-price').value,
+                    desc: document.getElementById('p-desc').value,
+                    images: document.getElementById('p-images').value,
+                    video: document.getElementById('p-video').value,
+                    agioRemaining: document.getElementById('p-agio-remaining').value || '',
+                    agioInstallment: document.getElementById('p-agio-installment').value || '',
+                    agioBank: document.getElementById('p-agio-bank').value || '',
+                    ownerEmail: this.currentUser ? this.currentUser.email : 'anon'
                 };
 
-                this.openModal('modal-pix-payment');
+                if(id) {
+                    db.ref(`properties/${id}`).set(propData);
+                } else {
+                    db.ref('properties').push(propData);
+                }
+                this.closeModal('modal-property-form');
             }
-            
-            processPixPayment() {
-                if(!this.currentUser) return;
 
-                // Zera as entregas realizadas (Renova o pacote)
-                this.currentUser.entregasRealizadas = 0;
-                this.currentUser.isBlocked = false;
+            renderPortfolioTable() {
+                const b = document.getElementById('portfolio-table-rows');
+                if(!b) return;
+                b.innerHTML = '';
+
+                const filtered = this.properties.filter(x => this.currentUser && (this.currentUser.role === 'Admin' || x.ownerEmail === this.currentUser.email));
                 
-                const index = this.users.findIndex(u => u.email === this.currentUser.email);
-                if(index !== -1) {
-                    this.users[index].entregasRealizadas = 0;
-                    this.users[index].isBlocked = false;
+                filtered.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Imóvel"><b>${p.title}</b></td>
+                        <td data-label="Tipo">${p.type}</td>
+                        <td data-label="Localização">${p.location}</td>
+                        <td data-label="Preço Face">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</td>
+                        <td data-label="Ações">
+                            <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="app.actionEditProperty('${p.id}')">Editar</button>
+                            <button class="btn-action" style="background:var(--tesla-red); padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
+                        </td>
+                    `;
+                    b.appendChild(tr);
+                });
+            }
+
+            actionEditProperty(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
+                document.getElementById('p-id').value = p.id;
+                document.getElementById('p-title').value = p.title;
+                document.getElementById('p-type').value = p.type;
+                document.getElementById('p-location').value = p.location;
+                document.getElementById('p-price').value = p.price;
+                document.getElementById('p-desc').value = p.desc || '';
+                document.getElementById('p-images').value = p.images || '';
+                document.getElementById('p-video').value = p.video || '';
+                
+                this.handleFormTypeChange(p.type);
+                if(p.type === 'Ágio') {
+                    document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
+                    document.getElementById('p-agio-installment').value = p.agioInstallment || '';
+                    document.getElementById('p-agio-bank').value = p.agioBank || '';
+                }
+                document.getElementById('form-prop-title').innerText = "Editar Imóvel";
+                this.openModal('modal-property-form');
+            }
+
+            actionDeleteProperty(id) {
+                if(confirm('Excluir este imóvel definitivamente da nuvem?')) {
+                    db.ref(`properties/${id}`).remove();
+                }
+            }
+
+            openDrivePicker(tId) {
+                this.activeDriveTargetInputId = tId;
+                const c = document.getElementById('drive-files-container');
+                c.innerHTML = '';
+                const mockFiles = [{name: "📸 Cloudflare_Link.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}];
+                
+                mockFiles.forEach(f => {
+                    const d = document.createElement('div');
+                    d.className = 'drive-item';
+                    d.innerHTML = `<div><b>${f.name}</b><br><small>${f.url}</small></div>`;
+                    d.onclick = () => this.chooseDriveFile(f.url);
+                    c.appendChild(d);
+                });
+                this.openModal('modal-drive-picker');
+            }
+
+            chooseDriveFile(url) {
+                if(this.activeDriveTargetInputId){
+                    const cur = document.getElementById(this.activeDriveTargetInputId).value;
+                    document.getElementById(this.activeDriveTargetInputId).value = cur ? cur + ',' + url : url;
+                }
+                this.closeModal('modal-drive-picker');
+            }
+
+            openLeadModal(propId) {
+                const targetProp = this.properties.find(x => x.id === propId);
+                if(targetProp) {
+                    this.selectedPropertyForLead = targetProp;
                 }
                 
-                this.saveState();
-                this.checkBillingStatusUI(); 
-                this.closeModal('modal-pix-payment'); 
-                this.refreshAllScreens(); 
-                alert("Pagamento PIX confirmado e baixado com sucesso! Saldo de entregas renovado.");
-            }
-
-            checkBillingStatusUI() {
-                const label = document.getElementById('billing-status-lbl');
-                const banner = document.getElementById('global-billing-alert');
-                
-                if (!this.currentUser) return;
-                
-                if (this.currentUser.role === 'Admin') {
-                    if(label) label.innerHTML = `<span style="color:var(--google-blue);">Conta Admin (Livre)</span>`;
-                    if(banner) banner.style.display = 'none';
+                if(!this.billingActive) {
+                    this.openModal('modal-pix-payment');
+                    document.getElementById('pix-qr-img').src = "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png";
+                    document.getElementById('pix-payload-container').innerText = "00020101021126360014br.gov.bcb.pix0114+5561999999999520400005303986540519.995802BR5925CRISTIAN R FLORENCIO6009BRASILIA62070503***6304ABCD";
                     return;
                 }
-
-                this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
-                const pacoteEsgotado = this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas;
-                
-                if (pacoteEsgotado) { 
-                    this.currentUser.isBlocked = true;
-                    if(label) label.innerHTML = `<span style="color:var(--tesla-red);">Bloqueado - Pacote de Entregas Esgotado</span>`;
-                    if(banner) { 
-                        banner.style.display = 'flex';
-                    }
-                } else { 
-                    this.currentUser.isBlocked = false;
-                    const cotaRestante = this.CONFIG_PIX.limiteEntregas - this.currentUser.entregasRealizadas;
-                    if(label) label.innerHTML = `<span style="color:var(--google-green);">Ativo (${cotaRestante} anúncios disponíveis)</span>`;
-                    if(banner) banner.style.display = 'none';
-                }
+                document.getElementById('form-lead').reset();
+                document.getElementById('lead-prop-id').value = propId;
+                this.openModal('modal-lead-form');
             }
 
-            switchAuthMode(m) { document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); if(m==='login'){document.getElementById('tab-auth-login').classList.add('active');document.getElementById('form-login').style.display='block';document.getElementById('form-register').style.display='none';}else{document.getElementById('tab-auth-register').classList.add('active');document.getElementById('form-login').style.display='none';document.getElementById('form-register').style.display='block';} }
-            handleRoleChange(r) { const c=document.getElementById('group-creci-field'); if(c) c.style.display = (r==='Corretor'||r==='Imobiliária') ? 'flex' : 'none'; }
-            
-            actionRegister(e) { 
+            actionSubmitLead(e) {
                 e.preventDefault();
-                const email = document.getElementById('reg-email').value; 
-                if(this.users.some(u=>u.email===email)) return alert('E-mail em uso.'); 
-                
-                const u = { 
-                    name: document.getElementById('reg-name').value, 
-                    email, 
-                    role: document.getElementById('reg-role').value, 
-                    creci: document.getElementById('reg-creci').value, 
-                    password: document.getElementById('reg-password').value,
-                    entregasRealizadas: 0,
-                    isBlocked: false
+                const propId = document.getElementById('lead-prop-id').value;
+                const p = this.properties.find(x => x.id === propId);
+                const leadData = {
+                    name: document.getElementById('lead-name').value,
+                    phone: document.getElementById('lead-phone').value,
+                    propId: propId,
+                    propTitle: p ? p.title : 'Desconhecido',
+                    sourceChannel: 'Tráfego Orgânico',
+                    date: new Date().toLocaleDateString('pt-BR')
                 };
-                this.users.push(u); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); 
+
+                db.ref('leads').push(leadData);
+                this.closeModal('modal-lead-form');
+                
+                // Conecta o lead diretamente ao corretor responsável via WhatsApp
+                this.contactBrokerResponsible();
             }
-            
-            actionLogin(e) { e.preventDefault(); const u = this.users.find(u=>u.email===document.getElementById('login-email').value && u.password===document.getElementById('login-password').value); if(!u) return alert('Credenciais inválidas.'); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); }
-            actionLogout() { this.currentUser=null; this.saveState(); this.refreshAllScreens(); this.navigate('landing'); }
-            updateAuthHeader() { const ba=document.getElementById('menu-btn-auth'), md=document.getElementById('menu-btn-dash'), pa=document.getElementById('menu-user-profile'), un=document.getElementById('header-user-name'); if(this.currentUser) { if(ba) ba.style.display='none'; if(md) md.style.display='block'; if(pa) pa.style.display='flex'; if(un) un.innerText=this.currentUser.name; } else { if(ba) ba.style.display='block'; if(md) md.style.display='none'; if(pa) pa.style.display='none'; } }
-            renderDashboard() { document.getElementById('dash-user-title').innerText=this.currentUser.name; document.getElementById('dash-user-subtitle').innerText=`Perfil: ${this.currentUser.role}`; const mp=document.getElementById('admin-master-panel'); if(this.currentUser.role==='Admin'){ if(mp)mp.style.display='block'; document.getElementById('admin-stat-users').innerText=this.users.length; document.getElementById('admin-stat-props').innerText=this.properties.length; document.getElementById('admin-stat-leads').innerText=this.leads.length; }else{ if(mp)mp.style.display='none'; } this.renderPortfolioGrid(); this.renderLeadsTable(); }
-            switchDashTab(t) { document.querySelectorAll('.tab-dash-view').forEach(v=>v.style.display='none'); document.querySelectorAll('.dash-menu-item').forEach(m=>m.classList.remove('active')); document.getElementById(`dash-tab-${t}`).style.display='block'; document.getElementById(`menu-sub-${t}`).classList.add('active'); }
-            
-            renderPortfolioGrid() {
-                const tbody = document.getElementById('portfolio-table-rows');
-                if(!tbody) return; tbody.innerHTML = '';
-                const uProps = this.currentUser.role==='Admin' ? this.properties : this.properties.filter(p=>p.author===this.currentUser.email);
-                if(uProps.length===0) return tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Vazio.</td></tr>`;
-                uProps.forEach(p => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Imóvel"><b>${p.title}</b></td><td data-label="Tipo"><span class="pricing-badge">${p.type}</span></td><td data-label="Local">${p.location}</td><td data-label="Preço">R$ ${Number(p.price).toLocaleString('pt-BR')}</td><td data-label="Ações"><button class="nav-link" style="color:var(--google-blue);" onclick="app.openEditPropertyModal('${p.id}')">Editar</button> | <button class="nav-link" style="color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button></td>`; tbody.appendChild(tr); });
+
+            contactBrokerResponsible() {
+                if (!this.selectedPropertyForLead) return;
+                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.ownerEmail) || { name: "Especialista Partner", phone: "5561983446343" };
+                const cleanPhone = broker.phone.replace(/\D/g, '');
+                const message = `Olá ${broker.name}, tenho interesse no imóvel "${this.selectedPropertyForLead.title}" listado na plataforma IA-MOBI. Poderia me passar mais informações?`;
+                
+                alert(`Conectando ao especialista do imóvel: ${broker.name}`);
+                const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
             }
 
             renderLeadsTable() {
-                const tbody = document.getElementById('leads-table-rows');
-                if(!tbody) return; tbody.innerHTML = '';
-                this.leads.forEach(l => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Nome">${l.name}</td><td data-label="Contato" style="color:var(--google-green);font-weight:bold;">${l.phone}</td><td data-label="Imóvel Alvo">${l.propTitle}</td><td data-label="Origem">${l.source}</td><td data-label="Data">${l.date}</td>`; tbody.appendChild(tr); });
+                const b = document.getElementById('leads-table-rows');
+                if(!b) return;
+                b.innerHTML = '';
+
+                this.leads.forEach(l => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Nome do Lead"><b>${l.name}</b></td>
+                        <td data-label="WhatsApp / Telefone">${l.phone}</td>
+                        <td data-label="Imóvel Alvo">${l.propTitle}</td>
+                        <td data-label="Origem Canal">${l.sourceChannel}</td>
+                        <td data-label="Data Captura">${l.date}</td>
+                    `;
+                    b.appendChild(tr);
+                });
             }
 
-            togglePropertyAgioForm(t) { document.getElementById('p-agio-panel').style.display = t==='Ágio'?'block':'none'; }
-            openNewPropertyModal() { document.getElementById('form-actual-property').reset(); document.getElementById('p-id').value=''; document.getElementById('form-prop-title').innerText="Novo Imóvel"; this.openModal('modal-property-form'); }
-            openEditPropertyModal(id) { const p=this.properties.find(x=>x.id===id); if(!p)return; document.getElementById('p-id').value=p.id; document.getElementById('p-title').value=p.title; document.getElementById('p-type').value=p.type; document.getElementById('p-price').value=p.price; document.getElementById('p-location').value=p.location; document.getElementById('p-image').value=p.image; document.getElementById('p-video').value=p.video; document.getElementById('p-description').value=p.description; this.togglePropertyAgioForm(p.type); if(p.type==='Ágio'){document.getElementById('p-agio-paid').value=p.agioPaid||'';document.getElementById('p-agio-remaining').value=p.agioRemaining||'';document.getElementById('p-agio-installment').value=p.agioInstallment||'';document.getElementById('p-agio-bank').value=p.agioBank||'';} document.getElementById('form-prop-title').innerText="Editar Imóvel"; this.openModal('modal-property-form'); }
-            actionDeleteProperty(id) { if(confirm('Excluir?')) { this.properties = this.properties.filter(x=>x.id!==id); this.saveState(); this.refreshAllScreens(); } }
+            openMediaViewer(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p || !p.video) return;
 
-            openDrivePicker(tId) { this.activeDriveTargetInputId=tId; const c=document.getElementById('drive-files-container'); c.innerHTML=''; const m=[{name:"📸 Cloudflare_Link.jpg", url:"https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}]; m.forEach(f=>{const d=document.createElement('div');d.className='drive-item';d.innerHTML=`<div><b>${f.name}</b><br><small>${f.url}</small></div>`;d.onclick=()=>this.chooseDriveFile(f.url);c.appendChild(d);}); this.openModal('modal-drive-picker'); }
-            chooseDriveFile(url) { if(this.activeDriveTargetInputId){ const cur=document.getElementById(this.activeDriveTargetInputId).value; document.getElementById(this.activeDriveTargetInputId).value = cur ? cur+','+url : url; } this.closeModal('modal-drive-picker'); }
-            
-            openModal(id) { document.getElementById(id).classList.add('active'); }
-            closeModal(id) { document.getElementById(id).classList.remove('active'); }
+                document.getElementById('media-viewer-title').innerText = p.title;
+                document.getElementById('media-viewer-desc').innerText = p.desc || 'Nenhuma descrição fornecida.';
+                
+                const container = document.getElementById('media-viewer-box');
+                container.innerHTML = '';
+
+                if(p.video.includes('youtube.com') || p.video.includes('youtu.be')) {
+                    let videoId = '';
+                    if(p.video.includes('v=')) videoId = p.video.split('v=')[1].split('&')[0];
+                    else videoId = p.video.split('/').pop();
+
+                    container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else if(p.video.includes('.m3u8') || p.video.includes('.mp4')) {
+                    container.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
+                } else {
+                    container.innerHTML = `<div style="color:white; text-align:center; font-weight:bold;">Formato de URL de mídia não suportado nativamente.</div>`;
+                }
+
+                this.openModal('modal-media-viewer');
+            }
+
+            closeMediaViewer() {
+                document.getElementById('media-viewer-box').innerHTML = '';
+                this.closeModal('modal-media-viewer');
+            }
+
+            actionCopyPixPayload() {
+                const payload = document.getElementById('pix-payload-container').innerText;
+                navigator.clipboard.writeText(payload);
+                alert('Código PIX Copiado com Sucesso!');
+            }
         }
 
-        const app = new IaMobiEngine();
+        const app = new ImobiApp();
+        window.onload = () => app.init();
     </script>
 </body>
 </html>
