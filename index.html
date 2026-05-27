@@ -2,7 +2,7 @@
 <html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>IMOBI | Plataforma Imobiliária</title>
     
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -10,7 +10,7 @@
 
     <style>
         :root {
-            /* Palette Fusão Premium: Light Mode Padrão */
+            /* Palette Premium */
             --bg-base: #f4f6fa;
             --bg-surface: #ffffff;
             --bg-card: #ffffff;
@@ -18,7 +18,6 @@
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-glow: rgba(26, 115, 232, 0.1);
-            /* Cores de Identidade de Marca (Estáveis) */
             --tesla-red: #e82127;
             --google-blue: #1a73e8;
             --google-green: #0f9d58;
@@ -29,7 +28,6 @@
         }
 
         html[data-theme="dark"] {
-            /* Palette Fusão Premium: Deep Tech Tesla Dark Mode */
             --bg-base: #060913;
             --bg-surface: #0c1220;
             --bg-card: #121b2d;
@@ -40,544 +38,84 @@
             --premium-gold: #ffd700;
         }
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            font-family: var(--font); 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        body { 
-            background-color: var(--bg-base); 
-            color: var(--text-main); 
-            overflow-x: hidden; 
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased; }
+        body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
 
-        .glass-glow-1 { 
-            position: fixed; 
-            width: 500px; 
-            height: 500px; 
-            background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); 
-            top: -10%; 
-            right: -10%;
-            z-index: -1; 
-            pointer-events: none; 
-        }
-        
-        .glass-glow-2 { 
-            position: fixed; 
-            width: 600px; 
-            height: 600px;
-            background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%); 
-            bottom: -20%; 
-            left: -10%; 
-            z-index: -1;
-            pointer-events: none; 
-        }
+        .glass-glow-1 { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); top: -10%; right: -10%; z-index: -1; pointer-events: none; }
+        .glass-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%); bottom: -20%; left: -10%; z-index: -1; pointer-events: none; }
 
-        header { 
-            background: rgba(255, 255, 255, 0.85); 
-            background-color: var(--bg-surface); /* Fallback para navegadores sem suporte a blur */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); 
-            border-bottom: 1px solid rgba(128, 128, 128, 0.1); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            padding: 1.2rem 2.5rem; 
-            display: flex;
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-        }
-        
-        .brand { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            cursor: pointer;
-        }
-        
-        .brand-logo { 
-            font-size: 1.8rem; 
-            font-weight: 900; 
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red)); 
-            -webkit-background-clip: text; 
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block; /* Garante renderização correta do gradiente no WebKit/Safari */
-        }
-        
-        .brand-sub { 
-            font-size: 0.7rem; 
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            display: block;
-        }
-        
-        nav { 
-            display: flex; 
-            gap: 1.2rem; 
-            align-items: center;
-        }
+        header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(128, 128, 128, 0.1); position: sticky; top: 0; z-index: 1000; padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); }
+        .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .brand-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand-sub { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: block; }
+        nav { display: flex; gap: 1.2rem; align-items: center; }
 
-        .nav-link { 
-            background: transparent; 
-            border: none; 
-            color: var(--text-muted); 
-            font-size: 0.95rem; 
-            font-weight: 600;
-            cursor: pointer; 
-            padding: 0.6rem 1.2rem; 
-            border-radius: 8px; 
-            transition: all 0.25s ease;
-        }
+        .nav-link { background: transparent; border: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; cursor: pointer; padding: 0.6rem 1.2rem; border-radius: 8px; transition: all 0.25s ease; }
+        .nav-link:hover, .nav-link.active { color: var(--text-main); background: rgba(128, 128, 128, 0.1); }
         
-        .nav-link:hover, .nav-link.active { 
-            color: var(--text-main); 
-            background: rgba(128, 128, 128, 0.1);
-        }
-        
-        .btn-action { 
-            background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%);
-            color: white; 
-            font-weight: 700; 
-            border: none; 
-            padding: 0.7rem 1.5rem; 
-            border-radius: 8px; 
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2); 
-            transition: transform 0.2s, box-shadow 0.2s;
-            -webkit-appearance: none; /* Remove estilos padrão do iOS */
-        }
-        
-        .btn-action:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35);
-        }
-        
-        .btn-theme-toggle { 
-            background: var(--bg-input); 
-            border: 1px solid rgba(128, 128, 128, 0.2);
-            color: var(--text-main); 
-            padding: 0.6rem; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1rem;
-        }
-        
-        .pricing-badge { 
-            background: linear-gradient(90deg, rgba(244, 180, 0, 0.1) 0%, rgba(26, 115, 232, 0.08) 100%);
-            border: 1px solid rgba(244, 180, 0, 0.4); 
-            color: var(--premium-gold); 
-            padding: 0.4rem 1rem; 
-            border-radius: 30px; 
-            font-size: 0.8rem; 
-            font-weight: 700; 
-            display: inline-flex;
-            align-items: center; 
-            gap: 6px; 
-        }
+        .btn-action { background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); color: white; font-weight: 700; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2); transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-action:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35); }
+        .btn-theme-toggle { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.6rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .pricing-badge { background: linear-gradient(90deg, rgba(244, 180, 0, 0.1) 0%, rgba(26, 115, 232, 0.08) 100%); border: 1px solid rgba(244, 180, 0, 0.4); color: var(--premium-gold); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
 
-        .container { 
-            max-width: 1400px; 
-            margin: 2.5rem auto;
-            padding: 0 2rem; 
-        }
-        
-        .view-section { 
-            display: none;
-        }
-        
-        .view-section.active-view { 
-            display: block;
-        }
-        
-        .billing-warning-banner { 
-            background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%); 
-            color: white;
-            padding: 1rem 1.5rem; 
-            border-radius: 10px; 
-            margin-bottom: 1.5rem; 
-            display: none; 
-            font-weight: 600; 
-            justify-content: space-between; 
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(232, 33, 39, 0.2); 
-        }
+        .container { max-width: 1400px; margin: 2.5rem auto; padding: 0 2rem; }
+        .view-section { display: none; }
+        .view-section.active-view { display: block; }
+        .billing-warning-banner { background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%); color: white; padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: none; font-weight: 600; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(232, 33, 39, 0.2); }
 
-        .hero { 
-            text-align: center;
-            padding: 2rem 1rem 2.5rem 1rem; 
-        }
-        
-        .hero h1 { 
-            font-size: 3.5rem; 
-            font-weight: 900;
-            letter-spacing: -1.5px; 
-            line-height: 1.15; 
-            margin-bottom: 1.5rem; 
-        }
-        
-        .hero h1 span { 
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
-            -webkit-background-clip: text; 
-            background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            display: inline-block;
-        }
+        .hero { text-align: center; padding: 2rem 1rem 2.5rem 1rem; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1.5rem; }
+        .hero h1 span { background: linear-gradient(90deg, var(--google-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .search-hub { 
-            background: var(--bg-surface);
-            border: 1px solid rgba(128, 128, 128, 0.15); 
-            padding: 1.8rem; 
-            border-radius: 20px; 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; 
-            gap: 1.2rem;
-            align-items: flex-end; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-            margin-bottom: 4rem; 
-        }
-        
-        .input-group { 
-            display: flex;
-            flex-direction: column; 
-            gap: 0.6rem; 
-        }
-        
-        .input-group label { 
-            font-size: 0.75rem; 
-            font-weight: 700;
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-        }
-        
-        .input-group input, .input-group select, .input-group textarea { 
-            background: var(--bg-input);
-            border: 1px solid rgba(128, 128, 128, 0.2); 
-            color: var(--text-main); 
-            padding: 0.9rem; 
-            border-radius: 10px; 
-            outline: none; 
-            font-size: 1rem; 
-            transition: all 0.3s;
-            -webkit-appearance: none; /* Corrige visualizações nativas inconsistentes */
-        }
-        
-        .input-group input:focus, .input-group select:focus { 
-            border-color: var(--google-blue); 
-            background: var(--bg-surface);
-            box-shadow: 0 0 10px rgba(26, 115, 232, 0.15); 
-        }
+        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
+        .input-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--google-blue); background: var(--bg-surface); box-shadow: 0 0 10px rgba(26, 115, 232, 0.15); }
 
-        .grid-wrapper { 
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); 
-            gap: 2.5rem; 
-        }
-        
-        .card { 
-            background: var(--bg-surface);
-            border: 1px solid rgba(128, 128, 128, 0.15); 
-            border-radius: 16px; 
-            overflow: hidden; 
-            position: relative; 
-            display: flex; 
-            flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.02); 
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--google-blue);
-            box-shadow: 0 20px 40px rgba(26, 115, 232, 0.1); 
-        }
-        
-        .card-badge { 
-            position: absolute;
-            top: 20px; 
-            left: 20px; 
-            background: rgba(255, 255, 255, 0.95); 
-            border: 1px solid var(--google-blue); 
-            color: var(--google-blue); 
-            padding: 0.4rem 0.9rem; 
-            border-radius: 30px;
-            font-size: 0.75rem; 
-            font-weight: 800; 
-            z-index: 10; 
-            text-transform: uppercase; 
-        }
-        
-        .card-media-mock { 
-            height: 240px;
-            background-color: #e2e8f0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            position: relative; 
-            overflow: hidden;
-        }
-        
-        .video-indicator { 
-            position: absolute; 
-            bottom: 15px; 
-            right: 15px; 
-            background: var(--tesla-red); 
-            color: white;
-            padding: 0.3rem 0.7rem; 
-            border-radius: 6px; 
-            font-size: 0.70rem; 
-            font-weight: 700; 
-            display: flex; 
-            align-items: center; 
-            gap: 4px; 
-            z-index: 12; 
-            cursor: pointer;
-        }
-        
-        .card-body { 
-            padding: 2rem; 
-            display: flex; 
-            flex-direction: column; 
-            flex-grow: 1;
-        }
-        
-        .card-price { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            color: var(--text-main); 
-            margin: 1rem 0;
-        }
+        .grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2.5rem; }
+        .card { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.02); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card:hover { transform: translateY(-8px); border-color: var(--google-blue); box-shadow: 0 20px 40px rgba(26, 115, 232, 0.1); }
+        .card-badge { position: absolute; top: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--google-blue); color: var(--google-blue); padding: 0.4rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-weight: 800; z-index: 10; text-transform: uppercase; }
+        .card-media-mock { height: 240px; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-size: cover; background-position: center; }
+        .video-indicator { position: absolute; bottom: 15px; right: 15px; background: var(--tesla-red); color: white; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 4px; z-index: 12; cursor: pointer; }
+        .card-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-price { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin: 1rem 0; }
 
-        .auth-container { 
-            max-width: 500px; 
-            margin: 4rem auto; 
-            background: var(--bg-surface);
-            border: 1px solid rgba(128, 128, 128, 0.15); 
-            border-radius: 20px; 
-            padding: 3rem; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.03);
-        }
-        
-        .auth-tabs { 
-            display: flex; 
-            gap: 1rem; 
-            border-bottom: 2px solid var(--bg-input); 
-            margin-bottom: 2rem;
-        }
-        
-        .auth-tab { 
-            padding: 0.8rem 1.5rem; 
-            cursor: pointer; 
-            color: var(--text-muted); 
-            font-weight: 700;
-            transition: all 0.2s; 
-        }
-        
-        .auth-tab.active { 
-            color: var(--google-blue); 
-            border-bottom: 2px solid var(--google-blue);
-        }
+        .auth-container { max-width: 500px; margin: 4rem auto; background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 20px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.03); }
+        .auth-tabs { display: flex; gap: 1rem; border-bottom: 2px solid var(--bg-input); margin-bottom: 2rem; }
+        .auth-tab { padding: 0.8rem 1.5rem; cursor: pointer; color: var(--text-muted); font-weight: 700; transition: all 0.2s; }
+        .auth-tab.active { color: var(--google-blue); border-bottom: 2px solid var(--google-blue); }
 
-        .dash-layout { 
-            display: grid; 
-            grid-template-columns: 280px 1fr; 
-            gap: 2.5rem;
-        }
-        
-        .dash-sidebar { 
-            background: var(--bg-surface); 
-            border: 1px solid rgba(128, 128, 128, 0.15);
-            border-radius: 16px; 
-            padding: 2rem; 
-            height: fit-content; 
-        }
-        
-        .dash-menu-item { 
-            display: flex; 
-            align-items: center;
-            gap: 12px; 
-            padding: 0.9rem 1.2rem; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            color: var(--text-muted); 
-            font-weight: 600; 
-            margin-bottom: 0.5rem; 
-            transition: all 0.2s;
-        }
-        
-        .dash-menu-item.active, .dash-menu-item:hover { 
-            background: var(--bg-input); 
-            color: var(--text-main);
-        }
-        
-        .dash-menu-item.active { 
-            border-left: 4px solid var(--tesla-red); 
-            color: var(--google-blue);
-        }
-        
-        .main-dash-content { 
-            background: var(--bg-surface); 
-            border: 1px solid rgba(128, 128, 128, 0.05);
-            border-radius: 16px; 
-            padding: 2.5rem; 
-            min-height: 600px; 
-        }
+        .dash-layout { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; }
+        .dash-sidebar { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 16px; padding: 2rem; height: fit-content; }
+        .dash-menu-item { display: flex; align-items: center; gap: 12px; padding: 0.9rem 1.2rem; border-radius: 10px; cursor: pointer; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; transition: all 0.2s; }
+        .dash-menu-item.active, .dash-menu-item:hover { background: var(--bg-input); color: var(--text-main); }
+        .dash-menu-item.active { border-left: 4px solid var(--tesla-red); color: var(--google-blue); }
+        .main-dash-content { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.05); border-radius: 16px; padding: 2.5rem; min-height: 600px; }
 
-        .modal-blur { 
-            position: fixed; 
-            top: 0;
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(15, 23, 42, 0.7); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
-            z-index: 5000; 
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            opacity: 0; 
-            pointer-events: none; 
-            transition: opacity 0.3s ease; 
-            padding: 1rem;
-        }
-        
-        .modal-blur.active { 
-            opacity: 1; 
-            pointer-events: auto;
-        }
-        
-        .modal-window { 
-            background: var(--bg-surface); 
-            border: 1px solid rgba(128, 128, 128, 0.2);
-            border-radius: 24px; 
-            width: 100%; 
-            max-width: 750px; 
-            padding: 2.5rem; 
-            max-height: 90vh; 
-            overflow-y: auto; 
-            position: relative; 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-            -webkit-overflow-scrolling: touch; /* Rolagem suave em modais no iOS */
-        }
-        
-        .video-box-container { 
-            width: 100%; 
-            height: 360px; 
-            background: #000; 
-            border-radius: 12px;
-            margin: 1.5rem 0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-        }
+        .modal-blur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
+        .modal-blur.active { opacity: 1; pointer-events: auto; }
+        .modal-window { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 24px; width: 100%; max-width: 750px; padding: 2.5rem; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+        .video-box-container { width: 100%; height: 360px; background: #000; border-radius: 12px; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 1.5rem;
-        }
-        
-        th { 
-            background: var(--bg-input); 
-            padding: 1rem; 
-            color: var(--text-muted); 
-            text-transform: uppercase; 
-            font-size: 0.75rem;
-            font-weight: 700; 
-            text-align: left; 
-        }
-        
-        td { 
-            padding: 1.2rem 1rem;
-            border-bottom: 1px solid rgba(128, 128, 128, 0.15); 
-            font-size: 0.9rem; 
-        }
+        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700; text-align: left; }
+        td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
 
-        /* CONTEXTO DE TABELAS RESPONSIVAS */
         @media (max-width: 768px) {
-            .dash-layout { 
-                grid-template-columns: 1fr;
-            }
-            table, thead, tbody, th, td, tr { 
-                display: block;
-                width: 100%; 
-            }
-            thead { 
-                display: none;
-            }
-            tr { 
-                margin-bottom: 1.5rem; 
-                background: var(--bg-surface);
-                border: 1px solid rgba(128,128,128,0.2); 
-                border-radius: 12px; 
-                padding: 1rem; 
-                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            }
-            td { 
-                text-align: right; 
-                padding-left: 50%; 
-                position: relative;
-                border-bottom: 1px solid rgba(128,128,128,0.1); 
-                padding-top: 0.8rem; 
-                padding-bottom: 0.8rem; 
-            }
-            td::before { 
-                content: attr(data-label);
-                position: absolute; 
-                left: 0; 
-                top: 0.8rem; 
-                text-align: left; 
-                font-weight: bold; 
-                color: var(--text-muted); 
-                font-size: 0.75rem; 
-                text-transform: uppercase;
-            }
-            td:last-child { 
-                border-bottom: none;
-            }
+            .dash-layout { grid-template-columns: 1fr; }
+            table, thead, tbody, th, td, tr { display: block; width: 100%; }
+            thead { display: none; }
+            tr { margin-bottom: 1.5rem; background: var(--bg-surface); border: 1px solid rgba(128,128,128,0.2); border-radius: 12px; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            td { text-align: right; padding-left: 50%; position: relative; border-bottom: 1px solid rgba(128,128,128,0.1); padding-top: 0.8rem; padding-bottom: 0.8rem; }
+            td::before { content: attr(data-label); position: absolute; left: 0; top: 0.8rem; text-align: left; font-weight: bold; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; }
+            td:last-child { border-bottom: none; }
         }
 
-        .drive-item { 
-            display: flex;
-            align-items: center; 
-            gap: 12px; 
-            padding: 0.8rem; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            transition: background 0.2s; 
-            border: 1px solid rgba(128, 128, 128, 0.1);
-            margin-bottom: 0.5rem; 
-        }
-        
-        .drive-item:hover { 
-            background: rgba(26, 115, 232, 0.08); 
-            border-color: var(--google-blue);
-        }
-        
-        footer { 
-            text-align: center; 
-            padding: 3rem; 
-            margin-top: 5rem;
-            border-top: 1px solid rgba(128, 128, 128, 0.15); 
-            font-size: 0.8rem; 
-            color: var(--text-muted); 
-            letter-spacing: 1px;
-        }
+        .drive-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(128, 128, 128, 0.1); margin-bottom: 0.5rem; }
+        .drive-item:hover { background: rgba(26, 115, 232, 0.08); border-color: var(--google-blue); }
+        footer { text-align: center; padding: 3rem; margin-top: 5rem; border-top: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -592,14 +130,12 @@
                 <span class="brand-sub">Partner Holding</span>
             </div>
         </div>
-     
         <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
             <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
             <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
-         
             <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
                 <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
                 <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Sair</button>
@@ -618,17 +154,20 @@
                 <h1>Plataforma de <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
-            <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
+            <div class="search-hub">
                 <div class="input-group">
                     <label>Modalidade</label>
                     <select id="search-type" onchange="app.executeSearch()">
                         <option value="">Todas as opções</option>
                         <option value="Ágio">Negociação de Ágio</option>
-                        <option value="Venda">Venda Directa</option>
+                        <option value="Venda">Venda Direta</option>
                         <option value="Aluguel">Locação Residencial</option>
                     </select>
-                </div>             
-        
+                </div>
+                <div class="input-group">
+                    <label>Localização / Palavra-Chave</label>
+                    <input type="text" id="search-string" placeholder="Ex: Águas Lindas, Sul, QNR" oninput="app.executeSearch()">
+                </div>
                 <button class="btn-action" style="height: 50px;" onclick="app.executeSearch()">Buscar</button>
                 <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
             </div>
@@ -641,6 +180,7 @@
                     <div class="auth-tab active" id="tab-auth-login" onclick="app.switchAuthMode('login')">Entrar</div>
                     <div class="auth-tab" id="tab-auth-register" onclick="app.switchAuthMode('register')">Cadastrar Conta</div>
                 </div>
+                
                 <form id="form-login" onsubmit="app.actionLogin(event)">
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail Corporativo</label><input type="email" id="login-email" required placeholder="exemplo@partner.com"></div>
                     <div class="input-group" style="margin-bottom: 2rem;"><label>Senha de Acesso</label><input type="password" id="login-password" required placeholder="Sua senha secreta"></div>
@@ -650,7 +190,6 @@
                 <form id="form-register" onsubmit="app.actionRegister(event)" style="display: none;">
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail de Trabalho</label><input type="email" id="reg-email" required placeholder="seu@email.com"></div>
-  
                     <div class="input-group" style="margin-bottom: 1.2rem;">
                         <label>Perfil Operacional</label>
                         <select id="reg-role" onchange="app.handleRoleChange(this.value)">
@@ -679,6 +218,7 @@
                     <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Convertidos</div>
                     <div class="dash-menu-item" id="menu-sub-system" onclick="app.switchDashTab('system')">Configurações & API</div>
                 </aside>
+                
                 <main class="main-dash-content">
                     <div id="dash-tab-portfolio" class="tab-dash-view">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
@@ -690,6 +230,7 @@
                             <tbody id="portfolio-table-rows"></tbody>
                         </table>
                     </div>
+                    
                     <div id="dash-tab-leads" class="tab-dash-view" style="display: none;">
                         <h2>Leads Capturados</h2>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">Controle de tráfego orgânico e conversões de alta intenção.</p>
@@ -698,6 +239,7 @@
                             <tbody id="leads-table-rows"></tbody>
                         </table>
                     </div>
+                    
                     <div id="dash-tab-system" class="tab-dash-view" style="display: none;">
                         <h2>Infraestrutura Jurídica e Comercial</h2>
                         <div style="margin-top: 1.5rem; background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
@@ -708,6 +250,7 @@
                                 <button class="btn-action" style="background: var(--google-green); box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Comprar Pacote PIX</button>
                             </div>
                         </div>
+                        
                         <div id="admin-master-panel" style="display: none; margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
                             <h3 style="color: var(--google-blue); margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
@@ -722,22 +265,617 @@
         </section>
     </div>
 
+    <div class="modal-blur" id="modal-property-detail">
+        <div class="modal-window">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
+            <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
+            <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
+            
+            <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
+                    <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
+                    <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
+                    <div><strong>Parcela Mensal:</strong> <span id="md-agio-installment"></span></div>
+                    <div><strong>Banco Credor:</strong> <span id="md-agio-bank"></span></div>
+                </div>
+            </div>
+            
+            <h3 id="md-price" style="color: var(--google-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
+            <p id="md-description" style="line-height: 1.6; margin-bottom: 1.5rem;">Descrição completa.</p>
+            <h4>▶ Tour Virtual / Mídia Integrada</h4>
+            <div class="video-box-container" id="md-video-container"></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista</button>
+                <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
+            </div>
+            <div style="margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; word-break: break-all;" id="md-share-url"></div>
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-property-form">
+        <div class="modal-window" style="max-width: 800px;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
+            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Cadastrar Novo Imóvel</h2>
+            
+            <form id="form-actual-property" onsubmit="app.actionSaveProperty(event)">
+                <input type="hidden" id="p-id">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Título Comercial</label><input type="text" id="p-title" required placeholder="Ex: Lote Premium"></div>
+                    <div class="input-group">
+                        <label>Modalidade</label>
+                        <select id="p-type" required onchange="app.togglePropertyAgioForm(this.value)">
+                            <option value="Venda">Venda Direta</option>
+                            <option value="Ágio">Negociação de Ágio</option>
+                            <option value="Aluguel">Locação Residencial</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Preço Face (R$)</label><input type="number" id="p-price" required placeholder="Valor"></div>
+                    <div class="input-group"><label>Localização</label><input type="text" id="p-location" required placeholder="Cidade - UF"></div>
+                </div>
+
+                <div id="p-agio-panel" style="display: none; background: rgba(128,128,128,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.2rem;">
+                    <h4 style="margin-bottom: 1rem; color: var(--premium-gold);">Parâmetros Específicos do Ágio</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                        <div class="input-group"><label>Valor do Ágio Pago (R$)</label><input type="number" id="p-agio-paid" placeholder="Quanto já pagou"></div>
+                        <div class="input-group"><label>Saldo Devedor Restante (R$)</label><input type="number" id="p-agio-remaining" placeholder="Valor para quitar"></div>
+                        <div class="input-group"><label>Parcela Mensal (R$)</label><input type="number" id="p-agio-installment" placeholder="Valor da prestação"></div>
+                        <div class="input-group"><label>Banco Credor</label><input type="text" id="p-agio-bank" placeholder="Ex: Caixa, Itaú"></div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+                    <div class="input-group">
+                        <label>URL da Imagem / Capa</label>
+                        <div style="display: flex; gap: 5px;">
+                            <input type="text" id="p-media" placeholder="https://..." style="flex: 1;">
+                            <button type="button" class="btn-action" style="padding: 0 10px;" onclick="app.openDrivePicker('p-media')">📁</button>
+                        </div>
+                    </div>
+                    <div class="input-group"><label>WhatsApp de Contato (Com DDD)</label><input type="text" id="p-whatsapp" required placeholder="Ex: 61999999999"></div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 2rem;"><label>Descrição Detalhada</label><textarea id="p-desc" rows="4" required placeholder="Descreva os diferenciais do imóvel..."></textarea></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-blue);">Salvar e Publicar Imóvel</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-drive-picker">
+        <div class="modal-window" style="max-width: 450px;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
+            <h3 style="margin-bottom: 1.5rem;">Repositório Cloud Integrado</h3>
+            <div id="drive-files-container"></div>
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-gate-capture">
+        <div class="modal-window" style="max-width: 460px;">
+            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Desbloquear Atendimento</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados para aceder imediatamente ao memorial e visita virtual.</p>
+            <form id="form-lead-capture" onsubmit="app.actionCaptureLead(event)">
+                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Digite seu nome"></div>
+                <div class="input-group" style="margin-bottom: 2rem;"><label>WhatsApp / Telefone</label><input type="tel" id="lead-phone" required placeholder="(61) 99999-9999"></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Liberar Conteúdo Exclusivo</button>
+            </form>
+        </div>
+    </div>
+
     <div class="modal-blur" id="modal-pix-payment">
         <div class="modal-window" style="max-width: 420px; text-align: center;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
-            
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
-                <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
-                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
+                <div style="width:200px; height:200px; background:#e2e8f0; display:flex; align-items:center; justify-content:center; font-weight:bold; color:var(--text-muted);">QR CODE PIX MOCK</div>
             </div>
-            
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
-            
-            <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
+            <button class="btn-action" style="width: 100%; var(--google-blue);" onclick="app.resetBilling(); app.closeModal('modal-pix-payment')">Confirmar Liquidação Simulada</button>
         </div>
     </div>
 
-    </body>
+    <footer>
+        <p>&copy; 2026 PARTNER HOLDING — SISTEMA DE GESTÃO E CAPTURA DE ALTA PERFORMANCE</p>
+    </footer>
+
+    <script>
+        // Inicialização Segura do Firebase
+        const firebaseConfig = {
+            databaseURL: "https://imobi-668cc-default-rtdb.firebaseio.com/"
+        };
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.database();
+
+        class ImobiApp {
+            constructor() {
+                this.currentUser = null;
+                this.properties = [];
+                this.leads = [];
+                this.usersList = [];
+                this.billingActive = true;
+                this.activeDriveTargetInputId = null;
+                this.selectedPropertyForDetail = null;
+            }
+
+            init() {
+                this.loadLocalState();
+                this.syncFirebaseData();
+                this.refreshAllScreens();
+                
+                // Tratar parâmetro na URL para link de tráfego direto de leads
+                const urlParams = new URLSearchParams(window.location.search);
+                const viewPropId = urlParams.get('propId');
+                if(viewPropId) {
+                    setTimeout(() => this.actionOpenPropertyDetail(viewPropId), 800);
+                }
+            }
+
+            loadLocalState() {
+                const u = localStorage.getItem('imobi_user');
+                if(u) { this.currentUser = JSON.parse(u); this.updateUserMenuUI(); }
+                const b = localStorage.getItem('imobi_billing');
+                if(b) { this.billingActive = (b === 'true'); }
+            }
+
+            saveState() {
+                localStorage.setItem('imobi_billing', this.billingActive);
+            }
+
+            syncFirebaseData() {
+                db.ref('properties').on('value', snap => {
+                    const data = snap.val();
+                    this.properties = data ? Object.keys(data).map(k => ({id: k, ...data[k]})) : [];
+                    this.refreshAllScreens();
+                });
+                db.ref('leads').on('value', snap => {
+                    const data = snap.val();
+                    this.leads = data ? Object.keys(data).map(k => ({id: k, ...data[k]})) : [];
+                    this.refreshAllScreens();
+                });
+                db.ref('users').on('value', snap => {
+                    const data = snap.val();
+                    this.usersList = data ? Object.keys(data).map(k => ({id: k, ...data[k]})) : [];
+                    this.refreshAdminPanel();
+                });
+            }
+
+            refreshAllScreens() {
+                this.renderPublicGrid();
+                this.renderPortfolioTable();
+                this.renderLeadsTable();
+                this.updateBillingUI();
+                this.refreshAdminPanel();
+            }
+
+            updateUserMenuUI() {
+                const btnAuth = document.getElementById('menu-btn-auth');
+                const btnDash = document.getElementById('menu-btn-dash');
+                const profileBox = document.getElementById('menu-user-profile');
+                const headerName = document.getElementById('header-user-name');
+
+                if(this.currentUser) {
+                    btnAuth.style.display = 'none';
+                    btnDash.style.display = 'block';
+                    profileBox.style.display = 'flex';
+                    headerName.innerText = this.currentUser.name.split(' ')[0];
+                    
+                    document.getElementById('dash-user-title').innerText = this.currentUser.name;
+                    document.getElementById('dash-user-subtitle').innerText = `${this.currentUser.role} | ${this.currentUser.email}`;
+                } else {
+                    btnAuth.style.display = 'block';
+                    btnDash.style.display = 'none';
+                    profileBox.style.display = 'none';
+                }
+            }
+
+            navigate(view) {
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+                if(view === 'landing') {
+                    document.getElementById('sec-landing').classList.add('active-view');
+                    document.getElementById('menu-btn-explore').classList.add('active');
+                } else if(view === 'auth') {
+                    document.getElementById('sec-auth').classList.add('active-view');
+                } else if(view === 'dashboard') {
+                    if(!this.currentUser) { this.navigate('auth'); return; }
+                    document.getElementById('sec-dashboard').classList.add('active-view');
+                    document.getElementById('menu-btn-dash').classList.add('active');
+                }
+            }
+
+            switchAuthMode(mode) {
+                document.getElementById('tab-auth-login').classList.remove('active');
+                document.getElementById('tab-auth-register').classList.remove('active');
+                document.getElementById('form-login').style.display = 'none';
+                document.getElementById('form-register').style.display = 'none';
+
+                if(mode === 'login') {
+                    document.getElementById('tab-auth-login').classList.add('active');
+                    document.getElementById('form-login').style.display = 'block';
+                } else {
+                    document.getElementById('tab-auth-register').classList.add('active');
+                    document.getElementById('form-register').style.display = 'block';
+                }
+            }
+
+            handleRoleChange(role) {
+                const creci = document.getElementById('group-creci-field');
+                if(['Corretor', 'Consultor', 'Imobiliária'].includes(role)) {
+                    creci.style.display = 'block';
+                } else {
+                    creci.style.display = 'none';
+                }
+            }
+
+            actionRegister(e) {
+                e.preventDefault();
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const role = document.getElementById('reg-role').value;
+                const creci = document.getElementById('reg-creci').value;
+                const password = document.getElementById('reg-password').value;
+
+                const uid = 'user_' + Date.now();
+                const newUser = { uid, name, email, role, creci, password };
+
+                db.ref('users/' + uid).set(newUser).then(() => {
+                    alert('Infraestrutura de usuário criada com sucesso!');
+                    this.currentUser = newUser;
+                    localStorage.setItem('imobi_user', JSON.stringify(newUser));
+                    this.updateUserMenuUI();
+                    document.getElementById('form-register').reset();
+                    this.navigate('dashboard');
+                });
+            }
+
+            actionLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const pass = document.getElementById('login-password').value;
+
+                const user = this.usersList.find(x => x.email === email && x.password === pass);
+                if(user) {
+                    this.currentUser = user;
+                    localStorage.setItem('imobi_user', JSON.stringify(user));
+                    this.updateUserMenuUI();
+                    document.getElementById('form-login').reset();
+                    this.navigate('dashboard');
+                } else {
+                    alert('Dados credenciais inválidos ou não localizados no Partner Holding.');
+                }
+            }
+
+            actionLogout() {
+                this.currentUser = null;
+                localStorage.removeItem('imobi_user');
+                this.updateUserMenuUI();
+                this.navigate('landing');
+            }
+
+            switchDashTab(tab) {
+                document.querySelectorAll('.tab-dash-view').forEach(t => t.style.display = 'none');
+                document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
+
+                document.getElementById(`dash-tab-${tab}`).style.display = 'block';
+                document.getElementById(`menu-sub-${tab}`).classList.add('active');
+            }
+
+            togglePropertyAgioForm(val) {
+                document.getElementById('p-agio-panel').style.display = (val === 'Ágio') ? 'block' : 'none';
+            }
+
+            openNewPropertyModal() {
+                document.getElementById('form-actual-property').reset();
+                document.getElementById('p-id').value = '';
+                document.getElementById('p-agio-panel').style.display = 'none';
+                document.getElementById('form-prop-title').innerText = "Cadastrar Novo Imóvel";
+                this.openModal('modal-property-form');
+            }
+
+            actionSaveProperty(e) {
+                e.preventDefault();
+                if(!this.currentUser) return;
+
+                const id = document.getElementById('p-id').value || 'prop_' + Date.now();
+                const propData = {
+                    title: document.getElementById('p-title').value,
+                    type: document.getElementById('p-type').value,
+                    price: parseFloat(document.getElementById('p-price').value) || 0,
+                    location: document.getElementById('p-location').value,
+                    media: document.getElementById('p-media').value || 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600',
+                    whatsapp: document.getElementById('p-whatsapp').value,
+                    desc: document.getElementById('p-desc').value,
+                    ownerUid: this.currentUser.uid,
+                    ownerName: this.currentUser.name,
+                    agioPaid: document.getElementById('p-type').value === 'Ágio' ? parseFloat(document.getElementById('p-agio-paid').value) || 0 : 0,
+                    agioRemaining: document.getElementById('p-type').value === 'Ágio' ? parseFloat(document.getElementById('p-agio-remaining').value) || 0 : 0,
+                    agioInstallment: document.getElementById('p-type').value === 'Ágio' ? parseFloat(document.getElementById('p-agio-installment').value) || 0 : 0,
+                    agioBank: document.getElementById('p-type').value === 'Ágio' ? document.getElementById('p-agio-bank').value : ""
+                };
+
+                db.ref('properties/' + id).set(propData).then(() => {
+                    this.closeModal('modal-property-form');
+                    alert('Imóvel atualizado na nuvem com sucesso!');
+                });
+            }
+
+            actionEditProperty(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
+
+                document.getElementById('p-id').value = p.id;
+                document.getElementById('p-title').value = p.title;
+                document.getElementById('p-type').value = p.type;
+                document.getElementById('p-price').value = p.price;
+                document.getElementById('p-location').value = p.location;
+                document.getElementById('p-media').value = p.media;
+                document.getElementById('p-whatsapp').value = p.whatsapp;
+                document.getElementById('p-desc').value = p.desc;
+
+                if(p.type === 'Ágio') {
+                    document.getElementById('p-agio-panel').style.display = 'block';
+                    document.getElementById('p-agio-paid').value = p.agioPaid || '';
+                    document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
+                    document.getElementById('p-agio-installment').value = p.agioInstallment || '';
+                    document.getElementById('p-agio-bank').value = p.agioBank || '';
+                } else {
+                    document.getElementById('p-agio-panel').style.display = 'none';
+                }
+
+                document.getElementById('form-prop-title').innerText = "Editar Parâmetros do Imóvel";
+                this.openModal('modal-property-form');
+            }
+
+            actionDeleteProperty(id) {
+                if(confirm('Tem certeza que deseja remover este imóvel de forma irreversível?')) {
+                    db.ref('properties/' + id).remove();
+                }
+            }
+
+            renderPublicGrid() {
+                const grid = document.getElementById('public-properties-grid');
+                grid.innerHTML = '';
+
+                const filterType = document.getElementById('search-type').value;
+                const filterString = document.getElementById('search-string') ? document.getElementById('search-string').value.toLowerCase() : '';
+
+                const filtered = this.properties.filter(p => {
+                    const matchType = filterType === '' || p.type === filterType;
+                    const matchText = p.title.toLowerCase().includes(filterString) || p.location.toLowerCase().includes(filterString) || p.desc.toLowerCase().includes(filterString);
+                    return matchType && matchText;
+                });
+
+                if(filtered.length === 0) {
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">Nenhum imóvel ou apartamento localizado com os filtros aplicados.</div>`;
+                    return;
+                }
+
+                filtered.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    let agioRibbon = p.type === 'Ágio' ? `<span class="card-badge" style="border-color:var(--google-yellow); color:var(--premium-gold);">Oportunidade Ágio</span>` : `<span class="card-badge">${p.type}</span>`;
+                    
+                    card.innerHTML = `
+                        ${agioRibbon}
+                        <div class="card-media-mock" style="background-image: url('${p.media}')">
+                            <div class="video-indicator" onclick="event.stopPropagation(); app.actionOpenPropertyDetail('${p.id}')">▶ Ver Detalhes</div>
+                        </div>
+                        <div class="card-body">
+                            <h3 style="font-size: 1.3rem; margin-bottom: 0.4rem;">${p.title}</h3>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">📍 ${p.location}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-main); line-height: 1.4; height: 40px; overflow: hidden; margin-bottom: 1rem;">${p.desc}</div>
+                            <div class="card-price">R$ ${p.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
+                            <button class="btn-action" style="width: 100%; margin-top: auto;" onclick="app.actionOpenPropertyDetail('${p.id}')">Acessar Memorial</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            renderPortfolioTable() {
+                const tbody = document.getElementById('portfolio-table-rows');
+                tbody.innerHTML = '';
+
+                if(!this.currentUser) return;
+                
+                // Admins visualizam tudo; Corretores visualizam apenas os seus
+                const myProps = this.currentUser.role === 'Admin' ? this.properties : this.properties.filter(x => x.ownerUid === this.currentUser.uid);
+
+                myProps.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Imóvel"><strong>${p.title}</strong></td>
+                        <td data-label="Tipo"><span style="color: ${p.type === 'Ágio' ? 'var(--google-yellow)' : 'var(--google-blue)'}; font-weight:700;">${p.type}</span></td>
+                        <td data-label="Localização">${p.location}</td>
+                        <td data-label="Preço Face">R$ ${p.price.toLocaleString('pt-BR')}</td>
+                        <td data-label="Ações">
+                            <button class="nav-link" style="display:inline; padding: 0.3rem 0.6rem; color:var(--google-blue);" onclick="app.actionEditProperty('${p.id}')">Editar</button>
+                            <button class="nav-link" style="display:inline; padding: 0.3rem 0.6rem; color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            renderLeadsTable() {
+                const tbody = document.getElementById('leads-table-rows');
+                tbody.innerHTML = '';
+                
+                this.leads.forEach(l => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Nome do Lead"><strong>${l.name}</strong></td>
+                        <td data-label="WhatsApp / Telefone"><a href="https://wa.me/${l.phone.replace(/\D/g,'')}" target="_blank" style="color: var(--google-green); font-weight: 700; text-decoration: none;">🟢 ${l.phone}</a></td>
+                        <td data-label="Imóvel Alvo">${l.propTitle || 'Geral'}</td>
+                        <td data-label="Origem Canal"><span style="background: var(--bg-input); padding: 4px 8px; border-radius: 6px; font-size: 11px;">${l.origin || 'Orgânico'}</span></td>
+                        <td data-label="Data Captura">${new Date(l.timestamp).toLocaleDateString('pt-BR')}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            executeSearch() {
+                this.renderPublicGrid();
+            }
+
+            clearSearchFilters() {
+                document.getElementById('search-type').value = '';
+                if(document.getElementById('search-string')) document.getElementById('search-string').value = '';
+                this.renderPublicGrid();
+            }
+
+            actionOpenPropertyDetail(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
+
+                this.selectedPropertyForDetail = p;
+                
+                document.getElementById('md-title').innerText = p.title;
+                document.getElementById('md-location').innerText = `📍 ${p.location}`;
+                document.getElementById('md-price').innerText = `R$ ${p.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                document.getElementById('md-description').innerText = p.desc;
+                document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}?propId=${p.id}`;
+
+                const agioPanel = document.getElementById('md-agio-details');
+                if(p.type === 'Ágio') {
+                    agioPanel.style.display = 'block';
+                    document.getElementById('md-agio-paid').innerText = `R$ ${p.agioPaid.toLocaleString('pt-BR')}`;
+                    document.getElementById('md-agio-remaining').innerText = `R$ ${p.agioRemaining.toLocaleString('pt-BR')}`;
+                    document.getElementById('md-agio-installment').innerText = `R$ ${p.agioInstallment.toLocaleString('pt-BR')}`;
+                    document.getElementById('md-agio-bank').innerText = p.agioBank || 'Não Informado';
+                } else {
+                    agioPanel.style.display = 'none';
+                }
+
+                // Vídeo/Mídia Mock Box
+                const videoBox = document.getElementById('md-video-container');
+                videoBox.innerHTML = `<div style="width:100%; height:100%; background-image:url('${p.media}'); background-size:cover; background-position:center;"></div>`;
+
+                if(!this.billingActive) {
+                    this.openModal('modal-gate-capture');
+                } else {
+                    this.openModal('modal-property-detail');
+                }
+            }
+
+            actionCaptureLead(e) {
+                e.preventDefault();
+                const name = document.getElementById('lead-name').value;
+                const phone = document.getElementById('lead-phone').value;
+                
+                const leadId = 'lead_' + Date.now();
+                const newLead = {
+                    name,
+                    phone,
+                    propId: this.selectedPropertyForDetail ? this.selectedPropertyForDetail.id : 'geral',
+                    propTitle: this.selectedPropertyForDetail ? this.selectedPropertyForDetail.title : 'Geral',
+                    origin: 'Tráfego de Alta Conversão',
+                    timestamp: Date.now()
+                };
+
+                db.ref('leads/' + leadId).set(newLead).then(() => {
+                    document.getElementById('form-lead-capture').reset();
+                    this.closeModal('modal-gate-capture');
+                    this.openModal('modal-property-detail');
+                });
+            }
+
+            contactBrokerResponsible() {
+                if(!this.selectedPropertyForDetail) return;
+                const num = this.selectedPropertyForDetail.whatsapp.replace(/\D/g, '');
+                const msg = encodeURIComponent(`Olá! Gostaria de mais informações sobre o memorial do imóvel: "${this.selectedPropertyForDetail.title}" visto na plataforma IMOBI.`);
+                window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+            }
+
+            copyConversionLink() {
+                const url = document.getElementById('md-share-url').innerText;
+                navigator.clipboard.writeText(url).then(() => alert('Link de tráfego copiado com sucesso!'));
+            }
+
+            simulateBillingExpiration() {
+                this.billingActive = false;
+                this.saveState();
+                this.updateBillingUI();
+            }
+
+            resetBilling() {
+                this.billingActive = true;
+                this.saveState();
+                this.updateBillingUI();
+                alert('Faturamento regularizado via PIX.');
+            }
+
+            updateBillingUI() {
+                const banner = document.getElementById('global-billing-alert');
+                const label = document.getElementById('billing-status-lbl');
+
+                if(this.billingActive) {
+                    banner.style.display = 'none';
+                    if(label) label.innerText = "Assinatura Ativa (Regularizada)";
+                } else {
+                    banner.style.display = 'flex';
+                    if(label) label.innerText = "Inadimplência de Assinatura Detectada";
+                }
+            }
+
+            refreshAdminPanel() {
+                if(this.currentUser && this.currentUser.role === 'Admin') {
+                    document.getElementById('admin-master-panel').style.display = 'block';
+                    document.getElementById('admin-stat-users').innerText = this.usersList.length;
+                    document.getElementById('admin-stat-props').innerText = this.properties.length;
+                    document.getElementById('admin-stat-leads').innerText = this.leads.length;
+                } else {
+                    const pnl = document.getElementById('admin-master-panel');
+                    if(pnl) pnl.style.display = 'none';
+                }
+            }
+
+            openDrivePicker(targetId) {
+                this.activeDriveTargetInputId = targetId;
+                const container = document.getElementById('drive-files-container');
+                container.innerHTML = '';
+                
+                const mockFiles = [
+                    {name: "📸 Fachada Residencial Premium.jpg", url: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800"},
+                    {name: "📸 Apartamento Interno Decorado.jpg", url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800"},
+                    {name: "📸 Planta Baixa Ágios DF.png", url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"}
+                ];
+
+                mockFiles.forEach(f => {
+                    const div = document.createElement('div');
+                    div.className = 'drive-item';
+                    div.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted); word-break:break-all;">${f.url}</small></div>`;
+                    div.onclick = () => this.chooseDriveFile(f.url);
+                    container.appendChild(div);
+                });
+                
+                this.openModal('modal-drive-picker');
+            }
+
+            chooseDriveFile(url) {
+                if(this.activeDriveTargetInputId) {
+                    document.getElementById(this.activeDriveTargetInputId).value = url;
+                }
+                this.closeModal('modal-drive-picker');
+            }
+
+            openModal(id) { document.getElementById(id).classList.add('active'); }
+            closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+            toggleTheme() {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+            }
+        }
+
+        const app = new ImobiApp();
+        window.onload = () => app.init();
+    </script>
+</body>
 </html>
