@@ -285,8 +285,8 @@
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong>10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
-                <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020101021126360014br.gov.bcb.pix0114%2B5561983446343520400005303986540519.995802BR5925CRISTIAN%20R%20FLORENCIO6009BRASILIA62070503***6304ABCD" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
-                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size: 0.75rem; word-break: break-all; border: 1px dashed rgba(128,128,128,0.3); margin-top:10px; border-radius:6px; max-height: 80px; overflow-y:auto;">00020101021126360014br.gov.bcb.pix0114+5561983446343520400005303986540519.995802BR5925CRISTIAN R FLORENCIO6009BRASILIA62070503***6304ABCD</div>
+                <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
+                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size: 0.75rem; word-break: break-all; border: 1px dashed rgba(128,128,128,0.3); margin-top:10px; border-radius:6px; max-height: 80px; overflow-y:auto;"></div>
             </div>
             <button class="btn-action" style="background: var(--google-blue); width: 100%;" onclick="app.actionCopyPixPayload()">Copiar Código PIX</button>
         </div>
@@ -305,7 +305,7 @@
                         <select id="p-type" onchange="app.handleFormTypeChange(this.value)">
                             <option value="Ágio">Negociação de Ágio</option>
                             <option value="Venda">Venda Direta</option>
-                            <option value="Aluguel">Locação Residential</option>
+                            <option value="Aluguel">Locação Residencial</option>
                         </select>
                     </div>
                 </div>
@@ -382,44 +382,13 @@
         class ImobiApp {
             constructor() {
                 this.currentUser = null;
-                // IMÓVEIS ORIGINAIS RECUPERADOS COM TODAS AS ESPECIFICAÇÕES PERFEITAS
-                this.properties = [
-                    {
-                        id: "prop-01",
-                        title: "Ágio de Casa de 3 Qts no Setor Coimbra",
-                        type: "Ágio",
-                        location: "Águas Lindas - GO",
-                        price: "35000",
-                        agioInstallment: "720",
-                        agioRemaining: "142000",
-                        agioBank: "Caixa",
-                        desc: "Imóvel pronto e reformado com quintal amplo e garagem coberta para 2 veículos.",
-                        images: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png",
-                        video: "https://imobi.droppfy.com/live/stream.m3u8",
-                        author: "cristian@partner.com"
-                    },
-                    {
-                        id: "prop-02",
-                        title: "Apartamento Premium de 2 Qts com Suíte",
-                        type: "Venda",
-                        location: "Águas Claras",
-                        price: "385000",
-                        desc: "Lazer completo, piscina aquecida, academia de ponta e 1 vaga de garagem privativa fixa.",
-                        images: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png",
-                        video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                        author: "consultor@partner.com"
-                    }
-                ];
+                this.properties = [];
                 this.leads = [];
                 this.usersCount = 0;
                 this.activeDriveTargetInputId = null;
                 this.billingActive = true;
                 this.selectedPropertyForLead = null;
-                // USUÁRIOS E CORRETORES CORRETOS DA INFRAESTRUTURA
-                this.users = [
-                    { name: "Especialista Partner", email: "cristian@partner.com", phone: "5561983446343" },
-                    { name: "Consultor Partner", email: "consultor@partner.com", phone: "5561983446343" }
-                ]; 
+                this.users = []; 
             }
 
             init() {
@@ -459,9 +428,8 @@
             syncProperties() {
                 db.ref('properties').on('value', (snapshot) => {
                     const data = snapshot.val();
-                    // Se o Firebase tiver dados, atualiza, senão mantém os estáveis padrão
+                    this.properties = [];
                     if(data) {
-                        this.properties = [];
                         for(let id in data) {
                             this.properties.push({id, ...data[id]});
                         }
@@ -664,17 +632,6 @@
                             if(maxPrice && parseFloat(item.price) > maxPrice) continue;
                             this.properties.push({id, ...item});
                         }
-                    } else {
-                        // Se não houver dados no Firebase durante o teste de busca, busca localmente
-                        this.properties = [
-                            { id: "prop-01", title: "Ágio de Casa de 3 Qts no Setor Coimbra", type: "Ágio", location: "Águas Lindas - GO", price: "35000", agioInstallment: "720", agioRemaining: "142000", agioBank: "Caixa", desc: "Imóvel pronto e reformado com quintal amplo.", images: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png", video: "https://imobi.droppfy.com/live/stream.m3u8", author: "cristian@partner.com" },
-                            { id: "prop-02", title: "Apartamento Premium de 2 Qts com Suíte", type: "Venda", location: "Águas Claras", price: "385000", desc: "Lazer completo, piscina aquecida.", images: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png", video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", author: "consultor@partner.com" }
-                        ].filter(item => {
-                            if(type && item.type !== type) return false;
-                            if(loc && !item.location.toLowerCase().includes(loc)) return false;
-                            if(maxPrice && parseFloat(item.price) > maxPrice) return false;
-                            return true;
-                        });
                     }
                     this.renderPublicGrid();
                 });
@@ -803,6 +760,8 @@
                 
                 if(!this.billingActive) {
                     this.openModal('modal-pix-payment');
+                    document.getElementById('pix-qr-img').src = "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png";
+                    document.getElementById('pix-payload-container').innerText = "00020101021126360014br.gov.bcb.pix0114+5561999999999520400005303986540519.995802BR5925CRISTIAN R FLORENCIO6009BRASILIA62070503***6304ABCD";
                     return;
                 }
                 document.getElementById('form-lead').reset();
@@ -826,12 +785,13 @@
                 db.ref('leads').push(leadData);
                 this.closeModal('modal-lead-form');
                 
+                // Conecta o lead diretamente ao corretor responsável via WhatsApp
                 this.contactBrokerResponsible();
             }
 
             contactBrokerResponsible() {
                 if (!this.selectedPropertyForLead) return;
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
+                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.ownerEmail) || { name: "Especialista Partner", phone: "5561983446343" };
                 const cleanPhone = broker.phone.replace(/\D/g, '');
                 const message = `Olá ${broker.name}, tenho interesse no imóvel "${this.selectedPropertyForLead.title}" listado na plataforma IA-MOBI. Poderia me passar mais informações?`;
                 
