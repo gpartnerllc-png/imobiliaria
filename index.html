@@ -39,83 +39,83 @@
             --border-glow: rgba(0, 240, 255, 0.15);
             --premium-gold: #ffd700;
         }
+        
         /* ==========================================================================
-   PREFIXOS DE COMPATIBILIDADE GLOBAL (COLE DENTRO DA TAG <STYLE>)
-   ========================================================================== */
+           PREFIXOS DE COMPATIBILIDADE GLOBAL E INTEGRAÇÃO CROSS-BROWSER
+           ========================================================================== */
 
-/* 1. RESET GLOBAL E SUAVIZAÇÃO DE FONTES (CHROME, SAFARI E FIREFOX) */
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: var(--font); 
-    -webkit-font-smoothing: antialiased; 
-    -moz-osx-font-smoothing: grayscale;
-}
+        /* 1. RESET GLOBAL E SUAVIZAÇÃO DE FONTES (CHROME, SAFARI E FIREFOX) */
+        * { 
+            box-sizing: border-box;
+            margin: 0; 
+            padding: 0; 
+            font-family: var(--font); 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-/* Evita que a tela dê "pulos" horizontais ao abrir modais em navegadores de desktop */
-html {
-    scrollbar-gutter: stable;
-}
+        /* Evita que a tela dê "pulos" horizontais ao abrir modais em navegadores de desktop */
+        html {
+            scrollbar-gutter: stable;
+        }
 
-/* 2. RECORTE DE GRADIENTE NA LOGO (COMPATIBILIDADE MULTI-NAVEGADOR) */
-.brand-logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    letter-spacing: -1px;
-    background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        /* 2. RECORTE DE GRADIENTE NA LOGO (COMPATIBILIDADE MULTI-NAVEGADOR) */
+        .brand-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* 3. NORMALIZAÇÃO DE INPUTS, TEXTAREAS E SELECTS (FORÇA ALTURA E ESTILO IGUAL NO IOS/SAFARI) */
-.input-group input, 
-.input-group select, 
-.input-group textarea {
-    background: var(--bg-input);
-    border: 1px solid rgba(128, 128, 128, 0.2);
-    color: var(--text-main);
-    padding: 0.9rem;
-    border-radius: 10px;
-    outline: none;
-    font-size: 1rem;
-    transition: all 0.3s;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
+        /* 3. NORMALIZAÇÃO DE INPUTS, TEXTAREAS E SELECTS (FORÇA ALTURA E ESTILO IGUAL NO IOS/SAFARI) */
+        .input-group input, 
+        .input-group select, 
+        .input-group textarea {
+            background: var(--bg-input);
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            color: var(--text-main);
+            padding: 0.9rem;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
 
-/* Garante que o elemento 'select' mantenha uma setinha elegante e nativa, mesmo resetado no Safari */
-.input-group select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    background-size: 1.2rem;
-    padding-right: 2.5rem;
-}
+        /* Garante que o elemento 'select' mantenha uma setinha elegante e nativa, mesmo resetado no Safari */
+        .input-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            padding-right: 2.5rem;
+        }
 
-/* 4. MODAL BLUR / DESFOQUE DE VIDRO COESIVO (FIX PARA SAFARI MOBILE E DESKTOP) */
-.modal-blur {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.7);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    z-index: 5000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    padding: 1rem;
-}
+        /* 4. MODAL BLUR / DESFOQUE DE VIDRO COESIVO (FIX PARA SAFARI MOBILE E DESKTOP) */
+        .modal-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+        }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased; }
         body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
 
         .glass-glow-1 { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); top: -10%; right: -10%; z-index: -1; pointer-events: none; }
@@ -123,7 +123,6 @@ html {
 
         header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(128, 128, 128, 0.1); position: sticky; top: 0; z-index: 1000; padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); }
         .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-        .brand-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .brand-sub { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: block; }
         nav { display: flex; gap: 1.2rem; align-items: center; }
 
@@ -147,7 +146,6 @@ html {
         .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
         .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
         .input-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-        .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
         .input-group input:focus, .input-group select:focus { border-color: var(--google-blue); background: var(--bg-surface); box-shadow: 0 0 10px rgba(26, 115, 232, 0.15); }
 
         .grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2.5rem; }
@@ -171,7 +169,6 @@ html {
         .dash-menu-item.active { border-left: 4px solid var(--tesla-red); color: var(--google-blue); }
         .main-dash-content { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.05); border-radius: 16px; padding: 2.5rem; min-height: 600px; }
 
-        .modal-blur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
         .modal-blur.active { opacity: 1; pointer-events: auto; }
         .modal-window { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 24px; width: 100%; max-width: 750px; padding: 2.5rem; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
         .video-box-container { width: 100%; height: 360px; background: #000; border-radius: 12px; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -241,7 +238,7 @@ html {
                         <option value="">Todas as opções</option>
                         <option value="Ágio">Negociação de Ágio</option>
                         <option value="Venda">Venda Directa</option>
-                        <option value="Aluguel">Locação Residencial</option>
+                        <option value="Aluguel">Locação Residential</option>
                     </select>
                 </div>             
         
@@ -265,7 +262,7 @@ html {
                 </form>
     
                 <form id="form-register" onsubmit="app.actionRegister(event)" style="display: none;">
-                  
+    
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail de Trabalho</label><input type="email" id="reg-email" required placeholder="seu@email.com"></div>
   
@@ -304,6 +301,7 @@ html {
                             <h2>Gerenciamento de Imóveis</h2>
                             <button class="btn-action" style="background: var(--google-green);" onclick="app.openNewPropertyModal()">+ Novo Imóvel</button>
                         </div>
+   
                         <table id="table-portfolio">
                             <thead><tr><th>Imóvel</th><th>Tipo</th><th>Localização</th><th>Preço Face</th><th>Ações</th></tr></thead>
                             <tbody id="portfolio-table-rows"></tbody>
@@ -319,6 +317,7 @@ html {
                     </div>
                     <div id="dash-tab-system" class="tab-dash-view" style="display: none;">
                         <h2>Infraestrutura Jurídica e Comercial</h2>
+        
                         <div style="margin-top: 1.5rem; background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
                             <h4 style="margin-bottom: 0.5rem;">Status de Faturamento da Conta</h4>
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;"><span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span></div>
@@ -346,16 +345,12 @@ html {
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
             <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
-            
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
                 <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
                 <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
             </div>
-            
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
-            
             <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
-            
         </div>
     </div>
 
@@ -364,98 +359,124 @@ html {
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
             <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
             <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
-            
             <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
                 <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
                     <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
                     <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
-                    <div><strong>Parcela Mensal:</strong> <span id="md-agio-installment"></span></div>
-                    <div><strong>Banco Credor:</strong> <span id="md-agio-bank"></span></div>
+                    <div><strong>Parcela do Ágio:</strong> <span id="md-agio-installment"></span></div>
+                    <div><strong>Banco Financiador:</strong> <span id="md-agio-bank"></span></div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                <div style="background: var(--bg-input); padding: 1rem; border-radius: 10px;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Modalidade</span>
+                    <strong id="md-type">-</strong>
+                </div>
+                <div style="background: var(--bg-input); padding: 1rem; border-radius: 10px;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Preço Comercial</span>
+                    <strong id="md-price" style="color: var(--google-blue); font-size: 1.2rem;">-</strong>
                 </div>
             </div>
 
-            <h3 id="md-price" style="color: var(--google-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
-            <p id="md-description" style="line-height: 1.6; margin-bottom: 1.5rem;">Descrição completa.</p>
-            
-            <h4>▶ Tour Virtual Integrado</h4>
-            <div class="video-box-container" id="md-video-container"></div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-                <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista</button>
-                <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin-bottom: 0.5rem;">Características e Parâmetros</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;" id="md-specs-container"></div>
             </div>
-            <div style="margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; word-break: break-all;" id="md-share-url"></div>
-        </div>
-    </div>
 
-    <div class="modal-blur" id="modal-gate-capture">
-        <div class="modal-window" style="max-width: 460px;">
-            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Desbloquear Atendimento</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados para aceder imediatamente ao memorial e visita virtual.</p>
-            <form id="form-lead-capture" onsubmit="app.actionCaptureLead(event)">
-                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Digite seu nome"></div>
-                <div class="input-group" style="margin-bottom: 2rem;"><label>WhatsApp / Telefone</label><input type="tel" id="lead-phone" required placeholder="(61) 99999-9999"></div>
-                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Liberar Conteúdo Exclusivo</button>
-            </form>
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin-bottom: 0.5rem;">Descrição Geral</h4>
+                <p id="md-desc" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; white-space: pre-line;"></p>
+            </div>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="margin-bottom: 0.5rem;">Galeria de Mídia do Imóvel</h4>
+                <div id="md-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;"></div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(128,128,128,0.15); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Anunciante Responsável</span>
+                    <strong id="md-author-name">-</strong> <span id="md-author-creci" style="font-size: 0.85rem; color: var(--google-blue);"></span>
+                </div>
+                <button class="btn-action" style="background: var(--google-green); display: flex; align-items: center; gap: 8px;" id="md-btn-whatsapp">
+                    <span>💬 Conectar via WhatsApp</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-property-form">
-        <div class="modal-window" style="max-width: 800px;">
+        <div class="modal-window">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
-            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Cadastrar Novo Imóvel</h2>
+            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Novo Imóvel</h2>
             
-            <form id="form-actual-property" onsubmit="app.actionSaveProperty(event)">
+            <form id="prop-real-form" onsubmit="app.actionSaveProperty(event)">
                 <input type="hidden" id="p-id">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Título Comercial</label><input type="text" id="p-title" required placeholder="Ex: Lote Premium"></div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
                     <div class="input-group">
-                        <label>Modalidade</label>
-                        <select id="p-type" required onchange="app.togglePropertyAgioForm(this.value)">
-                            <option value="Venda">Venda Directa</option>
+                        <label>Título Anúncio</label>
+                        <input type="text" id="p-title" required placeholder="Ex: Apartamento 2 Qts Reserva Taguatinga">
+                    </div>
+                    <div class="input-group">
+                        <label>Modalidade Comercial</label>
+                        <select id="p-type" required onchange="app.toggleFormAgioFields(this.value)">
+                            <option value="Venda">Venda Direta</option>
                             <option value="Ágio">Negociação de Ágio</option>
                             <option value="Aluguel">Locação Residencial</option>
                         </select>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Preço Face (R$)</label><input type="number" id="p-price" required placeholder="Valor"></div>
-                    <div class="input-group"><label>Localização</label><input type="text" id="p-location" required placeholder="Cidade - UF"></div>
-                </div>
 
-                <div id="p-agio-panel" style="display: none; background: rgba(128,128,128,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.2rem;">
-                    <h4 style="margin-bottom: 1rem; color: var(--premium-gold);">Parâmetros Específicos do Ágio</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
-                        <div class="input-group"><label>Valor Pago (R$)</label><input type="number" id="p-agio-paid" placeholder="Valor"></div>
-                        <div class="input-group"><label>Saldo Restante (R$)</label><input type="number" id="p-agio-remaining" placeholder="Valor"></div>
-                        <div class="input-group"><label>Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Valor"></div>
-                        <div class="input-group"><label>Banco / Agência</label><input type="text" id="p-agio-bank" placeholder="Instituição"></div>
+                <div id="form-agio-specials" style="display: none; border: 1px dashed var(--google-yellow); padding: 1.2rem; border-radius: 12px; margin-bottom: 1.2rem; background: rgba(244,180,0,0.02);">
+                    <h4 style="color: var(--premium-gold); margin-bottom: 0.8rem;">Composição Financeira do Ágio</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 0.8rem;">
+                        <div class="input-group"><label>Valor do Ágio (Sinal/Pago)</label><input type="number" step="0.01" id="p-agio-paid" placeholder="Ex: 50000"></div>
+                        <div class="input-group"><label>Saldo Devedor Vincendo</label><input type="number" step="0.01" id="p-agio-remaining" placeholder="Ex: 180000"></div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="input-group"><label>Valor Parcela Mensal</label><input type="number" step="0.01" id="p-agio-installment" placeholder="Ex: 1200"></div>
+                        <div class="input-group"><label>Banco da Alienação</label><input type="text" id="p-agio-bank" placeholder="Ex: Caixa Econômica"></div>
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
                     <div class="input-group">
-                        <label>Fotos (Links separados por vírgula. Suporta Drive/Cloudflare/Youtube)</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" id="p-image" placeholder="Cole os links aqui" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none;">Nuvem</button>
-                            <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
-                            <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
-                        </div>
+                        <label>Preço de Face / Valor Total (R$)</label>
+                        <input type="number" step="0.01" id="p-price" required placeholder="Ex: 230000">
                     </div>
                     <div class="input-group">
-                        <label>Vídeo Tour (Link Youtube/Drive/Cloudflare)</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="url" id="p-video" placeholder="Link do Vídeo" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="document.getElementById('p-video-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
-                            <input type="file" id="p-video-file" accept="video/*" style="display: none;" onchange="app.handleLocalVideo(this)">
-                        </div>
+                        <label>Região / Localidade</label>
+                        <input type="text" id="p-location" required placeholder="Ex: Águas Claras - DF">
                     </div>
                 </div>
 
-                <div class="input-group" style="margin-bottom: 2rem;"><label>Memorial / Observações</label><textarea id="p-description" rows="4" placeholder="Detalhes..."></textarea></div>
-                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-blue);">Salvar Anúncio</button>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Quartos</label><input type="number" id="p-rooms" value="0"></div>
+                    <div class="input-group"><label>Suítes</label><input type="number" id="p-suites" value="0"></div>
+                    <div class="input-group"><label>Vagas</label><input type="number" id="p-parking" value="0"></div>
+                    <div class="input-group"><label>Área (m²)</label><input type="number" id="p-area" value="0"></div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 1.2rem;">
+                    <label>Descrição Detalhada do Imóvel</label>
+                    <textarea id="p-desc" rows="4" placeholder="Descreva os diferenciais, armários, andar, posição do sol, área de lazer..."></textarea>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <label>Imagens e Fotos (Links separados por vírgula)</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="p-images" style="flex-grow: 1;" placeholder="https://link.com/foto1.jpg, https://link.com/foto2.jpg">
+                        <button type="button" class="btn-action" style="background: var(--text-main); font-size: 0.85rem; padding: 0 1rem;" onclick="app.openDrivePicker('p-images')">Nuvem</button>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: edit; gap: 10px; border-top: 1px solid rgba(128,128,128,0.15); padding-top: 1.5rem;">
+                    <button type="button" class="btn-action" style="background: var(--text-muted); box-shadow: none;" onclick="app.closeModal('modal-property-form')">Cancelar</button>
+                    <button type="submit" class="btn-action" style="background: var(--google-blue);">Salvar Registro</button>
+                </div>
             </form>
         </div>
     </div>
@@ -463,433 +484,474 @@ html {
     <div class="modal-blur" id="modal-drive-picker">
         <div class="modal-window" style="max-width: 500px;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
-            <h3 style="color: var(--google-blue); margin-bottom: 0.5rem;">📂 Partner Cloud Workspace</h3>
-            <div id="drive-files-container"></div>
+            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Banco de Imagens Compartilhado</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Clique no arquivo desejado para integrá-lo automaticamente ao formulário ativo.</p>
+            <div id="drive-files-container" style="max-height: 300px; overflow-y: auto; border: 1px solid rgba(128,128,128,0.2); border-radius: 10px; padding: 0.5rem; background: var(--bg-input);"></div>
         </div>
     </div>
 
-    <footer>&copy; 2026 IMOBI — Partner Holding.</footer>
+    <div class="modal-blur" id="modal-lead-form">
+        <div class="modal-window" style="max-width: 450px;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-lead-form')">&times;</button>
+            <h3 style="margin-bottom: 0.5rem; color: var(--google-blue);">Intenção de Contato</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Insira seus dados abaixo para liberar o link direto de conversão com o anunciante responsável.</p>
+            
+            <form id="lead-real-form" onsubmit="app.actionSubmitLead(event)">
+                <div class="input-group" style="margin-bottom: 1rem;"><label>Seu Nome</label><input type="text" id="l-name" required placeholder="Digite seu nome"></div>
+                <div class="input-group" style="margin-bottom: 1.5rem;"><label>WhatsApp / Telefone DDD</label><input type="text" id="l-phone" required placeholder="Ex: 61999998888"></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-green);">Liberar Canal de Atendimento</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IMOBI PLATAFORMA INTEGRADORA — PARTNER HOLDING SYSTEM. TODOS OS DIREITOS RESERVADOS.</p>
+    </footer>
 
     <script>
-        class IaMobiEngine {
+        const configFirebase = {
+            databaseURL: "https://sandxcdd-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(configFirebase);
+        const database = firebase.database();
+
+        class CoreApp {
             constructor() {
-                this.carouselIndices = {};
-
-                // --- CONFIGURAÇÃO PIX E KPI (Controle de Entregas) ---
-                this.CONFIG_PIX = {
-                    pix: "34259998854",
-                    beneficiario: "CRISTIAN R FLORENCIO",
-                    cidade: "BRASILIA",
-                    valorRenovacao: 19.99,
-                    limiteEntregas: 10
-                };
-
-                // CONFIGURAÇÃO FIREBASE
-                const firebaseConfig = {
-                    apiKey: "", 
-                    authDomain: "",
-                    databaseURL: "",
-                    projectId: "",
-                    storageBucket: "",
-                    messagingSenderId: "",
-                    appId: ""
-                };
-                this.useCloud = false;
-                
-                if (firebaseConfig.apiKey !== "") {
-                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-                    this.db = firebase.database();
-                    this.useCloud = true;
-                }
-
-                this.users = [];
+                this.currentUser = null;
                 this.properties = [];
                 this.leads = [];
-                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
-                this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
-                
-                this.init();
-            }
-
-            // Geração PIX (Padrão EMV)
-            gerarPixMestre(v) {
-                const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
-                const valStr = parseFloat(v).toFixed(2);
-                const payloadConta = f('00', 'br.gov.bcb.pix') + f('01', this.CONFIG_PIX.pix);
-                let payload = "000201" + f('26', payloadConta) + "52040000" + "5303986" + 
-                              f('54', valStr) + "5802BR" + f('59', this.CONFIG_PIX.beneficiario.substring(0, 25)) + 
-                              f('60', this.CONFIG_PIX.cidade.substring(0, 15)) + "62070503***" + "6304";
-                let crc = 0xFFFF;
-                for (let i = 0; i < payload.length; i++) {
-                    crc ^= payload.charCodeAt(i) << 8;
-                    for (let j = 0; j < 8; j++) {
-                        if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
-                        else crc <<= 1;
-                    }
-                }
-                return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+                this.billingActive = true;
+                this.currentAuthMode = 'login';
+                this.currentDashTab = 'portfolio';
+                this.activeDriveTargetInputId = null;
+                this.activeLeadProperty = null;
             }
 
             init() {
-                this.applySavedTheme();
-                this.catchUrlDeepLink();
-                this.initAutoCarousel();
-                this.checkBillingStatusUI();
-
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').on('value', (snapshot) => {
-                        const data = snapshot.val() || {};
-                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
-                        this.properties = data.properties || [];
-                        this.leads = data.leads || [];
-                        this.refreshAllScreens();
-                    });
-                } else {
-                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian", email: "admin@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
-                    this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
-                    this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
-                    this.refreshAllScreens();
-                }
+                this.loadState();
+                this.syncFirebase();
+                this.refreshAllScreens();
+                window.addEventListener('hashchange', () => this.handleRouting());
+                this.handleRouting();
             }
 
-            refreshAllScreens() {
-                this.updateAuthHeader();
-                this.renderPublicGrid();
-                if (this.currentUser) this.renderDashboard();
+            loadState() {
+                const u = localStorage.getItem('imobi_user');
+                if(u) this.currentUser = JSON.parse(u);
+                const b = localStorage.getItem('imobi_billing');
+                if(b !== null) this.billingActive = (b === 'true');
             }
 
             saveState() {
-                localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
-                localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
+                if(this.currentUser) localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
+                else localStorage.removeItem('imobi_user');
+                localStorage.setItem('imobi_billing', this.billingActive.toString());
+            }
 
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').set({ users: this.users, properties: this.properties, leads: this.leads });
+            syncFirebase() {
+                database.ref('properties').on('value', snap => {
+                    const data = snap.val();
+                    this.properties = [];
+                    if(data) { for(let id in data) { this.properties.push({id, ...data[id]}); } }
+                    this.refreshAllScreens();
+                });
+                database.ref('leads').on('value', snap => {
+                    const data = snap.val();
+                    this.leads = [];
+                    if(data) { for(let id in data) { this.leads.push({id, ...data[id]}); } }
+                    this.refreshAllScreens();
+                });
+            }
+
+            refreshAllScreens() {
+                this.renderHeaderNav();
+                this.renderPublicGrid();
+                this.renderDashboard();
+                this.renderAdminPanel();
+                this.updateBillingBanner();
+            }
+
+            handleRouting() {
+                const h = window.location.hash || '#landing';
+                if(h === '#landing') this.displayView('sec-landing');
+                else if(h === '#auth') this.displayView('sec-auth');
+                else if(h === '#dashboard') { if(!this.currentUser) this.navigate('auth'); else this.displayView('sec-dashboard'); }
+            }
+
+            navigate(dest) { window.location.hash = '#' + dest; this.handleRouting(); }
+            displayView(id) {
+                document.querySelectorAll('.view-section').forEach(x => x.classList.remove('active-view'));
+                document.getElementById(id).classList.add('active-view');
+                document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active-view'));
+                if(id === 'sec-landing') document.getElementById('menu-btn-explore').classList.add('active');
+            }
+
+            toggleTheme() {
+                const html = document.documentElement;
+                const current = html.getAttribute('data-theme');
+                html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+            }
+
+            renderHeaderNav() {
+                const btnAuth = document.getElementById('menu-btn-auth');
+                const btnDash = document.getElementById('menu-btn-dash');
+                const profileArea = document.getElementById('menu-user-profile');
+                const lblName = document.getElementById('header-user-name');
+
+                if(this.currentUser) {
+                    btnAuth.style.display = 'none';
+                    btnDash.style.display = 'block';
+                    profileArea.style.display = 'flex';
+                    lblName.innerText = this.currentUser.name;
                 } else {
-                    localStorage.setItem('iamobi_users', JSON.stringify(this.users));
-                    localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
-                    localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
+                    btnAuth.style.display = 'block';
+                    btnDash.style.display = 'none';
+                    profileArea.style.display = 'none';
                 }
             }
 
-            parseExternalLink(url, type = 'image') {
-                if (!url) return '';
-                url = url.trim();
-                if (url.includes('drive.google.com')) {
-                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-                    if (match && match[1]) { return type === 'image' ? `https://docs.google.com/uc?export=view&id=${match[1]}` : `https://drive.google.com/file/d/${match[1]}/preview`; }
+            updateBillingBanner() {
+                const banner = document.getElementById('global-billing-alert');
+                const lblStatus = document.getElementById('billing-status-lbl');
+                if(!this.billingActive) {
+                    banner.style.display = 'flex';
+                    if(lblStatus) { lblStatus.innerText = "Inadimplente / Bloqueado"; lblStatus.style.color = "var(--tesla-red)"; }
+                } else {
+                    banner.style.display = 'none';
+                    if(lblStatus) { lblStatus.innerText = "Assinatura Ativa (Regularizada)"; lblStatus.style.color = "var(--google-green)"; }
                 }
-                if (type === 'video') {
-                    if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
-                    if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
+            }
+
+            simulateBillingExpiration() { this.billingActive = false; this.saveState(); this.refreshAllScreens(); }
+            resetBilling() { this.billingActive = true; this.saveState(); this.refreshAllScreens(); this.closeModal('modal-pix-payment'); }
+
+            switchAuthMode(mode) {
+                this.currentAuthMode = mode;
+                const tLogin = document.getElementById('tab-auth-login');
+                const tReg = document.getElementById('tab-auth-register');
+                const fLogin = document.getElementById('form-login');
+                const fReg = document.getElementById('form-register');
+
+                if(mode === 'login') {
+                    tLogin.classList.add('active'); tReg.classList.remove('active');
+                    fLogin.style.display = 'block'; fReg.style.display = 'none';
+                } else {
+                    tLogin.classList.remove('active'); tReg.classList.add('active');
+                    fLogin.style.display = 'none'; fReg.style.display = 'block';
                 }
-                return url;
             }
 
-            getImagesArray(imageStr) {
-                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
-                return imageStr.split(',').map(url => this.parseExternalLink(url, 'image'));
+            handleRoleChange(val) { document.getElementById('group-creci-field').style.display = (val==='Corretor'||val==='Imobiliária') ? 'block' : 'none'; }
+
+            actionLogin(e) {
+                e.preventDefault();
+                const em = document.getElementById('login-email').value;
+                let mockName = em.split('@')[0];
+                mockName = mockName.charAt(0).toUpperCase() + mockName.slice(1);
+                this.currentUser = { name: mockName, email: em, role: em.includes('admin') ? 'Admin' : 'Corretor', creci: 'CRECI-DF 1234' };
+                this.saveState(); this.refreshAllScreens(); this.navigate('dashboard');
             }
 
-            moveCarousel(id, direction, total) {
-                if (total <= 1) return;
-                if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
-                this.carouselIndices[id] = (this.carouselIndices[id] + direction + total) % total;
-                document.querySelectorAll(`.carousel-slider-${id}`).forEach(slider => { slider.style.transform = `translateX(-${this.carouselIndices[id] * 100}%)`; });
+            actionRegister(e) {
+                e.preventDefault();
+                this.currentUser = {
+                    name: document.getElementById('reg-name').value,
+                    email: document.getElementById('reg-email').value,
+                    role: document.getElementById('reg-role').value,
+                    creci: document.getElementById('reg-creci').value || 'Não Informado'
+                };
+                this.saveState(); this.refreshAllScreens(); this.navigate('dashboard');
             }
 
-            initAutoCarousel() {
-                setInterval(() => {
-                    this.properties.forEach(p => {
-                        const images = this.getImagesArray(p.image);
-                        if (images.length > 1) this.moveCarousel(p.id, 1, images.length);
-                    });
-                }, 5000);
+            actionLogout() { this.currentUser = null; this.saveState(); this.refreshAllScreens(); this.navigate('landing'); }
+
+            switchDashTab(t) {
+                this.currentDashTab = t;
+                document.getElementById('menu-sub-portfolio').classList.remove('active');
+                document.getElementById('menu-sub-leads').classList.remove('active');
+                document.getElementById('menu-sub-system').classList.remove('active');
+                document.getElementById('dash-tab-portfolio').style.display = 'none';
+                document.getElementById('dash-tab-leads').style.display = 'none';
+                document.getElementById('dash-tab-system').style.display = 'none';
+
+                if(t==='portfolio') { document.getElementById('menu-sub-portfolio').classList.add('active'); document.getElementById('dash-tab-portfolio').style.display='block'; }
+                if(t==='leads') { document.getElementById('menu-sub-leads').classList.add('active'); document.getElementById('dash-tab-leads').style.display='block'; }
+                if(t==='system') { document.getElementById('menu-sub-system').classList.add('active'); document.getElementById('dash-tab-system').style.display='block'; }
             }
 
-            handleLocalImages(input) {
-                if (!input.files || input.files.length === 0) return;
-                const files = Array.from(input.files).slice(0, 12);
-                const promises = files.map(file => new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = new Image();
-                        img.onload = () => {
-                            const canvas = document.createElement('canvas');
-                            const MAX_WIDTH = 800; 
-                            const scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
-                            canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
-                            const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            resolve(canvas.toDataURL('image/jpeg', 0.8));
-                        };
-                        img.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }));
-                Promise.all(promises).then(b64 => { document.getElementById('p-image').value = b64.join(','); alert('Fotos processadas e comprimidas com sucesso!'); });
-            }
-
-            handleLocalVideo(input) {
-                if (!input.files || input.files.length === 0) return;
-                const reader = new FileReader();
-                reader.onload = (e) => { document.getElementById('p-video').value = e.target.result; alert('Vídeo carregado!'); };
-                reader.readAsDataURL(input.files[0]);
-            }
-
-            contactBrokerResponsible() {
-                if (!this.selectedPropertyForLead) return;
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
-                alert(`Conectando ao especialista do imóvel: ${broker.name}`);
-                window.open(`https://wa.me/5561983446343${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
-            }
-
-            renderPublicGrid(filteredData = null) {
-                const grid = document.getElementById('public-properties-grid');
-                if(!grid) return; grid.innerHTML = '';
+            renderPublicGrid() {
+                const g = document.getElementById('public-properties-grid');
+                if(!g) return;
+                g.innerHTML = '';
                 
-                // REGRA DA ASSINATURA: Puxa Admin ou quem não tem bloqueio
-                const validEmails = this.users.filter(u => u.role === 'Admin' || !u.isBlocked).map(u => u.email);
-                const data = (filteredData || this.properties).filter(p => validEmails.includes(p.author));
+                const fType = document.getElementById('search-type').value;
+                let filtered = this.properties;
+                if(fType) { filtered = filtered.filter(x => x.type === fType); }
 
-                if (data.length === 0) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem;">Nenhum imóvel encontrado no momento.</div>`; return; }
+                if(filtered.length === 0) { g.innerHTML = `<p style="color:var(--text-muted); grid-column:1/-1; text-align:center; padding:3rem;">Nenhum imóvel disponível para o filtro selecionado.</p>`; return; }
 
-                data.forEach(p => {
-                    const card = document.createElement('div'); card.className = 'card';
-                    const images = this.getImagesArray(p.image);
-                    const activeIdx = this.carouselIndices[p.id] || 0;
-                    const videoHtml = p.video ? `<div class="video-indicator" onclick="event.stopPropagation(); app.gateCheckProperty('${p.id}')"><span>▶ TOUR VÍDEO</span></div>` : '';
-                    let agioHtml = p.type === 'Ágio' ? `<div style="margin-top:0.5rem;padding:0.6rem;background:rgba(26,115,232,0.04);border-radius:6px;font-size:0.8rem;">🪙 <b>Ágio:</b> R$ ${(p.agioPaid||0).toLocaleString('pt-BR')}<br>📉 <b>Saldo:</b> R$ ${(p.agioRemaining||0).toLocaleString('pt-BR')}</div>` : '';
-
-                    card.innerHTML = `
+                filtered.forEach(p => {
+                    const c = document.createElement('div');
+                    c.className = 'card';
+                    const imgUrl = p.images ? p.images.split(',')[0].trim() : 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=500';
+                    c.innerHTML = `
                         <span class="card-badge">${p.type}</span>
-                        <div class="card-media-mock" style="position:relative;background:#e2e8f0;">
-                            <div class="carousel-slider-${p.id}" style="width:100%;height:100%;display:flex;transition:transform 0.4s ease-out;transform:translateX(-${activeIdx*100}%);">
-                                 ${images.map(img => `<img src="${img}" style="width:100%;height:100%;object-fit:cover;flex-shrink:0;">`).join('')}
-                            </div>
-                            ${images.length>1 ? `<button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', -1, ${images.length})" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10094;</button><button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', 1, ${images.length})" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10095;</button>` : ''}
-                            ${videoHtml}
+                        <div class="card-media-mock" style="background: url('${imgUrl}') center/cover no-repeat;">
+                            <div class="video-indicator" onclick="event.stopPropagation(); app.openVideoModal('${p.id}')">▶ Tour Virtual</div>
                         </div>
                         <div class="card-body">
-                            <h3 style="font-size:1.25rem;margin-bottom:0.5rem;">${p.title}</h3>
-                            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">📍 ${p.location}</p>
-                            ${agioHtml}
-                            <div class="card-price">R$ ${Number(p.price).toLocaleString('pt-BR')}</div>
-                            <button class="btn-action" style="width:100%;margin-top:auto;background:var(--text-main);" onclick="app.gateCheckProperty('${p.id}')">Analisar Memorial</button>
+                            <h3 style="font-size:1.25rem; margin-bottom:0.5rem;">${p.title}</h3>
+                            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1rem;">📍 ${p.location}</p>
+                            <div style="display:flex; gap:12px; font-size:0.8rem; color:var(--text-muted); margin-bottom:1.5rem;">
+                                <span>🛏️ ${p.rooms} Qts</span> <span>📐 ${p.area} m²</span> <span>🚗 ${p.parking} Vagas</span>
+                            </div>
+                            <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+                                <div class="card-price">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</div>
+                                <button class="btn-action" style="padding:0.5rem 1rem; font-size:0.85rem;" onclick="app.openPropertyDetail('${p.id}')">Ver Detalhes</button>
+                            </div>
                         </div>
                     `;
-                    grid.appendChild(card);
+                    g.appendChild(c);
                 });
+            }
+
+            executeSearch() { this.renderPublicGrid(); }
+            clearSearchFilters() { document.getElementById('search-type').value = ''; this.renderPublicGrid(); }
+
+            renderDashboard() {
+                const title = document.getElementById('dash-user-title');
+                const sub = document.getElementById('dash-user-subtitle');
+                if(this.currentUser && title) { title.innerText = this.currentUser.name; sub.innerText = this.currentUser.role + " | " + this.currentUser.creci; }
+
+                const tbody = document.getElementById('portfolio-table-rows');
+                if(!tbody) return;
+                tbody.innerHTML = '';
+
+                let myProps = this.properties;
+                if(this.currentUser && this.currentUser.role !== 'Admin') { myProps = myProps.filter(x => x.authorEmail === this.currentUser.email); }
+
+                myProps.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Imóvel"><b>${p.title}</b></td>
+                        <td data-label="Tipo"><span class="card-badge" style="position:static; padding:2px 8px;">${p.type}</span></td>
+                        <td data-label="Localização">${p.location}</td>
+                        <td data-label="Preço Face">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</td>
+                        <td data-label="Ações">
+                            <button class="nav-link" style="color:var(--google-blue); padding:2px 5px; font-size:0.85rem;" onclick="app.openEditPropertyModal('${p.id}')">Editar</button>
+                            <button class="nav-link" style="color:var(--tesla-red); padding:2px 5px; font-size:0.85rem;" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                const tLeads = document.getElementById('leads-table-rows');
+                if(!tLeads) return;
+                tLeads.innerHTML = '';
+                this.leads.forEach(l => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Nome do Lead">${l.name}</td>
+                        <td data-label="WhatsApp">${l.phone}</td>
+                        <td data-label="Imóvel Alvo">${l.propertyTitle}</td>
+                        <td data-label="Origem Canal"><span style="color:var(--google-green); font-weight:700;">Tráfego Direto</span></td>
+                        <td data-label="Data Captura">${l.date || 'Recente'}</td>
+                    `;
+                    tLeads.appendChild(tr);
+                });
+            }
+
+            renderAdminPanel() {
+                const pan = document.getElementById('admin-master-panel');
+                if(!pan) return;
+                if(this.currentUser && this.currentUser.role === 'Admin') {
+                    pan.style.display = 'block';
+                    document.getElementById('admin-stat-users').innerText = "14";
+                    document.getElementById('admin-stat-props').innerText = this.properties.length.toString();
+                    document.getElementById('admin-stat-leads').innerText = this.leads.length.toString();
+                } else { pan.style.display = 'none'; }
+            }
+
+            openModal(id) { document.getElementById(id).classList.add('active'); }
+            closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+            openVideoModal(id) {
+                if(!this.billingActive) { this.openModal('modal-pix-payment'); return; }
+                alert("Iniciando Stream da Nuvem Cloudflare R2... Canal Seguro HLS Ativo.");
+            }
+
+            openPropertyDetail(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
+                this.activeLeadProperty = p;
+
+                document.getElementById('md-title').innerText = p.title;
+                document.getElementById('md-location').innerText = "📍 " + p.location;
+                document.getElementById('md-type').innerText = p.type;
+                document.getElementById('md-price').innerText = "R$ " + parseFloat(p.price).toLocaleString('pt-BR');
+                document.getElementById('md-desc').innerText = p.desc || 'Sem descrição informada.';
+                document.getElementById('md-author-name').innerText = p.authorName || 'Consultor Partner';
+                document.getElementById('md-author-creci').innerText = p.authorCreci ? `(${p.authorCreci})` : '';
+
+                const agioBox = document.getElementById('md-agio-details');
+                if(p.type === 'Ágio') {
+                    agioBox.style.display = 'block';
+                    document.getElementById('md-agio-paid').innerText = p.agioPaid ? "R$ " + parseFloat(p.agioPaid).toLocaleString('pt-BR') : 'R$ 0,00';
+                    document.getElementById('md-agio-remaining').innerText = p.agioRemaining ? "R$ " + parseFloat(p.agioRemaining).toLocaleString('pt-BR') : 'R$ 0,00';
+                    document.getElementById('md-agio-installment').innerText = p.agioInstallment ? "R$ " + parseFloat(p.agioInstallment).toLocaleString('pt-BR') : 'R$ 0,00';
+                    document.getElementById('md-agio-bank').innerText = p.agioBank || 'Não Informado';
+                } else { agioBox.style.display = 'none'; }
+
+                const specs = document.getElementById('md-specs-container');
+                specs.innerHTML = `
+                    <span style="background:var(--bg-input); padding:5px 12px; border-radius:6px; font-size:0.85rem;">🛏️ ${p.rooms} Quartos</span>
+                    <span style="background:var(--bg-input); padding:5px 12px; border-radius:6px; font-size:0.85rem;">🚿 ${p.suites} Suítes</span>
+                    <span style="background:var(--bg-input); padding:5px 12px; border-radius:6px; font-size:0.85rem;">🚗 ${p.parking} Vagas</span>
+                    <span style="background:var(--bg-input); padding:5px 12px; border-radius:6px; font-size:0.85rem;">📐 ${p.area} m² Úteis</span>
+                `;
+
+                const gal = document.getElementById('md-gallery');
+                gal.innerHTML = '';
+                if(p.images) {
+                    p.images.split(',').forEach(img => {
+                        if(img.trim()) {
+                            const i = document.createElement('img'); i.src = img.trim();
+                            i.style.width = '100%'; i.style.height = '80px'; i.style.objectFit = 'cover'; i.style.borderRadius = '6px';
+                            gal.appendChild(i);
+                        }
+                    });
+                } else { gal.innerHTML = '<p style="font-size:0.8rem; color:var(--text-muted);">Nenhuma imagem na galeria.</p>'; }
+
+                document.getElementById('md-btn-whatsapp').onclick = () => {
+                    if(!this.billingActive) { this.openModal('modal-pix-payment'); return; }
+                    this.openModal('modal-lead-form');
+                };
+
+                this.openModal('modal-property-detail');
+            }
+
+            actionSubmitLead(e) {
+                e.preventDefault();
+                const lName = document.getElementById('l-name').value;
+                const lPhone = document.getElementById('l-phone').value;
+                
+                const payload = {
+                    name: lName,
+                    phone: lPhone,
+                    propertyId: this.activeLeadProperty.id,
+                    propertyTitle: this.activeLeadProperty.title,
+                    date: new Date().toLocaleDateString('pt-BR')
+                };
+
+                database.ref('leads').push(payload).then(() => {
+                    this.closeModal('modal-lead-form');
+                    this.closeModal('modal-property-detail');
+                    const wUrl = `https://api.whatsapp.com/send?phone=55${lPhone}&text=Olá,%20tenho%20interesse%20no%20imóvel%20${encodeURIComponent(this.activeLeadProperty.title)}`;
+                    window.open(wUrl, '_blank');
+                });
+            }
+
+            toggleFormAgioFields(type) {
+                document.getElementById('form-agio-specials').style.display = (type === 'Ágio') ? 'block' : 'none';
+            }
+
+            openNewPropertyModal() {
+                if(!this.currentUser) return;
+                document.getElementById('prop-real-form').reset();
+                document.getElementById('p-id').value = '';
+                this.toggleFormAgioFields('Venda');
+                document.getElementById('form-prop-title').innerText = "Novo Imóvel";
+                this.openModal('modal-property-form');
             }
 
             actionSaveProperty(e) {
                 e.preventDefault();
-                // LÓGICA DE CONTROLE DE ENTREGAS (KPI)
-                if (this.currentUser && this.currentUser.role !== 'Admin') {
-                    this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
-                    if (this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas) {
-                        this.closeModal('modal-property-form');
-                        this.resetBilling();
-                        return; // Impede o salvamento se o pacote acabou
-                    }
-                }
-
                 const id = document.getElementById('p-id').value;
-                const title = document.getElementById('p-title').value;
-                const type = document.getElementById('p-type').value;
-                const price = Number(document.getElementById('p-price').value);
-                const location = document.getElementById('p-location').value;
-                const image = document.getElementById('p-image').value;
-                const video = document.getElementById('p-video').value;
-                const description = document.getElementById('p-description').value;
-
-                let pObj = { id: id || String(Date.now()), title, type, price, location, image, video, description, author: id ? this.properties.find(x=>x.id===id).author : this.currentUser.email };
-                if (type === 'Ágio') { pObj.agioPaid = Number(document.getElementById('p-agio-paid').value||0); pObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value||0); pObj.agioInstallment = Number(document.getElementById('p-agio-installment').value||0); pObj.agioBank = document.getElementById('p-agio-bank').value; }
-
-                if (id) { this.properties[this.properties.findIndex(x=>x.id===id)] = pObj;
-                } else { 
-                    this.properties.push(pObj); 
-                    // Incrementa KPI de uso após salvar novo imóvel
-                    if(this.currentUser.role !== 'Admin') this.currentUser.entregasRealizadas++;
-                }
-
-                // Atualiza o estado global no array de usuários
-                const index = this.users.findIndex(u => u.email === this.currentUser.email);
-                if(index !== -1) { this.users[index].entregasRealizadas = this.currentUser.entregasRealizadas; }
-
-                this.saveState();
-                this.closeModal('modal-property-form'); this.refreshAllScreens(); 
-                alert("Imóvel publicado em todos os servidores!");
-            }
-
-            applySavedTheme() { document.documentElement.setAttribute('data-theme', localStorage.getItem('iamobi_theme') || 'light'); }
-            toggleTheme() { const nT = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', nT); localStorage.setItem('iamobi_theme', nT); }
-            navigate(view) { document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view')); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`sec-${view}`).classList.add('active-view'); const btn = document.getElementById(`menu-btn-${view}`); if(btn) btn.classList.add('active'); if(view === 'dashboard' && !this.currentUser) return this.navigate('auth'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            catchUrlDeepLink() { if(window.location.hash.startsWith('#view-prop-')) setTimeout(() => this.gateCheckProperty(window.location.hash.replace('#view-prop-', '')), 300); }
-            executeSearch() { const t=document.getElementById('search-type').value, l=document.getElementById('search-location').value.toLowerCase(), p=document.getElementById('search-price').value; this.renderPublicGrid(this.properties.filter(x => (t===""||x.type===t) && (l===""||x.location.toLowerCase().includes(l)) && (p===""||Number(x.price)<=Number(p)))); }
-            clearSearchFilters() { document.getElementById('search-type').value=""; document.getElementById('search-location').value=""; document.getElementById('search-price').value=""; this.renderPublicGrid(); }
-
-            gateCheckProperty(id) {
-                const prop = this.properties.find(p => p.id === id);
-                if (!prop) return;
-                
-                const dono = this.users.find(u => u.email === prop.author);
-                if (dono && dono.role !== 'Admin' && dono.isBlocked) { return alert("Acesso indisponível no momento."); }
-
-                this.selectedPropertyForLead = prop;
-                if(this.currentUser) this.openPropertyDetailModal(prop); else this.openModal('modal-gate-capture');
-            }
-
-            actionCaptureLead(e) {
-                e.preventDefault();
-                this.leads.push({ name: document.getElementById('lead-name').value, phone: document.getElementById('lead-phone').value, propTitle: this.selectedPropertyForLead.title, source: "Aladin", date: new Date().toLocaleString('pt-BR') });
-                this.saveState(); this.closeModal('modal-gate-capture'); document.getElementById('form-lead-capture').reset(); this.openPropertyDetailModal(this.selectedPropertyForLead);
-            }
-
-            openPropertyDetailModal(prop) {
-                document.getElementById('md-title').innerText = prop.title;
-                document.getElementById('md-location').innerText = `📍 ${prop.location}`; document.getElementById('md-price').innerText = `R$ ${Number(prop.price).toLocaleString('pt-BR')}`; document.getElementById('md-description').innerText = prop.description || "Sem memorial.";
-                const agioPanel = document.getElementById('md-agio-details');
-                if (prop.type === 'Ágio') { agioPanel.style.display = 'block'; document.getElementById('md-agio-paid').innerText = `R$ ${Number(prop.agioPaid||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-remaining').innerText = `R$ ${Number(prop.agioRemaining||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-installment').innerText = `R$ ${Number(prop.agioInstallment||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-bank').innerText = prop.agioBank || "Não informado"; } else { agioPanel.style.display = 'none'; }
-                
-                const vc = document.getElementById('md-video-container');
-                if (prop.video) {
-                    const parsedVideo = this.parseExternalLink(prop.video, 'video');
-                    if (parsedVideo.startsWith('data:video/')) { vc.innerHTML = `<video src="${parsedVideo}" controls style="width:100%;height:100%;object-fit:contain;"></video>`; } 
-                    else { vc.innerHTML = `<iframe width="100%" height="100%" src="${parsedVideo}" frameborder="0" allowfullscreen style="border:none;"></iframe>`; }
-                } else { vc.innerHTML = `<div style="color:var(--text-muted);padding:2rem;">📷 Mídia Convencional</div>`; }
-                
-                document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
-                this.openModal('modal-property-detail');
-            }
-
-            copyConversionLink() { navigator.clipboard.writeText(document.getElementById('md-share-url').innerText); alert('Link copiado!'); }
-            
-            // ==========================================
-            // LOGICA FINANCEIRA PIX E CONTROLE DE KPI
-            // ==========================================
-            simulateBillingExpiration() { 
-                if(this.currentUser) { 
-                    this.currentUser.entregasRealizadas = this.CONFIG_PIX.limiteEntregas; // Força limite atingido
-                    this.saveState();
-                    this.checkBillingStatusUI(); 
-                    this.refreshAllScreens(); 
-                }
-            }
-            
-            resetBilling() { 
-                const copiaEColaPix = this.gerarPixMestre(this.CONFIG_PIX.valorRenovacao);
-                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(copiaEColaPix)}`;
-                
-                document.getElementById('pix-qr-img').src = qrCodeUrl;
-                document.getElementById('pix-payload-container').innerText = copiaEColaPix;
-                document.getElementById('pix-payload-container').style.display = 'block';
-                document.getElementById('pix-copy-btn').onclick = () => {
-                    navigator.clipboard.writeText(copiaEColaPix).then(() => alert('Linha PIX copiada! Cole no app do banco.'));
+                const payload = {
+                    title: document.getElementById('p-title').value,
+                    type: document.getElementById('p-type').value,
+                    price: document.getElementById('p-price').value,
+                    location: document.getElementById('p-location').value,
+                    rooms: document.getElementById('p-rooms').value,
+                    suites: document.getElementById('p-suites').value,
+                    parking: document.getElementById('p-parking').value,
+                    area: document.getElementById('p-area').value,
+                    desc: document.getElementById('p-desc').value,
+                    images: document.getElementById('p-images').value,
+                    authorEmail: this.currentUser.email,
+                    authorName: this.currentUser.name,
+                    authorCreci: this.currentUser.creci,
+                    agioPaid: document.getElementById('p-agio-paid').value,
+                    agioRemaining: document.getElementById('p-agio-remaining').value,
+                    agioInstallment: document.getElementById('p-agio-installment').value,
+                    agioBank: document.getElementById('p-agio-bank').value
                 };
 
-                this.openModal('modal-pix-payment');
-            }
-            
-            processPixPayment() {
-                if(!this.currentUser) return;
-                // Zera as entregas realizadas (Renova o pacote)
-                this.currentUser.entregasRealizadas = 0;
-                this.currentUser.isBlocked = false;
-                
-                const index = this.users.findIndex(u => u.email === this.currentUser.email);
-                if(index !== -1) {
-                    this.users[index].entregasRealizadas = 0;
-                    this.users[index].isBlocked = false;
-                }
-                
-                this.saveState();
-                this.checkBillingStatusUI(); 
-                this.closeModal('modal-pix-payment'); 
-                this.refreshAllScreens(); 
-                alert("Pagamento PIX confirmado e baixado com sucesso! Saldo de entregas renovado.");
-            }
-
-            checkBillingStatusUI() {
-                const label = document.getElementById('billing-status-lbl');
-                const banner = document.getElementById('global-billing-alert');
-                
-                if (!this.currentUser) return;
-                
-                if (this.currentUser.role === 'Admin') {
-                    if(label) label.innerHTML = `<span style="color:var(--google-blue);">Conta Admin (Livre)</span>`;
-                    if(banner) banner.style.display = 'none';
-                    return;
-                }
-
-                this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
-                const pacoteEsgotado = this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas;
-                
-                if (pacoteEsgotado) { 
-                    this.currentUser.isBlocked = true;
-                    if(label) label.innerHTML = `<span style="color:var(--tesla-red);">Bloqueado - Pacote de Entregas Esgotado</span>`;
-                    if(banner) { 
-                        banner.style.display = 'flex';
-                    }
-                } else { 
-                    this.currentUser.isBlocked = false;
-                    const cotaRestante = this.CONFIG_PIX.limiteEntregas - this.currentUser.entregasRealizadas;
-                    if(label) label.innerHTML = `<span style="color:var(--google-green);">Ativo (${cotaRestante} anúncios disponíveis)</span>`;
-                    if(banner) banner.style.display = 'none';
+                if(id) {
+                    database.ref('properties/' + id).set(payload).then(() => { this.closeModal('modal-property-form'); });
+                } else {
+                    database.ref('properties').push(payload).then(() => { this.closeModal('modal-property-form'); });
                 }
             }
 
-            switchAuthMode(m) { document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); if(m==='login'){document.getElementById('tab-auth-login').classList.add('active');document.getElementById('form-login').style.display='block';document.getElementById('form-register').style.display='none';}else{document.getElementById('tab-auth-register').classList.add('active');document.getElementById('form-login').style.display='none';document.getElementById('form-register').style.display='block';} }
-            handleRoleChange(r) { const c=document.getElementById('group-creci-field'); if(c) c.style.display = (r==='Corretor'||r==='Imobiliária') ? 'flex' : 'none'; }
-            
-            actionRegister(e) { 
-                e.preventDefault();
-                const email = document.getElementById('reg-email').value; 
-                if(this.users.some(u=>u.email===email)) return alert('E-mail em uso.'); 
+            openEditPropertyModal(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
+                document.getElementById('p-id').value = p.id;
+                document.getElementById('p-title').value = p.title;
+                document.getElementById('p-type').value = p.type;
+                document.getElementById('p-price').value = p.price;
+                document.getElementById('p-location').value = p.location;
+                document.getElementById('p-rooms').value = p.rooms;
+                document.getElementById('p-suites').value = p.suites;
+                document.getElementById('p-parking').value = p.parking;
+                document.getElementById('p-area').value = p.area;
+                document.getElementById('p-desc').value = p.desc || '';
+                document.getElementById('p-images').value = p.images || '';
                 
-                const u = { 
-                    name: document.getElementById('reg-name').value, 
-                    email, 
-                    role: document.getElementById('reg-role').value, 
-                    creci: document.getElementById('reg-creci').value, 
-                    password: document.getElementById('reg-password').value,
-                    entregasRealizadas: 0,
-                    isBlocked: false
-                };
-                this.users.push(u); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); 
-            }
-            
-            actionLogin(e) { e.preventDefault(); const u = this.users.find(u=>u.email===document.getElementById('login-email').value && u.password===document.getElementById('login-password').value); if(!u) return alert('Credenciais inválidas.'); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); }
-            actionLogout() { this.currentUser=null; this.saveState(); this.refreshAllScreens(); this.navigate('landing'); }
-            updateAuthHeader() { const ba=document.getElementById('menu-btn-auth'), md=document.getElementById('menu-btn-dash'), pa=document.getElementById('menu-user-profile'), un=document.getElementById('header-user-name'); if(this.currentUser) { if(ba) ba.style.display='none'; if(md) md.style.display='block'; if(pa) pa.style.display='flex'; if(un) un.innerText=this.currentUser.name; } else { if(ba) ba.style.display='block'; if(md) md.style.display='none'; if(pa) pa.style.display='none'; } }
-            renderDashboard() { document.getElementById('dash-user-title').innerText=this.currentUser.name; document.getElementById('dash-user-subtitle').innerText=`Perfil: ${this.currentUser.role}`; const mp=document.getElementById('admin-master-panel'); if(this.currentUser.role==='Admin'){ if(mp)mp.style.display='block'; document.getElementById('admin-stat-users').innerText=this.users.length; document.getElementById('admin-stat-props').innerText=this.properties.length; document.getElementById('admin-stat-leads').innerText=this.leads.length; }else{ if(mp)mp.style.display='none'; } this.renderPortfolioGrid(); this.renderLeadsTable(); }
-            switchDashTab(t) { document.querySelectorAll('.tab-dash-view').forEach(v=>v.style.display='none'); document.querySelectorAll('.dash-menu-item').forEach(m=>m.classList.remove('active')); document.getElementById(`dash-tab-${t}`).style.display='block'; document.getElementById(`menu-sub-${t}`).classList.add('active'); }
-            
-            renderPortfolioGrid() {
-                const tbody = document.getElementById('portfolio-table-rows');
-                if(!tbody) return; tbody.innerHTML = '';
-                const uProps = this.currentUser.role==='Admin' ? this.properties : this.properties.filter(p=>p.author===this.currentUser.email);
-                if(uProps.length===0) return tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Vazio.</td></tr>`;
-                uProps.forEach(p => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Imóvel"><b>${p.title}</b></td><td data-label="Tipo"><span class="pricing-badge">${p.type}</span></td><td data-label="Local">${p.location}</td><td data-label="Preço">R$ ${Number(p.price).toLocaleString('pt-BR')}</td><td data-label="Ações"><button class="nav-link" style="color:var(--google-blue);" onclick="app.openEditPropertyModal('${p.id}')">Editar</button> | <button class="nav-link" style="color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button></td>`; tbody.appendChild(tr); });
+                this.toggleFormAgioFields(p.type);
+                if(p.type === 'Ágio') {
+                    document.getElementById('p-agio-paid').value = p.agioPaid || '';
+                    document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
+                    document.getElementById('p-agio-installment').value = p.agioInstallment || '';
+                    document.getElementById('p-agio-bank').value = p.agioBank || '';
+                }
+                document.getElementById('form-prop-title').innerText = "Editar Imóvel";
+                this.openModal('modal-property-form');
             }
 
-            renderLeadsTable() {
-                const tbody = document.getElementById('leads-table-rows');
-                if(!tbody) return; tbody.innerHTML = '';
-                this.leads.forEach(l => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Nome">${l.name}</td><td data-label="Contato" style="color:var(--google-green);font-weight:bold;">${l.phone}</td><td data-label="Imóvel Alvo">${l.propTitle}</td><td data-label="Origem">${l.source}</td><td data-label="Data">${l.date}</td>`; tbody.appendChild(tr); });
+            actionDeleteProperty(id) {
+                if(confirm('Deseja realmente excluir este imóvel de forma permanente?')) {
+                    database.ref('properties/' + id).remove();
+                }
             }
 
-            togglePropertyAgioForm(t) { document.getElementById('p-agio-panel').style.display = t==='Ágio'?'block':'none'; }
-            openNewPropertyModal() { document.getElementById('form-actual-property').reset(); document.getElementById('p-id').value=''; document.getElementById('form-prop-title').innerText="Novo Imóvel"; this.openModal('modal-property-form'); }
-            openEditPropertyModal(id) { const p=this.properties.find(x=>x.id===id); if(!p)return; document.getElementById('p-id').value=p.id; document.getElementById('p-title').value=p.title; document.getElementById('p-type').value=p.type; document.getElementById('p-price').value=p.price; document.getElementById('p-location').value=p.location; document.getElementById('p-image').value=p.image; document.getElementById('p-video').value=p.video; document.getElementById('p-description').value=p.description; this.togglePropertyAgioForm(p.type); if(p.type==='Ágio'){document.getElementById('p-agio-paid').value=p.agioPaid||'';document.getElementById('p-agio-remaining').value=p.agioRemaining||'';document.getElementById('p-agio-installment').value=p.agioInstallment||'';document.getElementById('p-agio-bank').value=p.agioBank||'';} document.getElementById('form-prop-title').innerText="Editar Imóvel"; this.openModal('modal-property-form'); }
-            actionDeleteProperty(id) { if(confirm('Excluir?')) { this.properties = this.properties.filter(x=>x.id!==id); this.saveState(); this.refreshAllScreens(); } }
+            openDrivePicker(tId) {
+                this.activeDriveTargetInputId = tId;
+                const c = document.getElementById('drive-files-container');
+                c.innerHTML = '';
+                const m = [{name:"📸 Cloudflare_Link.jpg", url:"https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}];
+                m.forEach(f => {
+                    const d = document.createElement('div');
+                    d.className = 'drive-item';
+                    d.innerHTML = `<div><b>${f.name}</b><br><small>${f.url}</small></div>`;
+                    d.onclick = () => this.chooseDriveFile(f.url);
+                    c.appendChild(d);
+                });
+                this.openModal('modal-drive-picker');
+            }
 
-            openDrivePicker(tId) { this.activeDriveTargetInputId=tId; const c=document.getElementById('drive-files-container'); c.innerHTML=''; const m=[{name:"📸 Cloudflare_Link.jpg", url:"https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}]; m.forEach(f=>{const d=document.createElement('div');d.className='drive-item';d.innerHTML=`<div><b>${f.name}</b><br><small>${f.url}</small></div>`;d.onclick=()=>this.chooseDriveFile(f.url);c.appendChild(d);}); this.openModal('modal-drive-picker'); }
-            chooseDriveFile(url) { if(this.activeDriveTargetInputId){ const cur=document.getElementById(this.activeDriveTargetInputId).value; document.getElementById(this.activeDriveTargetInputId).value = cur ? cur+','+url : url; } this.closeModal('modal-drive-picker'); }
-            
-            openModal(id) { document.getElementById(id).classList.add('active'); }
-            closeModal(id) { document.getElementById(id).classList.remove('active'); }
+            chooseDriveFile(url) {
+                if(this.activeDriveTargetInputId) {
+                    const cur = document.getElementById(this.activeDriveTargetInputId).value;
+                    document.getElementById(this.activeDriveTargetInputId).value = cur ? cur + ',' + url : url;
+                }
+                this.closeModal('modal-drive-picker');
+            }
         }
 
-        const app = new IaMobiEngine();
+        const app = new CoreApp();
+        window.onload = () => app.init();
     </script>
 </body>
 </html>
