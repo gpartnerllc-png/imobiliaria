@@ -69,7 +69,7 @@
         .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1.5rem; }
         .hero h1 span { background: linear-gradient(90deg, var(--google-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) auto auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
+        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
         .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
         .input-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
@@ -159,7 +159,7 @@
                 <h1>Plataforma de  <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
-            <div class="search-hub">
+            <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
                 <div class="input-group">
                     <label>Modalidade</label>
                     <select id="search-type" onchange="app.executeSearch()">
@@ -217,6 +217,7 @@
         <section id="sec-dashboard" class="view-section">
             <div class="dash-layout">
                 <aside class="dash-sidebar">
+                  
                     <div style="text-align: center; margin-bottom: 2rem;">
                         <div style="font-weight: 800; font-size: 1.1rem;" id="dash-user-title">Carregando...</div>
                         <div style="font-size: 0.75rem; color: var(--text-muted);" id="dash-user-subtitle">Acesso Autorizado</div>
@@ -225,7 +226,6 @@
                     <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Convertidos</div>
                     <div class="dash-menu-item" id="menu-sub-system" onclick="app.switchDashTab('system')">Configurações & API</div>
                 </aside>
-
                 <main class="main-dash-content">
                     <div id="dash-tab-portfolio" class="tab-dash-view">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
@@ -233,64 +233,34 @@
                             <button class="btn-action" style="background: var(--google-green);" onclick="app.openNewPropertyModal()">+ Novo Imóvel</button>
                         </div>
                         <table id="table-portfolio">
-                            <thead>
-                                <tr>
-                                    <th>Imóvel</th>
-                                    <th>Tipo</th>
-                                    <th>Localização</th>
-                                    <th>Preço Face</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Imóvel</th><th>Tipo</th><th>Localização</th><th>Preço Face</th><th>Ações</th></tr></thead>
                             <tbody id="portfolio-table-rows"></tbody>
                         </table>
                     </div>
-
                     <div id="dash-tab-leads" class="tab-dash-view" style="display: none;">
                         <h2>Leads Capturados</h2>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">Controle de tráfego orgânico e conversões de alta intenção.</p>
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome do Lead</th>
-                                    <th>WhatsApp / Telefone</th>
-                                    <th>Imóvel Alvo</th>
-                                    <th>Origem Canal</th>
-                                    <th>Data Captura</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Nome do Lead</th><th>WhatsApp / Telefone</th><th>Imóvel Alvo</th><th>Origem Canal</th><th>Data Captura</th></tr></thead>
                             <tbody id="leads-table-rows"></tbody>
                         </table>
                     </div>
-
                     <div id="dash-tab-system" class="tab-dash-view" style="display: none;">
                         <h2>Infraestrutura Jurídica e Comercial</h2>
                         <div style="margin-top: 1.5rem; background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
                             <h4 style="margin-bottom: 0.5rem;">Status de Faturamento da Conta</h4>
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
-                                <span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span>
-                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;"><span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span></div>
                             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
                                 <button class="btn-action" style="background: var(--tesla-red); box-shadow: none; font-size: 0.85rem;" onclick="app.simulateBillingExpiration()">Forçar Inadimplência</button>
                                 <button class="btn-action" style="background: var(--google-green); box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Comprar Pacote PIX</button>
                             </div>
                         </div>
-
                         <div id="admin-master-panel" style="display: none; margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
                             <h3 style="color: var(--google-blue); margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 2rem; font-weight: 800; color: var(--google-blue);" id="adm-total-users">0</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.5rem;">Contas Ativas</div>
-                                </div>
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 2rem; font-weight: 800; color: var(--google-green);" id="adm-total-props">0</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.5rem;">Total Geral Imóveis</div>
-                                </div>
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 12px; text-align: center;">
-                                    <div style="font-size: 2rem; font-weight: 800; color: var(--premium-gold);" id="adm-total-leads">0</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 0.5rem;">Leads Totais</div>
-                                </div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
+                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-users">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span></div>
+                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-props">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span></div>
+                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Leads na Rede</span></div>
                             </div>
                         </div>
                     </div>
@@ -299,790 +269,555 @@
         </section>
     </div>
 
-    <div class="modal-blur" id="modal-property-form">
+    <div class="modal-blur" id="modal-pix-payment">
+        <div class="modal-window" style="max-width: 420px; text-align: center;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
+            <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
+            
+            <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
+                <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
+                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
+            
+            <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
+            
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-property-detail">
         <div class="modal-window">
-            <h3 style="margin-bottom: 1.5rem;" id="form-prop-title">Novo Imóvel</h3>
-            <form id="property-form-raw" onsubmit="app.actionSaveProperty(event)">
-                <input type="hidden" id="p-id">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                    <div class="input-group">
-                        <label>Título Anúncio</label>
-                        <input type="text" id="p-title" required placeholder="Ex: Ágio Linda Casa de 3Q">
-                    </div>
-                    <div class="input-group">
-                        <label>Modalidade</label>
-                        <select id="p-type" required onchange="app.handleFormTypeChange(this.value)">
-                            <option value="Ágio">Ágio</option>
-                            <option value="Venda">Venda Direta</option>
-                            <option value="Aluguel">Aluguel</option>
-                        </select>
-                    </div>
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
+            <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
+            <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
+            
+            <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
+                    <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
+                    <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
+                    <div><strong>Parcela Mensal:</strong> <span id="md-agio-installment"></span></div>
+                    <div><strong>Banco Credor:</strong> <span id="md-agio-bank"></span></div>
                 </div>
+            </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                    <div class="input-group">
-                        <label>Cidade / Localização</label>
-                        <input type="text" id="p-location" required placeholder="Ex: Setor H sampling">
-                    </div>
-                    <div class="input-group">
-                        <label>Preço de Face (R$)</label>
-                        <input type="number" id="p-price" required placeholder="Ex: 45000">
-                    </div>
-                </div>
+            <h3 id="md-price" style="color: var(--google-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
+            <p id="md-description" style="line-height: 1.6; margin-bottom: 1.5rem;">Descrição completa.</p>
+            
+            <h4>▶ Tour Virtual Integrado</h4>
+            <div class="video-box-container" id="md-video-container"></div>
 
-                <div id="form-agio-specials" style="background: rgba(26,115,232,0.03); border: 1px dashed var(--google-blue); padding: 1.2rem; border-radius: 12px; margin-bottom: 1rem; display: block;">
-                    <h5 style="color: var(--google-blue); margin-bottom: 0.8rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">Composição do Ágio</h5>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem;">
-                        <div class="input-group"><label style="font-size:0.65rem;">Saldo Devedor</label><input type="number" id="p-agio-remaining" placeholder="Ex: 140000"></div>
-                        <div class="input-group"><label style="font-size:0.65rem;">Parcela Mensal</label><input type="number" id="p-agio-installment" placeholder="Ex: 890"></div>
-                        <div class="input-group"><label style="font-size:0.65rem;">Banco Financiador</label><input type="text" id="p-agio-bank" placeholder="Ex: Caixa"></div>
-                    </div>
-                </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista</button>
+                <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2); box-shadow: none;" onclick="app.copyConversionLink()">Copiar Link de Tráfego</button>
+            </div>
+            <div style="margin-top: 0.8rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; word-break: break-all;" id="md-share-url"></div>
+        </div>
+    </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                    <div class="input-group">
-                        <label>Mídia URL (Foto / Capa)</label>
-                        <div style="display: flex; gap: 6px;">
-                            <input type="text" id="p-image" required placeholder="https://..." style="flex-grow:1;">
-                            <button type="button" class="btn-action" style="padding:0 0.8rem; background: var(--text-main);" onclick="app.openDrivePicker('p-image')">📁</button>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Vídeo URL (YouTube / MP4 / M3U8)</label>
-                        <input type="text" id="p-video" placeholder="Link de demonstração opcional">
-                    </div>
-                </div>
-
-                <div class="input-group" style="margin-bottom: 1.5rem;">
-                    <label>Descrição Detalhada do Ativo</label>
-                    <textarea id="p-desc" rows="3" required placeholder="Descreva as especificações, diferenciais, taxas..."></textarea>
-                </div>
-
-                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-                    <button type="button" class="btn-action" style="background: transparent; color: var(--text-muted); box-shadow: none;" onclick="app.closeModal('modal-property-form')">Cancelar</button>
-                    <button type="submit" class="btn-action" style="background: var(--google-blue);">Salvar Registro</button>
-                </div>
+    <div class="modal-blur" id="modal-gate-capture">
+        <div class="modal-window" style="max-width: 460px;">
+            <h3 style="margin-bottom: 1rem; color: var(--google-blue);">Desbloquear Atendimento</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Insira seus dados para aceder imediatamente ao memorial e visita virtual.</p>
+            <form id="form-lead-capture" onsubmit="app.actionCaptureLead(event)">
+                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Digite seu nome"></div>
+                <div class="input-group" style="margin-bottom: 2rem;"><label>WhatsApp / Telefone</label><input type="tel" id="lead-phone" required placeholder="(61) 99999-9999"></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Liberar Conteúdo Exclusivo</button>
             </form>
         </div>
     </div>
 
-    <div class="modal-blur" id="modal-media-viewer" onclick="app.closeMediaViewer()">
-        <div class="modal-window" style="max-width: 850px; background: #0b0f19; border-color: #1e293b;" onclick="event.stopPropagation()">
-            <div style="display: flex; justify-content: space-between; align-items: center; color: white;">
-                <h4 id="media-viewer-title">Demonstração Digital Imersiva</h4>
-                <button onclick="app.closeMediaViewer()" style="background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
-            </div>
-            <div class="video-box-container" id="media-viewer-box"></div>
-        </div>
-    </div>
-
-    <div class="modal-blur" id="modal-public-detail">
+    <div class="modal-blur" id="modal-property-form">
         <div class="modal-window" style="max-width: 800px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
-                <div>
-                    <span id="detail-badge" class="pricing-badge" style="margin-bottom: 0.5rem; display: inline-flex;"></span>
-                    <h2 id="detail-title"></h2>
-                    <p id="detail-location" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.2rem;"></p>
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
+            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Cadastrar Novo Imóvel</h2>
+            
+            <form id="form-actual-property" onsubmit="app.actionSaveProperty(event)">
+                <input type="hidden" id="p-id">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Título Comercial</label><input type="text" id="p-title" required placeholder="Ex: Lote Premium"></div>
+                    <div class="input-group">
+                        <label>Modalidade</label>
+                        <select id="p-type" required onchange="app.togglePropertyAgioForm(this.value)">
+                            <option value="Venda">Venda Directa</option>
+                            <option value="Ágio">Negociação de Ágio</option>
+                            <option value="Aluguel">Locação Residencial</option>
+                        </select>
+                    </div>
                 </div>
-                <button onclick="app.closeModal('modal-public-detail')" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer;">&times;</button>
-            </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Preço Face (R$)</label><input type="number" id="p-price" required placeholder="Valor"></div>
+                    <div class="input-group"><label>Localização</label><input type="text" id="p-location" required placeholder="Cidade - UF"></div>
+                </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
-                <div>
-                    <img id="detail-img" src="" style="width: 100%; height: 260px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                    <div id="detail-agio-block" style="margin-top: 1rem; background: var(--bg-input); padding: 1rem; border-radius: 12px; display: none;">
-                        <h5 style="color: var(--google-blue); margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.7rem;">Dados do Financiamento</h5>
-                        <p style="font-size: 0.85rem; margin-bottom: 0.3rem;"><b>Saldo Devedor:</b> <span id="detail-agio-remaining"></span></p>
-                        <p style="font-size: 0.85rem; margin-bottom: 0.3rem;"><b>Parcela Mensal:</b> <span id="detail-agio-installment"></span></p>
-                        <p style="font-size: 0.85rem;"><b>Banco Credor:</b> <span id="detail-agio-bank"></span></p>
+                <div id="p-agio-panel" style="display: none; background: rgba(128,128,128,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.2rem;">
+                    <h4 style="margin-bottom: 1rem; color: var(--premium-gold);">Parâmetros Específicos do Ágio</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                        <div class="input-group"><label>Valor Pago (R$)</label><input type="number" id="p-agio-paid" placeholder="Valor"></div>
+                        <div class="input-group"><label>Saldo Restante (R$)</label><input type="number" id="p-agio-remaining" placeholder="Valor"></div>
+                        <div class="input-group"><label>Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Valor"></div>
+                        <div class="input-group"><label>Banco / Agência</label><input type="text" id="p-agio-bank" placeholder="Instituição"></div>
                     </div>
                 </div>
-                <div>
-                    <div style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 1rem;" id="detail-price"></div>
-                    <p id="detail-desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.5rem; white-space: pre-line;"></p>
-                    
-                    <div style="border-top: 1px solid rgba(128,128,128,0.15); padding-top: 1rem;">
-                        <h4 style="margin-bottom: 0.8rem; font-size: 0.9rem;">Deseja mais informações?</h4>
-                        <form id="public-lead-form" onsubmit="app.actionSubmitLead(event)">
-                            <div class="input-group" style="margin-bottom: 0.8rem;">
-                                <input type="text" id="lead-name" required placeholder="Seu nome completo">
-                            </div>
-                            <div class="input-group" style="margin-bottom: 1rem;">
-                                <input type="text" id="lead-phone" required placeholder="Seu WhatsApp (com DDD)">
-                            </div>
-                            <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); box-shadow: 0 4px 15px rgba(37,211,102,0.2);">Conectar via WhatsApp</button>
-                        </form>
+
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 1.2rem;">
+                    <div class="input-group">
+                        <label>Fotos (Links separados por vírgula. Suporta Drive/Cloudflare/Youtube)</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="p-image" placeholder="Cole os links aqui" style="flex-grow: 1;">
+                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-surface); color: var(--google-blue); border: 1px solid var(--google-blue); box-shadow: none;">Nuvem</button>
+                            <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
+                            <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Vídeo Tour (Link Youtube/Drive/Cloudflare)</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="url" id="p-video" placeholder="Link do Vídeo" style="flex-grow: 1;">
+                            <button type="button" class="btn-action" onclick="document.getElementById('p-video-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none;">📂 PC</button>
+                            <input type="file" id="p-video-file" accept="video/*" style="display: none;" onchange="app.handleLocalVideo(this)">
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="input-group" style="margin-bottom: 2rem;"><label>Memorial / Observações</label><textarea id="p-description" rows="4" placeholder="Detalhes..."></textarea></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-blue);">Salvar Anúncio</button>
+            </form>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-drive-picker">
         <div class="modal-window" style="max-width: 500px;">
-            <h4 style="margin-bottom: 1rem;">Selecionar Arquivo de Mídia (Cloudflare)</h4>
-            <div id="drive-files-container" style="max-height: 300px; overflow-y: auto;"></div>
-            <div style="text-align: right; margin-top: 1.5rem;">
-                <button class="btn-action" style="background: var(--text-main);" onclick="app.closeModal('modal-drive-picker')">Fechar</button>
-            </div>
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
+            <h3 style="color: var(--google-blue); margin-bottom: 0.5rem;">📂 Partner Cloud Workspace</h3>
+            <div id="drive-files-container"></div>
         </div>
     </div>
 
-    <div class="modal-blur" id="modal-checkout-pix">
-        <div class="modal-window" style="max-width: 450px; text-align: center;">
-            <h3 style="color: var(--google-blue);">Gateway de Liquidação Instantânea</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0.5rem 0 1.5rem 0;">Assinatura do Ecossistema Operacional IMOBI</p>
-            
-            <div style="background: white; padding: 1rem; display: inline-block; border-radius: 12px; border: 1px solid rgba(128,128,128,0.2); margin-bottom: 1rem;">
-                <div style="width: 180px; height: 180px; background: #f4f6fa; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; color: var(--text-muted);">[ QR CODE PIX SIMULADO ]</div>
-            </div>
-            
-            <div style="background: var(--bg-input); padding: 0.8rem; border-radius: 8px; font-size: 0.75rem; word-break: break-all; font-family: monospace; border: 1px solid rgba(128,128,128,0.15); text-align: left; margin-bottom: 1.5rem;" id="pix-payload-container">00020101021226830014br.gov.bcb.pix2561pix.partnerholding.com/checkout/id99182745281920520400005303986540519.995802BR5924PARTNER HOLDING LTDA6015BRASILIA62070503***6304A1B2</div>
-            
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <button class="btn-action" onclick="app.actionCopyPixPayload()">Copiar Código Copia e Cola</button>
-                <button class="btn-action" style="background: var(--google-green);" onclick="app.actionConfirmPayment()">Confirmar Pagamento</button>
-                <button class="btn-action" style="background: transparent; color: var(--text-muted); box-shadow: none;" onclick="app.closeModal('modal-checkout-pix')">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 IMOBI PLATAFORMA DIGITAL - DESENVOLVIDO PARA PARTNER HOLDING - BRASÍLIA/DF</p>
-    </footer>
+    <footer>&copy; 2026 IMOBI — Partner Holding.</footer>
 
     <script>
-        class ImobiApp {
+        class IaMobiEngine {
             constructor() {
-                // Configuração Simples Baseada em Variáveis Globais (Padrão Sem Inicialização Complexa)
-                this.firebaseConfig = {
-                    databaseURL: "https://imobi-partner-default-rtdb.firebaseio.com/"
+                this.carouselIndices = {};
+
+                // --- CONFIGURAÇÃO PIX E KPI (Controle de Entregas) ---
+                this.CONFIG_PIX = {
+                    pix: "34259998854",
+                    beneficiario: "CRISTIAN R FLORENCIO",
+                    cidade: "BRASILIA",
+                    valorRenovacao: 19.99,
+                    limiteEntregas: 10
                 };
-                this.db = null;
-                this.currentUser = null;
+
+                // CONFIGURAÇÃO FIREBASE
+                const firebaseConfig = {
+                    apiKey: "", 
+                    authDomain: "",
+                    databaseURL: "",
+                    projectId: "",
+                    storageBucket: "",
+                    messagingSenderId: "",
+                    appId: ""
+                };
+                this.useCloud = false;
+                
+                if (firebaseConfig.apiKey !== "") {
+                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+                    this.db = firebase.database();
+                    this.useCloud = true;
+                }
+
+                this.users = [];
                 this.properties = [];
                 this.leads = [];
-                this.activeDriveTargetInputId = null;
-                this.activePropertyInDetail = null;
+                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
+                this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
+                
+                this.init();
+            }
 
-                // Estado de Billing (Faturamento)
-                this.billingExpired = false;
+            // Geração PIX (Padrão EMV)
+            gerarPixMestre(v) {
+                const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
+                const valStr = parseFloat(v).toFixed(2);
+                const payloadConta = f('00', 'br.gov.bcb.pix') + f('01', this.CONFIG_PIX.pix);
+                let payload = "000201" + f('26', payloadConta) + "52040000" + "5303986" + 
+                              f('54', valStr) + "5802BR" + f('59', this.CONFIG_PIX.beneficiario.substring(0, 25)) + 
+                              f('60', this.CONFIG_PIX.cidade.substring(0, 15)) + "62070503***" + "6304";
+                let crc = 0xFFFF;
+                for (let i = 0; i < payload.length; i++) {
+                    crc ^= payload.charCodeAt(i) << 8;
+                    for (let j = 0; j < 8; j++) {
+                        if ((crc & 0x8000) !== 0) crc = (crc << 1) ^ 0x1021;
+                        else crc <<= 1;
+                    }
+                }
+                return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
             }
 
             init() {
-                try {
-                    firebase.initializeApp(this.firebaseConfig);
-                    this.db = firebase.database();
-                } catch(e) {
-                    console.warn("Firebase não conectado, utilizando armazenamento em memória volátil local.");
-                }
-                
-                this.loadState();
-                this.refreshAllScreens();
-                this.syncRealtimeData();
-            }
+                this.applySavedTheme();
+                this.catchUrlDeepLink();
+                this.initAutoCarousel();
+                this.checkBillingStatusUI();
 
-            loadState() {
-                const u = localStorage.getItem('imobi_user');
-                if(u) this.currentUser = JSON.parse(u);
-                
-                const b = localStorage.getItem('imobi_billing_expired');
-                this.billingExpired = (b === 'true');
-
-                if(!this.db) {
-                    const p = localStorage.getItem('imobi_mock_props');
-                    if(p) this.properties = JSON.parse(p);
-                    else this.generateMockProperties();
-
-                    const l = localStorage.getItem('imobi_mock_leads');
-                    if(l) this.leads = JSON.parse(l);
-                }
-            }
-
-            saveState() {
-                if(this.currentUser) localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
-                else localStorage.removeItem('imobi_user');
-
-                localStorage.setItem('imobi_billing_expired', this.billingExpired ? 'true' : 'false');
-
-                if(!this.db) {
-                    localStorage.setItem('imobi_mock_props', JSON.stringify(this.properties));
-                    localStorage.setItem('imobi_mock_leads', JSON.stringify(this.leads));
-                }
-            }
-
-            generateMockProperties() {
-                this.properties = [
-                    {
-                        id: "mock-1",
-                        title: "Ágio Magnífica Casa 3 Quartos - Residencial Mansões",
-                        type: "Ágio",
-                        location: "Águas Lindas de Goiás",
-                        price: 48000,
-                        agioRemaining: 142000,
-                        agioInstallment: 945,
-                        agioBank: "Caixa Econômica",
-                        image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
-                        video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                        desc: "Excelente oportunidade de adquirir sua casa própria sem burocracia bancária direta. Imóvel reformado, piso em porcelanato, armários planejados na cozinha e banheiros. Próximo ao shopping local.",
-                        userId: "system",
-                        ownerName: "Partner Holding"
-                    },
-                    {
-                        id: "mock-2",
-                        title: "Apartamento de Alto Padrão 2 Quartos - Noroeste",
-                        type: "Venda",
-                        location: "Plano Piloto - Brasília DF",
-                        price: 890000,
-                        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
-                        video: "",
-                        desc: "Prédio novo, fachada moderna em pele de vidro. Lazer completo na cobertura com piscina aquecida, academia equipada e espaço gourmet premium. Vaga de garagem inclusa com carregador automotivo elétrico.",
-                        userId: "system",
-                        ownerName: "Partner Holding"
-                    }
-                ];
-                this.saveState();
-            }
-
-            syncRealtimeData() {
-                if(!this.db) return;
-                
-                // Ouvir Imóveis
-                this.db.ref('properties').on('value', (snapshot) => {
-                    const data = snapshot.val();
-                    this.properties = [];
-                    if(data) {
-                        for(let id in data) {
-                            this.properties.push({ id, ...data[id] });
-                        }
-                    }
-                    this.refreshAllScreens();
-                });
-
-                // Ouvir Leads se logado
-                if(this.currentUser) {
-                    this.db.ref('leads').on('value', (snapshot) => {
-                        const data = snapshot.val();
-                        this.leads = [];
-                        if(data) {
-                            for(let id in data) {
-                                if(this.currentUser.role === 'Admin' || data[id].targetOwnerId === this.currentUser.uid) {
-                                    this.leads.push({ id, ...data[id] });
-                                }
-                            }
-                        }
-                        this.refreshDashboardTables();
+                if (this.useCloud) {
+                    this.db.ref('iamobi_data').on('value', (snapshot) => {
+                        const data = snapshot.val() || {};
+                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
+                        this.properties = data.properties || [];
+                        this.leads = data.leads || [];
+                        this.refreshAllScreens();
                     });
+                } else {
+                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian", email: "admin@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
+                    this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
+                    this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
+                    this.refreshAllScreens();
                 }
             }
 
             refreshAllScreens() {
-                // Atualizar Menu do Topo
-                const btnAuth = document.getElementById('menu-btn-auth');
-                const btnDash = document.getElementById('menu-btn-dash');
-                const profileBlock = document.getElementById('menu-user-profile');
-                const headerName = document.getElementById('header-user-name');
-
-                if(this.currentUser) {
-                    btnAuth.style.display = 'none';
-                    btnDash.style.display = 'inline-block';
-                    profileBlock.style.display = 'flex';
-                    headerName.innerText = this.currentUser.name;
-                } else {
-                    btnAuth.style.display = 'inline-block';
-                    btnDash.style.display = 'none';
-                    profileBlock.style.display = 'none';
-                }
-
-                // Banner de Faturamento
-                const alertBanner = document.getElementById('global-billing-alert');
-                if(this.billingExpired) {
-                    alertBanner.style.display = 'flex';
-                } else {
-                    alertBanner.style.display = 'none';
-                }
-
+                this.updateAuthHeader();
                 this.renderPublicGrid();
-                this.refreshDashboardTables();
+                if (this.currentUser) this.renderDashboard();
             }
 
-            toggleTheme() {
-                const html = document.documentElement;
-                const current = html.getAttribute('data-theme');
-                const next = current === 'dark' ? 'light' : 'dark';
-                html.setAttribute('data-theme', next);
-            }
+            saveState() {
+                localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
+                localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
 
-            navigate(viewId) {
-                document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active-view'));
-                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-
-                const targetSec = document.getElementById(`sec-${viewId}`);
-                if(targetSec) targetSec.classList.add('active-view');
-
-                if(viewId === 'landing') document.getElementById('menu-btn-explore').classList.add('active');
-                if(viewId === 'dashboard') document.getElementById('menu-btn-dash').classList.add('active');
-            }
-
-            switchAuthMode(mode) {
-                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-                if(mode === 'login') {
-                    document.getElementById('tab-auth-login').classList.add('active');
-                    document.getElementById('form-login').style.display = 'block';
-                    document.getElementById('form-register').style.display = 'none';
+                if (this.useCloud) {
+                    this.db.ref('iamobi_data').set({ users: this.users, properties: this.properties, leads: this.leads });
                 } else {
-                    document.getElementById('tab-auth-register').classList.add('active');
-                    document.getElementById('form-login').style.display = 'none';
-                    document.getElementById('form-register').style.display = 'block';
+                    localStorage.setItem('iamobi_users', JSON.stringify(this.users));
+                    localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
+                    localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
                 }
             }
 
-            handleRoleChange(role) {
-                const creciField = document.getElementById('group-creci-field');
-                if(role === 'Corretor' || role === 'Imobiliária') {
-                    creciField.style.display = 'flex';
-                } else {
-                    creciField.style.display = 'none';
+            parseExternalLink(url, type = 'image') {
+                if (!url) return '';
+                url = url.trim();
+                if (url.includes('drive.google.com')) {
+                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+                    if (match && match[1]) { return type === 'image' ? `https://docs.google.com/uc?export=view&id=${match[1]}` : `https://drive.google.com/file/d/${match[1]}/preview`; }
                 }
+                if (type === 'video') {
+                    if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
+                    if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
+                }
+                return url;
             }
 
-            actionRegister(e) {
-                e.preventDefault();
-                const name = document.getElementById('reg-name').value;
-                const email = document.getElementById('reg-email').value;
-                const role = document.getElementById('reg-role').value;
-                const creci = document.getElementById('reg-creci').value;
-                const password = document.getElementById('reg-password').value;
+            getImagesArray(imageStr) {
+                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
+                return imageStr.split(',').map(url => this.parseExternalLink(url, 'image'));
+            }
 
-                const uid = "user-" + Date.now();
-                const newUser = { uid, name, email, role, creci };
+            moveCarousel(id, direction, total) {
+                if (total <= 1) return;
+                if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
+                this.carouselIndices[id] = (this.carouselIndices[id] + direction + total) % total;
+                document.querySelectorAll(`.carousel-slider-${id}`).forEach(slider => { slider.style.transform = `translateX(-${this.carouselIndices[id] * 100}%)`; });
+            }
 
-                if(this.db) {
-                    this.db.ref('users/' + uid).set(newUser).then(() => {
-                        this.completeLoginExecution(newUser);
+            initAutoCarousel() {
+                setInterval(() => {
+                    this.properties.forEach(p => {
+                        const images = this.getImagesArray(p.image);
+                        if (images.length > 1) this.moveCarousel(p.id, 1, images.length);
                     });
-                } else {
-                    this.completeLoginExecution(newUser);
-                }
+                }, 5000);
             }
 
-            actionLogin(e) {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value;
-                
-                let role = "Corretor";
-                if(email.includes('admin')) role = "Admin";
-                if(email.includes('proprietario')) role = "Proprietário";
-
-                const mockUser = {
-                    uid: "user-logged-id",
-                    name: email.split('@')[0].toUpperCase(),
-                    email: email,
-                    role: role,
-                    creci: "CRECI-MOCK-DF"
-                };
-
-                this.completeLoginExecution(mockUser);
+            handleLocalImages(input) {
+                if (!input.files || input.files.length === 0) return;
+                const files = Array.from(input.files).slice(0, 12);
+                const promises = files.map(file => new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 800; 
+                            const scaleSize = img.width > MAX_WIDTH ? MAX_WIDTH / img.width : 1;
+                            canvas.width = img.width * scaleSize; canvas.height = img.height * scaleSize;
+                            const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            resolve(canvas.toDataURL('image/jpeg', 0.8));
+                        };
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }));
+                Promise.all(promises).then(b64 => { document.getElementById('p-image').value = b64.join(','); alert('Fotos processadas e comprimidas com sucesso!'); });
             }
 
-            completeLoginExecution(userObj) {
-                this.currentUser = userObj;
-                this.saveState();
-                this.syncRealtimeData();
-                this.refreshAllScreens();
-                this.navigate('dashboard');
-                document.getElementById('form-login').reset();
-                document.getElementById('form-register').reset();
+            handleLocalVideo(input) {
+                if (!input.files || input.files.length === 0) return;
+                const reader = new FileReader();
+                reader.onload = (e) => { document.getElementById('p-video').value = e.target.result; alert('Vídeo carregado!'); };
+                reader.readAsDataURL(input.files[0]);
             }
 
-            actionLogout() {
-                this.currentUser = null;
-                this.saveState();
-                this.refreshAllScreens();
-                this.navigate('landing');
+            contactBrokerResponsible() {
+                if (!this.selectedPropertyForLead) return;
+                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
+                alert(`Conectando ao especialista do imóvel: ${broker.name}`);
+                window.open(`https://wa.me/5561983446343${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
             }
 
-            renderPublicGrid() {
+            renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
-                grid.innerHTML = '';
+                if(!grid) return; grid.innerHTML = '';
+                
+                // REGRA DA ASSINATURA: Puxa Admin ou quem não tem bloqueio
+                const validEmails = this.users.filter(u => u.role === 'Admin' || !u.isBlocked).map(u => u.email);
+                const data = (filteredData || this.properties).filter(p => validEmails.includes(p.author));
 
-                const filterType = document.getElementById('search-type').value;
-                const filterLocation = document.getElementById('search-location').value.toLowerCase();
-                const filterPrice = parseFloat(document.getElementById('search-price').value);
+                if (data.length === 0) { grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:3rem;">Nenhum imóvel encontrado no momento.</div>`; return; }
 
-                this.properties.forEach(p => {
-                    // Lógica Filtragem
-                    if(filterType && p.type !== filterType) return;
-                    if(filterLocation && !p.location.toLowerCase().includes(filterLocation) && !p.title.toLowerCase().includes(filterLocation)) return;
-                    if(filterPrice && p.price > filterPrice) return;
-
-                    // Bloqueio de links em caso de inadimplência
-                    const linkAction = this.billingExpired ? `app.triggerBillingAlert()` : `app.openPublicDetail('${p.id}')`;
-
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    let videoTag = '';
-                    if(p.video) {
-                        videoTag = `<div class="video-indicator" onclick="event.stopPropagation(); app.openMediaViewer('${p.id}')">▶ VÍDEO</div>`;
-                    }
+                data.forEach(p => {
+                    const card = document.createElement('div'); card.className = 'card';
+                    const images = this.getImagesArray(p.image);
+                    const activeIdx = this.carouselIndices[p.id] || 0;
+                    const videoHtml = p.video ? `<div class="video-indicator" onclick="event.stopPropagation(); app.gateCheckProperty('${p.id}')"><span>▶ TOUR VÍDEO</span></div>` : '';
+                    let agioHtml = p.type === 'Ágio' ? `<div style="margin-top:0.5rem;padding:0.6rem;background:rgba(26,115,232,0.04);border-radius:6px;font-size:0.8rem;">🪙 <b>Ágio:</b> R$ ${(p.agioPaid||0).toLocaleString('pt-BR')}<br>📉 <b>Saldo:</b> R$ ${(p.agioRemaining||0).toLocaleString('pt-BR')}</div>` : '';
 
                     card.innerHTML = `
-                        <div class="card-badge">${p.type}</div>
-                        <div class="card-media-mock" style="background: url('${p.image}') center/cover no-repeat;" onclick="${linkAction}">
-                            ${videoTag}
+                        <span class="card-badge">${p.type}</span>
+                        <div class="card-media-mock" style="position:relative;background:#e2e8f0;">
+                            <div class="carousel-slider-${p.id}" style="width:100%;height:100%;display:flex;transition:transform 0.4s ease-out;transform:translateX(-${activeIdx*100}%);">
+                                 ${images.map(img => `<img src="${img}" style="width:100%;height:100%;object-fit:cover;flex-shrink:0;">`).join('')}
+                            </div>
+                            ${images.length>1 ? `<button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', -1, ${images.length})" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10094;</button><button onclick="event.stopPropagation(); app.moveCarousel('${p.id}', 1, ${images.length})" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:white;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;z-index:10;">&#10095;</button>` : ''}
+                            ${videoHtml}
                         </div>
-                        <div class="card-body" onclick="${linkAction}">
-                            <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">${p.location}</div>
-                            <h3 style="margin: 0.5rem 0; font-size:1.15rem; line-height:1.3; font-weight:800; cursor:pointer;">${p.title}</h3>
-                            <div class="card-price">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</div>
-                            ${p.type === 'Ágio' ? `<span style="font-size:0.75rem; color:var(--google-blue); font-weight:700;">Parcelas de R$ ${p.agioInstallment}/mês</span>` : `<span style="font-size:0.75rem; color:var(--google-green); font-weight:700;">Pronto para Transferência</span>`}
+                        <div class="card-body">
+                            <h3 style="font-size:1.25rem;margin-bottom:0.5rem;">${p.title}</h3>
+                            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">📍 ${p.location}</p>
+                            ${agioHtml}
+                            <div class="card-price">R$ ${Number(p.price).toLocaleString('pt-BR')}</div>
+                            <button class="btn-action" style="width:100%;margin-top:auto;background:var(--text-main);" onclick="app.gateCheckProperty('${p.id}')">Analisar Memorial</button>
                         </div>
                     `;
                     grid.appendChild(card);
                 });
-
-                if(grid.innerHTML === '') {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 3rem; color: var(--text-muted); font-weight:600;">Nenhum ativo imobiliário corresponde aos critérios da busca.</div>`;
-                }
-            }
-
-            executeSearch() {
-                this.renderPublicGrid();
-            }
-
-            clearSearchFilters() {
-                document.getElementById('search-type').value = '';
-                document.getElementById('search-location').value = '';
-                document.getElementById('search-price').value = '';
-                this.renderPublicGrid();
-            }
-
-            triggerBillingAlert() {
-                alert("Acesso temporariamente restrito por pendências de faturamento do canal distribuidor. Efetue a liquidação via PIX.");
-                document.getElementById('global-billing-alert').scrollIntoView({ behavior: 'smooth' });
-            }
-
-            openPublicDetail(id) {
-                const p = this.properties.find(x => x.id === id);
-                if(!p) return;
-
-                this.activePropertyInDetail = p;
-                document.getElementById('detail-badge').innerText = p.type;
-                document.getElementById('detail-title').innerText = p.title;
-                document.getElementById('detail-location').innerText = p.location;
-                document.getElementById('detail-img').src = p.image;
-                document.getElementById('detail-price').innerText = `R$ ${parseFloat(p.price).toLocaleString('pt-BR')}`;
-                document.getElementById('detail-desc').innerText = p.desc;
-
-                const agioBlock = document.getElementById('detail-agio-block');
-                if(p.type === 'Ágio') {
-                    agioBlock.style.display = 'block';
-                    document.getElementById('detail-agio-remaining').innerText = p.agioRemaining ? `R$ ${parseFloat(p.agioRemaining).toLocaleString('pt-BR')}` : 'Não informado';
-                    document.getElementById('detail-agio-installment').innerText = p.agioInstallment ? `R$ ${parseFloat(p.agioInstallment).toLocaleString('pt-BR')}/mês` : 'Não informado';
-                    document.getElementById('detail-agio-bank').innerText = p.agioBank || 'Não informado';
-                } else {
-                    agioBlock.style.display = 'none';
-                }
-
-                this.openModal('modal-public-detail');
-            }
-
-            actionSubmitLead(e) {
-                e.preventDefault();
-                if(!this.activePropertyInDetail) return;
-
-                const name = document.getElementById('lead-name').value;
-                const phone = document.getElementById('lead-phone').value;
-                
-                const newLead = {
-                    name,
-                    phone,
-                    targetPropertyTitle: this.activePropertyInDetail.title,
-                    targetOwnerId: this.activePropertyInDetail.userId || "system",
-                    channelSource: "Tráfego Direto Organização",
-                    timestamp: new Date().toLocaleString('pt-BR')
-                };
-
-                if(this.db) {
-                    this.db.ref('leads').push(newLead).then(() => {
-                        this.executeLeadRedirection(newLead);
-                    });
-                } else {
-                    this.leads.push(newLead);
-                    this.saveState();
-                    this.executeLeadRedirection(newLead);
-                }
-            }
-
-            executeLeadRedirection(lead) {
-                alert("Lead capturado pelo funil operacional com sucesso! Redirecionando para a central de atendimento...");
-                this.closeModal('modal-public-detail');
-                document.getElementById('public-lead-form').reset();
-                this.refreshDashboardTables();
-
-                // Simular encaminhamento WhatsApp
-                const text = encodeURIComponent(`Olá, vi o anúncio do imóvel "${lead.targetPropertyTitle}" na plataforma IMOBI e gostaria de obter mais detalhes de fechamento.`);
-                window.open(`https://api.whatsapp.com/send?phone=5561999999999&text=${text}`, '_blank');
-            }
-
-            refreshDashboardTables() {
-                if(!this.currentUser) return;
-
-                // Setar Painel Títulos
-                document.getElementById('dash-user-title').innerText = this.currentUser.name;
-                document.getElementById('dash-user-subtitle').innerText = `Acesso Perfil: ${this.currentUser.role}`;
-
-                // Controlar Visão Master Admin
-                const adminPanel = document.getElementById('admin-master-panel');
-                if(this.currentUser.role === 'Admin') {
-                    adminPanel.style.display = 'block';
-                    document.getElementById('adm-total-users').innerText = "12"; 
-                    document.getElementById('adm-total-props').innerText = this.properties.length;
-                    document.getElementById('adm-total-leads').innerText = this.db ? this.leads.length : localStorage.getItem('imobi_mock_leads') ? JSON.parse(localStorage.getItem('imobi_mock_leads')).length : "0";
-                } else {
-                    adminPanel.style.display = 'none';
-                }
-
-                // Renderizar Portfólio Interno
-                const tbodyProps = document.getElementById('portfolio-table-rows');
-                tbodyProps.innerHTML = '';
-
-                this.properties.forEach(p => {
-                    if(this.currentUser.role !== 'Admin' && p.userId !== this.currentUser.uid) return;
-
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td data-label="Imóvel"><b>${p.title}</b></td>
-                        <td data-label="Tipo">${p.type}</td>
-                        <td data-label="Localização">${p.location}</td>
-                        <td data-label="Preço Face">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</td>
-                        <td data-label="Ações">
-                            <button class="nav-link" style="color:var(--google-blue); display:inline; padding:0 5px;" onclick="app.openEditPropertyModal('${p.id}')">Editar</button>
-                            <button class="nav-link" style="color:var(--tesla-red); display:inline; padding:0 5px;" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
-                        </td>
-                    `;
-                    tbodyProps.appendChild(tr);
-                });
-
-                // Renderizar Leads no Painel
-                const tbodyLeads = document.getElementById('leads-table-rows');
-                tbodyLeads.innerHTML = '';
-
-                const leadsToRender = this.db ? this.leads : (localStorage.getItem('imobi_mock_leads') ? JSON.parse(localStorage.getItem('imobi_mock_leads')) : []);
-                
-                leadsToRender.forEach(l => {
-                    if(this.currentUser.role !== 'Admin' && l.targetOwnerId !== this.currentUser.uid) return;
-
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td data-label="Nome do Lead">${l.name}</td>
-                        <td data-label="WhatsApp / Telefone"><a href="https://api.whatsapp.com/send?phone=${l.phone}" target="_blank" style="color:var(--google-green); font-weight:bold;">${l.phone} 🟢</a></td>
-                        <td data-label="Imóvel Alvo">${l.targetPropertyTitle}</td>
-                        <td data-label="Origem Canal">${l.channelSource}</td>
-                        <td data-label="Data Captura">${l.timestamp}</td>
-                    `;
-                    tbodyLeads.appendChild(tr);
-                });
-            }
-
-            switchDashTab(tabId) {
-                document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
-                document.querySelectorAll('.tab-dash-view').forEach(v => v.style.display = 'none');
-
-                if(tabId === 'portfolio') document.getElementById('menu-sub-portfolio').classList.add('active');
-                if(tabId === 'leads') document.getElementById('menu-sub-leads').classList.add('active');
-                if(tabId === 'system') document.getElementById('menu-sub-system').classList.add('active');
-
-                document.getElementById(`dash-tab-${tabId}`).style.display = 'block';
-            }
-
-            openModal(mId) {
-                document.getElementById(mId).classList.add('active');
-            }
-
-            closeModal(mId) {
-                document.getElementById(mId).classList.remove('active');
-            }
-
-            handleFormTypeChange(v) {
-                const specBlock = document.getElementById('form-agio-specials');
-                if(v === 'Ágio') specBlock.style.display = 'block';
-                else specBlock.style.display = 'none';
-            }
-
-            openNewPropertyModal() {
-                document.getElementById('property-form-raw').reset();
-                document.getElementById('p-id').value = '';
-                document.getElementById('form-prop-title').innerText = "Novo Imóvel";
-                this.handleFormTypeChange('Ágio');
-                this.openModal('modal-property-form');
-            }
-
-            openEditPropertyModal(id) {
-                const p = this.properties.find(x => x.id === id);
-                if(!p) return;
-
-                document.getElementById('p-id').value = p.id;
-                document.getElementById('p-title').value = p.title;
-                document.getElementById('p-type').value = p.type;
-                document.getElementById('p-location').value = p.location;
-                document.getElementById('p-price').value = p.price;
-                document.getElementById('p-image').value = p.image;
-                document.getElementById('p-video').value = p.video || '';
-                document.getElementById('p-desc').value = p.desc;
-
-                this.handleFormTypeChange(p.type);
-
-                if(p.type === 'Ágio') {
-                    document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
-                    document.getElementById('p-agio-installment').value = p.agioInstallment || '';
-                    document.getElementById('p-agio-bank').value = p.agioBank || '';
-                }
-                document.getElementById('form-prop-title').innerText = "Editar Imóvel";
-                this.openModal('modal-property-form');
-            }
-
-            actionDeleteProperty(id) {
-                if(confirm('Confirmar exclusão definitiva do ativo do portfólio?')) {
-                    if(this.db) {
-                        this.db.ref('properties/' + id).remove();
-                    } else {
-                        this.properties = this.properties.filter(x => x.id !== id);
-                        this.saveState();
-                        this.refreshAllScreens();
-                    }
-                }
             }
 
             actionSaveProperty(e) {
                 e.preventDefault();
+                // LÓGICA DE CONTROLE DE ENTREGAS (KPI)
+                if (this.currentUser && this.currentUser.role !== 'Admin') {
+                    this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
+                    if (this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas) {
+                        this.closeModal('modal-property-form');
+                        this.resetBilling();
+                        return; // Impede o salvamento se o pacote acabou
+                    }
+                }
+
                 const id = document.getElementById('p-id').value;
                 const title = document.getElementById('p-title').value;
                 const type = document.getElementById('p-type').value;
+                const price = Number(document.getElementById('p-price').value);
                 const location = document.getElementById('p-location').value;
-                const price = parseFloat(document.getElementById('p-price').value);
                 const image = document.getElementById('p-image').value;
                 const video = document.getElementById('p-video').value;
-                const desc = document.getElementById('p-desc').value;
+                const description = document.getElementById('p-description').value;
 
-                let dataPayload = {
-                    title, type, location, price, image, video, desc,
-                    userId: this.currentUser.uid,
-                    ownerName: this.currentUser.name
+                let pObj = { id: id || String(Date.now()), title, type, price, location, image, video, description, author: id ? this.properties.find(x=>x.id===id).author : this.currentUser.email };
+                if (type === 'Ágio') { pObj.agioPaid = Number(document.getElementById('p-agio-paid').value||0); pObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value||0); pObj.agioInstallment = Number(document.getElementById('p-agio-installment').value||0); pObj.agioBank = document.getElementById('p-agio-bank').value; }
+
+                if (id) { this.properties[this.properties.findIndex(x=>x.id===id)] = pObj;
+                } else { 
+                    this.properties.push(pObj); 
+                    // Incrementa KPI de uso após salvar novo imóvel
+                    if(this.currentUser.role !== 'Admin') this.currentUser.entregasRealizadas++;
+                }
+
+                // Atualiza o estado global no array de usuários
+                const index = this.users.findIndex(u => u.email === this.currentUser.email);
+                if(index !== -1) { this.users[index].entregasRealizadas = this.currentUser.entregasRealizadas; }
+
+                this.saveState();
+                this.closeModal('modal-property-form'); this.refreshAllScreens(); 
+                alert("Imóvel publicado em todos os servidores!");
+            }
+
+            applySavedTheme() { document.documentElement.setAttribute('data-theme', localStorage.getItem('iamobi_theme') || 'light'); }
+            toggleTheme() { const nT = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; document.documentElement.setAttribute('data-theme', nT); localStorage.setItem('iamobi_theme', nT); }
+            navigate(view) { document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view')); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`sec-${view}`).classList.add('active-view'); const btn = document.getElementById(`menu-btn-${view}`); if(btn) btn.classList.add('active'); if(view === 'dashboard' && !this.currentUser) return this.navigate('auth'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            catchUrlDeepLink() { if(window.location.hash.startsWith('#view-prop-')) setTimeout(() => this.gateCheckProperty(window.location.hash.replace('#view-prop-', '')), 300); }
+            executeSearch() { const t=document.getElementById('search-type').value, l=document.getElementById('search-location').value.toLowerCase(), p=document.getElementById('search-price').value; this.renderPublicGrid(this.properties.filter(x => (t===""||x.type===t) && (l===""||x.location.toLowerCase().includes(l)) && (p===""||Number(x.price)<=Number(p)))); }
+            clearSearchFilters() { document.getElementById('search-type').value=""; document.getElementById('search-location').value=""; document.getElementById('search-price').value=""; this.renderPublicGrid(); }
+
+            gateCheckProperty(id) {
+                const prop = this.properties.find(p => p.id === id);
+                if (!prop) return;
+                
+                const dono = this.users.find(u => u.email === prop.author);
+                if (dono && dono.role !== 'Admin' && dono.isBlocked) { return alert("Acesso indisponível no momento."); }
+
+                this.selectedPropertyForLead = prop;
+                if(this.currentUser) this.openPropertyDetailModal(prop); else this.openModal('modal-gate-capture');
+            }
+
+            actionCaptureLead(e) {
+                e.preventDefault();
+                this.leads.push({ name: document.getElementById('lead-name').value, phone: document.getElementById('lead-phone').value, propTitle: this.selectedPropertyForLead.title, source: "Aladin", date: new Date().toLocaleString('pt-BR') });
+                this.saveState(); this.closeModal('modal-gate-capture'); document.getElementById('form-lead-capture').reset(); this.openPropertyDetailModal(this.selectedPropertyForLead);
+            }
+
+            openPropertyDetailModal(prop) {
+                document.getElementById('md-title').innerText = prop.title;
+                document.getElementById('md-location').innerText = `📍 ${prop.location}`; document.getElementById('md-price').innerText = `R$ ${Number(prop.price).toLocaleString('pt-BR')}`; document.getElementById('md-description').innerText = prop.description || "Sem memorial.";
+                const agioPanel = document.getElementById('md-agio-details');
+                if (prop.type === 'Ágio') { agioPanel.style.display = 'block'; document.getElementById('md-agio-paid').innerText = `R$ ${Number(prop.agioPaid||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-remaining').innerText = `R$ ${Number(prop.agioRemaining||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-installment').innerText = `R$ ${Number(prop.agioInstallment||0).toLocaleString('pt-BR')}`; document.getElementById('md-agio-bank').innerText = prop.agioBank || "Não informado"; } else { agioPanel.style.display = 'none'; }
+                
+                const vc = document.getElementById('md-video-container');
+                if (prop.video) {
+                    const parsedVideo = this.parseExternalLink(prop.video, 'video');
+                    if (parsedVideo.startsWith('data:video/')) { vc.innerHTML = `<video src="${parsedVideo}" controls style="width:100%;height:100%;object-fit:contain;"></video>`; } 
+                    else { vc.innerHTML = `<iframe width="100%" height="100%" src="${parsedVideo}" frameborder="0" allowfullscreen style="border:none;"></iframe>`; }
+                } else { vc.innerHTML = `<div style="color:var(--text-muted);padding:2rem;">📷 Mídia Convencional</div>`; }
+                
+                document.getElementById('md-share-url').innerText = `${window.location.origin}${window.location.pathname}#view-prop-${prop.id}`;
+                this.openModal('modal-property-detail');
+            }
+
+            copyConversionLink() { navigator.clipboard.writeText(document.getElementById('md-share-url').innerText); alert('Link copiado!'); }
+            
+            // ==========================================
+            // LOGICA FINANCEIRA PIX E CONTROLE DE KPI
+            // ==========================================
+            simulateBillingExpiration() { 
+                if(this.currentUser) { 
+                    this.currentUser.entregasRealizadas = this.CONFIG_PIX.limiteEntregas; // Força limite atingido
+                    this.saveState();
+                    this.checkBillingStatusUI(); 
+                    this.refreshAllScreens(); 
+                }
+            }
+            
+            resetBilling() { 
+                const copiaEColaPix = this.gerarPixMestre(this.CONFIG_PIX.valorRenovacao);
+                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(copiaEColaPix)}`;
+                
+                document.getElementById('pix-qr-img').src = qrCodeUrl;
+                document.getElementById('pix-payload-container').innerText = copiaEColaPix;
+                document.getElementById('pix-payload-container').style.display = 'block';
+                document.getElementById('pix-copy-btn').onclick = () => {
+                    navigator.clipboard.writeText(copiaEColaPix).then(() => alert('Linha PIX copiada! Cole no app do banco.'));
                 };
 
-                if(type === 'Ágio') {
-                    dataPayload.agioRemaining = parseFloat(document.getElementById('p-agio-remaining').value) || 0;
-                    dataPayload.agioInstallment = parseFloat(document.getElementById('p-agio-installment').value) || 0;
-                    dataPayload.agioBank = document.getElementById('p-agio-bank').value || '';
-                }
-
-                if(this.db) {
-                    if(id) {
-                        this.db.ref('properties/' + id).update(dataPayload).then(() => this.closeModal('modal-property-form'));
-                    } else {
-                        this.db.ref('properties').push(dataPayload).then(() => this.closeModal('modal-property-form'));
-                    }
-                } else {
-                    if(id) {
-                        const idx = this.properties.findIndex(x => x.id === id);
-                        if(idx !== -1) this.properties[idx] = { id, ...dataPayload };
-                    } else {
-                        this.properties.push({ id: "prop-" + Date.now(), ...dataPayload });
-                    }
-                    this.saveState();
-                    this.refreshAllScreens();
-                    this.closeModal('modal-property-form');
-                }
+                this.openModal('modal-pix-payment');
             }
-
-            openDrivePicker(targetInputId) {
-                this.activeDriveTargetInputId = targetInputId;
-                const container = document.getElementById('drive-files-container');
-                container.innerHTML = '';
-
-                // Banco de Dados de Imagens Mock vinculadas à Cloudflare CDN do usuário
-                const mediaFiles = [
-                    { name: "📸 Fachada_Moderna_Residencial.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png" },
-                    { name: "📸 Interior_Porcelanato_Living.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto2.png" },
-                    { name: "🎥 Video_Apresentacao_Dron.mp4", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/video1.mp4" }
-                ];
-
-                mediaFiles.forEach(file => {
-                    const div = document.createElement('div');
-                    div.className = 'drive-item';
-                    div.innerHTML = `<div><b>${file.name}</b><br><small style="color:var(--text-muted); font-size:0.7rem;">${file.url}</small></div>`;
-                    div.onclick = () => this.chooseDriveFile(file.url);
-                    container.appendChild(div);
-                });
-
-                this.openModal('modal-drive-picker');
-            }
-
-            chooseDriveFile(url) {
-                if(this.activeDriveTargetInputId) {
-                    document.getElementById(this.activeDriveTargetInputId).value = url;
+            
+            processPixPayment() {
+                if(!this.currentUser) return;
+                // Zera as entregas realizadas (Renova o pacote)
+                this.currentUser.entregasRealizadas = 0;
+                this.currentUser.isBlocked = false;
+                
+                const index = this.users.findIndex(u => u.email === this.currentUser.email);
+                if(index !== -1) {
+                    this.users[index].entregasRealizadas = 0;
+                    this.users[index].isBlocked = false;
                 }
-                this.closeModal('modal-drive-picker');
-            }
-
-            simulateBillingExpiration() {
-                this.billingExpired = true;
+                
                 this.saveState();
-                this.refreshAllScreens();
-                alert("Simulação de inadimplência da rede ativada. Links bloqueados.");
+                this.checkBillingStatusUI(); 
+                this.closeModal('modal-pix-payment'); 
+                this.refreshAllScreens(); 
+                alert("Pagamento PIX confirmado e baixado com sucesso! Saldo de entregas renovado.");
             }
 
-            resetBilling() {
-                this.openModal('modal-checkout-pix');
-            }
-
-            actionCopyPixPayload() {
-                const payload = document.getElementById('pix-payload-container').innerText;
-                navigator.clipboard.writeText(payload);
-                alert("Código de pagamento PIX copiado para a área de transferência!");
-            }
-
-            actionConfirmPayment() {
-                this.billingExpired = false;
-                this.saveState();
-                this.refreshAllScreens();
-                this.closeModal('modal-checkout-pix');
-                alert("Pagamento compensado com sucesso via gateway instantâneo. Links liberados!");
-            }
-
-            openMediaViewer(id) {
-                const p = this.properties.find(x => x.id === id);
-                if(!p || !p.video) return;
-
-                document.getElementById('media-viewer-title').innerText = p.title;
-                const container = document.getElementById('media-viewer-box');
-                container.innerHTML = '';
-
-                if(p.video.includes('youtube.com') || p.video.includes('youtu.be')) {
-                    let videoId = '';
-                    if(p.video.includes('v=')) videoId = p.video.split('v=')[1].split('&')[0];
-                    else videoId = p.video.split('/').pop();
-
-                    container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                } else if(p.video.includes('.m3u8') || p.video.includes('.mp4')) {
-                    container.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
-                } else {
-                    container.innerHTML = `<div style="color:white; text-align:center; font-weight:bold;">Formato de URL de mídia não suportado nativamente.</div>`;
+            checkBillingStatusUI() {
+                const label = document.getElementById('billing-status-lbl');
+                const banner = document.getElementById('global-billing-alert');
+                
+                if (!this.currentUser) return;
+                
+                if (this.currentUser.role === 'Admin') {
+                    if(label) label.innerHTML = `<span style="color:var(--google-blue);">Conta Admin (Livre)</span>`;
+                    if(banner) banner.style.display = 'none';
+                    return;
                 }
 
-                this.openModal('modal-media-viewer');
+                this.currentUser.entregasRealizadas = this.currentUser.entregasRealizadas || 0;
+                const pacoteEsgotado = this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas;
+                
+                if (pacoteEsgotado) { 
+                    this.currentUser.isBlocked = true;
+                    if(label) label.innerHTML = `<span style="color:var(--tesla-red);">Bloqueado - Pacote de Entregas Esgotado</span>`;
+                    if(banner) { 
+                        banner.style.display = 'flex';
+                    }
+                } else { 
+                    this.currentUser.isBlocked = false;
+                    const cotaRestante = this.CONFIG_PIX.limiteEntregas - this.currentUser.entregasRealizadas;
+                    if(label) label.innerHTML = `<span style="color:var(--google-green);">Ativo (${cotaRestante} anúncios disponíveis)</span>`;
+                    if(banner) banner.style.display = 'none';
+                }
             }
 
-            closeMediaViewer() {
-                document.getElementById('media-viewer-box').innerHTML = '';
-                this.closeModal('modal-media-viewer');
+            switchAuthMode(m) { document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); if(m==='login'){document.getElementById('tab-auth-login').classList.add('active');document.getElementById('form-login').style.display='block';document.getElementById('form-register').style.display='none';}else{document.getElementById('tab-auth-register').classList.add('active');document.getElementById('form-login').style.display='none';document.getElementById('form-register').style.display='block';} }
+            handleRoleChange(r) { const c=document.getElementById('group-creci-field'); if(c) c.style.display = (r==='Corretor'||r==='Imobiliária') ? 'flex' : 'none'; }
+            
+            actionRegister(e) { 
+                e.preventDefault();
+                const email = document.getElementById('reg-email').value; 
+                if(this.users.some(u=>u.email===email)) return alert('E-mail em uso.'); 
+                
+                const u = { 
+                    name: document.getElementById('reg-name').value, 
+                    email, 
+                    role: document.getElementById('reg-role').value, 
+                    creci: document.getElementById('reg-creci').value, 
+                    password: document.getElementById('reg-password').value,
+                    entregasRealizadas: 0,
+                    isBlocked: false
+                };
+                this.users.push(u); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); 
             }
+            
+            actionLogin(e) { e.preventDefault(); const u = this.users.find(u=>u.email===document.getElementById('login-email').value && u.password===document.getElementById('login-password').value); if(!u) return alert('Credenciais inválidas.'); this.currentUser=u; this.saveState(); this.refreshAllScreens(); this.navigate('dashboard'); }
+            actionLogout() { this.currentUser=null; this.saveState(); this.refreshAllScreens(); this.navigate('landing'); }
+            updateAuthHeader() { const ba=document.getElementById('menu-btn-auth'), md=document.getElementById('menu-btn-dash'), pa=document.getElementById('menu-user-profile'), un=document.getElementById('header-user-name'); if(this.currentUser) { if(ba) ba.style.display='none'; if(md) md.style.display='block'; if(pa) pa.style.display='flex'; if(un) un.innerText=this.currentUser.name; } else { if(ba) ba.style.display='block'; if(md) md.style.display='none'; if(pa) pa.style.display='none'; } }
+            renderDashboard() { document.getElementById('dash-user-title').innerText=this.currentUser.name; document.getElementById('dash-user-subtitle').innerText=`Perfil: ${this.currentUser.role}`; const mp=document.getElementById('admin-master-panel'); if(this.currentUser.role==='Admin'){ if(mp)mp.style.display='block'; document.getElementById('admin-stat-users').innerText=this.users.length; document.getElementById('admin-stat-props').innerText=this.properties.length; document.getElementById('admin-stat-leads').innerText=this.leads.length; }else{ if(mp)mp.style.display='none'; } this.renderPortfolioGrid(); this.renderLeadsTable(); }
+            switchDashTab(t) { document.querySelectorAll('.tab-dash-view').forEach(v=>v.style.display='none'); document.querySelectorAll('.dash-menu-item').forEach(m=>m.classList.remove('active')); document.getElementById(`dash-tab-${t}`).style.display='block'; document.getElementById(`menu-sub-${t}`).classList.add('active'); }
+            
+            renderPortfolioGrid() {
+                const tbody = document.getElementById('portfolio-table-rows');
+                if(!tbody) return; tbody.innerHTML = '';
+                const uProps = this.currentUser.role==='Admin' ? this.properties : this.properties.filter(p=>p.author===this.currentUser.email);
+                if(uProps.length===0) return tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Vazio.</td></tr>`;
+                uProps.forEach(p => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Imóvel"><b>${p.title}</b></td><td data-label="Tipo"><span class="pricing-badge">${p.type}</span></td><td data-label="Local">${p.location}</td><td data-label="Preço">R$ ${Number(p.price).toLocaleString('pt-BR')}</td><td data-label="Ações"><button class="nav-link" style="color:var(--google-blue);" onclick="app.openEditPropertyModal('${p.id}')">Editar</button> | <button class="nav-link" style="color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button></td>`; tbody.appendChild(tr); });
+            }
+
+            renderLeadsTable() {
+                const tbody = document.getElementById('leads-table-rows');
+                if(!tbody) return; tbody.innerHTML = '';
+                this.leads.forEach(l => { const tr = document.createElement('tr'); tr.innerHTML = `<td data-label="Nome">${l.name}</td><td data-label="Contato" style="color:var(--google-green);font-weight:bold;">${l.phone}</td><td data-label="Imóvel Alvo">${l.propTitle}</td><td data-label="Origem">${l.source}</td><td data-label="Data">${l.date}</td>`; tbody.appendChild(tr); });
+            }
+
+            togglePropertyAgioForm(t) { document.getElementById('p-agio-panel').style.display = t==='Ágio'?'block':'none'; }
+            openNewPropertyModal() { document.getElementById('form-actual-property').reset(); document.getElementById('p-id').value=''; document.getElementById('form-prop-title').innerText="Novo Imóvel"; this.openModal('modal-property-form'); }
+            openEditPropertyModal(id) { const p=this.properties.find(x=>x.id===id); if(!p)return; document.getElementById('p-id').value=p.id; document.getElementById('p-title').value=p.title; document.getElementById('p-type').value=p.type; document.getElementById('p-price').value=p.price; document.getElementById('p-location').value=p.location; document.getElementById('p-image').value=p.image; document.getElementById('p-video').value=p.video; document.getElementById('p-description').value=p.description; this.togglePropertyAgioForm(p.type); if(p.type==='Ágio'){document.getElementById('p-agio-paid').value=p.agioPaid||'';document.getElementById('p-agio-remaining').value=p.agioRemaining||'';document.getElementById('p-agio-installment').value=p.agioInstallment||'';document.getElementById('p-agio-bank').value=p.agioBank||'';} document.getElementById('form-prop-title').innerText="Editar Imóvel"; this.openModal('modal-property-form'); }
+            actionDeleteProperty(id) { if(confirm('Excluir?')) { this.properties = this.properties.filter(x=>x.id!==id); this.saveState(); this.refreshAllScreens(); } }
+
+            openDrivePicker(tId) { this.activeDriveTargetInputId=tId; const c=document.getElementById('drive-files-container'); c.innerHTML=''; const m=[{name:"📸 Cloudflare_Link.jpg", url:"https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}]; m.forEach(f=>{const d=document.createElement('div');d.className='drive-item';d.innerHTML=`<div><b>${f.name}</b><br><small>${f.url}</small></div>`;d.onclick=()=>this.chooseDriveFile(f.url);c.appendChild(d);}); this.openModal('modal-drive-picker'); }
+            chooseDriveFile(url) { if(this.activeDriveTargetInputId){ const cur=document.getElementById(this.activeDriveTargetInputId).value; document.getElementById(this.activeDriveTargetInputId).value = cur ? cur+','+url : url; } this.closeModal('modal-drive-picker'); }
+            
+            openModal(id) { document.getElementById(id).classList.add('active'); }
+            closeModal(id) { document.getElementById(id).classList.remove('active'); }
         }
 
-        const app = new ImobiApp();
-        window.onload = () => app.init();
+        const app = new IaMobiEngine();
     </script>
 </body>
 </html>
