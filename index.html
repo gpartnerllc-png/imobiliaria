@@ -164,7 +164,7 @@
                         <option value="">Todas as opções</option>
                         <option value="Ágio">Negociação de Ágio</option>
                         <option value="Venda">Venda Direta</option>
-                        <option value="Aluguel">Locação Residential</option>
+                        <option value="Aluguel">Locação Residencial</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -394,7 +394,7 @@
     </footer>
 
     <script>
-        // Configuração Estável do Firebase RTDB
+        // Configuração Estável do Firebase Realtime Database
         const firebaseConfig = {
             databaseURL: "https://ia-mobi-default-rtdb.firebaseio.com/"
         };
@@ -413,23 +413,27 @@
             }
 
             init() {
-                // Recuperar estado de autenticação persistido localmente
-                const u = localStorage.getItem('imobi_user');
-                if(u) {
-                    this.currentUser = JSON.parse(u);
+                // Recuperar estado persistido localmente de forma segura
+                const userState = localStorage.getItem('imobi_user');
+                if(userState) {
+                    this.currentUser = JSON.parse(userState);
                     this.setupUIAfterLogin();
                 }
-                const b = localStorage.getItem('imobi_billing');
-                this.billingActive = b !== 'expired';
+                const billingState = localStorage.getItem('imobi_billing');
+                this.billingActive = billingState !== 'expired';
                 this.updateBillingUI();
 
-                // Sincronizações em tempo real controladas para evitar loop travando telas
+                // Sincronizações seguras unificadas (IMOBI 11 + 12)
                 this.syncProperties();
                 this.syncLeadsCount();
             }
 
             saveState() {
-                if(this.currentUser) localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
+                if(this.currentUser) {
+                    localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
+                } else {
+                    localStorage.removeItem('imobi_user');
+                }
                 localStorage.setItem('imobi_billing', this.billingActive ? 'active' : 'expired');
             }
 
@@ -457,10 +461,7 @@
                             this.properties.push({id, ...data[id]});
                         }
                     }
-                    // Renderiza componentes sem disparar novos listeners secundários em cascata
-                    this.renderPublicGrid();
-                    this.renderPortfolioTable();
-                    this.updateAdminStats();
+                    this.refreshAllScreens();
                 });
             }
 
@@ -481,6 +482,12 @@
                     this.usersCount = snapshot.val() || 0;
                     this.updateAdminStats();
                 });
+            }
+
+            refreshAllScreens() {
+                this.renderPublicGrid();
+                this.renderPortfolioTable();
+                this.updateAdminStats();
             }
 
             updateAdminStats() {
@@ -565,7 +572,7 @@
                 this.closeModal('modal-pix-payment');
             }
 
-            // Ações de Autenticação
+            // Fluxo de Autenticação Realtime
             actionRegister(e) {
                 e.preventDefault();
                 const name = document.getElementById('reg-name').value;
@@ -578,12 +585,13 @@
                 db.ref('users_count').transaction((current) => (current || 0) + 1);
                 this.setupUIAfterLogin();
                 this.navigate('dashboard');
-                alert('Conta criada e autenticada via RTDB!');
+                alert('Conta criada e registrada com sucesso!');
             }
 
             actionLogin(e) {
                 e.preventDefault();
                 const email = document.getElementById('login-email').value;
+                // Simulação estável baseada em privilégios Admin padrão do IMOBI 12
                 this.currentUser = { name: email.split('@')[0].toUpperCase(), email: email, role: 'Admin', creci: 'N/A' };
                 this.saveState();
                 this.setupUIAfterLogin();
@@ -599,7 +607,7 @@
                 this.navigate('landing');
             }
 
-            // Renderizadores de Interface Dinâmica
+            // Renderizadores de Elementos e Listas Dinâmicas
             renderPublicGrid() {
                 const g = document.getElementById('public-properties-grid');
                 if(!g) return;
@@ -613,7 +621,7 @@
                 });
 
                 if(matches.length === 0) {
-                    g.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-muted);">Nenhum imóvel corresponde aos filtros de busca.</div>`;
+                    g.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-muted);">Nenhum imóvel encontrado.</div>`;
                     return;
                 }
 
@@ -702,7 +710,7 @@
                 });
             }
 
-            // Mecanismo de Busca Hub
+            // Mecanismo de Busca Hub Filtros
             executeSearch() {
                 this.filters.type = document.getElementById('search-type').value;
                 this.filters.location = document.getElementById('search-location').value;
@@ -718,7 +726,7 @@
                 this.renderPublicGrid();
             }
 
-            // CRUD Imóveis
+            // CRUD Imóveis Controladores
             handleFormTypeChange(type) {
                 const wrapper = document.getElementById('wrapper-agio-fields');
                 if(type === 'Ágio') {
@@ -786,7 +794,7 @@
                     db.ref('properties').push(propData);
                 }
                 this.closeModal('modal-property-form');
-                alert('Registro salvo com sucesso!');
+                alert('Registro de imóvel salvo com sucesso!');
             }
 
             actionDeleteProperty(id) {
@@ -795,35 +803,35 @@
                 }
             }
 
-            // Cloud Pickers Integrados
-            openDrivePicker(targetId) {
-                this.activeDriveTargetInputId = targetId;
-                const container = document.getElementById('drive-files-container');
-                container.innerHTML = '';
+            // Cloud Pickers Integrados dos códigos IMOBI 12
+            openDrivePicker(tId) {
+                this.activeDriveTargetInputId = tId;
+                const c = document.getElementById('drive-files-container');
+                c.innerHTML = '';
                 
-                const mockDriveFiles = [
+                const m = [
                     {name: "📸 Cloudflare_Link.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}
                 ];
 
-                mockDriveFiles.forEach(f => {
-                    const item = document.createElement('div');
-                    item.className = 'drive-item';
-                    item.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted); font-size:0.75rem;">${f.url}</small></div>`;
-                    item.onclick = () => this.chooseDriveFile(f.url);
-                    container.appendChild(item);
+                m.forEach(f => {
+                    const d = document.createElement('div');
+                    d.className = 'drive-item';
+                    d.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted); font-size:0.75rem;">${f.url}</small></div>`;
+                    d.onclick = () => this.chooseDriveFile(f.url);
+                    c.appendChild(d);
                 });
                 this.openModal('modal-drive-picker');
             }
 
             chooseDriveFile(url) {
                 if(this.activeDriveTargetInputId) {
-                    const currentVal = document.getElementById(this.activeDriveTargetInputId).value;
-                    document.getElementById(this.activeDriveTargetInputId).value = currentVal ? currentVal + ',' + url : url;
+                    const cur = document.getElementById(this.activeDriveTargetInputId).value;
+                    document.getElementById(this.activeDriveTargetInputId).value = cur ? cur + ',' + url : url;
                 }
                 this.closeModal('modal-drive-picker');
             }
 
-            // Gerenciamento e Captação de Leads
+            // Captação Avançada de Leads
             openLeadModal(propId, propTitle, ownerEmail) {
                 if(!this.billingActive) {
                     this.resetBilling();
@@ -850,10 +858,10 @@
 
                 db.ref('leads').push(leadData);
                 this.closeModal('modal-lead-form');
-                alert('Sua solicitação de contato foi enviada com sucesso ao corretor responsável!');
+                alert('Solicitação de contato encaminhada com sucesso via nuvem!');
             }
 
-            // Visualização de Vídeo Avançada
+            // Reprodutor Multimídia Streaming Estável (IMOBI 11)
             openMediaViewer(propId) {
                 const p = this.properties.find(x => x.id === propId);
                 if(!p || !p.video) return;
@@ -871,7 +879,7 @@
                 } else if(p.video.includes('.m3u8') || p.video.includes('.mp4')) {
                     container.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
                 } else {
-                    container.innerHTML = `<div style="color:white; text-align:center; font-weight:bold; padding:2rem;">Formato de link de vídeo não suportado nativamente.</div>`;
+                    container.innerHTML = `<div style="color:white; text-align:center; font-weight:bold; padding:2rem;">Formato de URL de mídia não suportado nativamente.</div>`;
                 }
 
                 this.openModal('modal-media-viewer');
@@ -883,7 +891,7 @@
             }
         }
 
-        // Inicialização Global
+        // Instanciação única e inicialização no ciclo de carregamento global da janela
         const app = new ImobiApp();
         window.onload = () => app.init();
     </script>
