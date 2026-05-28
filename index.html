@@ -40,82 +40,7 @@
             --premium-gold: #ffd700;
         }
 
-        /* ==========================================================================
-           PREFIXOS DE COMPATIBILIDADE GLOBAL (COLE DENTRO DA TAG <STYLE>)
-           ========================================================================== */
-
-        /* 1. RESET GLOBAL E SUAVIZAÇÃO DE FONTES (CHROME, SAFARI E FIREFOX) */
-        * { 
-            box-sizing: border-box;
-            margin: 0; 
-            padding: 0; 
-            font-family: var(--font); 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Evita que a tela dê "pulos" horizontais ao abrir modais em navegadores de desktop */
-        html {
-            scrollbar-gutter: stable;
-        }
-
-        /* 2. RECORTE DE GRADIENTE NA LOGO (COMPATIBILIDADE MULTI-NAVEGADOR) */
-        .brand-logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* 3. NORMALIZAÇÃO DE INPUTS, TEXTAREAS E SELECTS (FORÇA ALTURA E ESTILO IGUAL NO IOS/SAFARI) */
-        .input-group input, 
-        .input-group select, 
-        .input-group textarea {
-            background: var(--bg-input);
-            border: 1px solid rgba(128, 128, 128, 0.2);
-            color: var(--text-main);
-            padding: 0.9rem;
-            border-radius: 10px;
-            outline: none;
-            font-size: 1rem;
-            transition: all 0.3s;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        /* Garante que o elemento 'select' mantenha uma setinha elegante e nativa, mesmo resetado no Safari */
-        .input-group select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 1.2rem;
-            padding-right: 2.5rem;
-        }
-
-        /* 4. MODAL BLUR / DESFOQUE DE VIDRO COESIVO (FIX PARA SAFARI MOBILE E DESKTOP) */
-        .modal-blur {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.7);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            z-index: 5000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            padding: 1rem;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased; }
         body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
 
         .glass-glow-1 { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); top: -10%; right: -10%; z-index: -1; pointer-events: none; }
@@ -141,10 +66,10 @@
         .billing-warning-banner { background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%); color: white; padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: none; font-weight: 600; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(232, 33, 39, 0.2); }
 
         .hero { text-align: center; padding: 2rem 1rem 2.5rem 1rem; }
-        .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 1.5rem; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin-bottom: 1.5rem; }
         .hero h1 span { background: linear-gradient(90deg, var(--google-blue), var(--google-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
+        .search-hub { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); padding: 1.8rem; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem; align-items: flex-end; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 4rem; }
         .input-group { display: flex; flex-direction: column; gap: 0.6rem; }
         .input-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
@@ -171,6 +96,7 @@
         .dash-menu-item.active { border-left: 4px solid var(--tesla-red); color: var(--google-blue); }
         .main-dash-content { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.05); border-radius: 16px; padding: 2.5rem; min-height: 600px; }
 
+        .modal-blur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
         .modal-blur.active { opacity: 1; pointer-events: auto; }
         .modal-window { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 24px; width: 100%; max-width: 750px; padding: 2.5rem; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
         .video-box-container { width: 100%; height: 360px; background: #000; border-radius: 12px; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -179,7 +105,6 @@
         th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700; text-align: left; }
         td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
 
-        /* CORREÇÃO DO CONTEXTO DE TABELAS (RESPONSIVO SMARTPHONES) */
         @media (max-width: 768px) {
             .dash-layout { grid-template-columns: 1fr; }
             table, thead, tbody, th, td, tr { display: block; width: 100%; }
@@ -207,14 +132,12 @@
                 <span class="brand-sub">Partner Holding</span>
             </div>
         </div>
-     
         <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
             <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
             <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
-         
             <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
                 <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
                 <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Sair</button>
@@ -233,20 +156,40 @@
                 <h1>Plataforma de <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
-            <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
+            
+            <div class="search-hub">
                 <div class="input-group">
                     <label>Modalidade</label>
-                    <select id="search-type" onchange="app.executeSearch()">
+                    <select id="search-type">
                         <option value="">Todas as opções</option>
                         <option value="Ágio">Negociação de Ágio</option>
-                        <option value="Venda">Venda Directa</option>
-                        <option value="Aluguel">Locação Residencial</option>
+                        <option value="Venda">Venda Direta</option>
+                        <option value="Aluguel">Locação Residential</option>
                     </select>
-                </div>             
-        
-                <button class="btn-action" style="background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); height: 50px;" onclick="app.executeSearch()">Buscar</button>
+                </div>
+                <div class="input-group">
+                    <label>Região / Localização</label>
+                    <select id="search-location">
+                        <option value="">Todas as Regiões</option>
+                        <option value="Brasília">Brasília (Plano Piloto)</option>
+                        <option value="Taguatinga">Taguatinga</option>
+                        <option value="Ceilândia">Ceilândia</option>
+                        <option value="Samambaia">Samambaia</option>
+                        <option value="Águas Claras">Águas Claras</option>
+                        <option value="Guará">Guará</option>
+                        <option value="Águas Lindas">Águas Lindas - GO</option>
+                        <option value="Valparaíso">Valparaíso - GO</option>
+                        <option value="Luziânia">Luziânia - GO</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Preço Máximo (R$)</label>
+                    <input type="number" id="search-price" placeholder="Qualquer valor">
+                </div>
+                <button class="btn-action" style="background: var(--google-blue); height: 50px; font-weight: 800;" onclick="app.executeSearch()">Buscar Imóveis</button>
                 <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
             </div>
+            
             <div class="grid-wrapper" id="public-properties-grid"></div>
         </section>
 
@@ -287,48 +230,58 @@
                 <aside class="dash-sidebar">
                     <div style="text-align: center; margin-bottom: 2rem;">
                         <div style="font-weight: 800; font-size: 1.1rem;" id="dash-user-title">Carregando...</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);" id="dash-user-subtitle">Acesso Authorized</div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);" id="dash-user-subtitle">Acesso Autorizado</div>
                     </div>
                     <div class="dash-menu-item active" id="menu-sub-portfolio" onclick="app.switchDashTab('portfolio')">Meu Portfólio</div>
                     <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Convertidos</div>
-                    <div class="dash-menu-item" id="menu-sub-system" onclick="app.switchDashTab('system')">Configurações & API</div>
                 </aside>
+
                 <main class="main-dash-content">
-                    <div id="dash-tab-portfolio" class="tab-dash-view">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
-                            <h2>Gerenciamento de Imóveis</h2>
-                            <button class="btn-action" style="background: var(--google-green);" onclick="app.openNewPropertyModal()">+ Novo Imóvel</button>
+                    <div id="tab-content-portfolio">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <h2 style="font-size: 1.5rem; font-weight: 800;">Meus Imóveis Cadastrados</h2>
+                                <p style="color: var(--text-muted); font-size: 0.85rem;">Gerencie as ofertas e detalhes de ágios na nuvem.</p>
+                            </div>
+                            <button class="btn-action" style="background: var(--google-green);" onclick="app.openNewPropertyForm()">+ Novo Registro</button>
                         </div>
-                        <table id="table-portfolio">
-                            <thead><tr><th>Imóvel</th><th>Tipo</th><th>Localização</th><th>Preço Face</th><th>Ações</th></tr></thead>
+                        <table id="portfolio-table">
+                            <thead>
+                                <tr>
+                                    <th>Imóvel</th>
+                                    <th>Tipo</th>
+                                    <th>Localização</th>
+                                    <th>Preço Face</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
                             <tbody id="portfolio-table-rows"></tbody>
                         </table>
                     </div>
-                    <div id="dash-tab-leads" class="tab-dash-view" style="display: none;">
-                        <h2>Leads Capturados</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Controle de tráfego orgânico e conversões de alta intenção.</p>
+
+                    <div id="tab-content-leads" style="display: none;">
+                        <h2 style="font-size: 1.5rem; font-weight: 800;">Leads e Intenções Coletadas</h2>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Pessoas que solicitaram contato com o corretor da oferta.</p>
                         <table>
-                            <thead><tr><th>Nome do Lead</th><th>WhatsApp / Telefone</th><th>Imóvel Alvo</th><th>Origem Canal</th><th>Data Captura</th></tr></thead>
+                            <thead>
+                                <tr>
+                                    <th>Nome do Lead</th>
+                                    <th>WhatsApp / Telefone</th>
+                                    <th>Imóvel Alvo</th>
+                                    <th>Origem Canal</th>
+                                    <th>Data Captura</th>
+                                </tr>
+                            </thead>
                             <tbody id="leads-table-rows"></tbody>
                         </table>
                     </div>
-                    <div id="dash-tab-system" class="tab-dash-view" style="display: none;">
-                        <h2>Infraestrutura Jurídica e Comercial</h2>
-                        <div style="margin-top: 1.5rem; background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
-                            <h4 style="margin-bottom: 0.5rem;">Status de Faturamento da Conta</h4>
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;"><span style="font-weight: 700;" id="billing-status-lbl">Assinatura Ativa (Regularizada)</span></div>
-                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                <button class="btn-action" style="background: var(--tesla-red); box-shadow: none; font-size: 0.85rem;" onclick="app.simulateBillingExpiration()">Forçar Inadimplência</button>
-                                <button class="btn-action" style="background: var(--google-green); box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Comprar Pacote PIX</button>
-                            </div>
-                        </div>
-                        <div id="admin-master-panel" style="display: none; margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
-                            <h3 style="color: var(--google-blue); margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-users">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span></div>
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-props">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span></div>
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Leads na Rede</span></div>
-                            </div>
+
+                    <div id="admin-master-panel" style="display: none; margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
+                        <h3 style="color: var(--google-blue); margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
+                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-users">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span></div>
+                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-props">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span></div>
+                            <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Leads na Rede</span></div>
                         </div>
                     </div>
                 </main>
@@ -336,155 +289,603 @@
         </section>
     </div>
 
-    <div class="modal-blur" id="modal-pix-payment">
-        <div class="modal-window" style="max-width: 420px; text-align: center;">
-            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
-            <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
-            <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
-                <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
-                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
-            </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
-            <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
-        </div>
-    </div>
-
-    <div class="modal-blur" id="modal-property-detail">
-        <div class="modal-window">
-            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
-            <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
-            <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
-            
-            <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
-                    <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
-                    <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
-                    <div><strong>Parcela do Ágio:</strong> <span id="md-agio-installment"></span></div>
-                    <div><strong>Banco Financiador:</strong> <span id="md-agio-bank"></span></div>
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-                <div><strong>Modalidade comercial:</strong> <span id="md-type"></span></div>
-                <div><strong>Preço Estipulado:</strong> <span id="md-price" style="font-weight:700; color:var(--google-blue);"></span></div>
-            </div>
-            <div style="margin-bottom: 1.5rem;">
-                <strong>Memorial Técnico / Descrição:</strong>
-                <p id="md-desc" style="margin-top: 0.5rem; color:var(--text-muted); white-space: pre-line; line-height: 1.5;"></p>
-            </div>
-            <div id="md-media-section" style="margin-bottom: 1.5rem;">
-                <strong>Evidências Multimídia & Links Rápidos:</strong>
-                <div id="md-gallery" style="display: flex; gap: 10px; margin-top: 0.5rem; flex-wrap: wrap;"></div>
-                <div class="video-box-container" id="md-video-container" style="display: none;"></div>
-            </div>
-            <div style="border-top: 1px solid rgba(128,128,128,0.15); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Anunciante Responsável</span>
-                    <strong id="md-owner"></strong> <span id="md-creci" style="font-size:0.85rem; color:var(--google-blue);"></span>
-                </div>
-                <a id="md-whatsapp-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%); text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                    💬 Iniciar Negociação WhatsApp
-                </a>
-            </div>
-        </div>
-    </div>
-
     <div class="modal-blur" id="modal-property-form">
         <div class="modal-window">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-form')">&times;</button>
-            <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Novo Imóvel</h2>
-            <form id="property-form-real" onsubmit="app.actionSaveProperty(event)">
+            <h2 id="form-prop-title" style="margin-bottom: 1.5rem; font-weight: 800;">Adicionar Imóvel</h2>
+            <form id="form-property" onsubmit="app.actionSaveProperty(event)">
                 <input type="hidden" id="p-id">
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
+                    <div class="input-group"><label>Título do Anúncio</label><input type="text" id="p-title" required placeholder="Ex: Residencial Premium 2 Qts"></div>
                     <div class="input-group">
-                        <label>Título do Anúncio</label>
-                        <input type="text" id="p-title" required placeholder="Ex: Apartamento 2 Qts Metrópole">
-                    </div>
-                    <div class="input-group">
-                        <label>Modalidade Comercial</label>
+                        <label>Modalidade</label>
                         <select id="p-type" required onchange="app.handleFormTypeChange(this.value)">
                             <option value="Ágio">Negociação de Ágio</option>
-                            <option value="Venda">Venda Directa</option>
+                            <option value="Venda">Venda Direta</option>
                             <option value="Aluguel">Locação Residencial</option>
                         </select>
                     </div>
                 </div>
-
-                <div id="form-agio-block" style="background: rgba(244, 164, 0, 0.05); border: 1px solid rgba(244, 180, 0, 0.3); padding: 1.2rem; border-radius: 12px; margin-bottom: 1.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
                     <div class="input-group">
-                        <label>Valor do Ágio Pago (R$)</label>
-                        <input type="text" id="p-agio-paid" placeholder="Ex: 50000">
+                        <label>Região Imóvel</label>
+                        <select id="p-location" required>
+                            <option value="Brasília">Brasília (Plano Piloto)</option>
+                            <option value="Taguatinga">Taguatinga</option>
+                            <option value="Ceilândia">Ceilândia</option>
+                            <option value="Samambaia">Samambaia</option>
+                            <option value="Águas Claras">Águas Claras</option>
+                            <option value="Guará">Guará</option>
+                            <option value="Águas Lindas">Águas Lindas - GO</option>
+                            <option value="Valparaíso">Valparaíso - GO</option>
+                            <option value="Luziânia">Luziânia - GO</option>
+                        </select>
                     </div>
-                    <div class="input-group">
-                        <label>Saldo Devedor Restante (R$)</label>
-                        <input type="text" id="p-agio-remaining" placeholder="Ex: 180000">
-                    </div>
-                    <div class="input-group">
-                        <label>Valor da Parcela Mensal (R$)</label>
-                        <input type="text" id="p-agio-installment" placeholder="Ex: 1200">
-                    </div>
-                    <div class="input-group">
-                        <label>Banco de Financiamento</label>
-                        <input type="text" id="p-agio-bank" placeholder="Ex: Caixa Econômica">
+                    <div class="input-group"><label>Preço Total / Pedido no Ágio (R$)</label><input type="number" id="p-price" required placeholder="Ex: 45000"></div>
+                </div>
+                <div id="wrapper-agio-fields" style="background: rgba(26,115,232,0.04); border: 1px dashed rgba(26,115,232,0.3); padding: 1.2rem; border-radius: 12px; margin-bottom: 1.2rem;">
+                    <h4 style="font-size: 0.85rem; color: var(--google-blue); margin-bottom: 1rem; font-weight: 700; text-transform: uppercase;">Dados de Financiamento do Ágio</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                        <div class="input-group"><label>Saldo Devedor (R$)</label><input type="number" id="p-agio-remaining" placeholder="Ex: 180000"></div>
+                        <div class="input-group"><label>Valor Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Ex: 850"></div>
+                        <div class="input-group"><label>Banco Financiador</label><input type="text" id="p-agio-bank" placeholder="Ex: Caixa"></div>
                     </div>
                 </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem;">
-                    <div class="input-group">
-                        <label>Localização / Endereço</label>
-                        <input type="text" id="p-location" required placeholder="Ex: Águas Claras, DF">
-                    </div>
-                    <div class="input-group">
-                        <label>Preço de Face / Pedido (R$)</label>
-                        <input type="number" step="any" id="p-price" required placeholder="Ex: 250000">
-                    </div>
-                </div>
-
-                <div class="input-group" style="margin-bottom: 1.2rem;">
-                    <label>Memorial Técnico / Descrição Detalhada</label>
-                    <textarea id="p-description" rows="4" required placeholder="Descreva os detalhes, diferenciais e informações importantes do imóvel..."></textarea>
-                </div>
-
+                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Descrição e Detalhes Importantes</label><textarea id="p-desc" rows="3" placeholder="Infraestrutura interna, armários, lazer..."></textarea></div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.5rem;">
                     <div class="input-group">
-                        <label>Imagens (URLs separadas por vírgula)</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" id="p-images" placeholder="https://link.com/foto.jpg" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" style="padding: 0 1rem; background: var(--text-main);" onclick="app.openDrivePicker('p-images')">📁</button>
-                        </div>
+                        <label>Fotos (Links Separados por Vírgula)</label>
+                        <div style="display: flex; gap: 6px;"><input type="text" id="p-images" placeholder="https://..." style="flex-grow: 1;"><button type="button" class="btn-action" style="padding: 0.5rem 1rem;" onclick="app.openDrivePicker('p-images')">📁</button></div>
                     </div>
-                    <div class="input-group">
-                        <label>Vídeo Streaming (URL M3U8/MP4 ou Emby)</label>
-                        <input type="text" id="p-video" placeholder="https://stream.com/video.m3u8">
-                    </div>
+                    <div class="input-group"><label>Link do Vídeo Real (YouTube / M3U8 / MP4)</label><input type="text" id="p-video" placeholder="https://youtube.com/watch?v=..."></div>
                 </div>
-
-                <div style="display: flex; justify-content: flex-end; gap: 10px;">
-                    <button type="button" class="btn-action" style="background: var(--text-muted); box-shadow: none;" onclick="app.closeModal('modal-property-form')">Cancelar</button>
-                    <button type="submit" class="btn-action" style="background: var(--google-blue);">Salvar Registro</button>
-                </div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--text-main);">Salvar Registro no Banco</button>
             </form>
         </div>
     </div>
 
     <div class="modal-blur" id="modal-drive-picker">
-        <div class="modal-window" style="max-width: 480px;">
+        <div class="modal-window" style="max-width: 500px;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-drive-picker')">&times;</button>
-            <h3 style="margin-bottom: 1rem;">Repositório Cloudflare R2 integrado</h3>
+            <h3 style="margin-bottom: 1.5rem;">Selecione do Cloud Storage</h3>
             <div id="drive-files-container"></div>
         </div>
     </div>
 
+    <div class="modal-blur" id="modal-lead-form">
+        <div class="modal-window" style="max-width: 460px;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-lead-form')">&times;</button>
+            <h2 style="color: var(--google-blue); margin-bottom: 0.5rem;">Manifestar Interesse</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">A incorporadora ou o corretor responsável entrará em contato diretamente via WhatsApp.</p>
+            <form id="form-lead" onsubmit="app.actionSubmitLead(event)">
+                <input type="hidden" id="lead-prop-id">
+                <input type="hidden" id="lead-prop-title">
+                <input type="hidden" id="lead-prop-owner">
+                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome Completo</label><input type="text" id="lead-name" required placeholder="Digite seu nome"></div>
+                <div class="input-group" style="margin-bottom: 1.5rem;"><label>WhatsApp de Contato</label><input type="text" id="lead-phone" required placeholder="Ex: (61) 99999-9999"></div>
+                <button type="submit" class="btn-action" style="width: 100%; background: var(--google-green);">Enviar e Solicitar Contato</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-media-viewer">
+        <div class="modal-window" style="background: #090d16; color: white;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: #8a99ad;" onclick="app.closeMediaViewer()">&times;</button>
+            <h3 id="media-viewer-title" style="margin-bottom: 0.5rem;">Visualização Multimídia</h3>
+            <div class="video-box-container" id="media-viewer-box"></div>
+        </div>
+    </div>
+
+    <div class="modal-blur" id="modal-pix-payment">
+        <div class="modal-window" style="max-width: 420px; text-align: center;">
+            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
+            <h2 style="color: var(--google-green); margin-bottom: 1rem;">Renovação Inteligente</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong>10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
+            <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
+                <div style="width: 180px; height: 180px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 0.8rem; font-weight: bold; color: #475569;">[QR CODE DINÂMICO PIX]</div>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: 10px; font-size: 0.75rem; word-break: break-all; margin-bottom: 1.5rem; text-align: left;" id="pix-payload-container">00020101021126580014br.gov.bcb.pix0136611599a0-97b7-4b7b-bc43-225eb57262a4520400005303986540519.995802BR5915PartnerHolding6008Brasilia62070503***6304D1B8</div>
+            <button class="btn-action" style="width:100%; background: var(--google-blue);" onclick="app.actionCopyPixPayload()">Copiar Código Copia e Cola</button>
+        </div>
+    </div>
+
     <footer>
-        &copy; 2026 IMOBI PLATAFORMA inteligência Imobiliária. Todos os direitos reservados.
+        <p>&copy; 2026 IMOBI | SISTEMA OPERACIONAL DE ÁGIOS E CRÉDITO. DESENVOLVIDO PARA PARTNER HOLDING.</p>
     </footer>
 
     <script>
-        // O core JavaScript inalterado do sistema original inicia aqui...
-        // [Toda a lógica nativa do app, Firebase, tabelas, busca, etc. contida no arquivo original se mantém aqui]
+        // Configuração Estável do Firebase RTDB
+        const firebaseConfig = {
+            databaseURL: "https://ia-mobi-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        class ImobiApp {
+            constructor() {
+                this.properties = [];
+                this.leads = [];
+                this.usersCount = 0;
+                this.currentUser = null;
+                this.billingActive = true;
+                this.filters = { type: '', location: '', price: '' };
+                this.activeDriveTargetInputId = null;
+            }
+
+            init() {
+                // Recuperar estado de autenticação persistido localmente
+                const u = localStorage.getItem('imobi_user');
+                if(u) {
+                    this.currentUser = JSON.parse(u);
+                    this.setupUIAfterLogin();
+                }
+                const b = localStorage.getItem('imobi_billing');
+                this.billingActive = b !== 'expired';
+                this.updateBillingUI();
+
+                // Sincronizações em tempo real controladas para evitar loop travando telas
+                this.syncProperties();
+                this.syncLeadsCount();
+            }
+
+            saveState() {
+                if(this.currentUser) localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
+                localStorage.setItem('imobi_billing', this.billingActive ? 'active' : 'expired');
+            }
+
+            setupUIAfterLogin() {
+                document.getElementById('menu-btn-auth').style.display = 'none';
+                document.getElementById('menu-btn-dash').style.display = 'inline-block';
+                document.getElementById('menu-user-profile').style.display = 'flex';
+                document.getElementById('header-user-name').innerText = this.currentUser.name;
+                document.getElementById('dash-user-title').innerText = this.currentUser.name;
+                document.getElementById('dash-user-subtitle').innerText = `${this.currentUser.role} | ${this.currentUser.email}`;
+                
+                if(this.currentUser.role === 'Admin') {
+                    document.getElementById('admin-master-panel').style.display = 'block';
+                } else {
+                    document.getElementById('admin-master-panel').style.display = 'none';
+                }
+            }
+
+            syncProperties() {
+                db.ref('properties').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    this.properties = [];
+                    if(data) {
+                        for(let id in data) {
+                            this.properties.push({id, ...data[id]});
+                        }
+                    }
+                    // Renderiza componentes sem disparar novos listeners secundários em cascata
+                    this.renderPublicGrid();
+                    this.renderPortfolioTable();
+                    this.updateAdminStats();
+                });
+            }
+
+            syncLeadsCount() {
+                db.ref('leads').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    this.leads = [];
+                    if(data) {
+                        for(let id in data) {
+                            this.leads.push({id, ...data[id]});
+                        }
+                    }
+                    this.renderLeadsTable();
+                    this.updateAdminStats();
+                });
+
+                db.ref('users_count').on('value', (snapshot) => {
+                    this.usersCount = snapshot.val() || 0;
+                    this.updateAdminStats();
+                });
+            }
+
+            updateAdminStats() {
+                if(document.getElementById('admin-stat-users')) {
+                    document.getElementById('admin-stat-users').innerText = this.usersCount;
+                    document.getElementById('admin-stat-props').innerText = this.properties.length;
+                    document.getElementById('admin-stat-leads').innerText = this.leads.length;
+                }
+            }
+
+            toggleTheme() {
+                const html = document.documentElement;
+                const current = html.getAttribute('data-theme');
+                html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+            }
+
+            navigate(viewId) {
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                
+                document.getElementById(`sec-${viewId}`).classList.add('active-view');
+                if(viewId === 'landing') document.getElementById('menu-btn-explore').classList.add('active');
+                if(viewId === 'dashboard') document.getElementById('menu-btn-dash').classList.add('active');
+            }
+
+            switchAuthMode(mode) {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                if(mode === 'login') {
+                    document.getElementById('tab-auth-login').classList.add('active');
+                    document.getElementById('form-login').style.display = 'block';
+                    document.getElementById('form-register').style.display = 'none';
+                } else {
+                    document.getElementById('tab-auth-register').classList.add('active');
+                    document.getElementById('form-login').style.display = 'none';
+                    document.getElementById('form-register').style.display = 'block';
+                }
+            }
+
+            handleRoleChange(val) {
+                const f = document.getElementById('group-creci-field');
+                if(val === 'Corretor' || val === 'Imobiliária') {
+                    f.style.display = 'block';
+                } else {
+                    f.style.display = 'none';
+                }
+            }
+
+            switchDashTab(tab) {
+                document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
+                if(tab === 'portfolio') {
+                    document.getElementById('menu-sub-portfolio').classList.add('active');
+                    document.getElementById('tab-content-portfolio').style.display = 'block';
+                    document.getElementById('tab-content-leads').style.display = 'none';
+                } else {
+                    document.getElementById('menu-sub-leads').classList.add('active');
+                    document.getElementById('tab-content-portfolio').style.display = 'none';
+                    document.getElementById('tab-content-leads').style.display = 'block';
+                }
+            }
+
+            openModal(id) { document.getElementById(id).classList.add('active'); }
+            closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+            updateBillingUI() {
+                const banner = document.getElementById('global-billing-alert');
+                if(!this.billingActive) {
+                    banner.style.display = 'flex';
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+
+            resetBilling() { this.openModal('modal-pix-payment'); }
+            
+            actionCopyPixPayload() {
+                const payload = document.getElementById('pix-payload-container').innerText;
+                navigator.clipboard.writeText(payload);
+                alert('Código PIX Copiado com Sucesso!');
+                this.billingActive = true;
+                this.saveState();
+                this.updateBillingUI();
+                this.closeModal('modal-pix-payment');
+            }
+
+            // Ações de Autenticação
+            actionRegister(e) {
+                e.preventDefault();
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const role = document.getElementById('reg-role').value;
+                const creci = document.getElementById('reg-creci').value || 'N/A';
+
+                this.currentUser = { name, email, role, creci };
+                this.saveState();
+                db.ref('users_count').transaction((current) => (current || 0) + 1);
+                this.setupUIAfterLogin();
+                this.navigate('dashboard');
+                alert('Conta criada e autenticada via RTDB!');
+            }
+
+            actionLogin(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                this.currentUser = { name: email.split('@')[0].toUpperCase(), email: email, role: 'Admin', creci: 'N/A' };
+                this.saveState();
+                this.setupUIAfterLogin();
+                this.navigate('dashboard');
+            }
+
+            actionLogout() {
+                localStorage.removeItem('imobi_user');
+                this.currentUser = null;
+                document.getElementById('menu-btn-auth').style.display = 'inline-block';
+                document.getElementById('menu-btn-dash').style.display = 'none';
+                document.getElementById('menu-user-profile').style.display = 'none';
+                this.navigate('landing');
+            }
+
+            // Renderizadores de Interface Dinâmica
+            renderPublicGrid() {
+                const g = document.getElementById('public-properties-grid');
+                if(!g) return;
+                g.innerHTML = '';
+
+                const matches = this.properties.filter(p => {
+                    if(this.filters.type && p.type !== this.filters.type) return false;
+                    if(this.filters.location && p.location !== this.filters.location) return false;
+                    if(this.filters.price && parseFloat(p.price) > parseFloat(this.filters.price)) return false;
+                    return true;
+                });
+
+                if(matches.length === 0) {
+                    g.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--text-muted);">Nenhum imóvel corresponde aos filtros de busca.</div>`;
+                    return;
+                }
+
+                matches.forEach(p => {
+                    const c = document.createElement('div');
+                    c.className = 'card';
+                    
+                    let imgHtml = `<div class="card-media-mock" style="background:#cbd5e1; color:#475569; font-weight:bold;">IMÓVEL SEM FOTO</div>`;
+                    if(p.images) {
+                        const firstImg = p.images.split(',')[0].trim();
+                        imgHtml = `<div class="card-media-mock" style="background-image: url('${firstImg}'); background-size: cover; background-position: center;"></div>`;
+                    }
+
+                    let videoBadge = '';
+                    if(p.video) {
+                        videoBadge = `<div class="video-indicator" onclick="event.stopPropagation(); app.openMediaViewer('${p.id}')">▶ MULTIMÍDIA</div>`;
+                    }
+
+                    let specHtml = '';
+                    if(p.type === 'Ágio') {
+                        specHtml = `
+                            <div style="margin: 0.8rem 0; padding: 0.6rem; background: var(--bg-input); border-radius: 6px; font-size: 0.8rem;">
+                                📉 Parcela: <b>R$ ${p.agioInstallment || 'N/A'}</b> | Saldo: <b>R$ ${p.agioRemaining || 'N/A'}</b><br>
+                                🏛 Banco: ${p.agioBank || 'Não informado'}
+                            </div>
+                        `;
+                    }
+
+                    c.innerHTML = `
+                        <div class="card-badge">${p.type}</div>
+                        ${imgHtml}
+                        ${videoBadge}
+                        <div class="card-body">
+                            <h3 style="font-size: 1.25rem; font-weight:700;">${p.title}</h3>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">📍 ${p.location}</p>
+                            ${specHtml}
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px; line-height: 1.4; flex-grow:1;">${p.desc || ''}</p>
+                            <div class="card-price">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</div>
+                            <button class="btn-action" style="width: 100%; margin-top: auto;" onclick="app.openLeadModal('${p.id}', '${p.title.replace(/'/g, "\\'")}', '${p.ownerEmail}')">Manifestar Interesse</button>
+                        </div>
+                    `;
+                    g.appendChild(c);
+                });
+            }
+
+            renderPortfolioTable() {
+                const b = document.getElementById('portfolio-table-rows');
+                if(!b) return;
+                b.innerHTML = '';
+
+                const filtered = this.properties.filter(x => this.currentUser && (this.currentUser.role === 'Admin' || x.ownerEmail === this.currentUser.email));
+                
+                filtered.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Imóvel"><b>${p.title}</b></td>
+                        <td data-label="Tipo">${p.type}</td>
+                        <td data-label="Localização">${p.location}</td>
+                        <td data-label="Preço Face">R$ ${parseFloat(p.price).toLocaleString('pt-BR')}</td>
+                        <td data-label="Ações">
+                            <button class="btn-action" style="padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="app.actionEditProperty('${p.id}')">Editar</button>
+                            <button class="btn-action" style="background:var(--tesla-red); padding:0.4rem 0.8rem; font-size:0.8rem;" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
+                        </td>
+                    `;
+                    b.appendChild(tr);
+                });
+            }
+
+            renderLeadsTable() {
+                const b = document.getElementById('leads-table-rows');
+                if(!b) return;
+                b.innerHTML = '';
+
+                const filteredLeads = this.leads.filter(l => this.currentUser && (this.currentUser.role === 'Admin' || l.ownerEmail === this.currentUser.email));
+
+                filteredLeads.forEach(l => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td data-label="Nome do Lead"><b>${l.name}</b></td>
+                        <td data-label="WhatsApp / Telefone">${l.phone}</td>
+                        <td data-label="Imóvel Alvo">${l.propTitle}</td>
+                        <td data-label="Origem Canal">${l.sourceChannel || 'Direto'}</td>
+                        <td data-label="Data Captura">${l.date}</td>
+                    `;
+                    b.appendChild(tr);
+                });
+            }
+
+            // Mecanismo de Busca Hub
+            executeSearch() {
+                this.filters.type = document.getElementById('search-type').value;
+                this.filters.location = document.getElementById('search-location').value;
+                this.filters.price = document.getElementById('search-price').value;
+                this.renderPublicGrid();
+            }
+
+            clearSearchFilters() {
+                document.getElementById('search-type').value = '';
+                document.getElementById('search-location').value = '';
+                document.getElementById('search-price').value = '';
+                this.filters = { type: '', location: '', price: '' };
+                this.renderPublicGrid();
+            }
+
+            // CRUD Imóveis
+            handleFormTypeChange(type) {
+                const wrapper = document.getElementById('wrapper-agio-fields');
+                if(type === 'Ágio') {
+                    wrapper.style.display = 'block';
+                } else {
+                    wrapper.style.display = 'none';
+                }
+            }
+
+            openNewPropertyForm() {
+                document.getElementById('form-property').reset();
+                document.getElementById('p-id').value = '';
+                document.getElementById('form-prop-title').innerText = "Adicionar Imóvel";
+                this.handleFormTypeChange('Ágio');
+                this.openModal('modal-property-form');
+            }
+
+            actionEditProperty(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
+                document.getElementById('p-id').value = p.id;
+                document.getElementById('p-title').value = p.title;
+                document.getElementById('p-type').value = p.type;
+                document.getElementById('p-location').value = p.location;
+                document.getElementById('p-price').value = p.price;
+                document.getElementById('p-desc').value = p.desc || '';
+                document.getElementById('p-images').value = p.images || '';
+                document.getElementById('p-video').value = p.video || '';
+                
+                this.handleFormTypeChange(p.type);
+                if(p.type === 'Ágio') {
+                    document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
+                    document.getElementById('p-agio-installment').value = p.agioInstallment || '';
+                    document.getElementById('p-agio-bank').value = p.agioBank || '';
+                }
+                document.getElementById('form-prop-title').innerText = "Editar Imóvel";
+                this.openModal('modal-property-form');
+            }
+
+            actionSaveProperty(e) {
+                e.preventDefault();
+                if(!this.currentUser) return;
+
+                const id = document.getElementById('p-id').value;
+                const propData = {
+                    title: document.getElementById('p-title').value,
+                    type: document.getElementById('p-type').value,
+                    location: document.getElementById('p-location').value,
+                    price: document.getElementById('p-price').value,
+                    desc: document.getElementById('p-desc').value,
+                    images: document.getElementById('p-images').value,
+                    video: document.getElementById('p-video').value,
+                    ownerEmail: this.currentUser.email
+                };
+
+                if(propData.type === 'Ágio') {
+                    propData.agioRemaining = document.getElementById('p-agio-remaining').value;
+                    propData.agioInstallment = document.getElementById('p-agio-installment').value;
+                    propData.agioBank = document.getElementById('p-agio-bank').value;
+                }
+
+                if(id) {
+                    db.ref(`properties/${id}`).update(propData);
+                } else {
+                    db.ref('properties').push(propData);
+                }
+                this.closeModal('modal-property-form');
+                alert('Registro salvo com sucesso!');
+            }
+
+            actionDeleteProperty(id) {
+                if(confirm('Tem certeza que deseja excluir permanentemente este registro?')) {
+                    db.ref(`properties/${id}`).remove();
+                }
+            }
+
+            // Cloud Pickers Integrados
+            openDrivePicker(targetId) {
+                this.activeDriveTargetInputId = targetId;
+                const container = document.getElementById('drive-files-container');
+                container.innerHTML = '';
+                
+                const mockDriveFiles = [
+                    {name: "📸 Cloudflare_Link.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"}
+                ];
+
+                mockDriveFiles.forEach(f => {
+                    const item = document.createElement('div');
+                    item.className = 'drive-item';
+                    item.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted); font-size:0.75rem;">${f.url}</small></div>`;
+                    item.onclick = () => this.chooseDriveFile(f.url);
+                    container.appendChild(item);
+                });
+                this.openModal('modal-drive-picker');
+            }
+
+            chooseDriveFile(url) {
+                if(this.activeDriveTargetInputId) {
+                    const currentVal = document.getElementById(this.activeDriveTargetInputId).value;
+                    document.getElementById(this.activeDriveTargetInputId).value = currentVal ? currentVal + ',' + url : url;
+                }
+                this.closeModal('modal-drive-picker');
+            }
+
+            // Gerenciamento e Captação de Leads
+            openLeadModal(propId, propTitle, ownerEmail) {
+                if(!this.billingActive) {
+                    this.resetBilling();
+                    return;
+                }
+                document.getElementById('form-lead').reset();
+                document.getElementById('lead-prop-id').value = propId;
+                document.getElementById('lead-prop-title').value = propTitle;
+                document.getElementById('lead-prop-owner').value = ownerEmail;
+                this.openModal('modal-lead-form');
+            }
+
+            actionSubmitLead(e) {
+                e.preventDefault();
+                const leadData = {
+                    propId: document.getElementById('lead-prop-id').value,
+                    propTitle: document.getElementById('lead-prop-title').value,
+                    ownerEmail: document.getElementById('lead-prop-owner').value,
+                    name: document.getElementById('lead-name').value,
+                    phone: document.getElementById('lead-phone').value,
+                    sourceChannel: /Android|iPhone/i.test(navigator.userAgent) ? 'Mobile Web App' : 'Desktop Interface',
+                    date: new Date().toLocaleString('pt-BR')
+                };
+
+                db.ref('leads').push(leadData);
+                this.closeModal('modal-lead-form');
+                alert('Sua solicitação de contato foi enviada com sucesso ao corretor responsável!');
+            }
+
+            // Visualização de Vídeo Avançada
+            openMediaViewer(propId) {
+                const p = this.properties.find(x => x.id === propId);
+                if(!p || !p.video) return;
+
+                document.getElementById('media-viewer-title').innerText = p.title;
+                const container = document.getElementById('media-viewer-box');
+                container.innerHTML = '';
+
+                if(p.video.includes('youtube.com') || p.video.includes('youtu.be')) {
+                    let videoId = '';
+                    if(p.video.includes('v=')) videoId = p.video.split('v=')[1].split('&')[0];
+                    else videoId = p.video.split('/').pop();
+
+                    container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else if(p.video.includes('.m3u8') || p.video.includes('.mp4')) {
+                    container.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
+                } else {
+                    container.innerHTML = `<div style="color:white; text-align:center; font-weight:bold; padding:2rem;">Formato de link de vídeo não suportado nativamente.</div>`;
+                }
+
+                this.openModal('modal-media-viewer');
+            }
+
+            closeMediaViewer() {
+                document.getElementById('media-viewer-box').innerHTML = '';
+                this.closeModal('modal-media-viewer');
+            }
+        }
+
+        // Inicialização Global
+        const app = new ImobiApp();
+        window.onload = () => app.init();
     </script>
 </body>
 </html>
