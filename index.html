@@ -9,49 +9,48 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
-        /* RESET ABSOLUTO PARA UNIFICAÇÃO */
+    /* 1. RESET ABSOLUTO (Cobre todos os casos) */
     * { 
-        margin: 0; 
-        padding: 0; 
+        margin: 0; padding: 0; 
         box-sizing: border-box !important; 
         -webkit-tap-highlight-color: transparent; 
+        -webkit-font-smoothing: antialiased;
     }
+
     html, body { 
-        width: 100%; 
-        height: 100%; 
+        width: 100%; height: 100%; 
         overflow-x: hidden; 
         position: relative;
     }
-        :root {
-            /* Palette Fusão Premium: Light Mode Padrão */
-            --bg-base: #f4f6fa;
-            --bg-surface: #ffffff;
-            --bg-card: #ffffff;
-            --bg-input: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-glow: rgba(26, 115, 232, 0.1);
-            /* Cores de Identidade de Marca (Estáveis) */
-            --tesla-red: #e82127;
-            --google-blue: #1a73e8;
-            --google-green: #0f9d58;
-            --google-yellow: #f4b400;
-            --primary-cyber: #00f0ff;
-            --premium-gold: #b45309;
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
 
-        html[data-theme="dark"] {
-            /* Palette Fusão Premium: Deep Tech Tesla Dark Mode */
-            --bg-base: #060913;
-            --bg-surface: #0c1220;
-            --bg-card: #121b2d;
-            --bg-input: #18253f;
-            --text-main: #f5f7fa;
-            --text-muted: #8a99ad;
-            --border-glow: rgba(0, 240, 255, 0.15);
-            --premium-gold: #ffd700;
+    /* 2. BLOQUEIO DE GRID (Força a grade a manter a forma) */
+    .grid-wrapper { 
+        display: grid !important;
+        /* Define exatamente o tamanho das colunas para não depender do navegador */
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+        gap: 20px !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: -webkit-grid !important; /* Compatibilidade Safari */
+    }
+
+    /* 3. BLOQUEIO DE MOBILE (Igual na segunda foto) */
+    @media only screen and (max-width: 600px) {
+        .grid-wrapper { 
+            grid-template-columns: 1fr !important; /* Força uma coluna no telemóvel */
+            padding: 10px !important;
         }
+        .card { width: 100% !important; }
+    }
+
+    /* 4. BLOQUEIO DE IMAGENS E VÍDEOS (Para não quebrarem o card) */
+    .card img, .card video {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+    }
+        
         /* RESET E NORMALIZAÇÃO CROSS-BROWSER */
         * { margin: 0; padding: 0; box-sizing: border-box !important; -webkit-tap-highlight-color: transparent; }
         html, body { width: 100%; height: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
