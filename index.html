@@ -9,28 +9,49 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
-        /* Reset Absoluto para impedir que navegadores alterem margens */
-    * { margin: 0; padding: 0; box-sizing: border-box !important; }
-    
-    html, body { width: 100%; height: 100%; overflow-x: hidden; }
-
-    /* Força o Grid a ser idêntico em qualquer tela */
-    .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 20px; }
-    
-    .grid-wrapper { 
-        display: grid !important; 
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; 
-        gap: 20px !important; 
-        width: 100% !important;
-        align-content: start;
+        /* RESET ABSOLUTO PARA UNIFICAÇÃO */
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box !important; 
+        -webkit-tap-highlight-color: transparent; 
     }
-
-    /* Regra de Ouro para Smartphones (Mobile) */
-    @media (max-width: 768px) {
-        .grid-wrapper { 
-            grid-template-columns: 1fr !important; /* Força 1 coluna apenas no celular */
+    html, body { 
+        width: 100%; 
+        height: 100%; 
+        overflow-x: hidden; 
+        position: relative;
+    }
+        :root {
+            /* Palette Fusão Premium: Light Mode Padrão */
+            --bg-base: #f4f6fa;
+            --bg-surface: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-glow: rgba(26, 115, 232, 0.1);
+            /* Cores de Identidade de Marca (Estáveis) */
+            --tesla-red: #e82127;
+            --google-blue: #1a73e8;
+            --google-green: #0f9d58;
+            --google-yellow: #f4b400;
+            --primary-cyber: #00f0ff;
+            --premium-gold: #b45309;
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
-    }
+
+        html[data-theme="dark"] {
+            /* Palette Fusão Premium: Deep Tech Tesla Dark Mode */
+            --bg-base: #060913;
+            --bg-surface: #0c1220;
+            --bg-card: #121b2d;
+            --bg-input: #18253f;
+            --text-main: #f5f7fa;
+            --text-muted: #8a99ad;
+            --border-glow: rgba(0, 240, 255, 0.15);
+            --premium-gold: #ffd700;
+        }
         /* RESET E NORMALIZAÇÃO CROSS-BROWSER */
         * { margin: 0; padding: 0; box-sizing: border-box !important; -webkit-tap-highlight-color: transparent; }
         html, body { width: 100%; height: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
@@ -267,6 +288,28 @@
 @media (max-width: 768px) {
     .grid-wrapper { grid-template-columns: 1fr !important; }
 }
+        /* Reset Absoluto para impedir que navegadores alterem margens */
+    * { margin: 0; padding: 0; box-sizing: border-box !important; }
+    
+    html, body { width: 100%; height: 100%; overflow-x: hidden; }
+
+    /* Força o Grid a ser idêntico em qualquer tela */
+    .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 20px; }
+    
+    .grid-wrapper { 
+        display: grid !important; 
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; 
+        gap: 20px !important; 
+        width: 100% !important;
+        align-content: start;
+    }
+
+    /* Regra de Ouro para Smartphones (Mobile) */
+    @media (max-width: 768px) {
+        .grid-wrapper { 
+            grid-template-columns: 1fr !important; /* Força 1 coluna apenas no celular */
+        }
+    }
     </style>
 </head>
 <body>
