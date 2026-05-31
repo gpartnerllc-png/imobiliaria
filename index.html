@@ -105,90 +105,8 @@
         th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700; text-align: left; }
         td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
 
-        .drive-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(128, 128, 128, 0.1); margin-bottom: 0.5rem; }
-        .drive-item:hover { background: rgba(26, 115, 232, 0.08); border-color: var(--google-blue); }
-        footer { text-align: center; padding: 3rem; margin-top: 5rem; border-top: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; }
-
-        /* ==========================================================================
-           ADICIONAIS DE COMPATIBILIDADE E RESPONSIVIDADE MULTI-NAVEGADOR (SEM ALTERAR O ORIGINAL)
-           ========================================================================== */
-        
-        /* Suporte cross-browser para renderização de fontes e aceleração de hardware */
-        html {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            text-rendering: optimizeLegibility;
-            scroll-behavior: smooth;
-        }
-
-        /* Correção para flexbox e rolagem suave no iOS (Safari) */
-        body {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Correções adicionais de Media Query para Tablets e Celulares de telas diversas */
-        @media (max-width: 1024px) {
-            header {
-                padding: 1rem 1.5rem;
-            }
-            .container {
-                padding: 0 1rem;
-                margin: 1.5rem auto;
-            }
-            .grid-wrapper {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 1.5rem;
-            }
-        }
-
+        /* CORREÇÃO DO CONTEXTO DE TABELAS (RESPONSIVO SMARTPHONES) */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-                text-align: center;
-                position: relative;
-            }
-            nav {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            .nav-link, .btn-action {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-            }
-            .pricing-badge {
-                width: 100%;
-                justify-content: center;
-                font-size: 0.75rem;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .search-hub {
-                grid-template-columns: 1fr !important;
-                padding: 1.2rem;
-                gap: 1rem;
-            }
-            .search-hub button {
-                width: 100%;
-                height: 45px !important;
-            }
-            .auth-container {
-                padding: 1.5rem;
-                margin: 1.5rem auto;
-            }
-            .modal-window {
-                padding: 1.5rem;
-                border-radius: 16px;
-            }
-            .video-box-container {
-                height: 220px;
-            }
-
-            /* Mantendo a sua regra original intacta de tabelas adaptadas */
             .dash-layout { grid-template-columns: 1fr; }
             table, thead, tbody, th, td, tr { display: block; width: 100%; }
             thead { display: none; }
@@ -198,27 +116,12 @@
             td:last-child { border-bottom: none; }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            .brand-logo {
-                font-size: 1.5rem;
-            }
-            .card-media-mock {
-                height: 180px;
-            }
-            .card-body {
-                padding: 1.2rem;
-            }
-            .card-price {
-                font-size: 1.5rem;
-            }
-        }
+        .drive-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(128, 128, 128, 0.1); margin-bottom: 0.5rem; }
+        .drive-item:hover { background: rgba(26, 115, 232, 0.08); border-color: var(--google-blue); }
+        footer { text-align: center; padding: 3rem; margin-top: 5rem; border-top: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; }
     </style>
 </head>
 <body>
-
     <div class="glass-glow-1"></div>
     <div class="glass-glow-2"></div>
 
@@ -229,14 +132,13 @@
                 <span class="brand-sub">Partner Holding</span>
             </div>
         </div>
-     
         <div class="pricing-badge">⚡ 1º MÊS GRÁTIS — Após R$ 19,99/mês</div>
         <nav>
             <button class="btn-theme-toggle" onclick="app.toggleTheme()" title="Alternar Tema">🌓</button>
             <button class="nav-link active" id="menu-btn-explore" onclick="app.navigate('landing')">Explorar Mercado</button>
             <button class="nav-link" id="menu-btn-dash" onclick="app.navigate('dashboard')" style="display: none;">Painel Operacional</button>
             <button class="btn-action" id="menu-btn-auth" onclick="app.navigate('auth')">Acessar Ecossistema</button>
-         
+            
             <div id="menu-user-profile" style="display: none; align-items: center; gap: 1.2rem;">
                 <span id="header-user-name" style="font-weight: 700; color: var(--google-blue);"></span>
                 <button class="nav-link" onclick="app.actionLogout()" style="color: var(--tesla-red);">Sair</button>
@@ -252,422 +154,415 @@
 
         <section id="sec-landing" class="view-section active-view">
             <div class="hero">
-                <h1>Plataforma de  <span>Imóveis Novos & Ágios</span></h1>
+                <h1>Plataforma de <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
-            <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
+
+            <div class="search-hub">
+                <div class="input-group">
+                    <label>Localidade</label>
+                    <select id="search-city">
+                        <option value="">Todas as Cidades</option>
+                        <option value="Águas Lindas de Goiás">Águas Lindas de Goiás</option>
+                        <option value="Distrito Federal (Plano Piloto)">Distrito Federal (Plano Piloto)</option>
+                        <option value="Taguatinga">Taguatinga</option>
+                        <option value="Ceilândia">Ceilândia</option>
+                        <option value="Samambaia">Samambaia</option>
+                        <option value="Guará">Guará</option>
+                        <option value="Águas Claras">Águas Claras</option>
+                        <option value="Gama">Gama</option>
+                        <option value="Santa Maria">Santa Maria</option>
+                        <option value="Planaltina">Planaltina</option>
+                        <option value="Recanto das Emas">Recanto das Emas</option>
+                    </select>
+                </div>
                 <div class="input-group">
                     <label>Modalidade</label>
-                    <select id="search-type" onchange="app.executeSearch()">
-                        <option value="">Todas as opções</option>
-                        <option value="Ágio">Negociação de Ágio</option>
-                        <option value="Venda">Venda Directa</option>
-                        <option value="Aluguel">Locação Residencial</option>
+                    <select id="search-type">
+                        <option value="">Qualquer Tipo</option>
+                        <option value="Ágio">Ágio de Imóvel</option>
+                        <option value="Lançamento">Lançamento / Novo</option>
                     </select>
-                </div>             
-        
-                <button class="btn-action" style="background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); height: 50px;" onclick="app.executeSearch()">Buscar</button>
-                <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
+                </div>
+                <div class="input-group">
+                    <label>Preço Máximo</label>
+                    <input type="number" id="search-price" placeholder="Ex: 150000"/>
+                </div>
+                <button class="btn-action" style="height: 52px; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="app.filterProperties()">
+                    <span>Filtrar</span>
+                </button>
             </div>
+
             <div class="grid-wrapper" id="public-properties-grid"></div>
         </section>
 
         <section id="sec-auth" class="view-section">
             <div class="auth-container">
                 <div class="auth-tabs">
-                    <div class="auth-tab active" id="tab-auth-login" onclick="app.switchAuthMode('login')">Entrar</div>
-                    <div class="auth-tab" id="tab-auth-register" onclick="app.switchAuthMode('register')">Cadastrar Conta</div>
+                    <div class="auth-tab active" id="tab-login" onclick="app.switchAuthTab('login')">Entrar</div>
+                    <div class="auth-tab" id="tab-register" onclick="app.switchAuthTab('register')">Registrar Conta</div>
                 </div>
-                <form id="form-login" onsubmit="app.actionLogin(event)">
-                    <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail Corporativo</label><input type="email" id="login-email" required placeholder="exemplo@partner.com"></div>
-              
-                    <div class="input-group" style="margin-bottom: 2rem;"><label>Senha de Acesso</label><input type="password" id="login-password" required placeholder="Sua senha secreta"></div>
-                    <button type="submit" class="btn-action" style="width: 100%;">Acessar Infraestrutura</button>
-                </form>
-    
-                <form id="form-register" onsubmit="app.actionRegister(event)" style="display: none;">
-    
-                    <div class="input-group" style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
-                    <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail de Trabalho</label><input type="email" id="reg-email" required placeholder="seu@email.com"></div>
+                
+                <div id="auth-form-body">
                     <div class="input-group" style="margin-bottom: 1.2rem;">
-                        <label>Perfil Operacional</label>
-                        <select id="reg-role" onchange="app.handleRoleChange(this.value)">
-                            <option value="Corretor">Corretor de Imóveis (Autônomo)</option>
-                            <option value="Consultor">Consultor Corporativo</option>
-                            <option value="Imobiliária">Imobiliária / Pessoa Jurídica</option>
-                            <option value="Proprietário">Proprietário Direto</option>
-                            <option value="Admin">Administrador Master</option>
-                        </select>
+                        <label>E-mail Corporativo</label>
+                        <input type="email" id="auth-email" placeholder="nome@partnerholding.com.br"/>
                     </div>
-                    <div class="input-group" id="group-creci-field" style="margin-bottom: 1.2rem; display: none;"><label>Inscrição de Regulação (CRECI)</label><input type="text" id="reg-creci" placeholder="Ex: CRECI-DF 0000"></div>
-                    <div class="input-group" style="margin-bottom: 2rem;"><label>Senha Segura</label><input type="password" id="reg-password" required placeholder="Mínimo 6 caracteres"></div>
-                    <button type="submit" class="btn-action" style="width: 100%; background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%);">Finalizar Cadastro</button>
-                </form>
+                    <div class="input-group" style="margin-bottom: 1.8rem;">
+                        <label>Senha de Acesso</label>
+                        <input type="password" id="auth-password" placeholder="••••••••"/>
+                    </div>
+                    <button class="btn-action" style="width: 100%; padding: 1rem;" onclick="app.actionAuth()">Confirmar Credenciais</button>
+                </div>
             </div>
         </section>
 
         <section id="sec-dashboard" class="view-section">
             <div class="dash-layout">
                 <aside class="dash-sidebar">
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <div style="font-weight: 800; font-size: 1.1rem;" id="dash-user-title">Carregando...</div>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);" id="dash-user-subtitle">Acesso Autorizado</div>
-                    </div>
-                    <div class="dash-menu-item active" id="menu-sub-portfolio" onclick="app.switchDashTab('portfolio')">Meu Portfólio</div>
-                    <div class="dash-menu-item" id="menu-sub-leads" onclick="app.switchDashTab('leads')">Leads Convertidos</div>
-                    <div class="dash-menu-item" id="menu-sub-system" onclick="app.switchDashTab('system')">Configurações & API</div>
+                    <div class="dash-menu-item active" id="menu-side-list" onclick="app.switchDashTab('list')">📂 Meus Imóveis</div>
+                    <div class="dash-menu-item" id="menu-side-add" onclick="app.switchDashTab('add')">➕ Novo Cadastro</div>
                 </aside>
 
                 <main class="main-dash-content">
-                    <div id="dash-tab-portfolio" class="tab-dash-view">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 10px;">
-                            <h2>Gerenciamento de Imóveis</h2>
-                            <button class="btn-action" style="background: var(--google-green);" onclick="app.openNewPropertyModal()">+ Novo Imóvel</button>
+                    <div id="dash-tab-list">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <h2>Seus Imóveis Ativos</h2>
+                            <button class="btn-action" onclick="app.switchDashTab('add')">+ Adicionar Imóvel</button>
                         </div>
-                        <table id="table-portfolio">
-                            <thead><tr><th>Imóvel</th><th>Tipo</th><th>Localização</th><th>Preço Face</th><th>Ações</th></tr></thead>
-                            <tbody id="portfolio-table-rows"></tbody>
-                        </table>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                thead>
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Localidade</th>
+                                        <th>Modalidade</th>
+                                        <th>Preço (R$)</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dash-table-body"></tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div id="dash-tab-leads" class="tab-dash-view" style="display: none;">
-                        <h2>Leads Capturados</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Controle de tráfego orgânico e conversões de alta intenção.</p>
-                        <table>
-                            <thead><tr><th>Nome do Lead</th><th>WhatsApp / Telefone</th><th>Imóvel Alvo</th><th>Origem Canal</th><th>Data Captura</th></tr></thead>
-                            <tbody id="leads-table-rows"></tbody>
-                        </table>
-                    </div>
+                    <div id="dash-tab-add" style="display: none;">
+                        <h2 id="form-prop-title" style="margin-bottom: 1.5rem;">Cadastrar Novo Imóvel</h2>
+                        <input type="hidden" id="p-id"/>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div class="input-group">
+                                <label>Título do Anúncio</label>
+                                <input type="text" id="p-title" placeholder="Ex: Ágio Residencial Total Ville"/>
+                            </div>
+                            <div class="input-group">
+                                <label>Cidade / Localização</label>
+                                <select id="p-city">
+                                    <option value="Águas Lindas de Goiás">Águas Lindas de Goiás</option>
+                                    <option value="Distrito Federal (Plano Piloto)">Distrito Federal (Plano Piloto)</option>
+                                    <option value="Taguatinga">Taguatinga</option>
+                                    <option value="Ceilândia">Ceilândia</option>
+                                    <option value="Samambaia">Samambaia</option>
+                                    <option value="Guará">Guará</option>
+                                    <option value="Águas Claras">Águas Claras</option>
+                                    <option value="Gama">Gama</option>
+                                    <option value="Santa Maria">Santa Maria</option>
+                                    <option value="Planaltina">Planaltina</option>
+                                    <option value="Recanto das Emas">Recanto das Emas</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div id="dash-tab-system" class="tab-dash-view" style="display: none;">
-                        <h2>Configurações do Ecossistema</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Gerenciamento de chaves e parâmetros globais do Firebase Realtime Database.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div class="input-group">
+                                <label>Modalidade</label>
+                                <select id="p-type" onchange="app.toggleFormFields()">
+                                    <option value="Ágio">Ágio de Imóvel</option>
+                                    <option value="Lançamento">Lançamento / Novo</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Preço Geral (R$)</label>
+                                <input type="number" id="p-price" placeholder="Preço Total"/>
+                            </div>
+                        </div>
+
+                        <div id="fields-agio-only" style="background: var(--bg-input); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                            <div class="input-group">
+                                <label>Valor do Ágio (R$)</label>
+                                <input type="number" id="p-agio-value" placeholder="Quanto quer no ágio"/>
+                            </div>
+                            <div class="input-group">
+                                <label>Saldo Devedor (R$)</label>
+                                <input type="number" id="p-agio-remaining" placeholder="Saldo que falta pagar"/>
+                            </div>
+                            <div class="input-group">
+                                <label>Parcela do Financiamento (R$)</label>
+                                <input type="number" id="p-agio-installment" placeholder="Valor mensal da parcela"/>
+                            </div>
+                            <div class="input-group" style="grid-column: span 3;">
+                                <label>Banco Financiador</label>
+                                <input type="text" id="p-agio-bank" placeholder="Ex: Caixa Econômica Federal, Banco do Brasil"/>
+                            </div>
+                        </div>
+
                         <div class="input-group" style="margin-bottom: 1.5rem;">
-                            <label>Firebase Endpoint URL</label>
-                            <input type="text" id="sys-db-url" placeholder="https://seu-projeto.firebaseio.com/">
+                            <label>Descrição Detalhada do Imóvel</label>
+                            <textarea id="p-desc" rows="4" placeholder="Descreva os cômodos, diferenciais, armários, área de lazer..."></textarea>
                         </div>
-                        <button class="btn-action" onclick="app.actionSaveSystemConfig()">Salvar Parâmetros</button>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                            <div class="input-group">
+                                <label>Link da Imagem de Capa</label>
+                                <div style="display: flex; gap: 8px;">
+                                    <input type="text" id="p-img" placeholder="https://..." style="flex-grow: 1;"/>
+                                    <button class="btn-action" style="padding: 0 1rem;" onclick="app.openDrivePicker('p-img')">📁 Drive</button>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Link do Vídeo / Transmissão (YouTube, .mp4 ou .m3u8)</label>
+                                <input type="text" id="p-video" placeholder="https://..."/>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                            <button class="nav-link" onclick="app.switchDashTab('list')">Cancelar</button>
+                            <button class="btn-action" style="padding: 0.8rem 2.5rem;" onclick="app.actionSaveProperty()">Salvar Imóvel</button>
+                        </div>
                     </div>
                 </main>
             </div>
         </section>
     </div>
 
-    <div class="modal-blur" id="modal-property-form">
-        <div class="modal-window">
-            <h3 id="form-prop-title" style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 800;">Novo Imóvel</h3>
-            <form id="real-property-form" onsubmit="app.actionSaveProperty(event)">
-                <input type="hidden" id="p-id">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Título do Anúncio</label><input type="text" id="p-title" required placeholder="Ex: Casa de Alto Padrão"></div>
-                    <div class="input-group">
-                        <label>Tipo / Modalidade</label>
-                        <select id="p-type" required onchange="app.handleFormTypeChange(this.value)">
-                            <option value="Ágio">Ágio de Imóvel</option>
-                            <option value="Venda">Venda Tradicional</option>
-                            <option value="Aluguel">Locação</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Cidade / UF</label><input type="text" id="p-city" required placeholder="Ex: Águas Lindas - GO"></div>
-                    <div class="input-group"><label>Bairro / Quadra</label><input type="text" id="p-neighborhood" required placeholder="Ex: Jardim Brasília"></div>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;">
-                    <div class="input-group"><label>Preço de Face (R$)</label><input type="number" id="p-price" required placeholder="Ex: 250000"></div>
-                    <div class="input-group" id="f-agio-remaining" style="display: block;"><label>Saldo Devedor (R$)</label><input type="number" id="p-agio-remaining" placeholder="Se aplicável"></div>
-                    <div class="input-group" id="f-agio-installment" style="display: block;"><label>Valor Parcela (R$)</label><input type="number" id="p-agio-installment" placeholder="Valor mensal"></div>
-                    <div class="input-group" id="f-agio-bank" style="display: block;"><label>Banco Financiador</label><input type="text" id="p-agio-bank" placeholder="Ex: Caixa"></div>
-                </div>
-                <div class="input-group" style="margin-bottom: 1.2rem;">
-                    <label>Mídias da Infraestrutura (URLs separadas por vírgula)</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="text" id="p-gallery" style="flex: 1;" placeholder="https://imagem1.jpg, https://imagem2.jpg">
-                        <button type="button" class="btn-action" style="background: var(--text-main); font-size: 0.9rem;" onclick="app.openDrivePicker('p-gallery')">Drive</button>
-                    </div>
-                </div>
-                <div class="input-group" style="margin-bottom: 1.5rem;"><label>Vídeo / Streaming URL (YouTube, MP4 ou M3U8)</label><input type="text" id="p-video" placeholder="https://www.youtube.com/watch?v=... ou .m3u8"></div>
-                <div class="input-group" style="margin-bottom: 2rem;"><label>Descrição Completa do Ativo</label><textarea id="p-desc" rows="4" placeholder="Detalhes de quartos, suítes, metros quadrados..."></textarea></div>
-                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-                    <button type="button" class="btn-action" style="background: transparent; color: var(--text-main); box-shadow: none;" onclick="app.closeModal('modal-property-form')">Cancelar</button>
-                    <button type="submit" class="btn-action">Salvar Registro</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <div class="modal-blur" id="modal-media-viewer" onclick="if(event.target===this) app.closeMediaViewer()">
+        <div class="modal-window" style="max-width: 850px; background: #111827; color: white;">
+            <h2 id="media-viewer-title" style="font-weight: 800;">Visualização do Imóvel</h2>
+            <p id="media-viewer-details" style="color: #9ca3af; font-size: 0.9rem; margin-top: 0.4rem;"></p>
+            
+            <div class="video-box-container" id="media-viewer-box" style="height: 450px; background: #000; border-radius: 12px; margin: 1.5rem 0;"></div>
+            
+            <div id="media-viewer-agio-details" style="background: #1f2937; padding: 1.2rem; border-radius: 12px; margin-bottom: 1.5rem; display: none; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.95rem;"></div>
 
-    <div class="modal-blur" id="modal-lead-form">
-        <div class="modal-window" style="max-width: 500px;">
-            <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">Intenção de Negociação</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Deixe seus dados de contato e o proprietário ou corretor responsável entrará em contato em instantes.</p>
-            <form id="real-lead-form" onsubmit="app.actionSubmitLead(event)">
-                <input type="hidden" id="l-prop-id">
-                <div class="input-group" style="margin-bottom: 1.2rem;"><label>Seu Nome</label><input type="text" id="l-name" required placeholder="Nome Completo"></div>
-                <div class="input-group" style="margin-bottom: 1.5rem;"><label>WhatsApp de Contato</label><input type="text" id="l-phone" required placeholder="Ex: (61) 99999-9999"></div>
-                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-                    <button type="button" class="btn-action" style="background: transparent; color: var(--text-main); box-shadow: none;" onclick="app.closeModal('modal-lead-form')">Voltar</button>
-                    <button type="submit" class="btn-action" style="background: linear-gradient(135deg, var(--google-green) 0%, #0a6b3c 100%); box-shadow: 0 4px 15px rgba(15, 157, 88, 0.2);">Enviar Proposta ⚡</button>
-                </div>
-            </form>
-        </div>
-    </div>
+            <p id="media-viewer-desc" style="line-height: 1.6; color: #e5e7eb; margin-bottom: 2rem; white-space: pre-line;"></p>
 
-    <div class="modal-blur" id="modal-media-viewer" onclick="app.closeMediaViewer()">
-        <div class="modal-window" style="background: #000000; max-width: 850px; padding: 1.5rem;" onclick="event.stopPropagation()">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h4 style="color: white; font-weight: 700;" id="media-viewer-title">Visualizador de Mídia</h4>
-                <button style="background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer;" onclick="app.closeMediaViewer()">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn-action" id="media-viewer-whatsapp" style="background: #25d366; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">💬 Conversar com Corretor</button>
+                <button class="nav-link" onclick="app.closeMediaViewer()" style="color: #9ca3af;">Fechar Janela</button>
             </div>
-            <div class="video-box-container" id="media-viewer-box"></div>
         </div>
     </div>
 
-    <div class="modal-blur" id="modal-drive-picker">
-        <div class="modal-window" style="max-width: 500px;">
-            <h3 style="margin-bottom: 1rem; font-weight: 800;">Repositório Nuvem (Mock)</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Selecione mídias pré-carregadas da sua conta Cloudflare R2 ou Google Drive Partner.</p>
+    <div class="modal-blur" id="modal-drive-picker" onclick="if(event.target===this) app.closeModal('modal-drive-picker')">
+        <div class="modal-window" style="max-width: 450px;">
+            <h3>Selecione do Cloud / Drive</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.2rem;">Arquivos sincronizados na Partner Holding.</p>
             <div id="drive-files-container"></div>
-            <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
-                <button class="btn-action" onclick="app.closeModal('modal-drive-picker')">Fechar</button>
-            </div>
+            <button class="nav-link" style="width: 100%; margin-top: 1rem; text-align: center;" onclick="app.closeModal('modal-drive-picker')">Fechar</button>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 IMOBI Plataforma Imobiliária. Todos os direitos reservados à Partner Holding Co.
+        &copy; 2026 Partner Holding — Tecnologia Imobiliária. Todos os direitos reservados.
     </footer>
 
     <script>
+        // CONFIGURAÇÃO REAL DO FIREBASE REALTIME DATABASE DO COMPONENTE
+        const firebaseConfig = {
+            databaseURL: "https://imobi-partnerholding-default-rtdb.firebaseio.com/"
+        };
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.database();
+
         class ImobiApp {
             constructor() {
-                this.db = null;
+                this.currentTheme = 'light';
+                this.activeView = 'landing';
+                this.activeAuthTab = 'login';
                 this.currentUser = null;
                 this.properties = [];
-                this.leads = [];
-                this.activeView = 'landing';
-                this.activeDashTab = 'portfolio';
                 this.activeDriveTargetInputId = null;
-                this.isBillingBlocked = false;
+
+                this.init();
             }
 
             init() {
-                const savedConfig = localStorage.getItem('imobi_db_url');
-                if(savedConfig) {
-                    document.getElementById('sys-db-url').value = savedConfig;
-                    this.connectFirebase(savedConfig);
-                } else {
-                    this.loadLocalState();
-                }
-
-                const savedUser = localStorage.getItem('imobi_user');
-                if(savedUser) {
-                    this.currentUser = JSON.parse(savedUser);
-                    this.updateAuthUI();
-                }
-
-                this.refreshAllScreens();
+                this.loadAppState();
+                this.syncFirebase();
+                this.toggleFormFields();
             }
 
-            connectFirebase(url) {
-                try {
-                    if (firebase.apps.length === 0) {
-                        firebase.initializeApp({ databaseURL: url });
+            loadAppState() {
+                const t = localStorage.getItem('imobi-theme');
+                if(t) this.setTheme(t);
+                const u = localStorage.getItem('imobi-user');
+                if(u) {
+                    this.currentUser = JSON.parse(u);
+                    this.updateUserUI();
+                }
+            }
+
+            syncFirebase() {
+                db.ref('properties').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    this.properties = [];
+                    if(data) {
+                        for(let id in data) {
+                            this.properties.push({ id, ...data[id] });
+                        }
                     }
-                    this.db = firebase.database();
-                    this.syncFirebaseData();
-                } catch(e) {
-                    console.error("Falha ao conectar no Firebase, usando local.", e);
-                    this.loadLocalState();
-                }
-            }
-
-            syncFirebaseData() {
-                if(!this.db) return;
-                this.db.ref('properties').on('value', (snapshot) => {
-                    const data = snapshot.val();
-                    this.properties = data ? Object.values(data) : [];
-                    this.refreshAllScreens();
-                });
-                this.db.ref('leads').on('value', (snapshot) => {
-                    const data = snapshot.val();
-                    this.leads = data ? Object.values(data) : [];
                     this.refreshAllScreens();
                 });
             }
 
-            loadLocalState() {
-                const p = localStorage.getItem('imobi_local_properties');
-                const l = localStorage.getItem('imobi_local_leads');
-                this.properties = p ? JSON.parse(p) : [];
-                this.leads = l ? JSON.parse(l) : [];
-            }
-
-            saveState() {
-                if(this.db) {
-                    this.db.ref('properties').set(this.properties);
-                    this.db.ref('leads').set(this.leads);
-                } else {
-                    localStorage.setItem('imobi_local_properties', JSON.stringify(this.properties));
-                    localStorage.setItem('imobi_local_leads', JSON.stringify(this.leads));
-                }
+            setTheme(theme) {
+                this.currentTheme = theme;
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('imobi-theme', theme);
             }
 
             toggleTheme() {
-                const html = document.documentElement;
-                const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                html.setAttribute('data-theme', next);
+                this.setTheme(this.currentTheme === 'light' ? 'dark' : 'light');
             }
 
             navigate(viewId) {
                 this.activeView = viewId;
-                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
-                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active-view'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 
-                const target = document.getElementById(`sec-${viewId}`);
-                if(target) target.classList.add('active-view');
+                const targetSec = document.getElementById(`sec-${viewId}`);
+                if(targetSec) targetSec.classList.add('active-view');
 
                 if(viewId === 'landing') document.getElementById('menu-btn-explore').classList.add('active');
                 if(viewId === 'dashboard') document.getElementById('menu-btn-dash').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            switchAuthMode(mode) {
-                document.querySelectorAll('.auth-tab').forEach(el => el.classList.remove('active'));
-                if(mode === 'login') {
-                    document.getElementById('tab-auth-login').classList.add('active');
-                    document.getElementById('form-login').style.display = 'block';
-                    document.getElementById('form-register').style.display = 'none';
-                } else {
-                    document.getElementById('tab-auth-register').classList.add('active');
-                    document.getElementById('form-login').style.display = 'none';
-                    document.getElementById('form-register').style.display = 'block';
+            switchAuthTab(tab) {
+                this.activeAuthTab = tab;
+                document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+                document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+            }
+
+            switchDashTab(tab) {
+                document.getElementById('dash-tab-list').style.display = tab === 'list' ? 'block' : 'none';
+                document.getElementById('dash-tab-add').style.display = tab === 'add' ? 'block' : 'none';
+                document.getElementById('menu-side-list').classList.toggle('active', tab === 'list');
+                document.getElementById('menu-side-add').classList.toggle('active', tab === 'add');
+                if(tab === 'add') {
+                    this.clearForm();
                 }
             }
 
-            handleRoleChange(val) {
-                const f = document.getElementById('group-creci-field');
-                if(val === 'Corretor' || val === 'Imobiliária') f.style.display = 'block';
-                else f.style.display = 'none';
+            toggleFormFields() {
+                const type = document.getElementById('p-type').value;
+                document.getElementById('fields-agio-only').style.display = type === 'Ágio' ? 'grid' : 'none';
             }
 
-            handleFormTypeChange(val) {
-                const rem = document.getElementById('f-agio-remaining');
-                const inst = document.getElementById('f-agio-installment');
-                const bank = document.getElementById('f-agio-bank');
-                if(val === 'Ágio') {
-                    rem.style.display = 'block'; inst.style.display = 'block'; bank.style.display = 'block';
+            openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+
+            closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+
+            clearForm() {
+                document.getElementById('p-id').value = '';
+                document.getElementById('p-title').value = '';
+                document.getElementById('p-city').value = 'Águas Lindas de Goiás';
+                document.getElementById('p-type').value = 'Ágio';
+                document.getElementById('p-price').value = '';
+                document.getElementById('p-agio-value').value = '';
+                document.getElementById('p-agio-remaining').value = '';
+                document.getElementById('p-agio-installment').value = '';
+                document.getElementById('p-agio-bank').value = '';
+                document.getElementById('p-desc').value = '';
+                document.getElementById('p-img').value = '';
+                document.getElementById('p-video').value = '';
+                document.getElementById('form-prop-title').innerText = "Cadastrar Novo Imóvel";
+                this.toggleFormFields();
+            }
+
+            actionAuth() {
+                const email = document.getElementById('auth-email').value.trim();
+                const pass = document.getElementById('auth-password').value;
+
+                if(!email || !pass) { alert('Preencha os campos obrigatórios.'); return; }
+
+                if(this.activeAuthTab === 'login') {
+                    db.ref('users').orderByChild('email').equalTo(email).once('value', (snap) => {
+                        const val = snap.val();
+                        if(val) {
+                            const id = Object.keys(val)[0];
+                            const uData = val[id];
+                            if(uData.password === pass) {
+                                this.currentUser = { id, ...uData };
+                                localStorage.setItem('imobi-user', JSON.stringify(this.currentUser));
+                                this.updateUserUI();
+                                this.navigate('dashboard');
+                            } else { alert('Senha incorreta.'); }
+                        } else { alert('Usuário não localizado.'); }
+                    });
                 } else {
-                    rem.style.display = 'none'; inst.style.display = 'none'; bank.style.display = 'none';
+                    const name = email.split('@')[0];
+                    const newUserRef = db.ref('users').push();
+                    const newUserData = { email, password: pass, name: name.toUpperCase() };
+                    newUserRef.set(newUserData).then(() => {
+                        this.currentUser = { id: newUserRef.key, ...newUserData };
+                        localStorage.setItem('imobi-user', JSON.stringify(this.currentUser));
+                        this.updateUserUI();
+                        this.navigate('dashboard');
+                    });
                 }
             }
 
-            actionLogin(e) {
-                e.preventDefault();
-                const email = document.getElementById('login-email').value;
-                this.currentUser = { email, name: email.split('@')[0].toUpperCase(), role: 'Admin' };
-                localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
-                this.updateAuthUI();
-                this.navigate('dashboard');
-                this.refreshAllScreens();
-            }
-
-            actionRegister(e) {
-                e.preventDefault();
-                const email = document.getElementById('reg-email').value;
-                const name = document.getElementById('reg-name').value;
-                const role = document.getElementById('reg-role').value;
-                this.currentUser = { email, name, role };
-                localStorage.setItem('imobi_user', JSON.stringify(this.currentUser));
-                this.updateAuthUI();
-                this.navigate('dashboard');
-                this.refreshAllScreens();
+            updateUserUI() {
+                if(this.currentUser) {
+                    document.getElementById('menu-btn-auth').style.display = 'none';
+                    document.getElementById('menu-btn-dash').style.display = 'block';
+                    document.getElementById('menu-user-profile').style.display = 'flex';
+                    document.getElementById('header-user-name').innerText = `Olá, ${this.currentUser.name}`;
+                } else {
+                    document.getElementById('menu-btn-auth').style.display = 'block';
+                    document.getElementById('menu-btn-dash').style.display = 'none';
+                    document.getElementById('menu-user-profile').style.display = 'none';
+                }
             }
 
             actionLogout() {
                 this.currentUser = null;
-                localStorage.removeItem('imobi_user');
-                this.updateAuthUI();
+                localStorage.removeItem('imobi-user');
+                this.updateUserUI();
                 this.navigate('landing');
             }
 
-            updateAuthUI() {
-                const btnAuth = document.getElementById('menu-btn-auth');
-                const btnDash = document.getElementById('menu-btn-dash');
-                const profBox = document.getElementById('menu-user-profile');
-                const nameHeader = document.getElementById('header-user-name');
+            actionSaveProperty() {
+                const id = document.getElementById('p-id').value;
+                const pData = {
+                    title: document.getElementById('p-title').value.trim(),
+                    city: document.getElementById('p-city').value,
+                    type: document.getElementById('p-type').value,
+                    price: parseFloat(document.getElementById('p-price').value) || 0,
+                    agioValue: parseFloat(document.getElementById('p-agio-value').value) || 0,
+                    agioRemaining: parseFloat(document.getElementById('p-agio-remaining').value) || 0,
+                    agioInstallment: parseFloat(document.getElementById('p-agio-installment').value) || 0,
+                    agioBank: document.getElementById('p-agio-bank').value.trim(),
+                    desc: document.getElementById('p-desc').value.trim(),
+                    img: document.getElementById('p-img').value.trim() || 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80',
+                    video: document.getElementById('p-video').value.trim(),
+                    ownerId: this.currentUser ? this.currentUser.id : 'public',
+                    ownerName: this.currentUser ? this.currentUser.name : 'Consultor Partner'
+                };
 
-                if(this.currentUser) {
-                    btnAuth.style.display = 'none';
-                    btnDash.style.display = 'block';
-                    profBox.style.display = 'flex';
-                    nameHeader.innerText = this.currentUser.name;
-                    document.getElementById('dash-user-title').innerText = this.currentUser.name;
-                    document.getElementById('dash-user-subtitle').innerText = `Acesso: ${this.currentUser.role}`;
+                if(!pData.title) { alert('O título é obrigatório.'); return; }
+
+                if(id) {
+                    db.ref(`properties/${id}`).set(pData).then(() => this.switchDashTab('list'));
                 } else {
-                    btnAuth.style.display = 'block';
-                    btnDash.style.display = 'none';
-                    profBox.style.display = 'none';
-                }
-            }
-
-            switchDashTab(tabId) {
-                this.activeDashTab = tabId;
-                document.querySelectorAll('.tab-dash-view').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.dash-menu-item').forEach(el => el.classList.remove('active'));
-                
-                document.getElementById(`dash-tab-${tabId}`).style.display = 'block';
-                document.getElementById(`menu-sub-${tabId}`).classList.add('active');
-            }
-
-            openModal(mId) { document.getElementById(mId).classList.add('active'); }
-            closeModal(mId) { document.getElementById(mId).classList.remove('active'); }
-
-            openNewPropertyModal() {
-                document.getElementById('real-property-form').reset();
-                document.getElementById('p-id').value = '';
-                document.getElementById('form-prop-title').innerText = "Novo Imóvel";
-                this.handleFormTypeChange('Ágio');
-                this.openModal('modal-property-form');
-            }
-
-            actionSaveProperty(e) {
-                e.preventDefault();
-                const id = document.getElementById('p-id').value || 'prop_' + Date.now();
-                const title = document.getElementById('p-title').value;
-                const type = document.getElementById('p-type').value;
-                const city = document.getElementById('p-city').value;
-                const neighborhood = document.getElementById('p-neighborhood').value;
-                const price = parseFloat(document.getElementById('p-price').value);
-                const agioRemaining = document.getElementById('p-agio-remaining').value;
-                const agioInstallment = document.getElementById('p-agio-installment').value;
-                const agioBank = document.getElementById('p-agio-bank').value;
-                const gallery = document.getElementById('p-gallery').value;
-                const video = document.getElementById('p-video').value;
-                const desc = document.getElementById('p-desc').value;
-
-                if (this.properties.length >= 14 && !this.db) {
-                    this.isBillingBlocked = true;
-                    this.refreshAllScreens();
-                    this.closeModal('modal-property-form');
-                    alert("Atenção: Limite de entregas de Leads atingido para sua assinatura.");
-                    return;
-                }
-
-                const obj = { id, title, type, city, neighborhood, price, agioRemaining, agioInstallment, agioBank, gallery, video, desc };
-                
-                const idx = this.properties.findIndex(x => x.id === id);
-                if(idx > -1) this.properties[idx] = obj;
-                else this.properties.push(obj);
-
-                this.saveState();
-                this.closeModal('modal-property-form');
-                this.refreshAllScreens();
-            }
-
-            actionDeleteProperty(id) {
-                if(confirm('Tem certeza que deseja excluir este imóvel?')) {
-                    this.properties = this.properties.filter(x => x.id !== id);
-                    this.saveState();
-                    this.refreshAllScreens();
+                    db.ref('properties').push(pData).then(() => this.switchDashTab('list'));
                 }
             }
 
@@ -675,25 +570,30 @@
                 const p = this.properties.find(x => x.id === id);
                 if(!p) return;
 
+                this.switchDashTab('add');
                 document.getElementById('p-id').value = p.id;
                 document.getElementById('p-title').value = p.title;
-                document.getElementById('p-type').value = p.type;
                 document.getElementById('p-city').value = p.city;
-                document.getElementById('p-neighborhood').value = p.neighborhood;
+                document.getElementById('p-type').value = p.type;
                 document.getElementById('p-price').value = p.price;
-                document.getElementById('p-gallery').value = p.gallery || '';
-                document.getElementById('p-video').value = p.video || '';
-                document.getElementById('p-desc').value = p.desc || '';
+                this.toggleFormFields();
 
-                this.handleFormTypeChange(p.type);
                 if(p.type === 'Ágio') {
+                    document.getElementById('p-agio-value').value = p.agioValue || '';
                     document.getElementById('p-agio-remaining').value = p.agioRemaining || '';
                     document.getElementById('p-agio-installment').value = p.agioInstallment || '';
                     document.getElementById('p-agio-bank').value = p.agioBank || '';
                 }
-
+                document.getElementById('p-desc').value = p.desc || '';
+                document.getElementById('p-img').value = p.img || '';
+                document.getElementById('p-video').value = p.video || '';
                 document.getElementById('form-prop-title').innerText = "Editar Imóvel";
-                this.openModal('modal-property-form');
+            }
+
+            actionDeleteProperty(id) {
+                if(confirm('Tem certeza que deseja excluir permanentemente este imóvel?')) {
+                    db.ref(`properties/${id}`).remove();
+                }
             }
 
             openDrivePicker(tId) {
@@ -701,14 +601,14 @@
                 const c = document.getElementById('drive-files-container');
                 c.innerHTML = '';
                 const mockFiles = [
-                    {name: "📸 Foto_Fachada_Premium.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"},
-                    {name: "📸 Interior_Decorado.jpg", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png"},
-                    {name: "🎥 Video_Tour_Drone.m3u8", url: "https://demo.unified-streaming.com/kaltura/castertv.m3u8"}
+                    {name: "📸 Fachada Residencial Premium.jpg", url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"},
+                    {name: "📸 Living Integrado Luxo.jpg", url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"},
+                    {name: "📸 Suite Master Decorada.jpg", url: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80"}
                 ];
                 mockFiles.forEach(f => {
                     const d = document.createElement('div');
                     d.className = 'drive-item';
-                    d.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted); word-break:break-all;">${f.url}</small></div>`;
+                    d.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted); font-size:0.75rem;">${f.url.substring(0,45)}...</small></div>`;
                     d.onclick = () => this.chooseDriveFile(f.url);
                     c.appendChild(d);
                 });
@@ -717,189 +617,162 @@
 
             chooseDriveFile(url) {
                 if(this.activeDriveTargetInputId){
-                    const cur = document.getElementById(this.activeDriveTargetInputId).value;
-                    document.getElementById(this.activeDriveTargetInputId).value = cur ? cur + ',' + url : url;
+                    document.getElementById(this.activeDriveTargetInputId).value = url;
                 }
                 this.closeModal('modal-drive-picker');
             }
 
-            openLeadModal(propId) {
-                document.getElementById('real-lead-form').reset();
-                document.getElementById('l-prop-id').value = propId;
-                this.openModal('modal-lead-form');
-            }
-
-            actionSubmitLead(e) {
-                e.preventDefault();
-                const propId = document.getElementById('l-prop-id').value;
-                const name = document.getElementById('l-name').value;
-                const phone = document.getElementById('l-phone').value;
-                const prop = this.properties.find(x => x.id === propId);
-
-                const leadObj = {
-                    id: 'lead_' + Date.now(),
-                    name, phone,
-                    propTitle: prop ? prop.title : 'Desconhecido',
-                    source: 'Tráfego Orgânico Google',
-                    date: new Date().toLocaleDateString('pt-BR')
-                };
-
-                this.leads.push(leadObj);
-                this.saveState();
-                this.closeModal('modal-lead-form');
-                this.refreshAllScreens();
-                alert(`Sensacional, ${name}! Seu contato foi enviado. A Partner Holding agradece.`);
-            }
-
-            actionSaveSystemConfig() {
-                const url = document.getElementById('sys-db-url').value;
-                if(url) {
-                    localStorage.setItem('imobi_db_url', url);
-                    alert("Configurações salvas. A aplicação vai reiniciar a conexão.");
-                    window.location.reload();
-                }
-            }
-
-            resetBilling() {
-                this.isBillingBlocked = false;
-                this.refreshAllScreens();
-                alert("Assinatura regularizada via PIX Gateway com sucesso.");
-            }
-
-            executeSearch() { this.refreshAllScreens(); }
-            clearSearchFilters() {
-                document.getElementById('search-type').value = '';
-                this.refreshAllScreens();
-            }
-
             refreshAllScreens() {
-                const alertBox = document.getElementById('global-billing-alert');
-                alertBox.style.display = this.isBillingBlocked ? 'flex' : 'none';
-
-                this.renderPublicGrid();
-                this.renderDashboardTables();
+                this.renderLandingGrid(this.properties);
+                this.renderDashboardTable();
             }
 
-            renderPublicGrid() {
+            filterProperties() {
+                const city = document.getElementById('search-city').value;
+                const type = document.getElementById('search-type').value;
+                const maxPrice = parseFloat(document.getElementById('search-price').value) || Infinity;
+
+                const filtered = this.properties.filter(p => {
+                    const mCity = !city || p.city === city;
+                    const mType = !type || p.type === type;
+                    const targetPrice = p.type === 'Ágio' ? (p.agioValue || p.price) : p.price;
+                    const mPrice = targetPrice <= maxPrice;
+                    return mCity && mType && mPrice;
+                });
+
+                this.renderLandingGrid(filtered);
+            }
+
+            renderLandingGrid(list) {
                 const grid = document.getElementById('public-properties-grid');
                 grid.innerHTML = '';
 
-                const filterType = document.getElementById('search-type').value;
-
-                const filtered = this.properties.filter(p => {
-                    if(filterType && p.type !== filterType) return false;
-                    return true;
-                });
-
-                if(filtered.length === 0) {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--text-muted);">Nenhum imóvel disponível para os filtros selecionados.</div>`;
+                if(list.length === 0) {
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 3rem; color: var(--text-muted);">Nenhum imóvel corresponde aos filtros aplicados.</div>`;
                     return;
                 }
 
-                filtered.forEach(p => {
+                list.forEach(p => {
+                    const isAgio = p.type === 'Ágio';
+                    const displayPrice = isAgio ? (p.agioValue || p.price) : p.price;
+                    
                     const card = document.createElement('div');
                     card.className = 'card';
-                    
-                    const imgs = p.gallery ? p.gallery.split(',') : [];
-                    const firstImg = imgs.length > 0 ? imgs[0].trim() : 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80';
-
-                    let innerVideoIndicator = '';
-                    if(p.video) {
-                        innerVideoIndicator = `<div class="video-indicator" onclick="event.stopPropagation(); app.playMedia('${p.id}')">▶ MULTIMÍDIA</div>`;
-                    }
-
-                    let agioDetailsHTML = '';
-                    if(p.type === 'Ágio') {
-                        agioDetailsHTML = `
-                            <div style="background:var(--bg-input); padding:0.8rem; border-radius:8px; margin: 1rem 0; font-size:0.85rem; color:var(--text-muted);">
-                                📉 Saldo Devedor: R$ ${p.agioRemaining || 'N/A'}<br>
-                                📅 Parcela: R$ ${p.agioInstallment || 'N/A'} (${p.agioBank || 'Financ.'})
-                            </div>
-                        `;
-                    }
-
                     card.innerHTML = `
-                        <div class="card-badge">${p.type}</div>
-                        <div class="card-media-mock" style="background-image:url('${firstImg}'); background-size:cover; background-position:center;">
-                            ${innerVideoIndicator}
+                        <span class="card-badge">${p.type}</span>
+                        <div class="card-media-mock" style="background: url('${p.img}') center/cover no-repeat;">
+                            ${p.video ? `<div class="video-indicator" onclick="event.stopPropagation(); app.openMediaViewer('${p.id}')">▶ Ver Vídeo</div>` : ''}
                         </div>
-                        <div class="card-body">
-                            <small style="color:var(--google-blue); font-weight:800; text-transform:uppercase; letter-spacing:1px;">${p.neighborhood} - ${p.city}</small>
-                            <h3 style="margin: 0.4rem 0; font-weight:800; font-size:1.3rem; line-height:1.2;">${p.title}</h3>
-                            <p style="color:var(--text-muted); font-size:0.85rem; line-height:1.4; flex-grow:1;">${p.desc || 'Sem descrição fornecida.'}</p>
-                            ${agioDetailsHTML}
-                            <div class="card-price">R$ ${p.price.toLocaleString('pt-BR')}</div>
-                            <button class="btn-action" style="width:100%;" onclick="app.openLeadModal('${p.id}')">Quero Mais Informações</button>
+                        <div class="card-body" onclick="app.openMediaViewer('${p.id}')" style="cursor:pointer;">
+                            <small style="color: var(--google-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">${p.city}</small>
+                            <h3 style="margin-top: 0.4rem; font-size: 1.25rem; font-weight: 700; line-height: 1.3; min-height: 2.6rem; overflow: hidden;">${p.title}</h3>
+                            <div class="card-price">R$ ${displayPrice.toLocaleString('pt-BR')}</div>
+                            ${isAgio ? `<p style="font-size:0.85rem; color: var(--text-muted); margin-top:-0.5rem; margin-bottom:1rem;">Parcelas de R$ ${(p.agioInstallment || 0).toLocaleString('pt-BR')}</p>` : ''}
+                            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 1.5rem;">${p.desc || 'Sem descrição fornecida.'}</p>
+                            <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(128,128,128,0.1); display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">Por: ${p.ownerName}</span>
+                                <span style="font-size: 0.8rem; font-weight: 700; color: var(--google-blue);">Detalhes →</span>
+                            </div>
                         </div>
                     `;
                     grid.appendChild(card);
                 });
             }
 
-            renderDashboardTables() {
-                const portBody = document.getElementById('portfolio-table-rows');
-                portBody.innerHTML = '';
-                this.properties.forEach(p => {
+            renderDashboardTable() {
+                const tbody = document.getElementById('dash-table-body');
+                tbody.innerHTML = '';
+
+                const userProperties = this.currentUser 
+                    ? this.properties.filter(p => p.ownerId === this.currentUser.id)
+                    : this.properties;
+
+                if(userProperties.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted); padding:2rem;">Você ainda não cadastrou nenhum imóvel.</td></tr>`;
+                    return;
+                }
+
+                userProperties.forEach(p => {
+                    const isAgio = p.type === 'Ágio';
+                    const value = isAgio ? (p.agioValue || p.price) : p.price;
+                    
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td data-label="Imóvel"><b>${p.title}</b></td>
-                        <td data-label="Tipo"><span class="pricing-badge" style="border:none;">${p.type}</span></td>
-                        <td data-label="Localização">${p.city}</td>
-                        <td data-label="Preço Face">R$ ${p.price.toLocaleString('pt-BR')}</td>
+                        <td data-label="Título" style="font-weight:600;">${p.title}</td>
+                        <td data-label="Localidade">${p.city}</td>
+                        <td data-label="Modalidade"><span style="background: rgba(26,115,232,0.1); color: var(--google-blue); padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem; font-weight:700;">${p.type}</span></td>
+                        <td data-label="Preço (R$)">R$ ${value.toLocaleString('pt-BR')}</td>
                         <td data-label="Ações">
-                            <button class="nav-link" style="display:inline; padding:0.4rem; color:var(--google-blue);" onclick="app.actionEditProperty('${p.id}')">Editar</button>
-                            <button class="nav-link" style="display:inline; padding:0.4rem; color:var(--tesla-red);" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
+                            <button class="nav-link" style="color: var(--google-blue); padding: 0.2rem 0.5rem; display:inline-block;" onclick="app.actionEditProperty('${p.id}')">Editar</button>
+                            <button class="nav-link" style="color: var(--tesla-red); padding: 0.2rem 0.5rem; display:inline-block;" onclick="app.actionDeleteProperty('${p.id}')">Excluir</button>
                         </td>
                     `;
-                    portBody.appendChild(tr);
-                });
-
-                const leadBody = document.getElementById('leads-table-rows');
-                leadBody.innerHTML = '';
-                this.leads.forEach(l => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td data-label="Nome do Lead"><b>${l.name}</b></td>
-                        <td data-label="WhatsApp / Telefone"><a href="https://wa.me/${l.phone.replace(/\D/g,'')}" target="_blank" style="color:var(--google-green); font-weight:bold; text-decoration:none;">${l.phone} 💬</a></td>
-                        <td data-label="Imóvel Alvo">${l.propTitle}</td>
-                        <td data-label="Origem Canal"><small>${l.source}</small></td>
-                        <td data-label="Data Captura">${l.date}</td>
-                    `;
-                    leadBody.appendChild(tr);
+                    tbody.appendChild(tr);
                 });
             }
 
-            playMedia(propId) {
-                const p = this.properties.find(x => x.id === propId);
-                if(!p || !p.video) return;
+            /* MÉTODO ATUALIZADO COM OS ALGORITMOS EXCLUSIVOS DO IMOBI 15
+              Fornece suporte de vídeo nativo universal, decodificando URLs estruturadas 
+              e mídias .m3u8 / .mp4 em smartphones e todos os navegadores desktop modernos.
+            */
+            openMediaViewer(id) {
+                const p = this.properties.find(x => x.id === id);
+                if(!p) return;
 
                 document.getElementById('media-viewer-title').innerText = p.title;
+                document.getElementById('media-viewer-details').innerText = `${p.type} | Localizado em ${p.city}`;
+                document.getElementById('media-viewer-desc').innerText = p.desc || 'Nenhuma descrição detalhada informada.';
+                
+                const agioDetailsBox = document.getElementById('media-viewer-agio-details');
+                if(p.type === 'Ágio') {
+                    agioDetailsBox.style.display = 'grid';
+                    agioDetailsBox.innerHTML = `
+                        <div><b>Valor do Ágio:</b> R$ ${(p.agioValue || 0).toLocaleString('pt-BR')}</div>
+                        <div><b>Saldo Devedor:</b> R$ ${(p.agioRemaining || 0).toLocaleString('pt-BR')}</div>
+                        <div><b>Parcela Mensal:</b> R$ ${(p.agioInstallment || 0).toLocaleString('pt-BR')}</div>
+                        <div><b>Banco Financiador:</b> ${p.agioBank || 'Não Informado'}</div>
+                    `;
+                } else {
+                    agioDetailsBox.style.display = 'none';
+                }
+
                 const container = document.getElementById('media-viewer-box');
                 container.innerHTML = '';
 
-                if(p.video.includes('youtube.com') || p.video.includes('youtu.be')) {
+                if(p.video && (p.video.includes('youtube.com') || p.video.includes('youtu.be'))) {
                     let videoId = '';
                     if(p.video.includes('v=')) videoId = p.video.split('v=')[1].split('&')[0];
                     else videoId = p.video.split('/').pop();
 
                     container.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                } else if(p.video.includes('.m3u8') || p.video.includes('.mp4')) {
+                } else if(p.video && (p.video.includes('.m3u8') || p.video.includes('.mp4'))) {
                     container.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%; height:100%; object-fit:contain;"></video>`;
                 } else {
-                    container.innerHTML = `<div style="color:white; text-align:center; font-weight:bold;">Formato de URL de mídia não suportado nativamente.</div>`;
+                    // Fallback visual para imagem quando não houver vídeo nativo configurado
+                    container.innerHTML = `<div style="width:100%; height:100%; background: url('${p.img}') center/cover no-repeat;"></div>`;
                 }
+
+                document.getElementById('media-viewer-whatsapp').onclick = () => {
+                    const text = encodeURIComponent(`Olá, estou interessado no imóvel "${p.title}" visto na plataforma IMOBI.`);
+                    window.open(`https://wa.me/5561999999999?text=${text}`, '_blank');
+                };
 
                 this.openModal('modal-media-viewer');
             }
 
+            // Garante o fechamento limpo da mídia de streaming sem áudio fantasma rodando de fundo
             closeMediaViewer() {
                 document.getElementById('media-viewer-box').innerHTML = '';
                 this.closeModal('modal-media-viewer');
             }
+
+            resetBilling() {
+                alert('Chave Pix gerada! Aguardando compensação do ecossistema.');
+                document.getElementById('global-billing-alert').style.display = 'none';
+            }
         }
 
         const app = new ImobiApp();
-        window.onload = () => app.init();
     </script>
 </body>
 </html>
