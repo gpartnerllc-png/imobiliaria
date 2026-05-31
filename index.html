@@ -228,6 +228,13 @@
                 font-size: 1.5rem;
             }
         }
+        /* Desktop (default) */
+.grid-wrapper { display: grid; grid-template-columns: repeat(3, 1fr); }
+
+/* Smartphone (O que força a igualdade) */
+@media (max-width: 768px) {
+    .grid-wrapper { grid-template-columns: 1fr !important; }
+}
     </style>
 </head>
 <body>
