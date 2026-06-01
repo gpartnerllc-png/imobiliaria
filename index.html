@@ -615,30 +615,23 @@
     if (!url) return '';
     url = url.trim();
 
-    // 1. Correção da base (Faltava o https://)
-    const CDN_BASE = 'https://6a13b0d3086634e3699975e1.imgix.net/'; 
-    
-    // 2. Se a URL já for um link completo (vinda do widget de upload), use-a diretamente
-    // Se não, concatena com a base da CDN
-    const cleanUrl = url.startsWith('http') ? url : `${CDN_BASE}${url.replace(/^\//, '')}`;
+    // 1. Se for uma URL que já vem de um servidor confiável, não mude nada.
+    // Isso evita que o sistema quebre o que já funcionava.
+    if (url.startsWith('https://ucarecdn.com') || url.startsWith('http')) {
+        return url; 
+    }
 
-    // 3. Parâmetros de otimização
+    // 2. Se for um caminho interno, aplica a CDN com segurança
+    const CDN_BASE = 'https://6a13b0d3086634e3699975e1.imgix.net/';
+    const cleanUrl = `${CDN_BASE}${url.replace(/^\//, '')}`;
+
     const params = new URLSearchParams({
         auto: 'format,compress',
-        fit: 'max',
-        w: options.width || '800',
-        q: options.quality || '75'
+        w: options.width || '800'
     });
 
     return `${cleanUrl}?${params.toString()}`;
 }
-                }
-                if (type === 'video') {
-                    if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
-                    if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
-                }
-                return url;
-            }
 
             getImagesArray(imageStr) {
                 if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
