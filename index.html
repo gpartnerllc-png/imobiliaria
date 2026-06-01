@@ -679,7 +679,7 @@
                 if (!this.selectedPropertyForLead) return;
                 const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
                 alert(`Conectando ao especialista do imóvel: ${broker.name}`);
-                window.open(`https://wa.me/5561983446343${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
+                window.open(`https://wa.me/5561983446343?text=${encodeURIComponent('Tenho interesse no imóvel: ' + this.selectedPropertyForLead.title)}`, '_blank');
             }
 
             renderPublicGrid(filteredData = null) {
