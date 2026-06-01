@@ -645,6 +645,20 @@
                 }
                 return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
             }
+            init() {
+    console.log("Iniciando motor IMOBI...");
+    
+    // VERIFICAÇÃO DE SEGURANÇA: 
+    // Se você não preencheu o firebaseConfig, ele NUNCA vai mostrar imóveis.
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    
+    this.db = firebase.database();
+    this.useCloud = true; // Força o uso da nuvem
+    
+    this.loadPropertiesFromCloud(); // Chama a função que busca no Firebase
+}
 
             init() {
                 this.applySavedTheme();
