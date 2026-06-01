@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8"/>    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IMOBI | Plataforma Imobiliária</title>   
+    <title>IMOBI | Plataforma Imobiliária</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
         /* RESET ABSOLUTO PARA UNIFICAÇÃO */
@@ -48,59 +51,6 @@
             --text-muted: #8a99ad;
             --border-glow: rgba(0, 240, 255, 0.15);
             --premium-gold: #ffd700;
-        }
-        /* RESET E NORMALIZAÇÃO CROSS-BROWSER */
-        * { margin: 0; padding: 0; box-sizing: border-box !important; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; height: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
-        
-        :root {
-            --bg-base: #f4f6fa;
-            --bg-surface: #ffffff;
-            --text-main: #0f172a;
-            --google-blue: #1a73e8;
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-
-        body { background-color: var(--bg-base); color: var(--text-main); font-family: var(--font); }
-
-        /* GRID FIXO PARA TODOS OS NAVEGADORES */
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        
-        .grid-wrapper { 
-            display: -webkit-box;      /* Safari */
-            display: -ms-flexbox;      /* IE 10 */
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; 
-            width: 100%;
-        }
-
-        /* FORÇAR COLUNA ÚNICA EM MOBILE PARA TODOS */
-        @media screen and (max-width: 768px) {
-            .grid-wrapper { 
-                grid-template-columns: 1fr !important; 
-            }
-        }
-
-        /* COMPATIBILIDADE DE GLASSMORPHISM */
-        header { 
-            background: rgba(255, 255, 255, 0.85); 
-            -webkit-backdrop-filter: blur(20px); 
-            backdrop-filter: blur(20px); 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 20px;
-        }
-
-        .btn-action { 
-            display: inline-block;
-            background: var(--google-blue); 
-            color: white; 
-            padding: 10px 20px; 
-            border-radius: 8px; 
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased; }
@@ -727,28 +677,11 @@
             }
 
             contactBrokerResponsible() {
-    if (!this.selectedPropertyForLead) return;
-
-    // 1. Busca o broker ou define o padrão
-    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || 
-                   { name: "Especialista Partner", phone: "5561983446343" };
-
-    // 2. Limpa o telefone: remove qualquer caractere que não seja número (importante para evitar erros)
-    const cleanPhone = broker.phone.replace(/\D/g, '');
-
-    // 3. Monta a mensagem (usando template literal para ficar organizado)
-    const message = `Olá! Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
-    
-    // 4. Constrói a URL corretamente seguindo o padrão wa.me/numero?text=mensagem
-    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
-
-    alert(`Conectando ao especialista: ${broker.name}`);
-    window.open(whatsappUrl, '_blank');
-}
-            <button onclick="window.open('https://wa.me/5561983446343?text=Tenho%20interesse%20neste%20imóvel', '_blank')" 
-        class="seu-botao-estilo">
-    Falar com Especialista
-</button>
+                if (!this.selectedPropertyForLead) return;
+                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
+                alert(`Conectando ao especialista do imóvel: ${broker.name}`);
+                window.open(`https://wa.me/5561983446343${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
+            }
 
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
@@ -999,6 +932,5 @@
 
         const app = new IaMobiEngine();
     </script>
-    
 </body>
 </html>
