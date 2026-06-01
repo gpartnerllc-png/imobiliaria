@@ -612,30 +612,56 @@
                 };
                 this.useCloud = false;
                 
-                if (firebaseConfig.apiKey !== "") {
-                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-                    this.db = firebase.database();
-                    this.useCloud = true;
-                }
-                const firebaseConfig = {
-    apiKey: "AIzaSy... (use a string completa da sua chave)",
-    authDomain: "imobi-droppfy.firebaseapp.com",
-    databaseURL: "https://imobi-droppfy-default-rtdb.firebaseio.com",
-    projectId: "imobi-droppfy",
-    storageBucket: "imobi-droppfy.appspot.com",
+               // --- CONFIGURAÇÃO DE NUVEM IMOBI ---
+const firebaseConfig = {
+    apiKey:            "AIzaSy...", 
+    authDomain:        "imobi-droppfy.firebaseapp.com",
+    databaseURL:       "https://imobi-droppfy-default-rtdb.firebaseio.com",
+    projectId:         "imobi-droppfy",
+    storageBucket:     "imobi-droppfy.appspot.com",
     messagingSenderId: "810148677732",
-    appId: "1:810148677732:web:a620f..."
+    appId:             "1:810148677732:web:a620f..."
 };
 
-                this.users = [];
-                this.properties = [];
-                this.leads = [];
-                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
-                this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
-                
-                this.init();
-            }
+// --- MOTOR DE SINCRONIZAÇÃO ---
+class IaMobiEngine {
+    constructor() {
+        this.properties = [];
+        this.init();
+    }
 
+    init() {
+        // Inicializa o Firebase apenas se não estiver carregado
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        
+        this.db = firebase.database();
+        this.useCloud = true;
+
+        // Escuta em tempo real: qualquer mudança no banco atualiza todos os navegadores
+        this.db.ref('iamobi_data').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                // Converte objeto do Firebase para array para exibir na tela
+                this.properties = Array.isArray(data) ? data : Object.values(data);
+                this.render(); 
+            }
+        });
+        
+        console.log("Motor IMOBI: Sincronizado e ouvindo a nuvem.");
+    }
+
+    render() {
+        // O seu código de desenhar os cards na tela deve vir aqui
+        // Exemplo: document.getElementById('grid-properties').innerHTML = ...
+    }
+}
+
+// Inicializa a aplicação
+window.onload = () => {
+    window.app = new IaMobiEngine();
+};
             // Geração PIX (Padrão EMV)
             gerarPixMestre(v) {
                 const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
