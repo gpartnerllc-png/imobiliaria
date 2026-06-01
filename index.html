@@ -288,28 +288,6 @@
 @media (max-width: 768px) {
     .grid-wrapper { grid-template-columns: 1fr !important; }
 }
-        /* Reset Absoluto para impedir que navegadores alterem margens */
-    * { margin: 0; padding: 0; box-sizing: border-box !important; }
-    
-    html, body { width: 100%; height: 100%; overflow-x: hidden; }
-
-    /* Força o Grid a ser idêntico em qualquer tela */
-    .container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 20px; }
-    
-    .grid-wrapper { 
-        display: grid !important; 
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important; 
-        gap: 20px !important; 
-        width: 100% !important;
-        align-content: start;
-    }
-
-    /* Regra de Ouro para Smartphones (Mobile) */
-    @media (max-width: 768px) {
-        .grid-wrapper { 
-            grid-template-columns: 1fr !important; /* Força 1 coluna apenas no celular */
-        }
-    }
     </style>
 </head>
 <body>
@@ -612,56 +590,21 @@
                 };
                 this.useCloud = false;
                 
-               // --- CONFIGURAÇÃO DE NUVEM IMOBI ---
-const firebaseConfig = {
-    apiKey:            "AIzaSy...", 
-    authDomain:        "imobi-droppfy.firebaseapp.com",
-    databaseURL:       "https://imobi-droppfy-default-rtdb.firebaseio.com",
-    projectId:         "imobi-droppfy",
-    storageBucket:     "imobi-droppfy.appspot.com",
-    messagingSenderId: "810148677732",
-    appId:             "1:810148677732:web:a620f..."
-};
+                if (firebaseConfig.apiKey !== "") {
+                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+                    this.db = firebase.database();
+                    this.useCloud = true;
+                }
 
-// --- MOTOR DE SINCRONIZAÇÃO ---
-class IaMobiEngine {
-    constructor() {
-        this.properties = [];
-        this.init();
-    }
-
-    init() {
-        // Inicializa o Firebase apenas se não estiver carregado
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        
-        this.db = firebase.database();
-        this.useCloud = true;
-
-        // Escuta em tempo real: qualquer mudança no banco atualiza todos os navegadores
-        this.db.ref('iamobi_data').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                // Converte objeto do Firebase para array para exibir na tela
-                this.properties = Array.isArray(data) ? data : Object.values(data);
-                this.render(); 
+                this.users = [];
+                this.properties = [];
+                this.leads = [];
+                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
+                this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
+                
+                this.init();
             }
-        });
-        
-        console.log("Motor IMOBI: Sincronizado e ouvindo a nuvem.");
-    }
 
-    render() {
-        // O seu código de desenhar os cards na tela deve vir aqui
-        // Exemplo: document.getElementById('grid-properties').innerHTML = ...
-    }
-}
-
-// Inicializa a aplicação
-window.onload = () => {
-    window.app = new IaMobiEngine();
-};
             // Geração PIX (Padrão EMV)
             gerarPixMestre(v) {
                 const f = (id, val) => `${id}${val.length.toString().padStart(2, '0')}${val}`;
@@ -680,20 +623,6 @@ window.onload = () => {
                 }
                 return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
             }
-            init() {
-    console.log("Iniciando motor IMOBI...");
-    
-    // VERIFICAÇÃO DE SEGURANÇA: 
-    // Se você não preencheu o firebaseConfig, ele NUNCA vai mostrar imóveis.
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-    
-    this.db = firebase.database();
-    this.useCloud = true; // Força o uso da nuvem
-    
-    this.loadPropertiesFromCloud(); // Chama a função que busca no Firebase
-}
 
             init() {
                 this.applySavedTheme();
