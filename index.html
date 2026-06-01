@@ -984,6 +984,22 @@
         }
 
         const app = new IaMobiEngine();
+        
+        // Exemplo de como processar a imagem no seu método render():
+render() {
+    this.properties.forEach(p => {
+        const grid = document.getElementById('grid-properties');
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        // A chave aqui é garantir que o src aponte para o link direto
+        card.innerHTML = `
+            <img src="${p.imageUrl}" alt="Imóvel" onerror="this.src='fallback.jpg'">
+            <h3>${p.title}</h3>
+        `;
+        grid.appendChild(card);
+    });
+}
     </script>
 </body>
 </html>
