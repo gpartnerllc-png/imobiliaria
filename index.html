@@ -568,20 +568,6 @@
         class IaMobiEngine {
             constructor() {
                 this.carouselIndices = {};
-                // Dentro da sua classe IaMobiEngine
-actionSaveProperty() {
-    const propertyData = {
-        id: Date.now().toString(),
-        title: document.getElementById('p-title').value,
-        price: document.getElementById('p-price').value,
-        imageUrl: document.getElementById('p-image-url').value // GARANTA QUE ESTE CAMPO RECEBE O LINK DO IMGIX
-    };
-
-    // Salva na nuvem
-    this.db.ref('iamobi_data/' + propertyData.id).set(propertyData);
-    this.closeModal('modal-property-form');
-    alert("Imóvel salvo na nuvem!");
-}
 
                 // --- CONFIGURAÇÃO PIX E KPI (Controle de Entregas) ---
                 this.CONFIG_PIX = {
