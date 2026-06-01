@@ -611,12 +611,27 @@
                 }
             }
 
-            parseExternalLink(url, type = 'image') {
-                if (!url) return '';
-                url = url.trim();
-                if (url.includes('drive.google.com')) {
-                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-                    if (match && match[1]) { return type === 'image' ? `https://docs.google.com/uc?export=view&id=${match[1]}` : `https://drive.google.com/file/d/${match[1]}/preview`; }
+            parseExternalLink(url, options = {}) {
+    if (!url) return '';
+    url = url.trim();
+
+    // 1. Correção da base (Faltava o https://)
+    const CDN_BASE = 'https://6a13b0d3086634e3699975e1.imgix.net/'; 
+    
+    // 2. Se a URL já for um link completo (vinda do widget de upload), use-a diretamente
+    // Se não, concatena com a base da CDN
+    const cleanUrl = url.startsWith('http') ? url : `${CDN_BASE}${url.replace(/^\//, '')}`;
+
+    // 3. Parâmetros de otimização
+    const params = new URLSearchParams({
+        auto: 'format,compress',
+        fit: 'max',
+        w: options.width || '800',
+        q: options.quality || '75'
+    });
+
+    return `${cleanUrl}?${params.toString()}`;
+}
                 }
                 if (type === 'video') {
                     if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
