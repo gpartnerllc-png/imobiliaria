@@ -726,28 +726,36 @@
                 reader.readAsDataURL(input.files[0]);
             }
 
-            contactBrokerResponsible() {
-    if (!this.selectedPropertyForLead) return;
+            methods: {
+    contactBrokerResponsible() {
+        // Garantia de que a propriedade existe
+        const property = this.selectedPropertyForLead;
+        if (!property) {
+            console.error("Nenhum imóvel selecionado para lead.");
+            return;
+        }
 
-    // 1. Busca o broker ou define o padrão
-    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || 
-                   { name: "Especialista Partner", phone: "5561983446343" };
+        // Define o broker ou o padrão
+        const broker = this.users.find(u => u.email === property.author) || 
+                       { name: "Especialista Partner", phone: "5561983446343" };
 
-    // 2. Limpa o telefone: remove qualquer caractere que não seja número (importante para evitar erros)
-    const cleanPhone = broker.phone.replace(/\D/g, '');
-
-    // 3. Monta a mensagem (usando template literal para ficar organizado)
-    const message = `Olá! Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
-    
-    // 4. Constrói a URL corretamente seguindo o padrão wa.me/numero?text=mensagem
-    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
-
-    alert(`Conectando ao especialista: ${broker.name}`);
-    window.open(whatsappUrl, '_blank');
-}
-            <button onclick="window.open('https://wa.me/5561983446343?text=Tenho%20interesse%20neste%20imóvel', '_blank')" 
-        class="seu-botao-estilo">
-    Falar com Especialista
+        // Limpa o telefone para o formato padrão do WhatsApp
+        const cleanPhone = String(broker.phone).replace(/\D/g, '');
+        
+        // Mensagem codificada para URL
+        const msg = encodeURIComponent(`Olá, tenho interesse no imóvel: ${property.title || 'Imóvel'}`);
+        
+        const url = `https://wa.me/${cleanPhone}?text=${msg}`;
+        
+        // Abre em nova janela
+        window.open(url, '_blank');
+        }
+        
+           <button 
+    @click="contactBrokerResponsible" 
+    class="btn-whatsapp"
+    :disabled="!selectedPropertyForLead">
+    {{ selectedPropertyForLead ? 'Falar com Especialista' : 'Selecione um imóvel' }}
 </button>
 
             renderPublicGrid(filteredData = null) {
