@@ -613,12 +613,7 @@
             parseExternalLink(url, options = {}) {
     if (!url) return '';
     url = url.trim();
-
-    // 1. Se for uma URL que já vem de um servidor confiável, não mude nada.
-    // Isso evita que o sistema quebre o que já funcionava.
-    if (url.startsWith('https://ucarecdn.com') || url.startsWith('http')) {
-        return url; 
-    }
+    
 
     // 2. Se for um caminho interno, aplica a CDN com segurança
     const CDN_BASE = 'https://6a13b0d3086634e3699975e1.imgix.net/';
