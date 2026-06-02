@@ -566,47 +566,32 @@
                     limiteEntregas: 10
                 };
 
-                // 1. Configurações Globais
-const SUPABASE_URL = 'https://adiynqojadclrvuialge.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_WDX3whHMuKfb5N4DjyXiFg_8it7aNIt';
+                // CONFIGURAÇÃO FIREBASE
+                const firebaseConfig = {
+                    apiKey: "", 
+                    authDomain: "",
+                    databaseURL: "",
+                    projectId: "",
+                    storageBucket: "",
+                    messagingSenderId: "",
+                    appId: ""
+                };
+                this.useCloud = false;
+                
+                if (firebaseConfig.apiKey !== "") {
+                    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+                    this.db = firebase.database();
+                    this.useCloud = true;
+                }
 
-this.useCloud = true;
-
-// 2. Criando o atalho para o banco (this.db)
-this.db = {
-    fetch: async (path, options = {}) => {
-        const url = `${SUPABASE_URL}/rest/v1/${path}`;
-        const headers = {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-        };
-        options.headers = { ...headers, ...options.headers };
-        return fetch(url, options).then(res => res.json());
-    }
-};
-
-// 3. Inicialização dos dados
-this.users = [];
-this.properties = [];
-this.leads = [];
-this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
-
-// 4. Função principal de carga
-async function carregarDadosDaNuvem() {
-    try {
-        // Usamos o nosso novo atalho this.db.fetch
-        const data = await this.db.fetch('iMOBI'); 
-        this.properties = data;
-        this.renderPublicGrid();
-    } catch (error) {
-        console.error("Erro ao carregar do Supabase:", error);
-    }
-}
-
-// Executa a carga
-carregarDadosDaNuvem();
+                this.users = [];
+                this.properties = [];
+                this.leads = [];
+                this.currentUser = JSON.parse(localStorage.getItem('iamobi_current_user')) || null;
+                this.billingInvoiceExpired = JSON.parse(localStorage.getItem('iamobi_billing_expired')) || false;
+                
+                this.init();
+            }
 
             // Geração PIX (Padrão EMV)
             gerarPixMestre(v) {
@@ -1021,17 +1006,7 @@ carregarDadosDaNuvem();
         }
 
         const app = new IaMobiEngine();
-            <script src="seu-arquivo-de-logica.js">
     </script>
-    <script>
-    // Teste rápido para ver se o JavaScript está carregando
-    window.onload = () => {
-        console.log("Sistema IMOBI carregado com sucesso!");
-        if (typeof app === 'undefined') {
-            console.error("ERRO: O objeto 'app' não foi encontrado. Verifique seu arquivo JS.");
-        }
-    };
-</script>
     
 </body>
 </html>
