@@ -665,30 +665,13 @@
                 }
             }
 
-           parseExternalLink(url, type = 'image') {
-    if (!url) return '';
-    url = url.trim();
-
-    // Domínio fornecido do seu Imgix
-    const imgixDomain = '6a13b0d3086634e3699975e1.imgix.net';
-    
-    // 1. Trata links do Google Drive para formato de acesso direto
-    let sourceUrl = url;
-    if (url.includes('drive.google.com')) {
-        const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) {
-            sourceUrl = `https://docs.google.com/uc?export=view&id=${match[1]}`;
-        }
-    }
-
-    // 2. Codifica a URL original para ser um parâmetro seguro
-    const encodedUrl = encodeURIComponent(sourceUrl);
-    
-    // 3. Retorna a URL completa com parâmetros de otimização padrão
-    // auto=format: entrega WebP/AVIF se o navegador suportar
-    // auto=compress: remove metadados desnecessários
-    return `https://${imgixDomain}/${encodedUrl}?auto=format,compress&fit=crop&w=800`;
-}
+            parseExternalLink(url, type = 'image') {
+                if (!url) return '';
+                url = url.trim();
+                if (url.includes('drive.google.com')) {
+                    const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+                    if (match && match[1]) { return type === 'image' ? `https://docs.google.com/uc?export=view&id=${match[1]}` : `https://drive.google.com/file/d/${match[1]}/preview`; }
+                }
                 if (type === 'video') {
                     if (url.includes('youtube.com/watch')) return url.replace('watch?v=', 'embed/').split('&')[0];
                     if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'www.youtube.com/embed/').split('?')[0];
@@ -697,19 +680,9 @@
             }
 
             getImagesArray(imageStr) {
-    // 1. Imagem de fallback (padrão) caso a string esteja vazia
-    const defaultImage = 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80';
-    
-    if (!imageStr || imageStr.trim() === '') {
-        return [defaultImage];
-    }
-
-    // 2. Converte a string em array, trata espaços e passa pelo parser do Imgix
-    return imageStr.split(',')
-        .map(url => url.trim())
-        .filter(url => url !== '') // Remove entradas vazias se houver vírgulas extras
-        .map(url => this.parseExternalLink(url, 'image'));
-}
+                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
+                return imageStr.split(',').map(url => this.parseExternalLink(url, 'image'));
+            }
 
             moveCarousel(id, direction, total) {
                 if (total <= 1) return;
@@ -1011,8 +984,6 @@
         }
 
         const app = new IaMobiEngine();
-        
-
     </script>
 </body>
 </html>
