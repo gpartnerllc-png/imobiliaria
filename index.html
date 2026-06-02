@@ -718,23 +718,31 @@
                 reader.readAsDataURL(input.files[0]);
             }
 
-            // CORREÇÃO DO WHATSAPP APLICADA AQUI
             contactBrokerResponsible() {
-                if (!this.selectedPropertyForLead) return;
-                
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
+    // 1. Garante que temos um imóvel selecionado
+    if (!this.selectedPropertyForLead) return;
+    
+    // 2. Busca o corretor ou usa o especialista padrão (garantindo estrutura)
+    let broker = this.users.find(u => u.email === this.selectedPropertyForLead.author);
+    
+    // Se não achar o corretor ou o telefone for inválido, usa o padrão
+    if (!broker || !broker.phone) {
+        broker = { name: "Especialista Partner", phone: "5561983446343" };
+    }
 
-                // Limpa o telefone: remove qualquer caractere que não seja número
-                const cleanPhone = broker.phone.replace(/\D/g, '');
-                
-                // Monta a mensagem 
-                const message = `Olá! Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
-                
-                // Constrói a URL corretamente
-                const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
-                console.log(`Conectando ao especialista: ${broker.name}`);
-                window.open(whatsappUrl, '_blank');
-            }
+    // 3. Limpeza segura: Força a conversão para string e trata valores nulos
+    // Isso evita o erro de 'replace' que trava a execução
+    const rawPhone = broker.phone ? String(broker.phone) : "5561983446343";
+    const cleanPhone = rawPhone.replace(/\D/g, '');
+    
+    // 4. Monta a mensagem e a URL
+    const message = `Olá! Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    
+    // 5. Execução
+    console.log(`Conectando ao especialista: ${broker.name} via ${cleanPhone}`);
+    window.open(whatsappUrl, '_blank');
+}
 
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
