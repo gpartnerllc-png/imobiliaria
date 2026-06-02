@@ -934,8 +934,6 @@ init() {
         }
 
         const app = new IaMobiEngine();
-    // --- GESTÃO DE LEADS E STATUS (Integrado à classe IaMobiEngine) ---
-
 renderLeadsTable() {
     const tableBody = document.getElementById('leadsTableBody');
     if (!tableBody) return;
@@ -996,8 +994,7 @@ toggleUserStatus(index) {
     this.saveState();
     this.renderUsersTable(); // Atualiza a tabela de parceiros/corretores
     console.log(`Usuário ${user.name} alterado para ${user.status}.`);
-}
-    
+}   
     
     </script>
 </body>
