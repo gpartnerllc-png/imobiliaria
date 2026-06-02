@@ -718,16 +718,27 @@
                 reader.readAsDataURL(input.files[0]);
             }
 
-            // 1. Busca o broker
-let broker = this.users.find(u => u.email === this.selectedPropertyForLead.author);
+            contactBrokerResponsible() {
+    if (!this.selectedPropertyForLead) return;
 
-// 2. Garante que exista um objeto broker e um telefone válido
-if (!broker || !broker.phone) {
-    broker = { name: "Especialista Partner", phone: "5561983446343" };
+    // 1. Busca o corretor com segurança
+    let broker = this.users.find(u => u.email === this.selectedPropertyForLead.author);
+
+    // 2. Garante um objeto broker e um telefone, mesmo que o dado esteja faltando no banco
+    if (!broker || !broker.phone) {
+        broker = { name: "Especialista Partner", phone: "5561983446343" };
+    }
+
+    // 3. Conversão segura para string antes de aplicar o replace
+    // Isso evita o erro de "undefined reading replace" que apareceu na sua imagem
+    const cleanPhone = String(broker.phone || "").replace(/\D/g, '');
+
+    const message = `Olá! Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    
+    console.log(`Conectando ao especialista: ${broker.name} via ${cleanPhone}`);
+    window.open(whatsappUrl, '_blank');
 }
-
-// 3. Limpeza segura (agora forçamos a conversão para string antes de usar replace)
-const cleanPhone = String(broker.phone).replace(/\D/g, '');
 
                 // Limpa o telefone: remove qualquer caractere que não seja número
                 const cleanPhone = broker.phone.replace(/\D/g, '');
