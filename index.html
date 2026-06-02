@@ -1023,6 +1023,15 @@ carregarDadosDaNuvem();
         const app = new IaMobiEngine();
             <script src="seu-arquivo-de-logica.js">
     </script>
+    <script>
+    // Teste rápido para ver se o JavaScript está carregando
+    window.onload = () => {
+        console.log("Sistema IMOBI carregado com sucesso!");
+        if (typeof app === 'undefined') {
+            console.error("ERRO: O objeto 'app' não foi encontrado. Verifique seu arquivo JS.");
+        }
+    };
+</script>
     
 </body>
 </html>
