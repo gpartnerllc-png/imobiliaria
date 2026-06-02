@@ -718,11 +718,16 @@
                 reader.readAsDataURL(input.files[0]);
             }
 
-            // CORREÇÃO DO WHATSAPP APLICADA AQUI
-            contactBrokerResponsible() {
-                if (!this.selectedPropertyForLead) return;
-                
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
+            // 1. Busca o broker
+let broker = this.users.find(u => u.email === this.selectedPropertyForLead.author);
+
+// 2. Garante que exista um objeto broker e um telefone válido
+if (!broker || !broker.phone) {
+    broker = { name: "Especialista Partner", phone: "5561983446343" };
+}
+
+// 3. Limpeza segura (agora forçamos a conversão para string antes de usar replace)
+const cleanPhone = String(broker.phone).replace(/\D/g, '');
 
                 // Limpa o telefone: remove qualquer caractere que não seja número
                 const cleanPhone = broker.phone.replace(/\D/g, '');
