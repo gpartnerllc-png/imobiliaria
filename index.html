@@ -934,6 +934,71 @@ init() {
         }
 
         const app = new IaMobiEngine();
+    // --- GESTÃO DE LEADS E STATUS (Integrado à classe IaMobiEngine) ---
+
+renderLeadsTable() {
+    const tableBody = document.getElementById('leadsTableBody');
+    if (!tableBody) return;
+
+    let rowsHtml = '';
+    this.leads.forEach((lead, index) => {
+        rowsHtml += `
+            <tr>
+                <td>${lead.name}</td>
+                <td>${lead.phone}</td>
+                <td>${lead.property}</td>
+                <td>${lead.source}</td>
+                <td>${lead.date}</td>
+                <td>
+                    <button onclick="app.deleteLead(${index})" class="btn-delete" title="Excluir">🗑️</button>
+                </td>
+            </tr>
+        `;
+    });
+    tableBody.innerHTML = rowsHtml;
+}
+
+deleteLead(index) {
+    if (confirm("Confirmar exclusão deste lead? Esta ação é irreversível.")) {
+        this.leads.splice(index, 1);
+        this.renderLeadsTable(); // Atualiza a tabela imediatamente
+        this.saveState();       // Sincroniza com o banco D1
+        console.log("Lead removido e sincronizado.");
+    }
+}
+
+renderUsersTable() {
+    const userTableBody = document.getElementById('usersTableBody');
+    if (!userTableBody) return;
+
+    let rowsHtml = '';
+    this.users.forEach((user, index) => {
+        rowsHtml += `
+            <tr>
+                <td>${user.name}</td>
+                <td>${user.status || 'ativo'}</td>
+                <td>
+                    <button onclick="app.toggleUserStatus(${index})" class="btn-status" title="Bloquear/Desbloquear">🔒</button>
+                </td>
+            </tr>
+        `;
+    });
+    userTableBody.innerHTML = rowsHtml;
+}
+
+toggleUserStatus(index) {
+    const user = this.users[index];
+    if (!user) return;
+    
+    // Alterna o status
+    user.status = (user.status === 'bloqueado') ? 'ativo' : 'bloqueado';
+    
+    this.saveState();
+    this.renderUsersTable(); // Atualiza a tabela de parceiros/corretores
+    console.log(`Usuário ${user.name} alterado para ${user.status}.`);
+}
+    
+    
     </script>
 </body>
 </html>
