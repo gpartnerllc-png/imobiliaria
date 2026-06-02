@@ -732,22 +732,26 @@
             contactBrokerResponsible() {
     if (!this.selectedPropertyForLead) return;
 
-    // 1. Busca o corretor. Se não achar, usa o padrão.
-    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) 
-                   || { name: "Especialista Partner", phone: "5561983446343" };
+    // 1. Busca o broker ou define o padrão
+    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || 
+                   { name: "Especialista Partner", phone: "5561983446343" };
 
-    // 2. Limpa o telefone (remove caracteres não numéricos para evitar erro no wa.me)
-    const phone = broker.phone.replace(/\D/g, '');
+    // 2. Limpa o telefone: remove qualquer caractere que não seja número (importante para evitar erros)
+    const cleanPhone = broker.phone.replace(/\D/g, '');
 
-    // 3. Monta a mensagem formatada
-    const message = `Olá, tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
+    // 3. Monta a mensagem (usando template literal para ficar organizado)
+    const message = `Olá! Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
     
-    // 4. Constrói a URL corretamente com o parâmetro 'text'
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    // 4. Constrói a URL corretamente seguindo o padrão wa.me/numero?text=mensagem
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 
-    console.log(`Conectando ao especialista: ${broker.name} via ${phone}`);
-    window.open(url, '_blank');
+    alert(`Conectando ao especialista: ${broker.name}`);
+    window.open(whatsappUrl, '_blank');
 }
+            <button onclick="window.open('https://wa.me/5561983446343?text=Tenho%20interesse%20neste%20imóvel', '_blank')" 
+        class="seu-botao-estilo">
+    Falar com Especialista
+</button>
 
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
