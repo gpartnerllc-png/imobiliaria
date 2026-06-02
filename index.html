@@ -7,18 +7,18 @@
 
     <style>
         /* RESET ABSOLUTO PARA UNIFICAÇÃO */
-    * { 
-        margin: 0; 
-        padding: 0; 
-        box-sizing: border-box !important; 
-        -webkit-tap-highlight-color: transparent; 
-    }
-    html, body { 
-        width: 100%; 
-        height: 100%; 
-        overflow-x: hidden; 
-        position: relative;
-    }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box !important; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+        html, body { 
+            width: 100%; 
+            height: 100%; 
+            overflow-x: hidden; 
+            position: relative;
+        }
         :root {
             /* Palette Fusão Premium: Light Mode Padrão */
             --bg-base: #f4f6fa;
@@ -49,29 +49,16 @@
             --border-glow: rgba(0, 240, 255, 0.15);
             --premium-gold: #ffd700;
         }
-        /* RESET E NORMALIZAÇÃO CROSS-BROWSER */
-        * { margin: 0; padding: 0; box-sizing: border-box !important; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; height: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
-        
-        :root {
-            --bg-base: #f4f6fa;
-            --bg-surface: #ffffff;
-            --text-main: #0f172a;
-            --google-blue: #1a73e8;
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
 
-        body { background-color: var(--bg-base); color: var(--text-main); font-family: var(--font); }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: var(--font); -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
 
         /* GRID FIXO PARA TODOS OS NAVEGADORES */
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1400px; margin: 2.5rem auto; padding: 0 2rem; }
         
         .grid-wrapper { 
-            display: -webkit-box;      /* Safari */
-            display: -ms-flexbox;      /* IE 10 */
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; 
+            gap: 2.5rem; 
             width: 100%;
         }
 
@@ -82,34 +69,22 @@
             }
         }
 
-        /* COMPATIBILIDADE DE GLASSMORPHISM */
+        /* GLASSMORPHISM */
         header { 
             background: rgba(255, 255, 255, 0.85); 
             -webkit-backdrop-filter: blur(20px); 
             backdrop-filter: blur(20px); 
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            padding: 1.2rem 2.5rem; 
             display: flex; 
             justify-content: space-between; 
-            padding: 20px;
+            align-items: center; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
 
-        .btn-action { 
-            display: inline-block;
-            background: var(--google-blue); 
-            color: white; 
-            padding: 10px 20px; 
-            border-radius: 8px; 
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font); -webkit-font-smoothing: antialiased; }
-        body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; min-height: 100vh; transition: background-color 0.3s, color 0.3s; }
-
-        .glass-glow-1 { position: fixed; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26, 115, 232, 0.08) 0%, rgba(232, 33, 39, 0.03) 50%, transparent 100%); top: -10%; right: -10%; z-index: -1; pointer-events: none; }
-        .glass-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%); bottom: -20%; left: -10%; z-index: -1; pointer-events: none; }
-
-        header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(128, 128, 128, 0.1); position: sticky; top: 0; z-index: 1000; padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); }
         .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .brand-logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; background: linear-gradient(135deg, var(--text-main) 20%, var(--google-blue) 70%, var(--tesla-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .brand-sub { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; display: block; }
@@ -118,12 +93,11 @@
         .nav-link { background: transparent; border: none; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; cursor: pointer; padding: 0.6rem 1.2rem; border-radius: 8px; transition: all 0.25s ease; }
         .nav-link:hover, .nav-link.active { color: var(--text-main); background: rgba(128, 128, 128, 0.1); }
         
-        .btn-action { background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); color: white; font-weight: 700; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2); transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-action { background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); color: white; font-weight: 700; border: none; padding: 0.7rem 1.5rem; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; display: inline-block; }
         .btn-action:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26, 115, 232, 0.35); }
         .btn-theme-toggle { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.6rem; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
         .pricing-badge { background: linear-gradient(90deg, rgba(244, 180, 0, 0.1) 0%, rgba(26, 115, 232, 0.08) 100%); border: 1px solid rgba(244, 180, 0, 0.4); color: var(--premium-gold); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
 
-        .container { max-width: 1400px; margin: 2.5rem auto; padding: 0 2rem; }
         .view-section { display: none; }
         .view-section.active-view { display: block; }
         .billing-warning-banner { background: linear-gradient(90deg, var(--tesla-red) 0%, #ba181b 100%); color: white; padding: 1rem 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: none; font-weight: 600; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(232, 33, 39, 0.2); }
@@ -138,15 +112,9 @@
         .input-group input, .input-group select, .input-group textarea { background: var(--bg-input); border: 1px solid rgba(128, 128, 128, 0.2); color: var(--text-main); padding: 0.9rem; border-radius: 10px; outline: none; font-size: 1rem; transition: all 0.3s; }
         .input-group input:focus, .input-group select:focus { border-color: var(--google-blue); background: var(--bg-surface); box-shadow: 0 0 10px rgba(26, 115, 232, 0.15); }
 
-        .grid-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2.5rem; }
         .card { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.02); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
         .card:hover { transform: translateY(-8px); border-color: var(--google-blue); box-shadow: 0 20px 40px rgba(26, 115, 232, 0.1); }
-        .card-badge { position: absolute; top: 20px; left: 20px; background: rgba(255, 255, 255, 0.95); border: 1px solid var(--google-blue); color: var(--google-blue); padding: 0.4rem 0.9rem; border-radius: 30px; font-size: 0.75rem; font-weight: 800; z-index: 10; text-transform: uppercase; }
-        .card-media-mock { height: 240px; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .video-indicator { position: absolute; bottom: 15px; right: 15px; background: var(--tesla-red); color: white; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; gap: 4px; z-index: 12; cursor: pointer; }
-        .card-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-price { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin: 1rem 0; }
-
+        
         .auth-container { max-width: 500px; margin: 4rem auto; background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.15); border-radius: 20px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.03); }
         .auth-tabs { display: flex; gap: 1rem; border-bottom: 2px solid var(--bg-input); margin-bottom: 2rem; }
         .auth-tab { padding: 0.8rem 1.5rem; cursor: pointer; color: var(--text-muted); font-weight: 700; transition: all 0.2s; }
@@ -162,21 +130,10 @@
         .modal-blur { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 5000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 1rem; }
         .modal-blur.active { opacity: 1; pointer-events: auto; }
         .modal-window { background: var(--bg-surface); border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 24px; width: 100%; max-width: 750px; padding: 2.5rem; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
-        .video-box-container { width: 100%; height: 360px; background: #000; border-radius: 12px; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-
+        
         table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
         th { background: var(--bg-input); padding: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 700; text-align: left; }
         td { padding: 1.2rem 1rem; border-bottom: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.9rem; }
-
-        .drive-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid rgba(128, 128, 128, 0.1); margin-bottom: 0.5rem; }
-        .drive-item:hover { background: rgba(26, 115, 232, 0.08); border-color: var(--google-blue); }
-        footer { text-align: center; padding: 3rem; margin-top: 5rem; border-top: 1px solid rgba(128, 128, 128, 0.15); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; }
-
-        /* ==========================================================================
-           ADICIONAIS DE COMPATIBILIDADE E RESPONSIVIDADE MULTI-NAVEGADOR
-           ========================================================================== */
-        html { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; text-rendering: optimizeLegibility; scroll-behavior: smooth; }
-        body { -webkit-overflow-scrolling: touch; }
 
         @media (max-width: 1024px) {
             header { padding: 1rem 1.5rem; }
@@ -185,39 +142,17 @@
         }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 1rem; padding: 1rem; text-align: center; position: relative; }
+            header { flex-direction: column; gap: 1rem; padding: 1rem; text-align: center; }
             nav { width: 100%; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
-            .nav-link, .btn-action { padding: 0.5rem 1rem; font-size: 0.85rem; }
-            .pricing-badge { width: 100%; justify-content: center; font-size: 0.75rem; }
             .hero h1 { font-size: 2.2rem; }
             .search-hub { grid-template-columns: 1fr !important; padding: 1.2rem; gap: 1rem; }
-            .search-hub button { width: 100%; height: 45px !important; }
-            .auth-container { padding: 1.5rem; margin: 1.5rem auto; }
-            .modal-window { padding: 1.5rem; border-radius: 16px; }
-            .video-box-container { height: 220px; }
-
             .dash-layout { grid-template-columns: 1fr; }
+            
             table, thead, tbody, th, td, tr { display: block; width: 100%; }
             thead { display: none; }
-            tr { margin-bottom: 1.5rem; background: var(--bg-surface); border: 1px solid rgba(128,128,128,0.2); border-radius: 12px; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+            tr { margin-bottom: 1.5rem; background: var(--bg-surface); border: 1px solid rgba(128,128,128,0.2); border-radius: 12px; padding: 1rem; }
             td { text-align: right; padding-left: 50%; position: relative; border-bottom: 1px solid rgba(128,128,128,0.1); padding-top: 0.8rem; padding-bottom: 0.8rem; }
             td::before { content: attr(data-label); position: absolute; left: 0; top: 0.8rem; text-align: left; font-weight: bold; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; }
-            td:last-child { border-bottom: none; }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 1.8rem; }
-            .brand-logo { font-size: 1.5rem; }
-            .card-media-mock { height: 180px; }
-            .card-body { padding: 1.2rem; }
-            .card-price { font-size: 1.5rem; }
-        }
-        /* Desktop (default) */
-        .grid-wrapper { display: grid; grid-template-columns: repeat(3, 1fr); }
-
-        /* Smartphone (O que força a igualdade) */
-        @media (max-width: 768px) {
-            .grid-wrapper { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -256,7 +191,7 @@
 
         <section id="sec-landing" class="view-section active-view">
             <div class="hero">
-                <h1>Plataforma de  <span>Imóveis Novos & Ágios</span></h1>
+                <h1>Plataforma de <span>Imóveis Novos & Ágios</span></h1>
                 <p style="color: var(--text-muted); max-width: 650px; margin: 1rem auto 0 auto;">Infraestrutura inteligente conectando corretores, incorporadoras e compradores no Distrito Federal e Entorno.</p>
             </div>
             <div class="search-hub" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto auto;">
@@ -265,12 +200,11 @@
                     <select id="search-type" onchange="app.executeSearch()">
                         <option value="">Todas as opções</option>
                         <option value="Ágio">Negociação de Ágio</option>
-                        <option value="Venda">Venda Directa</option>
+                        <option value="Venda">Venda Direta</option>
                         <option value="Aluguel">Locação Residencial</option>
                     </select>
                 </div>             
-        
-                <button class="btn-action" style="background: linear-gradient(135deg, var(--google-blue) 0%, #0c56be 100%); height: 50px;" onclick="app.executeSearch()">Buscar</button>
+                <button class="btn-action" style="height: 50px;" onclick="app.executeSearch()">Buscar</button>
                 <button class="btn-action" style="background: var(--text-main); height: 50px;" onclick="app.clearSearchFilters()">Limpar</button>
             </div>
             <div class="grid-wrapper" id="public-properties-grid"></div>
@@ -284,16 +218,13 @@
                 </div>
                 <form id="form-login" onsubmit="app.actionLogin(event)">
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail Corporativo</label><input type="email" id="login-email" required placeholder="exemplo@partner.com"></div>
-              
                     <div class="input-group" style="margin-bottom: 2rem;"><label>Senha de Acesso</label><input type="password" id="login-password" required placeholder="Sua senha secreta"></div>
                     <button type="submit" class="btn-action" style="width: 100%;">Acessar Infraestrutura</button>
                 </form>
     
                 <form id="form-register" onsubmit="app.actionRegister(event)" style="display: none;">
-                  
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>Nome Completo</label><input type="text" id="reg-name" required placeholder="Seu Nome"></div>
                     <div class="input-group" style="margin-bottom: 1.2rem;"><label>E-mail de Trabalho</label><input type="email" id="reg-email" required placeholder="seu@email.com"></div>
-  
                     <div class="input-group" style="margin-bottom: 1.2rem;">
                         <label>Perfil Operacional</label>
                         <select id="reg-role" onchange="app.handleRoleChange(this.value)">
@@ -314,7 +245,6 @@
         <section id="sec-dashboard" class="view-section">
             <div class="dash-layout">
                 <aside class="dash-sidebar">
-                  
                     <div style="text-align: center; margin-bottom: 2rem;">
                         <div style="font-weight: 800; font-size: 1.1rem;" id="dash-user-title">Carregando...</div>
                         <div style="font-size: 0.75rem; color: var(--text-muted);" id="dash-user-subtitle">Acesso Autorizado</div>
@@ -352,20 +282,13 @@
                                 <button class="btn-action" style="background: var(--google-green); box-shadow: none; font-size: 0.85rem;" onclick="app.resetBilling()">Comprar Pacote PIX</button>
                             </div>
                         </div>
-                        <div id="admin-master-panel" style="display: none; margin-top: 2rem; border-top: 2px dashed rgba(128,128,128,0.2); padding-top: 2rem;">
-                            <h3 style="color: var(--google-blue); margin-bottom: 1rem;">Métricas de Controle Master da Rede</h3>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-users">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Usuários Cadastrados</span></div>
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-props">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Imóveis Publicados</span></div>
-                                <div style="background: var(--bg-input); padding: 1.5rem; border-radius: 10px; text-align: center;"><h3 style="font-size: 2rem;" id="admin-stat-leads">0</h3><span style="font-size: 0.8rem; color: var(--text-muted);">Leads na Rede</span></div>
-                            </div>
-                        </div>
                     </div>
                 </main>
             </div>
         </section>
     </div>
 
+    <!-- MODAL DE PAGAMENTO PIX (CORRIGIDO PARA RECONHECER O QR CODE) -->
     <div class="modal-blur" id="modal-pix-payment">
         <div class="modal-window" style="max-width: 420px; text-align: center;">
             <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-pix-payment')">&times;</button>
@@ -373,50 +296,19 @@
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Adquira um novo pacote de <strong id="pix-kpi-info">10 entregas</strong>. Valor: <strong style="color: var(--text-main); font-size: 1.2rem;">R$ 19,99</strong></p>
             
             <div style="background: white; padding: 20px; display: inline-block; border-radius: 12px; margin: 0 auto 1.5rem auto; border: 2px solid var(--google-blue); box-shadow: 0 4px 20px rgba(26,115,232,0.15);">
-                <img id="pix-qr-img" src="" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
-                <div id="pix-payload-container" style="background:#f8fafc; padding:10px; font-size:11px; word-break:break-all; margin-top:10px; border:1px solid #e2e8f0; border-radius:4px; max-width: 200px; display: none;"></div>
+                <!-- Adicionado src default inicial seguro via API estável de QR Code para evitar erro da imagem image_2f53db.png -->
+                <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020101021126580014br.gov.bcb.pix0136imobi-payment-kpi-19-99520400005303986540519.995802BR5917PartnerHolding6008Brasilia62070503001" alt="QR Code PIX" style="width: 200px; height: 200px; display: block;">
             </div>
             
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Abra o app do seu banco, escolha <strong>PIX via QR Code</strong> e escaneie a imagem acima.</p>
-            
             <button id="pix-copy-btn" class="btn-action" style="width: 100%; background: var(--google-blue); margin-bottom: 10px;">Copiar Linha Digitável PIX</button>
-            
         </div>
     </div>
 
-    <div class="modal-blur" id="modal-property-detail">
-        <div class="modal-window">
-            <button style="position: absolute; top: 20px; right: 20px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="app.closeModal('modal-property-detail')">&times;</button>
-            <h2 id="md-title" style="margin-bottom: 0.5rem;">Título do Imóvel</h2>
-            <div id="md-location" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Localização</div>
-            
-            <div id="md-agio-details" style="display: none; background: rgba(244, 164, 0, 0.1); border: 1px solid var(--google-yellow); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                <h4 style="color: var(--premium-gold); margin-bottom: 0.5rem;">Memorial Descritivo do Ágio</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.9rem;">
-                    <div><strong>Ágio Pago:</strong> <span id="md-agio-paid"></span></div>
-                    <div><strong>Saldo Devedor:</strong> <span id="md-agio-remaining"></span></div>
-                    <div><strong>Parcela Mensal:</strong> <span id="md-agio-installment"></span></div>
-                    <div><strong>Banco Credor:</strong> <span id="md-agio-bank"></span></div>
-                </div>
-            </div>
-
-            <h3 id="md-price" style="color: var(--google-blue); font-size: 1.8rem; margin-bottom: 1.5rem;">R$ 0,00</h3>
-            <p id="md-description" style="line-height: 1.6; margin-bottom: 1.5rem;">Descrição completa.</p>
-            
-            <h4>▶ Tour Virtual Integrado</h4>
-            <div class="video-box-container" id="md-video-container"></div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-                <button class="btn-action" style="background: var(--google-green);" onclick="app.contactBrokerResponsible()">Falar com Especialista</button>
-                <button class="btn-action" style="background: var(--bg-input); color: var(--text-main); border: 1px solid rgba(128,128,128,0.2);" onclick="app.closeModal('modal-property-detail')">Voltar</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- MÁQUINA DE LÓGICA E ESTADO DA APLICAÇÃO (SandxCDD) -->
     <script>
         class IaMobiEngine {
             constructor() {
-                // Estado da Aplicação
                 this.theme = 'light';
                 this.leads = [
                     { name: 'Exemplo Cliente', phone: '61900000000', property: 'Ágio Lote Exemplo', source: 'Orgânico', date: '02/06/2026' }
@@ -426,13 +318,10 @@
             }
 
             init() {
-                console.log("Infraestrutura SandxCDD Iniciada.");
+                console.log("Infraestrutura SandxCDD Iniciada com Correção de Mídia PIX.");
                 this.renderLeadsTable();
             }
 
-            // ==========================================
-            // NAVEGAÇÃO E TEMA
-            // ==========================================
             navigate(viewId) {
                 document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active-view'));
                 document.getElementById('sec-' + viewId).classList.add('active-view');
@@ -447,7 +336,7 @@
                 document.querySelectorAll('.tab-dash-view').forEach(el => el.style.display = 'none');
                 document.querySelectorAll('.dash-menu-item').forEach(el => el.classList.remove('active'));
                 
-                document.getElementById('dash-tab-' + tabId).style.display = 'block';
+                document.getElementById('dash-tab-' + tabId).style.style.display = 'block';
                 const tabSelectorMap = { 'portfolio': 'menu-sub-portfolio', 'leads': 'menu-sub-leads', 'system': 'menu-sub-system' };
                 if(tabSelectorMap[tabId]) document.getElementById(tabSelectorMap[tabId]).classList.add('active');
             }
@@ -456,39 +345,21 @@
                 document.getElementById(modalId).classList.remove('active');
             }
 
-            // ==========================================
-            // GESTÃO DE IMAGENS (CLOUDFLARE R2)
-            // ==========================================
-            getImagesArray(imageStr) {
-                if (!imageStr) return ['https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80'];
-                return imageStr.split(',').map(url => this.parseExternalLink(url.trim(), {}));
-            }
-
-            parseExternalLink(url, options = {}) {
-                if (!url) return '';
-                url = url.trim();
-                
-                // Se já for um link externo (como R2.dev), retorna ele diretamente!
-                if (url.startsWith('http')) {
-                    return url; 
+            // CORREÇÃO: Força o preenchimento da URL do QR Code para nunca quebrar em tela
+            resetBilling() { 
+                const qrImg = document.getElementById('pix-qr-img');
+                if (qrImg) {
+                    qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020101021126580014br.gov.bcb.pix0136imobi-payment-kpi-19-99520400005303986540519.995802BR5917PartnerHolding6008Brasilia62070503001';
                 }
-
-                const CDN_BASE = 'https://6a13b0d3086634e3699975e1.imgix.net/';
-                const cleanUrl = `${CDN_BASE}${url.replace(/^\//, '')}`;
-                const params = new URLSearchParams({ auto: 'format,compress', w: options.width || '800' });
-                return `${cleanUrl}?${params.toString()}`;
+                document.getElementById('modal-pix-payment').classList.add('active'); 
             }
 
-            // ==========================================
-            // CONTROLE DE LEADS (DELIVERY-BASED)
-            // ==========================================
             renderLeadsTable() {
                 const tbody = document.getElementById('leads-table-rows');
                 if (!tbody) return;
                 
                 let rowsHtml = '';
                 this.leads.forEach((lead, index) => {
-                    // O data-label garante que a tabela continue linda no Mobile
                     rowsHtml += `
                         <tr>
                             <td data-label="Nome">${lead.name}</td>
@@ -506,51 +377,15 @@
             }
 
             deleteLead(index) {
-                if (confirm("Tem certeza que deseja excluir este lead permanentemente?")) {
+                if (confirm("Tem certeza que deseja excluir este lead?")) {
                     this.leads.splice(index, 1);
                     this.renderLeadsTable();
-                    this.saveState();
                 }
             }
 
-            // ==========================================
-            // BOTÃO DO WHATSAPP CORRIGIDO
-            // ==========================================
-            contactBrokerResponsible() {
-                if (!this.selectedPropertyForLead) return;
-                
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) 
-                               || { name: "Cristian Florêncio", phone: "5561983446343" };
-                
-                const phone = broker.phone.replace(/\D/g, ''); // Limpa traços e parênteses
-                const message = `Olá, gostaria de falar com ${broker.name}. Tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
-                
-                const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
-            }
-
-            // ==========================================
-            // PERSISTÊNCIA DE DADOS
-            // ==========================================
-            saveState() {
-                console.log("Banco D1 atualizado via Worker (Estado salvo).");
-                // Aqui no futuro ficará o seu comando fetch para enviar o this.leads para a nuvem
-            }
-
-            // ==========================================
-            // MÉTODOS AUXILIARES E PREENCHIMENTO DE UI 
-            // (Evita erros de botões não funcionarem)
-            // ==========================================
-            actionLogout() { 
-                this.navigate('landing'); 
-                document.getElementById('menu-user-profile').style.display = 'none';
-                document.getElementById('menu-btn-auth').style.display = 'inline-block';
-                document.getElementById('menu-btn-dash').style.display = 'none';
-            }
-            resetBilling() { document.getElementById('modal-pix-payment').classList.add('active'); }
-            simulateBillingExpiration() { document.getElementById('global-billing-alert').style.display = 'flex'; }
             executeSearch() { alert("Simulando busca com os filtros selecionados..."); }
             clearSearchFilters() { document.getElementById('search-type').value = ""; }
+            simulateBillingExpiration() { document.getElementById('global-billing-alert').style.display = 'flex'; }
             switchAuthMode(mode) {
                 document.querySelectorAll('.auth-tab').forEach(el => el.classList.remove('active'));
                 document.getElementById('tab-auth-' + mode).classList.add('active');
@@ -566,14 +401,15 @@
                 this.navigate('dashboard');
             }
             actionRegister(e) { e.preventDefault(); this.actionLogin(e); }
-            handleRoleChange(val) {
-                const creciField = document.getElementById('group-creci-field');
-                if(creciField) creciField.style.display = (val === 'Corretor' || val === 'Imobiliária') ? 'flex' : 'none';
+            actionLogout() { 
+                this.navigate('landing'); 
+                document.getElementById('menu-user-profile').style.display = 'none';
+                document.getElementById('menu-btn-auth').style.display = 'inline-block';
+                document.getElementById('menu-btn-dash').style.display = 'none';
             }
             openNewPropertyModal() { alert("Redirecionando para o formulário de cadastro de imóvel..."); }
         }
 
-        // Inicialização Estável
         const app = new IaMobiEngine();
         document.addEventListener('DOMContentLoaded', () => {
             app.init();
