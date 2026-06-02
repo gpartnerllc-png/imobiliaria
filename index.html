@@ -569,47 +569,50 @@
                 return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
             }
 
+// Dentro da sua classe, certifique-se de que a estrutura esteja assim:
+
 init() {
-                this.applySavedTheme();
-                this.catchUrlDeepLink();
-                this.initAutoCarousel();
-                this.checkBillingStatusUI();
+    this.applySavedTheme();
+    this.catchUrlDeepLink();
+    this.initAutoCarousel();
+    this.checkBillingStatusUI();
 
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').on('value', (snapshot) => {
-                        const data = snapshot.val() || {};
-                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
-                        this.properties = data.properties || [];
-                        this.leads = data.leads || [];
-                        this.refreshAllScreens();
-                    });
-                } else {
-                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian", email: "admin@partner.com", password: "123", role: "Admin", entregasRealizadas: 0 }];
-                    this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
-                    this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
-                    this.refreshAllScreens();
-                }
-            }
+    const endpoint = 'https://api-imobi.contatodroppfy.workers.dev/api/data';
 
-            refreshAllScreens() {
-                this.updateAuthHeader();
-                this.renderPublicGrid();
-                if (this.currentUser) this.renderDashboard();
-            }
+    if (this.useCloud) {
+        fetch(endpoint)
+            .then(res => res.json())
+            .then(data => {
+                this.users = data.users || [];
+                this.properties = data.properties || [];
+                this.leads = data.leads || [];
+                this.refreshAllScreens();
+            })
+            .catch(err => console.error("Erro na nuvem:", err));
+    } else {
+        this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [];
+        this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
+        this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
+        this.refreshAllScreens();
+    }
+}
 
-            saveState() {
-                localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
-                localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
+saveState() {
+    localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
+    localStorage.setItem('iamobi_billing_expired', JSON.stringify(this.billingInvoiceExpired));
 
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').set({ users: this.users, properties: this.properties, leads: this.leads });
-                } else {
-                    localStorage.setItem('iamobi_users', JSON.stringify(this.users));
-                    localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
-                    localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
-                }
-            }
-           
+    if (this.useCloud) {
+        fetch('https://api-imobi.contatodroppfy.workers.dev/api/data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ users: this.users, properties: this.properties, leads: this.leads })
+        }).catch(err => console.error("Erro ao salvar nuvem:", err));
+    } else {
+        localStorage.setItem('iamobi_users', JSON.stringify(this.users));
+        localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
+        localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
+    }
+}
             parseExternalLink(url, options = {}) {
     if (!url) return '';
     url = url.trim();
