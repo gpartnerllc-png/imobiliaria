@@ -730,11 +730,24 @@
             }
 
             contactBrokerResponsible() {
-                if (!this.selectedPropertyForLead) return;
-                const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || { name: "Especialista Partner", phone: "5561983446343" };
-                alert(`Conectando ao especialista do imóvel: ${broker.name}`);
-                window.open(`https://wa.me/5561983446343${encodeURIComponent(this.selectedPropertyForLead.title)}.`, '_blank');
-            }
+    if (!this.selectedPropertyForLead) return;
+
+    // 1. Busca o corretor. Se não achar, usa o padrão.
+    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) 
+                   || { name: "Especialista Partner", phone: "5561983446343" };
+
+    // 2. Limpa o telefone (remove caracteres não numéricos para evitar erro no wa.me)
+    const phone = broker.phone.replace(/\D/g, '');
+
+    // 3. Monta a mensagem formatada
+    const message = `Olá, tenho interesse no imóvel: ${this.selectedPropertyForLead.title}`;
+    
+    // 4. Constrói a URL corretamente com o parâmetro 'text'
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    console.log(`Conectando ao especialista: ${broker.name} via ${phone}`);
+    window.open(url, '_blank');
+}
 
             renderPublicGrid(filteredData = null) {
                 const grid = document.getElementById('public-properties-grid');
