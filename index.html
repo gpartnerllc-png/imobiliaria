@@ -733,7 +733,7 @@
     if (!this.selectedPropertyForLead) return;
 
     // 1. Busca o broker ou define o padrão
-    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author) || 
+    const broker = this.users.find(u => u.email === this.selectedPropertyForLead.author)
                    { name: "Especialista Partner", phone: "5561983446343" };
 
     // 2. Limpa o telefone: remove qualquer caractere que não seja número (importante para evitar erros)
