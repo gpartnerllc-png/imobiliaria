@@ -14,16 +14,16 @@
     }
     </script>
 
-    
     <style>
         /* RESET ABSOLUTO E UNIFICAÇÃO CROSS-BROWSER */
         * { 
             margin: 0; padding: 0; 
-            box-sizing: border-box !important; 
+            box-sizing: border-box !important;
             -webkit-tap-highlight-color: transparent; 
         }
         html, body { 
-            width: 100%; height: 100%; 
+            width: 100%;
+            height: 100%; 
             overflow-x: hidden; 
             position: relative;
             -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;
@@ -52,13 +52,15 @@
         }
 
         html[data-theme="dark"] {
-            --bg-base: #060913; --bg-surface: #0c1220; --bg-card: #121b2d;
+            --bg-base: #060913;
+            --bg-surface: #0c1220; --bg-card: #121b2d;
             --bg-input: #18253f; --text-main: #f5f7fa; --text-muted: #8a99ad;
             --border-glow: rgba(0, 240, 255, 0.15); --premium-gold: #ffd700;
         }
 
         body { 
-            background-color: var(--bg-base); color: var(--text-main); font-family: var(--font);
+            background-color: var(--bg-base);
+            color: var(--text-main); font-family: var(--font);
             transition: background-color 0.3s, color 0.3s; min-height: 100vh;
         }
 
@@ -67,7 +69,8 @@
         .glass-glow-2 { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(15, 157, 88, 0.06) 0%, rgba(244, 180, 0, 0.03) 60%, transparent 100%); bottom: -20%; left: -10%; z-index: -1; pointer-events: none; }
 
         header.main-header { 
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(128, 128, 128, 0.1); position: sticky; top: 0; z-index: 1000;
             padding: 1.2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
@@ -126,7 +129,7 @@
         .saas-dashboard-wrapper {
             display: flex;
             width: 100%;
-            min-height: calc(100vh - 80px); /* Ajusta com o header principal */
+            min-height: calc(100vh - 80px);
             position: relative;
         }
 
@@ -139,7 +142,6 @@
             display: flex;
             flex-direction: column;
             flex-shrink: 0;
-            /* Comportamento sticky para não sumir no desktop */
             position: sticky;
             top: 80px;
             height: calc(100vh - 80px);
@@ -156,7 +158,7 @@
             display: flex;
             flex-direction: column;
             background-color: var(--bg-base);
-            min-width: 0; /* Previne estouro de flexbox */
+            min-width: 0;
         }
 
         /* Painel Master Topo Direito Fixo */
@@ -487,7 +489,7 @@
                         <label>Fotos (Links por vírgula)</label>
                         <div style="display: flex; gap: 8px;">
                             <input type="text" id="p-image" style="flex-grow: 1;">
-                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-input); color: var(--google-blue); border: 1px solid rgba(128,128,128,0.2); box-shadow: none; font-size: 0.85rem;">☁️ Drive</button>
+                            <button type="button" class="btn-action" onclick="app.openDrivePicker('p-image')" style="background: var(--bg-input); color: var(--google-blue); border: 1px solid rgba(128,128,128,0.2); box-shadow: none; font-size: 0.85rem;">☁️ R2 Links</button>
                             <button type="button" class="btn-action" onclick="document.getElementById('p-image-file').click()" style="background: var(--bg-surface); color: var(--google-green); border: 1px solid var(--google-green); box-shadow: none; font-size: 0.85rem;">📂 PC</button>
                             <input type="file" id="p-image-file" multiple accept="image/*" style="display: none;" onchange="app.handleLocalImages(this)">
                         </div>
@@ -547,24 +549,49 @@
                 this.activeDriveTargetInputId = null;
                 this.carouselIndices = {};
 
-                this.useCloud = typeof firebase !== 'undefined' && firebase.apps.length > 0;
+                // Integração Definitiva: Cloudflare R2 + Imgix
+                this.CLOUD_R2_URL = "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/imoveis.json";
+                this.IMGIX_DOMAIN = "https://6a13b0d3086634e3699975e1.imgix.net";
 
-                if (this.useCloud) {
-                    this.db = firebase.database();
-                    this.db.ref('iamobi_data').on('value', (snapshot) => {
-                        const data = snapshot.val() || {};
-                        this.users = data.users || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0, isBlocked: false }];
-                        this.properties = data.properties || [];
-                        this.leads = data.leads || [];
-                        this.executeInitPipeline();
-                    });
-                } else {
-                    this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0, isBlocked: false }];
-                    this.properties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
-                    this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
-                    if (!localStorage.getItem('iamobi_users')) localStorage.setItem('iamobi_users', JSON.stringify(this.users));
-                    setTimeout(() => { this.executeInitPipeline(); }, 100);
+                // Memória Master
+                this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "123", role: "Admin", entregasRealizadas: 0, isBlocked: false }];
+                this.leads = JSON.parse(localStorage.getItem('iamobi_leads')) || [];
+                this.properties = []; 
+                this.allProperties = [];
+
+                if (!localStorage.getItem('iamobi_users')) localStorage.setItem('iamobi_users', JSON.stringify(this.users));
+                
+                this.initCloud();
+            }
+
+            // [MOTOR CLOUD] Carrega os dados direto do seu R2 para TODOS os aparelhos
+            async initCloud() {
+                try {
+                    // O parâmetro 't' impede o cache antigo e puxa a lista nova
+                    const response = await fetch(this.CLOUD_R2_URL + '?t=' + Date.now());
+                    if(response.ok) {
+                        this.allProperties = await response.json();
+                    } else {
+                        // Caso você ainda não tenha subido o JSON no R2
+                        this.allProperties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
+                    }
+                } catch (e) {
+                    console.warn("Lendo localmente. Para aparecer para todos, suba o imoveis.json no painel do Cloudflare R2.");
+                    this.allProperties = JSON.parse(localStorage.getItem('iamobi_properties')) || [];
                 }
+                
+                this.properties = this.allProperties;
+                this.executeInitPipeline();
+            }
+
+            // [MOTOR CDN] Otimiza os links do Cloudflare com o Imgix para não pesar
+            getOptimizedImage(url) {
+                if (!url) return '';
+                if (url.includes('r2.dev')) {
+                    const path = url.split('r2.dev/')[1];
+                    return `${this.IMGIX_DOMAIN}/${path}?auto=format,compress&w=600&q=80`;
+                }
+                return url; // Retorna normal se já for do drive ou imgix
             }
 
             executeInitPipeline() {
@@ -573,16 +600,22 @@
                 this.catchUrlDeepLink();
             }
 
+            // Salva dados e gera o JSON automático para você subir no R2
             saveState() {
                 localStorage.setItem('iamobi_current_user', JSON.stringify(this.currentUser));
-                if (this.useCloud) {
-                    this.db.ref('iamobi_data').set({ users: this.users, properties: this.properties, leads: this.leads });
-                } else {
-                    localStorage.setItem('iamobi_users', JSON.stringify(this.users));
-                    localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
-                    localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
-                }
+                localStorage.setItem('iamobi_users', JSON.stringify(this.users));
+                localStorage.setItem('iamobi_properties', JSON.stringify(this.properties));
+                localStorage.setItem('iamobi_leads', JSON.stringify(this.leads));
                 this.refreshAllScreens();
+            }
+
+            // Gera o arquivo imoveis.json para o Cloudflare
+            downloadCloudflareDatabase() {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.properties, null, 2));
+                const dlAnchorElem = document.createElement('a');
+                dlAnchorElem.setAttribute("href", dataStr);
+                dlAnchorElem.setAttribute("download", "imoveis.json");
+                dlAnchorElem.click();
             }
 
             refreshAllScreens() {
@@ -592,7 +625,6 @@
                     this.checkBillingStatusUI();
                     this.renderDashboard();
                 }
-                // Atualiza métricas Master da Rede no Canto Superior Direito (SaaS Layout)
                 document.getElementById('master-realtime-users').innerText = this.users.length;
                 document.getElementById('master-realtime-ops').innerText = this.properties.length;
             }
@@ -659,7 +691,6 @@
                     const name = document.getElementById('reg-name').value.trim();
                     const phone = document.getElementById('reg-phone').value.trim();
                     if (this.users.some(x => x.email === email)) return alert("Este e-mail corporativo já consta na base central.");
-                    
                     const newUser = { name, phone, email, password: pass, role: "Corretor", entregasRealizadas: 0, isBlocked: false };
                     this.users.push(newUser);
                     this.currentUser = newUser;
@@ -677,12 +708,10 @@
 
             /* --- DASHBOARD: SAAS TABS E CRM --- */
             switchDashTab(targetTabId) {
-                // Alternância do Painel Independente (Oculta todos, mostra o alvo)
                 document.querySelectorAll('.app-tab-panel').forEach(panel => panel.classList.remove('active-view'));
                 const target = document.getElementById(targetTabId);
                 if (target) target.classList.add('active-view');
 
-                // Atualiza visual do Menu Lateral
                 document.querySelectorAll('.dash-menu-item').forEach(m => m.classList.remove('active'));
                 const menuTarget = document.getElementById('menu-' + targetTabId);
                 if (menuTarget) menuTarget.classList.add('active');
@@ -703,7 +732,6 @@
                 this.renderBrokerLeadsCRM();
             }
 
-            // GERAÇÃO DOS LEADS COM BOTÕES DO CRM
             renderBrokerLeadsCRM() {
                 const container = document.getElementById('crm-leads-container');
                 if (!container) return;
@@ -722,11 +750,9 @@
                     return;
                 }
 
-                // Renderiza os Cards de Lead do CRM
                 filteredLeads.forEach(lead => {
                     const cleanPhone = String(lead.phone).replace(/\D/g, '');
                     const isAgendado = lead.status === 'agendado';
-                    
                     const card = document.createElement('div');
                     card.style = `background: var(--bg-surface); padding: 18px; border-radius: 12px; border: 1px solid rgba(128,128,128,0.2); transition: box-shadow 0.2s;`;
                     card.innerHTML = `
@@ -748,7 +774,6 @@
                 });
             }
 
-            // Funções de Controle do CRM
             actionScheduleProposal(leadId) {
                 const idx = this.leads.findIndex(l => l.id === leadId);
                 if (idx !== -1) {
@@ -775,7 +800,7 @@
                 const data = (filteredData || this.properties).filter(p => validEmails.includes(p.author));
 
                 if (data.length === 0) {
-                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:3rem; font-weight:600;">Nenhum anúncio localizado na malha de servidores.</div>`;
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:3rem; font-weight:600;">Nenhum anúncio localizado na malha de servidores do R2.</div>`;
                     return;
                 }
 
@@ -787,12 +812,15 @@
                     
                     let carouselHtml = '';
                     if (images.length > 0) {
+                        // APLICA O MOTOR IMGIX AQUI
+                        const optimizedUrl = this.getOptimizedImage(images[activeIdx]);
+                        
                         carouselHtml = `
                             <div style="position:relative; height:240px; background:#e2e8f0; overflow:hidden;">
-                                <img src="${images[activeIdx]}" id="img-card-${p.id}" style="width:100%; height:100%; object-fit:cover;">
+                                <img src="${optimizedUrl}" id="img-card-${p.id}" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
                                 ${images.length > 1 ? `
-                                    <button onclick="event.stopPropagation(); app.prevCardImg('${p.id}', ${JSON.stringify(images)})" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; z-index:15; font-weight:bold;">‹</button>
-                                    <button onclick="event.stopPropagation(); app.nextCardImg('${p.id}', ${JSON.stringify(images)})" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; z-index:15; font-weight:bold;">›</button>
+                                    <button onclick="event.stopPropagation(); app.prevCardImg('${p.id}', ${JSON.stringify(images).replace(/"/g, '&quot;')})" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; z-index:15; font-weight:bold;">‹</button>
+                                    <button onclick="event.stopPropagation(); app.nextCardImg('${p.id}', ${JSON.stringify(images).replace(/"/g, '&quot;')})" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.6); color:white; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; z-index:15; font-weight:bold;">›</button>
                                 ` : ''}
                             </div>
                         `;
@@ -818,19 +846,19 @@
             prevCardImg(id, images) {
                 if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
                 this.carouselIndices[id] = (this.carouselIndices[id] - 1 + images.length) % images.length;
-                document.getElementById(`img-card-${id}`).src = images[this.carouselIndices[id]];
+                document.getElementById(`img-card-${id}`).src = this.getOptimizedImage(images[this.carouselIndices[id]]);
             }
 
             nextCardImg(id, images) {
                 if (!this.carouselIndices[id]) this.carouselIndices[id] = 0;
                 this.carouselIndices[id] = (this.carouselIndices[id] + 1) % images.length;
-                document.getElementById(`img-card-${id}`).src = images[this.carouselIndices[id]];
+                document.getElementById(`img-card-${id}`).src = this.getOptimizedImage(images[this.carouselIndices[id]]);
             }
 
             executeSearch() {
                 const type = document.getElementById('search-type').value;
                 const queryText = document.getElementById('search-location-query').value.toLowerCase().trim();
-                let filtered = this.properties;
+                let filtered = this.allProperties; // Aplica o filtro na base Cloud
                 if (type) filtered = filtered.filter(p => p.type === type);
                 if (queryText) filtered = filtered.filter(p => p.location.toLowerCase().includes(queryText) || p.title.toLowerCase().includes(queryText));
                 this.renderPublicGrid(filtered);
@@ -1000,7 +1028,6 @@
                     description: document.getElementById('p-description').value,
                     author: id ? this.properties.find(x => x.id === id).author : this.currentUser.email
                 };
-
                 if (type === 'Ágio') {
                     pObj.agioPaid = Number(document.getElementById('p-agio-paid').value || 0);
                     pObj.agioRemaining = Number(document.getElementById('p-agio-remaining').value || 0);
@@ -1027,13 +1054,18 @@
                 }
                 this.saveState();
                 this.closeModal('modal-property-form');
-                alert("Anúncio gravado e publicado na malha global de servidores!");
+                
+                // Exibe o alerta para automatizar o R2 e baixa o arquivo
+                alert("Anúncio Salvo! O arquivo 'imoveis.json' com as atualizações será baixado no seu computador. Jogue este arquivo no seu painel do Cloudflare R2 para atualizar o site para TODOS instantaneamente!");
+                this.downloadCloudflareDatabase();
             }
 
             actionDeleteProperty(id) {
                 if (confirm("Deseja excluir permanentemente este anúncio?")) {
                     this.properties = this.properties.filter(x => x.id !== id);
                     this.saveState();
+                    alert("Anúncio deletado. O novo arquivo 'imoveis.json' será baixado para você atualizar no R2.");
+                    this.downloadCloudflareDatabase();
                 }
             }
 
@@ -1112,7 +1144,8 @@
 
                 if (this.currentUser.role === 'Admin') {
                     if (lbl) { lbl.innerText = "Licença Master (Isento)"; lbl.style.color = "var(--google-blue)"; }
-                    if (banner) banner.style.display = 'none'; return;
+                    if (banner) banner.style.display = 'none';
+                    return;
                 }
 
                 if (this.currentUser.isBlocked || (this.currentUser.entregasRealizadas >= this.CONFIG_PIX.limiteEntregas)) {
@@ -1130,7 +1163,9 @@
                 this.activeDriveTargetInputId = targetInputId;
                 const c = document.getElementById('drive-files-container');
                 if (!c) return; c.innerHTML = '';
-                const mocks = [{ name: "📸 Fachada_Residencial.png", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png" }, { name: "📸 Interior_Decorado.png", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto2.png" }];
+                const mocks = [
+                    { name: "📸 Link Base", url: "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/foto1.png" }
+                ];
                 mocks.forEach(f => {
                     const item = document.createElement('div'); item.className = 'drive-item';
                     item.innerHTML = `<div><b>${f.name}</b><br><small style="color:var(--text-muted);">${f.url}</small></div>`;
