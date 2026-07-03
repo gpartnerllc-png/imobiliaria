@@ -908,7 +908,7 @@
 
                 // Integração Definitiva: Cloudflare R2 + Imgix
                 this.CLOUD_R2_URL = "https://pub-84193ad5106b49e69df6f4d2a13f04fe.r2.dev/imoveis.json";
-                this.IMGIX_DOMAIN = "https://6a13b0d3086634e3699975e1.imgix.net";
+               
 
                 // Memória Master
                 this.users = JSON.parse(localStorage.getItem('iamobi_users')) || [{ name: "Cristian Ribeiro", email: "cristian@partner.com", password: "787", role: "Admin", entregasRealizadas: 0, isBlocked: false }];
@@ -1474,7 +1474,7 @@
             }
 
             resetBilling() {
-                const payloadPix = `00020101021126580014br.gov.bcb.pix0136cristian@partner.imobi.com5204000053039865404${this.CONFIG_PIX.valorRenovacao.toFixed(2)}5802BR5916PartnerHolding6008Brasilia62070503***6304A1B2`;
+                const payloadPix = `00020101021126580014br.gov.bcb.pix0136342599988545204000053039865404${this.CONFIG_PIX.valorRenovacao.toFixed(2)}5802BR5916PartnerHolding6008Brasilia62070503***6304A1B2`;
                 document.getElementById('pix-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(payloadPix)}`;
                 const container = document.getElementById('pix-payload-container');
                 container.innerText = payloadPix;
@@ -1606,7 +1606,7 @@
 	<a
 		id="lovable-badge-cta" 
 		target="_blank" 
-		href="https://lovable.dev/projects/775f738c-4388-4d6f-8f53-207de625b2b4?utm_source=lovable-badge"
+		href="https://droppfy.com"
 		rel="noopener nofollow"
 		aria-label="Edit with Lovable">
 		<span id="lovable-badge-text">Edit with</span>
