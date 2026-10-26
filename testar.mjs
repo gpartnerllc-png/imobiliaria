@@ -197,6 +197,20 @@ const env = {
   },
   JWT_SECRET: 'segredo-de-teste',
   ASSETS: null,
+  INFINITEPAY_API_KEY: 'chave-de-teste-infinitepay',
+};
+
+// Mock do gateway InfinitePay
+const fetchOriginal = globalThis.fetch;
+globalThis.fetch = async (url, opts = {}) => {
+  const u = String(url);
+  if (u.includes('api.checkout.infinitepay.io/links')) {
+    return new Response(JSON.stringify({ id: 'lnk_teste', slug: 'slug-teste', url: 'https://checkout.infinitepay.io/l/slug-teste' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  }
+  if (u.includes('api.checkout.infinitepay.io/payment_check')) {
+    return new Response(JSON.stringify({ success: true, paid: true, paid_amount: 4990 }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  }
+  return fetchOriginal(url, opts);
 };
 
 function req(url, { method = 'GET', body, token } = {}) {
@@ -265,6 +279,21 @@ ok('ativar premium (demo) ok', demo.status === 200);
 const fatura = await worker.fetch(req('/api/me/fatura', { token: logJson.token }), env);
 const fatJson = await fatura.json();
 ok('fatura mostra premium ativo', fatJson.tenant?.plano === 'premium' && fatJson.pagamentos?.length === 1);
+
+const ipay = await worker.fetch(req('/api/pagamentos/infinitepay', { method: 'POST', token: logJson.token, body: { plano: 'profissional' } }), env);
+const ipayJson = await ipay.json();
+ok('infinitepay cria checkout 201 + url', ipay.status === 201 && !!ipayJson.url && !!ipayJson.order_nsu);
+
+const whDesconhecido = await worker.fetch(req('/api/webhooks/infinitepay', { method: 'POST', body: { order_nsu: 'nao-existe' } }), env);
+ok('webhook infinitepay pedido desconhecido → 404', whDesconhecido.status === 404);
+
+const wh = await worker.fetch(req('/api/webhooks/infinitepay', { method: 'POST', body: { order_nsu: ipayJson.order_nsu, transaction_nsu: 'tx-teste', invoice_slug: 'slug-teste' } }), env);
+const whJson = await wh.json();
+ok('webhook infinitepay confirma e ativa plano', wh.status === 200 && whJson.ativado === true);
+
+const fat2 = await worker.fetch(req('/api/me/fatura', { token: logJson.token }), env);
+const fat2Json = await fat2.json();
+ok('fatura ativa plano profissional via infinitepay', fat2Json.tenant?.plano === 'profissional' && fat2Json.pagamentos?.length === 2);
 
 console.log(passos.join('\n'));
 const falhas = passos.filter(p => p.startsWith('✗')).length;

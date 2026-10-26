@@ -1461,21 +1461,19 @@ class ImobiApp {
     if (!this.token) { this.abrirAuth('login'); return; }
     this.abrirModal('modal-pix');
     document.getElementById('pix-titulo').innerText = 'Assinar plano ' + plano;
-    document.getElementById('pix-corpo').innerHTML = '<div class="carregando"><div class="spinner"></div> Gerando cobrança PIX…</div>';
-    this.chamarApi('/api/pagamentos/pix', { method: 'POST', body: JSON.stringify({ plano }) })
+    document.getElementById('pix-corpo').innerHTML = '<div class="carregando"><div class="spinner"></div> Gerando link de pagamento…</div>';
+    this.chamarApi('/api/pagamentos/infinitepay', { method: 'POST', body: JSON.stringify({ plano }) })
       .then(d => {
         if (d.demo) {
           document.getElementById('pix-corpo').innerHTML = `
-            <div class="msg-info">O gateway de pagamento (Asaas) ainda não está conectado. Você pode ativar o plano agora em <b>modo demonstração</b> — a cobrança real entra em vigor assim que a chave for configurada.</div>
+            <div class="msg-info">O gateway de pagamento (InfinitePay) ainda não está conectado. Você pode ativar o plano agora em <b>modo demonstração</b> — a cobrança real entra em vigor assim que a chave for configurada.</div>
             <button class="btn-ouro" style="width:100%;" onclick="app.confirmarDemo('${plano}')">Ativar agora (demonstração)</button>`;
-        } else if (d.pix) {
-          const copia = d.pix.copiaECola || '';
+        } else if (d.url) {
           document.getElementById('pix-corpo').innerHTML = `
-            ${d.pix.imagem ? `<div style="text-align:center;"><img src="data:image/png;base64,${d.pix.imagem}" style="width:190px;height:190px;" alt="QR Code PIX"></div>` : ''}
-            <div class="pix-copia">${this.escapar(copia)}</div>
-            <button class="btn-luxo" style="width:100%;margin-bottom:.6rem;" onclick="app.copiarPix()">Copiar código PIX</button>
-            <button class="btn-fantasma" style="width:100%;" onclick="app.verificarPagamento()">Já paguei — verificar</button>`;
-          window._pixCopia = copia;
+            <div class="msg-info">Escaneie o <b>QR code</b> ou pague com cartão no link seguro do InfinitePay. Assim que o pagamento for confirmado, seu plano é ativado <b>automaticamente</b>.</div>
+            <button class="btn-ouro" style="width:100%;margin-bottom:.6rem;" onclick="window.open('${d.url}', '_blank')">Pagar com PIX (QR code) ou cartão</button>
+            <button class="btn-fantasma" style="width:100%;" onclick="app.verificarPagamento('${plano}')">Já paguei — verificar</button>`;
+          this.pollPagamento(plano);
         } else {
           document.getElementById('pix-corpo').innerHTML = '<div class="msg-erro">Não foi possível gerar a cobrança agora. Tente novamente em instantes.</div>';
         }
@@ -1483,6 +1481,23 @@ class ImobiApp {
       .catch(e => {
         document.getElementById('pix-corpo').innerHTML = `<div class="msg-erro">${this.escapar(e.message)}</div>`;
       });
+  }
+
+  pollPagamento(plano) {
+    clearInterval(this._pollPag);
+    this._pollPag = setInterval(async () => {
+      if (!document.getElementById('modal-pix').classList.contains('ativo')) { clearInterval(this._pollPag); return; }
+      try {
+        const d = await this.chamarApi('/api/me/fatura');
+        if (d.tenant && d.tenant.plano === plano && d.tenant.status_licenca === 'ativo') {
+          clearInterval(this._pollPag);
+          this.fecharModal('modal-pix');
+          this.toast('Pagamento confirmado! Plano ' + plano.toUpperCase() + ' ativado.', 'ok');
+          this.carregarFatura();
+          this.carregarDashboard();
+        }
+      } catch (e) {}
+    }, 5000);
   }
 
   copiarPix() {
@@ -1503,9 +1518,17 @@ class ImobiApp {
     } catch (e) { this.toast(e.message, 'erro'); }
   }
 
-  async verificarPagamento() {
-    this.toast('Verificando pagamento…', 'info');
-    await this.carregarFatura();
+  async verificarPagamento(plano) {
+    const d = await this.chamarApi('/api/me/fatura').catch(() => null);
+    if (d && d.tenant && d.tenant.plano === plano && d.tenant.status_licenca === 'ativo') {
+      clearInterval(this._pollPag);
+      this.fecharModal('modal-pix');
+      this.toast('Pagamento confirmado! Plano ' + plano.toUpperCase() + ' ativado.', 'ok');
+      this.carregarFatura();
+      this.carregarDashboard();
+    } else {
+      this.toast('Pagamento ainda não confirmado. Aguarde alguns segundos e verifique de novo.', 'info');
+    }
   }
 
   async carregarFatura() {

@@ -212,6 +212,10 @@ async function garantirSchema(env) {
   await alterar(`ALTER TABLE media ADD COLUMN ordem INTEGER NOT NULL DEFAULT 0`);
   await alterar(`ALTER TABLE leads ADD COLUMN status TEXT NOT NULL DEFAULT 'novo'`);
   await alterar(`ALTER TABLE leads ADD COLUMN observacao TEXT`);
+  await alterar(`ALTER TABLE pagamentos ADD COLUMN gateway TEXT`);
+  await alterar(`ALTER TABLE pagamentos ADD COLUMN order_nsu TEXT`);
+  await alterar(`ALTER TABLE pagamentos ADD COLUMN slug TEXT`);
+  await alterar(`ALTER TABLE pagamentos ADD COLUMN checkout_url TEXT`);
 
   // Planos padrão
   const contagem = await env.DB.prepare("SELECT COUNT(*) AS n FROM planos").first();
@@ -291,6 +295,66 @@ async function asaasCriarPix(env, tenant, userEmail, plano) {
     pix = { copiaECola: d.payload, imagem: d.encodedImage };
   }
   return { asaas_id: pagamento.id, pix };
+}
+
+// ---------- InfinitePay (checkout integrado: PIX com QR code + cartão) ----------
+const INFINITEPAY_API = "https://api.checkout.infinitepay.io";
+
+async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamentoId) {
+  const KEY = env.INFINITEPAY_API_KEY;
+  if (!KEY) return null;
+  const orderNsu = `imobi-pag-${pagamentoId}-${Date.now()}`;
+  const handle = `imobi-plano-${plano.nome}`;
+  const base = env.INFINITEPAY_WEBHOOK_BASE || "https://imobi-api.contatodroppfy.workers.dev";
+  const corpo = {
+    handle,
+    order_nsu: orderNsu,
+    webhook_url: `${base}/api/webhooks/infinitepay`,
+    redirect_url: `${base}/api/pagamentos/retorno?order_nsu=${encodeURIComponent(orderNsu)}`,
+    items: [{
+      quantity: 1,
+      price: Math.round(plano.preco * 100),
+      description: `IMOBI — Assinatura do plano ${plano.titulo} (30 dias)`,
+    }],
+    customer: {
+      name: tenant.nome_exibicao,
+      email: userEmail,
+      phone_number: (tenant.whatsapp || "").replace(/\D/g, ""),
+    },
+    options: {
+      single_payment: true,
+      require_delivery_address: false,
+      assured_installments: 0,
+      payment_methods_enabled: ["pix", "credit_card"],
+      discounts: { pix: 0, credit_card: 0 },
+      valid_until: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+    },
+  };
+  const resp = await fetch(`${INFINITEPAY_API}/links`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Api-Key": KEY },
+    body: JSON.stringify(corpo),
+  });
+  const texto = await resp.text();
+  let dados = null;
+  try { dados = JSON.parse(texto); } catch { dados = { bruto: texto }; }
+  if (!resp.ok) throw new Error(`InfinitePay respondeu ${resp.status}: ${texto.slice(0, 300)}`);
+  const raiz = dados.data && typeof dados.data === "object" ? dados.data : dados;
+  const url = dados.url || dados.checkout_url || dados.payment_url || dados.link || raiz.url || raiz.checkout_url || raiz.payment_url || null;
+  const slug = dados.slug || dados.invoice_slug || dados.id || raiz.slug || raiz.invoice_slug || raiz.id || null;
+  return { order_nsu: orderNsu, handle, slug, url };
+}
+
+async function infinitepayChecar(env, { handle, order_nsu, transaction_nsu, slug }) {
+  const KEY = env.INFINITEPAY_API_KEY;
+  if (!KEY) return null;
+  const resp = await fetch(`${INFINITEPAY_API}/payment_check`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Api-Key": KEY },
+    body: JSON.stringify({ handle, order_nsu, transaction_nsu: transaction_nsu || null, slug: slug || null }),
+  });
+  if (!resp.ok) return null;
+  return await resp.json().catch(() => null);
 }
 
 // ---------- Ativação de plano ----------
@@ -730,6 +794,83 @@ export default {
         ).bind(auth.tenant_id, plano.nome, plano.preco, asaas.asaas_id, asaas.pix ? asaas.pix.copiaECola : null).run();
 
         return comCors(json({ asaas_id: asaas.asaas_id, pix: asaas.pix }, 201));
+      }
+
+      if (path === "/api/pagamentos/infinitepay" && method === "POST") {
+        const auth = await authPayload(request, env);
+        if (!auth) return comCors(erro(request, 401, "Não autenticado."));
+        const b = await request.json().catch(() => null);
+        if (!b || !b.plano) return comCors(erro(request, 400, "Informe o plano desejado."));
+        const plano = await env.DB.prepare("SELECT * FROM planos WHERE nome = ? AND nome != 'gratis'").bind(b.plano).first();
+        if (!plano) return comCors(erro(request, 400, "Plano inválido."));
+
+        if (!env.INFINITEPAY_API_KEY) {
+          return comCors(json({
+            demo: true,
+            mensagem: "Gateway de pagamento ainda não configurado. Use o modo demonstração para ativar o plano."
+          }));
+        }
+
+        const tenant = await carregarTenant(env, auth.tenant_id);
+        const user = await env.DB.prepare("SELECT email FROM users WHERE id = ?").bind(auth.sub).first();
+        const email = user ? user.email : auth.email;
+
+        const criado = await env.DB.prepare(
+          "INSERT INTO pagamentos (tenant_id, plano, valor, status, gateway) VALUES (?, ?, ?, 'pendente', 'infinitepay') RETURNING id"
+        ).bind(auth.tenant_id, plano.nome, plano.preco).first();
+        if (!criado || !criado.id) return comCors(erro(request, 500, "Não foi possível registrar o pedido de pagamento."));
+
+        let checkout = null;
+        try {
+          checkout = await infinitepayCriarCheckout(env, tenant, email, plano, criado.id);
+        } catch (e) {
+          return comCors(erro(request, 502, `Erro no gateway de pagamento: ${e.message}`));
+        }
+
+        await env.DB.prepare(
+          "UPDATE pagamentos SET order_nsu = ?, slug = ?, checkout_url = ? WHERE id = ?"
+        ).bind(checkout.order_nsu, checkout.slug, checkout.url, criado.id).run();
+
+        return comCors(json({
+          id: criado.id,
+          order_nsu: checkout.order_nsu,
+          url: checkout.url,
+          handle: checkout.handle,
+          mensagem: "Abra o link para pagar com PIX (QR code) ou cartão. A assinatura é ativada automaticamente após a confirmação."
+        }, 201));
+      }
+
+      if (path === "/api/webhooks/infinitepay" && method === "POST") {
+        const b = await request.json().catch(() => null);
+        if (!b || !b.order_nsu) return comCors(json({ ok: false, motivo: "order_nsu ausente" }), 400);
+        const pag = await env.DB.prepare("SELECT * FROM pagamentos WHERE order_nsu = ?").bind(b.order_nsu).first();
+        if (!pag) return comCors(json({ ok: false, motivo: "pedido desconhecido" }, 404));
+        if (pag.status === "pago") return comCors(json({ ok: true, ja_pago: true }));
+
+        // Não confia só no corpo do webhook: confirma o status no gateway.
+        const conf = await infinitepayChecar(env, {
+          handle: b.handle || `imobi-plano-${pag.plano}`,
+          order_nsu: b.order_nsu,
+          transaction_nsu: b.transaction_nsu || null,
+          slug: b.invoice_slug || b.slug || pag.slug || null,
+        });
+        const confirmado = !!conf && (
+          conf.success === true || conf.paid === true ||
+          conf.status === "paid" || conf.status === "confirmed" || conf.status === "approved"
+        );
+        const valorOk = !conf || !conf.paid_amount ||
+          Number(conf.paid_amount || conf.amount || 0) >= Math.round(pag.valor * 100);
+
+        if (confirmado && valorOk) {
+          await env.DB.prepare("UPDATE pagamentos SET status = 'pago', pago_em = datetime('now') WHERE id = ?").bind(pag.id).run();
+          await ativarPlano(env, pag.tenant_id, pag.plano);
+          return comCors(json({ ok: true, ativado: true }));
+        }
+        return comCors(json({ ok: true, ativado: false }));
+      }
+
+      if (path === "/api/pagamentos/retorno" && method === "GET") {
+        return Response.redirect("https://imobi.droppfy.com/?pagamento=concluido#painel", 302);
       }
 
       if (path === "/api/pagamentos/demo" && method === "POST") {
