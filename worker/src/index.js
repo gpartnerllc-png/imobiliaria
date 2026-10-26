@@ -300,11 +300,23 @@ async function asaasCriarPix(env, tenant, userEmail, plano) {
 // ---------- InfinitePay (checkout integrado: PIX com QR code + cartão) ----------
 const INFINITEPAY_API = "https://api.checkout.infinitepay.io";
 
+// O gateway rejeita caracteres fora do ASCII (acentos, travessão) — 400 Bad Request.
+function textoAscii(s) {
+  return String(s || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[—–]/g, "-")
+    .replace(/[^\x20-\x7E]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamentoId) {
   const KEY = env.INFINITEPAY_API_KEY;
   if (!KEY) return null;
   const orderNsu = `imobi-pag-${pagamentoId}-${Date.now()}`;
-  const handle = `imobi-plano-${plano.nome}`;
+  // O handle precisa estar cadastrado no painel InfinitePay; demais handles retornam 403.
+  const handle = env.INFINITEPAY_HANDLE || "droppfy";
   const base = env.INFINITEPAY_WEBHOOK_BASE || "https://imobi-api.contatodroppfy.workers.dev";
   const corpo = {
     handle,
@@ -314,10 +326,10 @@ async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamento
     items: [{
       quantity: 1,
       price: Math.round(plano.preco * 100),
-      description: `IMOBI — Assinatura do plano ${plano.titulo} (30 dias)`,
+      description: textoAscii(`IMOBI — Assinatura do plano ${plano.titulo} (30 dias)`),
     }],
     customer: {
-      name: tenant.nome_exibicao,
+      name: textoAscii(tenant.nome_exibicao) || "Cliente",
       email: userEmail,
       phone_number: (tenant.whatsapp || "").replace(/\D/g, ""),
     },
@@ -326,7 +338,6 @@ async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamento
       require_delivery_address: false,
       assured_installments: 0,
       payment_methods_enabled: ["pix", "credit_card"],
-      discounts: { pix: 0, credit_card: 0 },
       valid_until: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
     },
   };
@@ -338,7 +349,9 @@ async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamento
   const texto = await resp.text();
   let dados = null;
   try { dados = JSON.parse(texto); } catch { dados = { bruto: texto }; }
-  if (!resp.ok) throw new Error(`InfinitePay respondeu ${resp.status}: ${texto.slice(0, 300)}`);
+  if (!resp.ok || (dados && dados.success === false)) {
+    throw new Error(`InfinitePay respondeu ${resp.status}: ${texto.slice(0, 300)}`);
+  }
   const raiz = dados.data && typeof dados.data === "object" ? dados.data : dados;
   const url = dados.url || dados.checkout_url || dados.payment_url || dados.link || raiz.url || raiz.checkout_url || raiz.payment_url || null;
   const slug = dados.slug || dados.invoice_slug || dados.id || raiz.slug || raiz.invoice_slug || raiz.id || null;
@@ -849,7 +862,7 @@ export default {
 
         // Não confia só no corpo do webhook: confirma o status no gateway.
         const conf = await infinitepayChecar(env, {
-          handle: b.handle || `imobi-plano-${pag.plano}`,
+          handle: b.handle || env.INFINITEPAY_HANDLE || "droppfy",
           order_nsu: b.order_nsu,
           transaction_nsu: b.transaction_nsu || null,
           slug: b.invoice_slug || b.slug || pag.slug || null,
