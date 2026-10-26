@@ -318,6 +318,13 @@ async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamento
   // O handle precisa estar cadastrado no painel InfinitePay; demais handles retornam 403.
   const handle = env.INFINITEPAY_HANDLE || "droppfy";
   const base = env.INFINITEPAY_WEBHOOK_BASE || "https://imobi-api.contatodroppfy.workers.dev";
+  const telefone = (tenant.whatsapp || "").replace(/\D/g, "") || env.INFINITEPAY_TELEFONE_FALLBACK || "";
+  const cliente = {
+    name: textoAscii(tenant.nome_exibicao) || "Cliente",
+    email: userEmail,
+  };
+  // Campo vazio dá 422 no gateway; ausente é aceito.
+  if (telefone) cliente.phone_number = telefone;
   const corpo = {
     handle,
     order_nsu: orderNsu,
@@ -328,11 +335,7 @@ async function infinitepayCriarCheckout(env, tenant, userEmail, plano, pagamento
       price: Math.round(plano.preco * 100),
       description: textoAscii(`IMOBI — Assinatura do plano ${plano.titulo} (30 dias)`),
     }],
-    customer: {
-      name: textoAscii(tenant.nome_exibicao) || "Cliente",
-      email: userEmail,
-      phone_number: (tenant.whatsapp || "").replace(/\D/g, ""),
-    },
+    customer: cliente,
     options: {
       single_payment: true,
       require_delivery_address: false,
