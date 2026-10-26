@@ -8,3 +8,9 @@ wrangler.toml.bak
 *.log
 .DS_Store
 .verdent/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

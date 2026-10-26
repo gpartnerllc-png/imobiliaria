@@ -12,8 +12,8 @@ not_found_handling = "single-page-application"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "imobiliaria"
-database_id = "0d2e89e3-f568-4972-babf-78863bd62e39"
+database_name = "imobi"
+database_id = "7c48829c-2ab6-4d5b-ba5a-5406badac79b"
 
 [[r2_buckets]]
 binding = "MEDIA_BUCKET"

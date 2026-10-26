@@ -35,14 +35,14 @@ function fromHex(hex) {
 async function hashSenha(senha) {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const key = await crypto.subtle.importKey("raw", ENC.encode(senha), "PBKDF2", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations: 120000, hash: "SHA-256" }, key, 256);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" }, key, 256);
   return `${toHex(salt)}:${toHex(bits)}`;
 }
 async function senhaConfere(senha, guardada) {
   try {
     const [sh, hh] = guardada.split(":");
     const key = await crypto.subtle.importKey("raw", ENC.encode(senha), "PBKDF2", false, ["deriveBits"]);
-    const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: fromHex(sh), iterations: 120000, hash: "SHA-256" }, key, 256);
+    const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: fromHex(sh), iterations: 100000, hash: "SHA-256" }, key, 256);
     return toHex(bits) === hh;
   } catch { return false; }
 }
@@ -82,6 +82,22 @@ function slugify(t) {
 async function garantirSchema(env) {
   const criar = (sql) => env.DB.prepare(sql).run();
   const alterar = (sql) => env.DB.prepare(sql).run().catch(() => {});
+
+  // Migra para o lado tabelas do protótipo antigo (sem tenant_id), preservando os dados.
+  // O RENAME é inofensivo se a tabela não existir ou já estiver no formato novo.
+  const colunaExiste = async (tabela, coluna) => {
+    const r = await env.DB.prepare(
+      `SELECT COUNT(*) AS n FROM pragma_table_info('${tabela}') WHERE name = '${coluna}'`
+    ).first().catch(() => null);
+    return !!(r && r.n > 0);
+  };
+  if (await colunaExiste("users", "email") && !(await colunaExiste("users", "tenant_id"))) {
+    await alterar("ALTER TABLE users RENAME TO users_legado");
+  }
+  if (await colunaExiste("leads", "name") && !(await colunaExiste("leads", "tenant_id"))) {
+    await alterar("ALTER TABLE leads RENAME TO leads_legado");
+  }
+  await alterar("ALTER TABLE properties RENAME TO properties_legado");
 
   await criar(`CREATE TABLE IF NOT EXISTS tenants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

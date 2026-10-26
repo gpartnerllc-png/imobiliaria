@@ -9,9 +9,11 @@ aparecem para todos os visitantes em qualquer máquina.
 
 ## Arquitetura (versão atual)
 - `worker/src/index.js` — API completa em JavaScript puro (sem dependências, sem build).
-  - Banco: Cloudflare D1 (`imobiliaria`, id 0d2e89e3-f568-4972-babf-78863bd62e39).
+  - Banco: Cloudflare D1 (`imobi`, id 7c48829c-2ab6-4d5b-ba5a-5406badac79b). O D1 antigo
+    (`imobiliaria`, 0d2e89e3...) está abandonado — não usar.
   - Mídia: Cloudflare R2 (`imobi-media`, binding `MEDIA_BUCKET`), servida via `/media/:key`.
-  - Auth: JWT próprio (WebCrypto HMAC-SHA256) + senhas PBKDF2 (120k iterações).
+  - Auth: JWT próprio (WebCrypto HMAC-SHA256) + senhas PBKDF2 (100k iterações — máximo
+    suportado pelo runtime Workers; acima disso dá `Pbkdf2 failed`).
   - Schema auto-migratório: `garantirSchema(env)` roda CREATE TABLE IF NOT EXISTS +
     ALTER TABLE idempotentes na primeira requisição. **Não use `wrangler d1 migrations apply`** —
     o schema se auto-corrige e migrations gerariam colunas duplicadas.
@@ -42,8 +44,11 @@ aparecem para todos os visitantes em qualquer máquina.
 - O dashboard: https://dash.cloudflare.com/533aa092c7f3571e13fdc103ba716bdf
 
 ## CI/CD
-- `.github/workflows/deploy-worker.yml` — no push em `main`, faz deploy dos DOIS workers
-  (`imobi-api` e `imobiliada`). O Pages atualiza `imobi.droppfy.com` pelo `index.html` da raiz.
+- `.github/workflows/deploy-worker.yml` — no push em `main`, faz deploy apenas do `imobi-api`
+  (usa o `wrangler.toml` padrão de `worker/`). O token OAuth do GitHub **não tem escopo
+  `workflow`** — não é possível editar o arquivo do workflow (push é rejeitado).
+- O worker `imobiliada` (site com assets) é feito via `npx wrangler deploy -c wrangler.imobiliada.toml`
+  a partir desta máquina (OAuth local). O Pages atualiza `imobi.droppfy.com` pelo `index.html` da raiz.
 
 ## Secrets necessários
 - GitHub Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (já configurados).
