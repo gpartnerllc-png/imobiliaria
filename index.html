@@ -1,508 +1,1563 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IMOBI — Curadoria Imobiliária</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --areia-claro: #FBF6ED; --areia: #F3E9D8; --marfim: #FFFCF6;
-      --ambar: #CDA05F; --ambar-suave: #E4C68C; --bronze: #8C6A45;
-      --espresso: #2B2118; --espresso-suave: #5B4C3B; --linha-ouro: rgba(205,160,95,.35);
-      --erro: #9B4A3A; --sucesso: #5C7A5A;
-      --phi-1: .618rem; --phi0: 1rem; --phi1: 1.618rem; --phi2: 2.618rem; --phi3: 4.236rem; --phi4: 6.854rem;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; color: var(--espresso); min-height: 100vh; position: relative; overflow-x: hidden; background: var(--areia-claro); }
-    button { font-family: 'Inter', sans-serif; cursor: pointer; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IMOBI — Curadoria Imobiliária · DF e Entorno</title>
+<meta name="description" content="Vitrine imobiliária multi-marca do Distrito Federal: ágio, venda, locação, consórcio Ademicon e financiamento Caixa."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --areia-claro:#FBF6ED; --areia:#F3E9D8; --marfim:#FFFCF6;
+  --ambar:#CDA05F; --ambar-suave:#E4C68C; --bronze:#8C6A45;
+  --espresso:#2B2118; --espresso-suave:#5B4C3B; --linha-ouro:rgba(205,160,95,.35);
+  --erro:#9B4A3A; --sucesso:#5C7A5A;
+  --phi-1:.618rem; --phi0:1rem; --phi1:1.618rem; --phi2:2.618rem; --phi3:4.236rem;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--espresso);min-height:100vh;position:relative;overflow-x:hidden;background:var(--areia-claro);}
+button{font-family:'Inter',sans-serif;cursor:pointer;}
+img,video{max-width:100%;}
+a{color:inherit;}
 
-    .aurora {
-      position: fixed; inset: 0; z-index: -2;
-      background: radial-gradient(circle at 15% 20%, rgba(228,198,140,.55) 0%, transparent 45%),
-                  radial-gradient(circle at 85% 15%, rgba(205,160,95,.4) 0%, transparent 50%),
-                  radial-gradient(circle at 50% 90%, rgba(140,106,69,.3) 0%, transparent 55%), var(--areia-claro);
-      background-size: 180% 180%, 200% 200%, 160% 160%, 100% 100%;
-      animation: auroraQuieta 32s ease-in-out infinite;
-    }
-    @keyframes auroraQuieta {
-      0% { background-position: 0% 30%, 100% 10%, 50% 100%, 0 0; }
-      50% { background-position: 60% 70%, 20% 60%, 80% 40%, 0 0; }
-      100% { background-position: 0% 30%, 100% 10%, 50% 100%, 0 0; }
-    }
+.aurora{position:fixed;inset:0;z-index:-2;
+  background:radial-gradient(circle at 15% 20%, rgba(228,198,140,.55) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(205,160,95,.4) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(140,106,69,.3) 0%, transparent 55%), var(--areia-claro);
+  background-size:180% 180%,200% 200%,160% 160%,100% 100%;
+  animation:auroraQuieta 32s ease-in-out infinite;}
+@keyframes auroraQuieta{0%{background-position:0% 30%,100% 10%,50% 100%,0 0;}50%{background-position:60% 70%,20% 60%,80% 40%,0 0;}100%{background-position:0% 30%,100% 10%,50% 100%,0 0;}}
 
-    .camada-viva {
-      background: rgba(255,252,246,.55);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(205,160,95,.28);
-    }
+.camada-viva{background:rgba(255,252,246,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(205,160,95,.28);}
 
-    header { display: flex; justify-content: space-between; align-items: center; padding: var(--phi1) var(--phi3); position: sticky; top: 0; z-index: 30; }
-    .marca { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600; }
-    .marca span { color: var(--ambar); }
-    nav { display: flex; gap: var(--phi2); font-size: .86rem; font-weight: 500; color: var(--espresso-suave); }
-    .acoes-topo { display: flex; gap: .8rem; align-items: center; }
-    
-    .btn-luxo { font-size: .82rem; font-weight: 500; letter-spacing: .04em; padding: .75rem var(--phi1); border-radius: 100px; background: var(--espresso); color: var(--marfim); border: 1px solid var(--espresso); transition: .3s; }
-    .btn-luxo:hover { background: transparent; color: var(--espresso); }
-    .btn-fantasma { font-size: .82rem; font-weight: 500; padding: .75rem var(--phi1); border-radius: 100px; background: transparent; color: var(--espresso); border: 1px solid var(--linha-ouro); }
-    
-    .user-chip { font-size: .8rem; color: var(--espresso-suave); display: flex; align-items: center; gap: .6rem; }
-    .oculto { display: none !important; }
+/* ===== Header ===== */
+header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:var(--phi1) var(--phi3);position:sticky;top:0;z-index:60;}
+.marca{font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:600;cursor:pointer;white-space:nowrap;}
+.marca span{color:var(--ambar);}
+nav{display:flex;gap:1.4rem;font-size:.86rem;font-weight:500;color:var(--espresso-suave);flex-wrap:wrap;}
+nav a{text-decoration:none;padding-bottom:.2rem;border-bottom:1px solid transparent;transition:.2s;}
+nav a:hover,nav a.ativo{color:var(--espresso);border-color:var(--ambar);}
+.acoes-topo{display:flex;gap:.7rem;align-items:center;white-space:nowrap;}
+.btn-luxo{font-size:.82rem;font-weight:600;letter-spacing:.03em;padding:.72rem 1.35rem;border-radius:100px;background:var(--espresso);color:var(--marfim);border:1px solid var(--espresso);transition:.3s;}
+.btn-luxo:hover{background:transparent;color:var(--espresso);}
+.btn-fantasma{font-size:.82rem;font-weight:500;padding:.7rem 1.3rem;border-radius:100px;background:transparent;color:var(--espresso);border:1px solid var(--linha-ouro);transition:.3s;}
+.btn-fantasma:hover{border-color:var(--ambar);}
+.btn-ouro{font-size:.82rem;font-weight:600;padding:.72rem 1.35rem;border-radius:100px;background:var(--ambar);color:var(--marfim);border:1px solid var(--ambar);transition:.3s;}
+.btn-ouro:hover{background:var(--bronze);border-color:var(--bronze);}
+.user-chip{font-size:.8rem;color:var(--espresso-suave);display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.user-chip strong{color:var(--espresso);font-weight:600;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.oculto{display:none !important;}
 
-    .hero { max-width: 1360px; margin: 0 auto; padding: var(--phi3) var(--phi3) var(--phi2); }
-    .eyebrow { font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--bronze); margin-bottom: var(--phi1); }
-    h1 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height: 1.1; max-width: 20ch; }
-    h1 em { font-style: italic; color: var(--ambar); }
-    .lead { margin-top: var(--phi1); font-size: 1.05rem; color: var(--espresso-suave); max-width: 56ch; line-height: 1.7; font-weight: 300; }
+/* ===== Hero ===== */
+.hero{max-width:1360px;margin:0 auto;padding:var(--phi3) var(--phi3) var(--phi2);}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:var(--phi1);}
+h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(2.3rem,4.6vw,3.8rem);line-height:1.08;max-width:22ch;}
+h1 em{font-style:italic;color:var(--ambar);}
+.lead{margin-top:var(--phi1);font-size:1.06rem;color:var(--espresso-suave);max-width:58ch;line-height:1.7;font-weight:300;}
+.stats-mini{display:flex;gap:2.2rem;margin-top:var(--phi2);font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--espresso-suave);}
+.stats-mini b{display:block;font-size:1.35rem;color:var(--espresso);font-weight:500;}
+.ficha-luxo{margin-top:var(--phi2);padding:var(--phi2);border-radius:6px;display:grid;grid-template-columns:1fr 1.2fr 1fr auto;gap:var(--phi2);align-items:end;}
+.campo label{display:block;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);margin-bottom:.45rem;}
+.campo select,.campo input,.campo textarea{width:100%;border:none;border-bottom:1px solid var(--linha-ouro);background:transparent;font-family:'Inter',sans-serif;font-size:1rem;padding:.42rem 0;color:var(--espresso);outline:none;border-radius:0;}
+.campo select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--bronze) 50%),linear-gradient(135deg,var(--bronze) 50%,transparent 50%);background-position:calc(100% - 6px) 60%,calc(100% - 2px) 60%;background-size:4px 4px;background-repeat:no-repeat;padding-right:14px;}
+.campo select option{background:var(--marfim);color:var(--espresso);}
+.campo textarea{resize:vertical;min-height:70px;}
 
-    .ficha-luxo { margin-top: var(--phi2); padding: var(--phi2); border-radius: 4px; display: grid; grid-template-columns: 1fr 1fr auto; gap: var(--phi2); align-items: end; }
-    .campo label { display: block; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--bronze); margin-bottom: .5rem; }
-    .campo select, .campo input, .campo textarea { width: 100%; border: none; border-bottom: 1px solid var(--linha-ouro); background: transparent; font-family: 'Inter', sans-serif; font-size: 1rem; padding: .4rem 0; color: var(--espresso); outline: none; }
-    .campo textarea { resize: vertical; min-height: 70px; }
+/* ===== Seções ===== */
+.secao{max-width:1360px;margin:var(--phi3) auto;padding:0 var(--phi3);}
+.secao-cabecalho{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--phi2);gap:1rem;flex-wrap:wrap;}
+.secao-titulo{font-family:'Cormorant Garamond',serif;font-size:1.95rem;font-weight:500;}
+.secao-nota{font-size:.78rem;color:var(--espresso-suave);font-family:'IBM Plex Mono',monospace;}
+.chips{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:var(--phi2);}
+.chip{border:1px solid var(--linha-ouro);background:transparent;color:var(--espresso-suave);padding:.5rem 1.05rem;border-radius:100px;font-size:.8rem;font-weight:500;transition:.25s;}
+.chip:hover{color:var(--espresso);border-color:var(--ambar);}
+.chip.ativo{background:var(--espresso);color:var(--marfim);border-color:var(--espresso);}
 
-    .secao { max-width: 1360px; margin: var(--phi3) auto; padding: 0 var(--phi3); }
-    .secao-cabecalho { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--phi2); }
-    .secao-titulo { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 500; }
-    .secao-nota { font-size: .78rem; color: var(--espresso-suave); }
+/* ===== Cards ===== */
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:var(--phi2);}
+.card{border-radius:6px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;cursor:pointer;background:var(--marfim);display:flex;flex-direction:column;}
+.card:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(43,33,24,.12);}
+.card-foto{height:215px;background:linear-gradient(150deg,var(--areia),var(--ambar-suave));background-size:cover;background-position:center;position:relative;overflow:hidden;}
+.card-foto img{width:100%;height:100%;object-fit:cover;display:block;}
+.card-tag{position:absolute;top:14px;left:14px;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(43,33,24,.88);color:var(--marfim);padding:.35rem .75rem;border-radius:100px;backdrop-filter:blur(4px);}
+.card-selo{position:absolute;top:12px;right:12px;font-size:.6rem;letter-spacing:.08em;background:var(--ambar);color:var(--marfim);padding:.3rem .6rem;border-radius:100px;font-weight:600;}
+.seta-foto{position:absolute;top:50%;transform:translateY(-50%);background:rgba(43,33,24,.55);color:#fff;border:none;width:32px;height:32px;border-radius:50%;font-size:1rem;line-height:1;display:flex;align-items:center;justify-content:center;opacity:0;transition:.25s;z-index:3;}
+.card:hover .seta-foto{opacity:1;}
+.seta-foto.esq{left:10px;} .seta-foto.dir{right:10px;}
+.card-video{position:absolute;bottom:12px;right:12px;background:rgba(155,74,58,.92);color:#fff;padding:.32rem .7rem;border-radius:100px;font-size:.66rem;font-weight:600;display:flex;gap:.35rem;align-items:center;z-index:3;}
+.pontinhos{position:absolute;bottom:10px;left:0;right:0;display:flex;gap:5px;justify-content:center;z-index:3;}
+.pontinhos i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45);}
+.pontinhos i.on{background:#fff;}
+.card-corpo{padding:var(--phi1) var(--phi1) var(--phi1);display:flex;flex-direction:column;flex:1;}
+.card-corpo h3{font-family:'Cormorant Garamond',serif;font-size:1.22rem;font-weight:600;line-height:1.2;}
+.card-local{font-size:.78rem;color:var(--espresso-suave);margin-top:.3rem;display:flex;gap:.4rem;align-items:center;}
+.card-specs{display:flex;gap:.9rem;margin-top:.55rem;font-size:.72rem;color:var(--espresso-suave);font-family:'IBM Plex Mono',monospace;}
+.card-rodape{display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:var(--phi0);}
+.card-preco{font-size:1.28rem;font-weight:600;color:var(--bronze);}
+.card-preco small{display:block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--espresso-suave);font-weight:400;}
+.card-agio{font-size:.72rem;color:var(--bronze);background:rgba(205,160,95,.1);padding:.4rem .6rem;border-radius:4px;margin-top:.5rem;font-weight:500;}
+.card-anunciante{font-size:.72rem;font-style:italic;color:var(--espresso-suave);text-align:right;max-width:46%;}
 
-    .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: var(--phi2); }
-    .card { border-radius: 4px; overflow: hidden; transition: transform .5s cubic-bezier(.2,.8,.2,1); cursor: pointer; }
-    .card:hover { transform: translateY(-6px); }
-    .card-foto { height: 210px; background: linear-gradient(150deg, var(--areia), var(--ambar-suave)); background-size: cover; background-position: center; position: relative; }
-    .card-tag { position: absolute; top: 14px; left: 14px; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; background: var(--espresso); color: var(--marfim); padding: .35rem .7rem; border-radius: 100px; }
-    .card-corpo { padding: var(--phi1) var(--phi1) var(--phi1); }
-    .card-corpo h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; }
-    .card-local { font-size: .78rem; color: var(--espresso-suave); margin-top: .3rem; }
-    .card-rodape { display: flex; justify-content: space-between; align-items: flex-end; margin-top: var(--phi0); }
-    .card-preco { font-size: 1.3rem; font-weight: 300; color: var(--bronze); }
-    .card-anunciante { font-size: .74rem; font-style: italic; color: var(--espresso-suave); }
+.estado-vazio{grid-column:1/-1;text-align:center;padding:var(--phi3) var(--phi1);color:var(--espresso-suave);font-size:.95rem;}
+.estado-vazio strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.45rem;color:var(--espresso);margin-bottom:.4rem;font-weight:500;}
 
-    .estado-vazio { grid-column: 1/-1; text-align: center; padding: var(--phi3) var(--phi1); color: var(--espresso-suave); font-size: .95rem; }
-    .estado-vazio strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--espresso); margin-bottom: .4rem; font-weight: 500; }
+/* ===== Banners Ademicon / Caixa ===== */
+.banner-duplo{display:grid;grid-template-columns:1fr 1fr;gap:var(--phi2);}
+.banner{position:relative;border-radius:8px;padding:var(--phi2);overflow:hidden;color:var(--marfim);min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center;}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(20,15,10,.82) 78%);}
+.banner>*{position:relative;z-index:2;}
+.banner h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;margin-bottom:.4rem;}
+.banner p{font-size:.9rem;font-weight:300;line-height:1.55;max-width:44ch;opacity:.92;}
+.banner .btn-luxo{margin-top:var(--phi1);align-self:flex-start;background:var(--marfim);color:var(--espresso);border-color:var(--marfim);}
+.banner-ademicon{background:linear-gradient(120deg,#1d4e63 0%,#123746 60%),url('');}
+.banner-caixa{background:linear-gradient(120deg,#1a5f96 0%,#0d3a66 60%),url('');}
+.banner-mini-nums{display:flex;gap:1.4rem;margin-top:var(--phi1);font-family:'IBM Plex Mono',monospace;font-size:.72rem;opacity:.9;}
+.banner-mini-nums b{display:block;font-size:1.1rem;font-weight:500;}
 
-    /* ===== Modais ===== */
-    .modal-fundo { position: fixed; inset: 0; background: rgba(43,33,24,.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1.2rem; }
-    .modal-fundo.ativo { display: flex; }
-    .modal { background: var(--marfim); border-radius: 8px; padding: var(--phi2); max-width: 460px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
-    .modal h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; margin-bottom: var(--phi1); }
-    .modal .fechar { position: absolute; top: var(--phi1); right: var(--phi1); background: none; border: none; font-size: 1.2rem; color: var(--espresso-suave); }
-    .campo-modal { margin-bottom: var(--phi0); }
-    .campo-modal label { display: block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--bronze); margin-bottom: .4rem; }
-    .campo-modal input, .campo-modal select, .campo-modal textarea { width: 100%; padding: .7rem .8rem; border: 1px solid var(--linha-ouro); border-radius: 4px; background: var(--areia-claro); font-family: 'Inter', sans-serif; font-size: .95rem; outline: none; }
-    .campo-modal textarea { resize: vertical; min-height: 80px; }
-    .linha-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--phi0); }
-    .msg-erro { background: rgba(155,74,58,.1); color: var(--erro); font-size: .82rem; padding: .6rem .8rem; border-radius: 4px; margin-bottom: var(--phi0); }
-    .msg-erro.oculto { display: none; }
-    .msg-sucesso { background: rgba(92,122,90,.12); color: var(--sucesso); font-size: .82rem; padding: .6rem .8rem; border-radius: 4px; margin-bottom: var(--phi0); }
-    .msg-sucesso.oculto { display: none; }
-    .troca-modo { margin-top: var(--phi1); font-size: .82rem; text-align: center; color: var(--espresso-suave); }
-    .troca-modo a { color: var(--bronze); cursor: pointer; text-decoration: underline; }
-    .campos-agio { border-top: 1px dashed var(--linha-ouro); margin-top: var(--phi0); padding-top: var(--phi0); }
+/* ===== Simulador ===== */
+.simulador{margin-top:var(--phi2);padding:var(--phi2);border-radius:8px;display:grid;grid-template-columns:1.1fr .9fr;gap:var(--phi2);align-items:center;}
+.simulador .entradas{display:flex;flex-direction:column;gap:var(--phi1);}
+.simulador .resultado{background:rgba(205,160,95,.09);border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi2);text-align:center;}
+.simulador .resultado b{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:500;color:var(--bronze);display:block;}
+.simulador .resultado small{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--espresso-suave);}
+input[type=range]{width:100%;accent-color:var(--ambar);}
 
-    footer { text-align: center; padding: var(--phi3); font-size: .75rem; color: var(--espresso-suave); }
+/* ===== Modais ===== */
+.modal-fundo{position:fixed;inset:0;background:rgba(43,33,24,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:2rem 1.2rem;overflow-y:auto;}
+.modal-fundo.ativo{display:flex;}
+.modal{background:var(--marfim);border-radius:10px;padding:var(--phi2);max-width:520px;width:100%;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.25);animation:sobe .35s cubic-bezier(.2,.8,.2,1);margin:auto;}
+.modal.grande{max-width:860px;}
+@keyframes sobe{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:500;margin-bottom:var(--phi1);}
+.modal .fechar{position:absolute;top:var(--phi1);right:var(--phi1);background:none;border:none;font-size:1.15rem;color:var(--espresso-suave);width:34px;height:34px;border-radius:50%;transition:.2s;}
+.modal .fechar:hover{background:var(--areia);}
+.campo-modal{margin-bottom:var(--phi0);}
+.campo-modal label{display:block;font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--bronze);margin-bottom:.4rem;}
+.campo-modal input,.campo-modal select,.campo-modal textarea{width:100%;padding:.7rem .8rem;border:1px solid var(--linha-ouro);border-radius:5px;background:var(--areia-claro);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;color:var(--espresso);transition:.2s;}
+.campo-modal input:focus,.campo-modal select:focus,.campo-modal textarea:focus{border-color:var(--ambar);background:#fff;}
+.campo-modal textarea{resize:vertical;min-height:80px;}
+.linha-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--phi0);}
+.linha-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--phi0);}
+.msg-erro{background:rgba(155,74,58,.1);color:var(--erro);font-size:.82rem;padding:.65rem .85rem;border-radius:5px;margin-bottom:var(--phi0);}
+.msg-sucesso{background:rgba(92,122,90,.12);color:var(--sucesso);font-size:.82rem;padding:.65rem .85rem;border-radius:5px;margin-bottom:var(--phi0);}
+.msg-info{background:rgba(205,160,95,.12);color:var(--bronze);font-size:.82rem;padding:.65rem .85rem;border-radius:5px;margin-bottom:var(--phi0);}
+.troca-modo{margin-top:var(--phi1);font-size:.82rem;text-align:center;color:var(--espresso-suave);}
+.troca-modo a{color:var(--bronze);cursor:pointer;text-decoration:underline;}
+.campos-agio{border-top:1px dashed var(--linha-ouro);margin-top:var(--phi0);padding-top:var(--phi0);}
+.upload-zona{border:2px dashed var(--linha-ouro);border-radius:8px;padding:1.4rem;text-align:center;color:var(--espresso-suave);font-size:.85rem;cursor:pointer;transition:.25s;background:var(--areia-claro);}
+.upload-zona:hover{border-color:var(--ambar);color:var(--espresso);}
+.previews{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:.6rem;margin-top:.8rem;}
+.previews .item{position:relative;height:84px;border-radius:6px;overflow:hidden;border:1px solid var(--linha-ouro);background:var(--areia);}
+.previews .item img{width:100%;height:100%;object-fit:cover;display:block;}
+.previews .item video{width:100%;height:100%;object-fit:cover;display:block;}
+.previews .remover{position:absolute;top:4px;right:4px;background:rgba(155,74,58,.92);color:#fff;border:none;width:22px;height:22px;border-radius:50%;font-size:.7rem;display:flex;align-items:center;justify-content:center;}
+.previews .tipo-video{position:absolute;bottom:4px;left:4px;background:rgba(43,33,24,.8);color:#fff;font-size:.55rem;padding:2px 6px;border-radius:4px;letter-spacing:.05em;}
+.barra-progresso{height:5px;background:var(--areia);border-radius:3px;overflow:hidden;margin-top:.7rem;}
+.barra-progresso i{display:block;height:100%;background:var(--ambar);width:0;transition:width .3s;}
 
-    @media(max-width: 900px) {
-      .hero, .secao, header { padding-left: var(--phi1); padding-right: var(--phi1); }
-      .ficha-luxo { grid-template-columns: 1fr; }
-      nav { display: none; }
-      .linha-2 { grid-template-columns: 1fr; }
-    }
-  </style>
+/* ===== Detalhe do imóvel ===== */
+.detalhe-galeria{display:grid;grid-template-columns:2.2fr 1fr;gap:.8rem;}
+.detalhe-principal{border-radius:8px;overflow:hidden;background:#111;min-height:340px;position:relative;display:flex;align-items:center;justify-content:center;}
+.detalhe-principal img{width:100%;height:100%;object-fit:cover;max-height:430px;}
+.detalhe-principal video{width:100%;max-height:430px;background:#000;}
+.detalhe-thumbs{display:grid;grid-template-rows:repeat(auto-fill,minmax(64px,1fr));gap:.55rem;max-height:430px;overflow-y:auto;}
+.detalhe-thumbs .thumb{height:72px;border-radius:6px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:var(--areia);position:relative;}
+.detalhe-thumbs .thumb.on{border-color:var(--ambar);}
+.detalhe-thumbs .thumb img,.detalhe-thumbs .thumb video{width:100%;height:100%;object-fit:cover;}
+.detalhe-thumbs .thumb .icone-video{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;background:rgba(0,0,0,.35);}
+.specs-grade{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin:var(--phi1) 0;}
+.spec{background:var(--areia-claro);border:1px solid var(--linha-ouro);border-radius:6px;padding:.8rem .5rem;text-align:center;}
+.spec b{display:block;font-size:1.05rem;font-weight:600;color:var(--espresso);}
+.spec span{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--espresso-suave);}
+.preco-detalhe{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--bronze);font-weight:600;margin:var(--phi0) 0;}
+.bloco-anunciante{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--linha-ouro);border-bottom:1px solid var(--linha-ouro);padding:var(--phi1) 0;margin:var(--phi1) 0;flex-wrap:wrap;}
+.bloco-anunciante .marca-nome{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;}
+.bloco-anunciante .marca-info{font-size:.75rem;color:var(--espresso-suave);}
+.memorial{white-space:pre-wrap;line-height:1.7;font-weight:300;color:var(--espresso-suave);}
+
+/* ===== Dashboard ===== */
+.dash-wrap{display:flex;width:100%;min-height:calc(100vh - 74px);position:relative;max-width:1360px;margin:0 auto;}
+.dash-sidebar{width:250px;background:var(--marfim);border-right:1px solid var(--linha-ouro);padding:var(--phi1);display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:74px;height:calc(100vh - 74px);overflow-y:auto;}
+.dash-sidebar .dash-perfil{padding:var(--phi1) .8rem;border-bottom:1px solid var(--linha-ouro);margin-bottom:var(--phi0);}
+.dash-sidebar .dash-perfil h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;}
+.dash-sidebar .dash-perfil span{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--bronze);}
+.dash-item{display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;border-radius:8px;cursor:pointer;color:var(--espresso-suave);font-weight:500;margin-bottom:.3rem;transition:.2s;border:none;background:none;width:100%;text-align:left;font-size:.88rem;border-left:3px solid transparent;}
+.dash-item:hover{background:var(--areia);color:var(--espresso);}
+.dash-item.ativo{background:rgba(205,160,95,.12);color:var(--espresso);border-left-color:var(--ambar);}
+.dash-main{flex:1;min-width:0;padding:var(--phi2) var(--phi3);}
+.painel{display:none;}
+.painel.ativo{display:block;animation:sobe .3s ease;}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--phi0);margin-bottom:var(--phi2);}
+.kpi{background:var(--marfim);border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi1);}
+.kpi b{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;display:block;color:var(--espresso);}
+.kpi span{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--espresso-suave);}
+.kpi.ouro b{color:var(--bronze);}
+
+.tabela{width:100%;border-collapse:collapse;background:var(--marfim);border:1px solid var(--linha-ouro);border-radius:8px;overflow:hidden;}
+.tabela th{background:var(--areia);padding:.85rem 1rem;color:var(--espresso-suave);text-transform:uppercase;font-size:.68rem;letter-spacing:.08em;text-align:left;font-weight:600;}
+.tabela td{padding:.9rem 1rem;border-top:1px solid rgba(205,160,95,.16);font-size:.86rem;vertical-align:middle;}
+.tabela .mini-foto{width:64px;height:44px;object-fit:cover;border-radius:4px;display:block;}
+.badge{display:inline-block;padding:.25rem .6rem;border-radius:100px;font-size:.66rem;font-weight:600;letter-spacing:.04em;}
+.badge-ativo{background:rgba(92,122,90,.14);color:var(--sucesso);}
+.badge-inativo{background:rgba(155,74,58,.12);color:var(--erro);}
+.badge-vendido{background:rgba(205,160,95,.16);color:var(--bronze);}
+.badge-novo{background:rgba(26,115,232,.12);color:#1a5f96;}
+.badge-agendado{background:rgba(205,160,95,.16);color:var(--bronze);}
+.badge-convertido{background:rgba(92,122,90,.14);color:var(--sucesso);}
+.btn-mini{font-size:.72rem;padding:.42rem .8rem;border-radius:100px;border:1px solid var(--linha-ouro);background:transparent;color:var(--espresso-suave);transition:.2s;}
+.btn-mini:hover{color:var(--espresso);border-color:var(--ambar);}
+.btn-mini.perigo{color:var(--erro);border-color:rgba(155,74,58,.4);}
+.btn-mini.verde{color:var(--sucesso);border-color:rgba(92,122,90,.4);}
+.acoes-td{display:flex;gap:.4rem;flex-wrap:wrap;}
+
+.planos-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--phi1);}
+.plano{background:var(--marfim);border:1px solid var(--linha-ouro);border-radius:10px;padding:var(--phi2);position:relative;display:flex;flex-direction:column;gap:.6rem;}
+.plano.destaque{border-color:var(--ambar);box-shadow:0 14px 34px rgba(205,160,95,.18);}
+.plano .selo-plano{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--ambar);color:#fff;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:100px;font-weight:600;}
+.plano h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;}
+.plano .preco{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:600;color:var(--bronze);}
+.plano .preco small{font-size:.8rem;color:var(--espresso-suave);font-family:'Inter';}
+.plano ul{list-style:none;font-size:.82rem;color:var(--espresso-suave);display:flex;flex-direction:column;gap:.4rem;flex:1;}
+.plano ul li::before{content:"✓ ";color:var(--sucesso);font-weight:700;}
+.pagamento-item{display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;border:1px solid var(--linha-ouro);border-radius:8px;margin-bottom:.6rem;font-size:.84rem;background:var(--marfim);flex-wrap:wrap;gap:.5rem;}
+.pix-copia{background:var(--espresso);color:var(--ambar-suave);font-family:'IBM Plex Mono',monospace;font-size:.7rem;padding:.9rem;border-radius:6px;word-break:break-all;max-height:110px;overflow-y:auto;margin:.8rem 0;}
+
+.lead-card{background:var(--marfim);border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi1);margin-bottom:var(--phi0);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:flex-start;}
+.lead-card h4{font-size:.95rem;font-weight:600;}
+.lead-card .lead-meta{font-size:.76rem;color:var(--espresso-suave);margin-top:.25rem;display:flex;flex-direction:column;gap:.2rem;}
+
+/* ===== Toast ===== */
+.toasts{position:fixed;bottom:22px;right:22px;z-index:300;display:flex;flex-direction:column;gap:.6rem;max-width:360px;}
+.toast{background:var(--espresso);color:var(--marfim);padding:.85rem 1.1rem;border-radius:8px;font-size:.84rem;box-shadow:0 14px 30px rgba(0,0,0,.25);animation:sobe .3s ease;display:flex;gap:.6rem;align-items:flex-start;}
+.toast.ok{background:#2f4a2e;}
+.toast.erro{background:#5c2d27;}
+.toast.info{background:#3d4a52;}
+
+/* ===== Footer ===== */
+footer{border-top:1px solid var(--linha-ouro);padding:var(--phi3);text-align:center;font-size:.74rem;color:var(--espresso-suave);line-height:1.7;}
+footer .rodape-links{display:flex;gap:1.6rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap;font-size:.78rem;}
+footer .rodape-links a{color:var(--bronze);text-decoration:none;}
+footer .rodape-links a:hover{text-decoration:underline;}
+
+.aviso-limite{background:rgba(155,74,58,.08);border:1px solid rgba(155,74,58,.35);color:var(--erro);border-radius:8px;padding:var(--phi1);margin-bottom:var(--phi1);font-size:.85rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+
+.carregando{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:var(--phi2);color:var(--espresso-suave);font-size:.88rem;}
+.spinner{width:18px;height:18px;border:2px solid var(--linha-ouro);border-top-color:var(--ambar);border-radius:50%;animation:gira .8s linear infinite;}
+@keyframes gira{to{transform:rotate(360deg);}}
+
+/* ===== Responsivo ===== */
+@media(max-width:960px){
+  .hero,.secao,header{padding-left:var(--phi1);padding-right:var(--phi1);}
+  .ficha-luxo{grid-template-columns:1fr 1fr;}
+  nav{display:none;}
+  .banner-duplo{grid-template-columns:1fr;}
+  .simulador{grid-template-columns:1fr;}
+  .detalhe-galeria{grid-template-columns:1fr;}
+  .detalhe-thumbs{grid-template-columns:repeat(4,1fr);grid-template-rows:none;}
+  .dash-wrap{flex-direction:column;}
+  .dash-sidebar{width:100%;position:relative;top:0;height:auto;border-right:none;border-bottom:1px solid var(--linha-ouro);flex-direction:row;flex-wrap:wrap;align-items:center;gap:.4rem;}
+  .dash-sidebar .dash-perfil{width:100%;}
+  .dash-main{padding:var(--phi1);}
+  .linha-2,.linha-3{grid-template-columns:1fr;}
+  .specs-grade{grid-template-columns:1fr 1fr;}
+  .stats-mini{flex-wrap:wrap;gap:1.4rem;}
+}
+</style>
 </head>
 <body>
 
-  <div class="aurora"></div>
+<div class="aurora"></div>
 
-  <header class="camada-viva">
-    <div class="marca">IMOBI <span>·</span></div>
-    <nav>
-      <a href="#" onclick="app.filtrar('todas');return false;">Todos</a>
-      <a href="#" onclick="app.filtrar('agio');return false;">Ágio</a>
-      <a href="#" onclick="app.filtrar('venda_direta');return false;">Venda direta</a>
-      <a href="#" onclick="app.filtrar('locacao_residencial');return false;">Locação</a>
-    </nav>
-    <div class="acoes-topo">
-      <div id="area-visitante" class="acoes-topo">
-        <button class="btn-fantasma" onclick="app.abrirAuth('login')">Entrar</button>
-        <button class="btn-luxo" onclick="app.abrirAuth('cadastro')">Anunciar imóvel</button>
-      </div>
-      <div id="area-logado" class="user-chip oculto">
-        <span id="nome-usuario-logado"></span>
-        <button class="btn-luxo" onclick="app.abrirPublicar()">Publicar imóvel</button>
-        <button class="btn-fantasma" onclick="app.logout()">Sair</button>
-      </div>
+<!-- ================= HEADER ================= -->
+<header class="camada-viva">
+  <div class="marca" onclick="app.irPara('inicio')">IMOBI <span>·</span> Curadoria</div>
+  <nav>
+    <a href="#" onclick="app.filtrar('todas');return false;">Todos</a>
+    <a href="#" onclick="app.filtrar('agio');return false;">Ágio</a>
+    <a href="#" onclick="app.filtrar('venda_direta');return false;">Venda direta</a>
+    <a href="#" onclick="app.filtrar('locacao_residencial');return false;">Locação</a>
+    <a href="#" onclick="app.rolarPara('secao-ademicon');return false;">Consórcio Ademicon</a>
+    <a href="#" onclick="app.rolarPara('secao-caixa');return false;">Financiamento Caixa</a>
+  </nav>
+  <div class="acoes-topo">
+    <div id="area-visitante" class="acoes-topo">
+      <button class="btn-fantasma" onclick="app.abrirAuth('login')">Entrar</button>
+      <button class="btn-ouro" onclick="app.abrirAuth('cadastro')">Anunciar imóvel</button>
     </div>
-  </header>
-
-  <section class="hero">
-    <div class="eyebrow">Curadoria imobiliária · Distrito Federal</div>
-    <h1>Cada endereço tem<br>uma <em>luz</em> própria.</h1>
-    <p class="lead">Uma vitrine só, para todas as marcas: corretores, imobiliárias, construtoras, incorporadoras, correspondentes Caixa e proprietários — cada um com identidade e recebimento próprios.</p>
-
-    <div class="ficha-luxo camada-viva">
-      <div class="campo">
-        <label>Modalidade</label>
-        <select id="busca-modalidade">
-          <option value="todas">Todas as opções</option>
-          <option value="agio">Negociação de Ágio</option>
-          <option value="venda_direta">Venda direta</option>
-          <option value="locacao_residencial">Locação residencial</option>
-        </select>
-      </div>
-      <div class="campo">
-        <label>Localização / palavra-chave</label>
-        <input type="text" id="busca-q" placeholder="Águas Claras, Sudoeste...">
-      </div>
-      <button class="btn-luxo" onclick="app.carregarListings()">Buscar</button>
-    </div>
-  </section>
-
-  <section class="secao">
-    <div class="secao-cabecalho">
-      <h2 class="secao-titulo">Vitrine da rede</h2>
-      <span class="secao-nota" id="contador-resultados"></span>
-    </div>
-    <div class="grade" id="grade-imoveis">
-      <div class="estado-vazio"><strong>Carregando a vitrine…</strong>Buscando os imóveis publicados por toda a rede.</div>
-    </div>
-  </section>
-
-  <footer>IMOBI — Curadoria imobiliária multi-marca · Distrito Federal e Entorno</footer>
-
-  <!-- ===== Modal: Login / Cadastro ===== -->
-  <div class="modal-fundo" id="modal-auth">
-    <div class="modal camada-viva">
-      <button class="fechar" onclick="app.fecharModal('modal-auth')">✕</button>
-      <div id="auth-erro" class="msg-erro oculto"></div>
-
-      <div id="bloco-login">
-        <h2>Entrar</h2>
-        <div class="campo-modal"><label>E-mail</label><input type="email" id="login-email"></div>
-        <div class="campo-modal"><label>Senha</label><input type="password" id="login-senha"></div>
-        <button class="btn-luxo" style="width:100%" onclick="app.login()">Entrar</button>
-        <div class="troca-modo">Ainda não tem conta? <a onclick="app.trocarAuth('cadastro')">Cadastre-se</a></div>
-      </div>
-
-      <div id="bloco-cadastro" class="oculto">
-        <h2>Criar conta</h2>
-        <div class="campo-modal">
-          <label>Você é</label>
-          <select id="cad-tipo">
-            <option value="corretor">Corretor autônomo</option>
-            <option value="imobiliaria">Imobiliária</option>
-            <option value="construtora">Construtora</option>
-            <option value="incorporadora">Incorporadora</option>
-            <option value="correspondente_caixa">Correspondente Caixa</option>
-            <option value="proprietario">Proprietário direto</option>
-          </select>
-        </div>
-        <div class="campo-modal"><label>Nome da marca / imobiliária</label><input type="text" id="cad-nome-exibicao" placeholder="Ex: Maria Silva Imóveis"></div>
-        <div class="linha-2">
-          <div class="campo-modal"><label>Seu nome</label><input type="text" id="cad-nome"></div>
-          <div class="campo-modal"><label>CRECI (opcional)</label><input type="text" id="cad-creci"></div>
-        </div>
-        <div class="linha-2">
-          <div class="campo-modal"><label>WhatsApp</label><input type="text" id="cad-whatsapp"></div>
-          <div class="campo-modal"><label>Chave PIX p/ recebimento</label><input type="text" id="cad-pix"></div>
-        </div>
-        <div class="campo-modal"><label>E-mail</label><input type="email" id="cad-email"></div>
-        <div class="campo-modal"><label>Senha</label><input type="password" id="cad-senha"></div>
-        <button class="btn-luxo" style="width:100%" onclick="app.cadastro()">Criar conta</button>
-        <div class="troca-modo">Já tem conta? <a onclick="app.trocarAuth('login')">Entrar</a></div>
-      </div>
+    <div id="area-logado" class="user-chip oculto">
+      <strong id="nome-usuario-logado"></strong>
+      <button class="btn-luxo" onclick="app.abrirPublicar()">+ Publicar</button>
+      <button class="btn-fantasma" onclick="app.abrirDashboard()">Meu painel</button>
+      <button class="btn-fantasma" onclick="app.logout()">Sair</button>
     </div>
   </div>
+</header>
 
-  <!-- ===== Modal: Publicar imóvel ===== -->
-  <div class="modal-fundo" id="modal-publicar">
-    <div class="modal camada-viva">
-      <button class="fechar" onclick="app.fecharModal('modal-publicar')">✕</button>
-      <h2>Publicar imóvel</h2>
-      <div id="publicar-erro" class="msg-erro oculto"></div>
-      <div id="publicar-sucesso" class="msg-sucesso oculto"></div>
+<!-- ================= INÍCIO (vitrine) ================= -->
+<div id="view-inicio">
+<section class="hero">
+  <div class="eyebrow">Curadoria imobiliária · Distrito Federal e Entorno</div>
+  <h1>Cada endereço tem<br>uma <em>luz</em> própria.</h1>
+  <p class="lead">Uma vitrine única para todas as marcas: corretores, imobiliárias, construtoras, incorporadoras, correspondentes Caixa e proprietários. Com fotos, vídeos, ágio, consórcio Ademicon e financiamento Caixa — tudo em um só lugar.</p>
+  <div class="stats-mini">
+    <div><b id="stat-imoveis">—</b>imóveis na vitrine</div>
+    <div><b id="stat-corretores">—</b>marcas parceiras</div>
+    <div><b id="stat-leads">—</b>contatos gerados</div>
+  </div>
 
-      <div class="campo-modal"><label>Título</label><input type="text" id="p-titulo" placeholder="Ex: Cobertura 3 quartos — Águas Claras"></div>
+  <div class="ficha-luxo camada-viva">
+    <div class="campo">
+      <label>Modalidade</label>
+      <select id="busca-modalidade">
+        <option value="todas">Todas as opções</option>
+        <option value="agio">Negociação de Ágio</option>
+        <option value="venda_direta">Venda direta</option>
+        <option value="locacao_residencial">Locação residencial</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label>Localização / palavra-chave</label>
+      <input type="text" id="busca-q" placeholder="Águas Claras, Sudoeste, Vicente Pires..." onkeydown="if(event.key==='Enter')app.carregarVitrine()">
+    </div>
+    <div class="campo">
+      <label>Tipo de imóvel</label>
+      <select id="busca-tipo">
+        <option value="">Todos os tipos</option>
+        <option value="apartamento">Apartamento</option>
+        <option value="casa">Casa</option>
+        <option value="cobertura">Cobertura</option>
+        <option value="kitnet">Kitnet</option>
+        <option value="terreno">Terreno</option>
+        <option value="comercial">Comercial</option>
+      </select>
+    </div>
+    <button class="btn-luxo" onclick="app.carregarVitrine()">Buscar imóveis</button>
+  </div>
+</section>
+
+<section class="secao">
+  <div class="secao-cabecalho">
+    <h2 class="secao-titulo">Vitrine da rede</h2>
+    <span class="secao-nota" id="contador-resultados"></span>
+  </div>
+  <div class="chips" id="chips-ordem">
+    <button class="chip ativo" onclick="app.definirOrdem('recentes',this)">Mais recentes</button>
+    <button class="chip" onclick="app.definirOrdem('destaque',this)">Em destaque</button>
+    <button class="chip" onclick="app.definirOrdem('preco',this)">Menor preço</button>
+  </div>
+  <div class="grade" id="grade-imoveis">
+    <div class="estado-vazio"><strong>Carregando a vitrine…</strong>Buscando os imóveis publicados por toda a rede.</div>
+  </div>
+</section>
+
+<section class="secao" id="secao-ademicon">
+  <div class="secao-cabecalho">
+    <h2 class="secao-titulo">Consórcio de imóveis</h2>
+    <span class="secao-nota">Parceria Ademicon</span>
+  </div>
+  <div class="banner-duplo">
+    <div class="banner banner-ademicon">
+      <h3>Consórcio Ademicon</h3>
+      <p>Compre seu imóvel planejando com parcelas que cabem no bolso, sem juros e sem entrada. Contemple e escolha qualquer imóvel da vitrine — novo ou usado.</p>
+      <div class="banner-mini-nums">
+        <div><b>Sem juros</b>parcelas fixas</div>
+        <div><b>100%</b>do crédito</div>
+        <div><b>Lance</b>ou sorteio</div>
+      </div>
+      <a class="btn-luxo" href="https://www.ademicon.com.br" target="_blank" rel="noopener">Simular consórcio</a>
+    </div>
+    <div class="banner banner-caixa">
+      <h3>Financiamento Caixa</h3>
+      <p>Financie até 80% do valor do imóvel pela Caixa Econômica Federal, com uso de FGTS e as menores taxas do mercado. Correspondentes Caixa da rede cuidam de todo o processo.</p>
+      <div class="banner-mini-nums">
+        <div><b>Até 35</b>anos de prazo</div>
+        <div><b>FGTS</b>na entrada</div>
+        <div><b>80%</b>do valor</div>
+      </div>
+      <a class="btn-luxo" href="https://www.caixa.gov.br/voce/habitacao/Paginas/default.aspx" target="_blank" rel="noopener">Simular financiamento</a>
+    </div>
+  </div>
+</section>
+
+<section class="secao" id="secao-caixa">
+  <div class="secao-cabecalho">
+    <h2 class="secao-titulo">Simulador rápido</h2>
+    <span class="secao-nota">Estimativa de financiamento habitacional</span>
+  </div>
+  <div class="simulador camada-viva">
+    <div class="entradas">
+      <div class="campo">
+        <label>Valor do imóvel: R$ <span id="sim-valor-lbl">400.000</span></label>
+        <input type="range" id="sim-valor" min="100000" max="3000000" step="10000" value="400000" oninput="app.atualizarSimulador()">
+      </div>
+      <div class="campo">
+        <label>Entrada: <span id="sim-entrada-lbl">20%</span></label>
+        <input type="range" id="sim-entrada" min="0" max="50" step="5" value="20" oninput="app.atualizarSimulador()">
+      </div>
+      <div class="campo">
+        <label>Prazo: <span id="sim-prazo-lbl">30 anos</span></label>
+        <input type="range" id="sim-prazo" min="5" max="35" step="5" value="30" oninput="app.atualizarSimulador()">
+      </div>
+    </div>
+    <div class="resultado">
+      <small>Prestação estimada</small>
+      <b id="sim-resultado">R$ 0</b>
+      <small id="sim-nota">Sistema SAC · taxa referencial 10,5% a.a.</small>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div id="view-dashboard" class="oculto">
+<div class="dash-wrap">
+  <aside class="dash-sidebar">
+    <div class="dash-perfil">
+      <h3 id="dash-nome">Minha conta</h3>
+      <span id="dash-plano-badge">Plano gratuito</span>
+    </div>
+    <button class="dash-item ativo" data-painel="paineis-visao" onclick="app.trocarPainel('paineis-visao',this)">◈ Visão geral</button>
+    <button class="dash-item" data-painel="paineis-anuncios" onclick="app.trocarPainel('paineis-anuncios',this)">▤ Meus anúncios</button>
+    <button class="dash-item" data-painel="paineis-leads" onclick="app.trocarPainel('paineis-leads',this)">✉ Leads recebidos</button>
+    <button class="dash-item" data-painel="paineis-perfil" onclick="app.trocarPainel('paineis-perfil',this)">❖ Minha marca</button>
+    <button class="dash-item" data-painel="paineis-planos" onclick="app.trocarPainel('paineis-planos',this)">⚖ Planos e cobrança</button>
+    <button class="btn-ouro" style="margin-top:auto;margin-bottom:.6rem;" onclick="app.abrirPublicar()">+ Novo anúncio</button>
+    <button class="btn-fantasma" onclick="app.irPara('inicio')">← Voltar à vitrine</button>
+  </aside>
+
+  <main class="dash-main">
+
+    <div class="painel ativo" id="paineis-visao">
+      <h2 class="secao-titulo" style="margin-bottom:var(--phi1)">Visão geral</h2>
+      <div id="aviso-limite" class="aviso-limite oculto">
+        <span>Você atingiu o limite de anúncios do plano gratuito.</span>
+        <button class="btn-ouro" onclick="app.trocarPainel('paineis-planos',document.querySelector('[data-painel=paineis-planos]'))">Fazer upgrade</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><b id="kpi-anuncios">0</b><span>Anúncios ativos</span></div>
+        <div class="kpi ouro"><b id="kpi-leads">0</b><span>Leads recebidos</span></div>
+        <div class="kpi"><b id="kpi-leads-novos">0</b><span>Leads novos</span></div>
+        <div class="kpi ouro"><b id="kpi-limite">0</b><span>Limite de anúncios</span></div>
+      </div>
+      <div class="camada-viva" style="padding:var(--phi2);border-radius:8px;">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;margin-bottom:.6rem;">Status da licença</h3>
+        <p style="font-size:.9rem;color:var(--espresso-suave);line-height:1.7;" id="status-licenca-texto">Verificando…</p>
+        <div style="display:flex;gap:.6rem;margin-top:var(--phi1);flex-wrap:wrap;">
+          <button class="btn-luxo" onclick="app.abrirPublicar()">Publicar imóvel</button>
+          <button class="btn-fantasma" onclick="app.trocarPainel('paineis-planos',document.querySelector('[data-painel=paineis-planos]'))">Ver planos</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="painel" id="paineis-anuncios">
+      <h2 class="secao-titulo" style="margin-bottom:var(--phi1)">Meus anúncios</h2>
+      <p style="font-size:.85rem;color:var(--espresso-suave);margin-bottom:var(--phi1);">Todos os seus imóveis aparecem automaticamente na vitrine pública, em qualquer aparelho, para qualquer visitante.</p>
+      <div id="meus-anuncios-lista"><div class="carregando"><div class="spinner"></div> Carregando anúncios…</div></div>
+    </div>
+
+    <div class="painel" id="paineis-leads">
+      <h2 class="secao-titulo" style="margin-bottom:var(--phi1)">Leads recebidos</h2>
+      <p style="font-size:.85rem;color:var(--espresso-suave);margin-bottom:var(--phi1);">Contatos de interessados nos seus imóveis. Organize o funil: novo → agendado → convertido.</p>
+      <div id="meus-leads-lista"><div class="carregando"><div class="spinner"></div> Carregando leads…</div></div>
+    </div>
+
+    <div class="painel" id="paineis-perfil">
+      <h2 class="secao-titulo" style="margin-bottom:var(--phi1)">Minha marca</h2>
+      <div id="perfil-sucesso" class="msg-sucesso oculto"></div>
+      <div class="linha-2">
+        <div class="campo-modal"><label>Nome da marca / imobiliária</label><input type="text" id="pf-nome-exibicao"></div>
+        <div class="campo-modal"><label>Seu nome</label><input type="text" id="pf-nome"></div>
+      </div>
+      <div class="linha-2">
+        <div class="campo-modal"><label>CRECI (opcional)</label><input type="text" id="pf-creci"></div>
+        <div class="campo-modal"><label>WhatsApp para contatos</label><input type="text" id="pf-whatsapp" placeholder="Ex: 5561999999999"></div>
+      </div>
+      <div class="campo-modal"><label>Chave PIX para recebimento</label><input type="text" id="pf-pix" placeholder="PIX que aparecerá para os compradores"></div>
+      <div class="campo-modal"><label>Sobre a marca (aparece nos seus anúncios)</label><textarea id="pf-sobre" rows="3"></textarea></div>
+      <button class="btn-luxo" onclick="app.salvarPerfil()">Salvar alterações</button>
+    </div>
+
+    <div class="painel" id="paineis-planos">
+      <h2 class="secao-titulo" style="margin-bottom:var(--phi1)">Planos e cobrança</h2>
+      <div class="planos-grade" id="planos-grade"></div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;margin:var(--phi2) 0 var(--phi0);">Histórico de pagamentos</h3>
+      <div id="pagamentos-lista"><div class="carregando"><div class="spinner"></div> Carregando…</div></div>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  IMOBI — Curadoria imobiliária multi-marca · Distrito Federal e Entorno<br>
+  Venda · Locação · Ágio · Consórcio Ademicon · Financiamento Caixa
+  <div class="rodape-links">
+    <a href="#" onclick="app.irPara('inicio');return false;">Vitrine</a>
+    <a href="#" onclick="app.abrirAuth('cadastro');return false;">Anunciar imóvel</a>
+    <a href="#" onclick="app.abrirAuth('login');return false;">Acesso do corretor</a>
+    <a href="https://www.ademicon.com.br" target="_blank" rel="noopener">Ademicon</a>
+    <a href="https://www.caixa.gov.br/voce/habitacao/Paginas/default.aspx" target="_blank" rel="noopener">Caixa Habitação</a>
+  </div>
+</footer>
+
+<!-- ================= MODAL: AUTH ================= -->
+<div class="modal-fundo" id="modal-auth">
+  <div class="modal">
+    <button class="fechar" onclick="app.fecharModal('modal-auth')">✕</button>
+    <div id="auth-erro" class="msg-erro oculto"></div>
+    <div id="bloco-login">
+      <h2>Entrar</h2>
+      <div class="campo-modal"><label>E-mail</label><input type="email" id="login-email" placeholder="voce@imobiliaria.com"></div>
+      <div class="campo-modal"><label>Senha</label><input type="password" id="login-senha" placeholder="Sua senha" onkeydown="if(event.key==='Enter')app.login()"></div>
+      <button class="btn-luxo" style="width:100%" onclick="app.login()">Entrar</button>
+      <div class="troca-modo">Ainda não tem conta? <a onclick="app.trocarAuth('cadastro')">Cadastre-se grátis</a></div>
+    </div>
+    <div id="bloco-cadastro" class="oculto">
+      <h2>Criar conta</h2>
       <div class="campo-modal">
-        <label>Modalidade</label>
+        <label>Você é</label>
+        <select id="cad-tipo">
+          <option value="corretor">Corretor autônomo</option>
+          <option value="imobiliaria">Imobiliária</option>
+          <option value="construtora">Construtora</option>
+          <option value="incorporadora">Incorporadora</option>
+          <option value="correspondente_caixa">Correspondente Caixa</option>
+          <option value="proprietario">Proprietário direto</option>
+        </select>
+      </div>
+      <div class="campo-modal"><label>Nome da marca / imobiliária *</label><input type="text" id="cad-nome-exibicao" placeholder="Ex: Maria Silva Imóveis"></div>
+      <div class="linha-2">
+        <div class="campo-modal"><label>Seu nome *</label><input type="text" id="cad-nome"></div>
+        <div class="campo-modal"><label>CRECI (opcional)</label><input type="text" id="cad-creci"></div>
+      </div>
+      <div class="linha-2">
+        <div class="campo-modal"><label>WhatsApp</label><input type="text" id="cad-whatsapp" placeholder="5561999999999"></div>
+        <div class="campo-modal"><label>Chave PIX p/ recebimento</label><input type="text" id="cad-pix"></div>
+      </div>
+      <div class="campo-modal"><label>E-mail *</label><input type="email" id="cad-email"></div>
+      <div class="campo-modal"><label>Senha (mín. 6 caracteres) *</label><input type="password" id="cad-senha"></div>
+      <button class="btn-ouro" style="width:100%" onclick="app.cadastro()">Criar conta grátis</button>
+      <div class="troca-modo">Já tem conta? <a onclick="app.trocarAuth('login')">Entrar</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODAL: PUBLICAR / EDITAR ================= -->
+<div class="modal-fundo" id="modal-publicar">
+  <div class="modal grande">
+    <button class="fechar" onclick="app.fecharModal('modal-publicar')">✕</button>
+    <h2 id="publicar-titulo">Publicar imóvel</h2>
+    <div id="publicar-erro" class="msg-erro oculto"></div>
+    <div id="publicar-sucesso" class="msg-sucesso oculto"></div>
+
+    <div class="campo-modal"><label>Título do anúncio *</label><input type="text" id="p-titulo" placeholder="Ex: Cobertura 3 quartos — Águas Claras"></div>
+    <div class="linha-2">
+      <div class="campo-modal">
+        <label>Modalidade *</label>
         <select id="p-modalidade" onchange="app.alternarCamposAgio()">
           <option value="venda_direta">Venda direta</option>
           <option value="agio">Negociação de Ágio</option>
           <option value="locacao_residencial">Locação residencial</option>
         </select>
       </div>
-      <div class="linha-2">
-        <div class="campo-modal"><label>Preço face (R$)</label><input type="number" id="p-preco"></div>
-        <div class="campo-modal"><label>Localização</label><input type="text" id="p-local"></div>
-      </div>
-
-      <div class="campos-agio oculto" id="campos-agio">
-        <div class="linha-2">
-          <div class="campo-modal"><label>Ágio pago (R$)</label><input type="number" id="p-agio-pago"></div>
-          <div class="campo-modal"><label>Saldo devedor (R$)</label><input type="number" id="p-saldo"></div>
-        </div>
-        <div class="linha-2">
-          <div class="campo-modal"><label>Prestação mensal (R$)</label><input type="number" id="p-prestacao"></div>
-          <div class="campo-modal"><label>Banco credor</label><input type="text" id="p-banco"></div>
-        </div>
-      </div>
-
-      <div class="campo-modal"><label>Memorial descritivo</label><textarea id="p-memorial"></textarea></div>
-      <div class="campo-modal"><label>Link de vídeo (YouTube ou .mp4)</label><input type="text" id="p-video"></div>
       <div class="campo-modal">
-        <label>Fotos do imóvel</label>
-        <input type="file" id="p-fotos" accept="image/*" multiple onchange="app.enviarFotos(this.files)">
-        <div id="p-fotos-status" style="font-size:.78rem;color:var(--espresso-suave);margin-top:.4rem;"></div>
+        <label>Tipo de imóvel</label>
+        <select id="p-tipo">
+          <option value="apartamento">Apartamento</option>
+          <option value="casa">Casa</option>
+          <option value="cobertura">Cobertura</option>
+          <option value="kitnet">Kitnet</option>
+          <option value="terreno">Terreno</option>
+          <option value="comercial">Comercial</option>
+        </select>
       </div>
-
-      <button class="btn-luxo" style="width:100%" onclick="app.publicar()">Publicar anúncio</button>
     </div>
-  </div>
-
-  <!-- ===== Modal: Falar com especialista (lead) ===== -->
-  <div class="modal-fundo" id="modal-lead">
-    <div class="modal camada-viva">
-      <button class="fechar" onclick="app.fecharModal('modal-lead')">✕</button>
-      <h2>Falar com o anunciante</h2>
-      <div id="lead-sucesso" class="msg-sucesso oculto"></div>
-      <div class="campo-modal"><label>Seu nome</label><input type="text" id="lead-nome"></div>
-      <div class="campo-modal"><label>WhatsApp (com DDD)</label><input type="text" id="lead-whatsapp"></div>
-      <button class="btn-luxo" style="width:100%" onclick="app.enviarLead()">Iniciar conversa</button>
+    <div class="linha-2">
+      <div class="campo-modal"><label>Preço (R$) *</label><input type="number" id="p-preco" placeholder="780000"></div>
+      <div class="campo-modal"><label>Localização *</label><input type="text" id="p-local" placeholder="Ex: Águas Claras · Área Central"></div>
     </div>
+    <div class="linha-3">
+      <div class="campo-modal"><label>Quartos</label><input type="number" id="p-quartos" min="0" placeholder="3"></div>
+      <div class="campo-modal"><label>Banheiros</label><input type="number" id="p-banheiros" min="0" placeholder="2"></div>
+      <div class="campo-modal"><label>Vagas</label><input type="number" id="p-vagas" min="0" placeholder="1"></div>
+    </div>
+    <div class="campo-modal"><label>Área útil (m²)</label><input type="number" id="p-area" min="0" placeholder="85"></div>
+
+    <div class="campos-agio oculto" id="campos-agio">
+      <div class="linha-2">
+        <div class="campo-modal"><label>Ágio pago (R$)</label><input type="number" id="p-agio-pago"></div>
+        <div class="campo-modal"><label>Saldo devedor (R$)</label><input type="number" id="p-saldo"></div>
+      </div>
+      <div class="linha-2">
+        <div class="campo-modal"><label>Prestação mensal (R$)</label><input type="number" id="p-prestacao"></div>
+        <div class="campo-modal"><label>Banco credor</label><input type="text" id="p-banco" placeholder="Ex: Caixa, BRB, Itaú..."></div>
+      </div>
+    </div>
+
+    <div class="campo-modal"><label>Memorial descritivo</label><textarea id="p-memorial" rows="4" placeholder="Descreva o imóvel: acabamento, condomínio, lazer, documentação..."></textarea></div>
+    <div class="campo-modal"><label>Vídeo tour (link YouTube ou envie arquivo abaixo)</label><input type="text" id="p-video-link" placeholder="https://youtube.com/watch?v=..."></div>
+
+    <div class="campo-modal">
+      <label>Fotos e vídeos do imóvel</label>
+      <div class="upload-zona" onclick="document.getElementById('p-arquivos').click()">
+        📸 Clique para enviar fotos e vídeos do seu computador ou celular
+        <input type="file" id="p-arquivos" accept="image/*,video/*" multiple style="display:none" onchange="app.enviarArquivos(this.files)">
+      </div>
+      <div class="barra-progresso oculto" id="upload-barra"><i></i></div>
+      <div id="p-status-upload" style="font-size:.76rem;color:var(--espresso-suave);margin-top:.45rem;"></div>
+      <div class="previews" id="p-previews"></div>
+    </div>
+
+    <button class="btn-ouro" style="width:100%;padding:.95rem;font-size:1rem;" id="botao-publicar" onclick="app.publicar()">Publicar anúncio</button>
   </div>
+</div>
 
-  <script>
-    class ImobiApp {
-      constructor() {
-        // Endereço exato mapeado pelo seu frontend
-        this.API_BASE = "https://imobi-api.contatodroppfy.workers.dev";
+<!-- ================= MODAL: DETALHE ================= -->
+<div class="modal-fundo" id="modal-detalhe">
+  <div class="modal grande" style="max-width:920px;">
+    <button class="fechar" onclick="app.fecharModal('modal-detalhe')">✕</button>
+    <div id="detalhe-conteudo"><div class="carregando"><div class="spinner"></div> Abrindo imóvel…</div></div>
+  </div>
+</div>
 
-        this.token = localStorage.getItem('imobi_token') || null; 
-        this.usuario = JSON.parse(localStorage.getItem('imobi_user') || 'null');
-        this.leadAlvo = { tenant_id: null, listing_id: null };
-        this.mediaPendente = [];
+<!-- ================= MODAL: LEAD ================= -->
+<div class="modal-fundo" id="modal-lead">
+  <div class="modal">
+    <button class="fechar" onclick="app.fecharModal('modal-lead')">✕</button>
+    <h2>Falar com o anunciante</h2>
+    <p style="font-size:.85rem;color:var(--espresso-suave);margin-bottom:var(--phi1);">Deixe seu contato e o responsável pelo imóvel fala com você pelo WhatsApp.</p>
+    <div id="lead-sucesso" class="msg-sucesso oculto"></div>
+    <div class="campo-modal"><label>Seu nome</label><input type="text" id="lead-nome"></div>
+    <div class="campo-modal"><label>WhatsApp (com DDD)</label><input type="text" id="lead-whatsapp" placeholder="61999999999"></div>
+    <button class="btn-ouro" style="width:100%" onclick="app.enviarLead()">Iniciar conversa</button>
+  </div>
+</div>
 
-        this.atualizarAreaConta();
-        this.carregarListings();
-      }
+<!-- ================= MODAL: PIX / PLANO ================= -->
+<div class="modal-fundo" id="modal-pix">
+  <div class="modal">
+    <button class="fechar" onclick="app.fecharModal('modal-pix')">✕</button>
+    <h2 id="pix-titulo">Pagamento via PIX</h2>
+    <div id="pix-corpo"></div>
+  </div>
+</div>
 
-      async chamarApi(caminho, opcoes = {}) {
-        const headers = { 'Content-Type': 'application/json', ...(opcoes.headers || {}) };
-        if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
-        const resp = await fetch(this.API_BASE + caminho, { ...opcoes, headers });
-        const dados = await resp.json().catch(() => ({}));
-        if (!resp.ok) throw new Error(dados.erro || 'Não foi possível completar a ação.');
-        return dados;
-      }
+<div class="toasts" id="toasts"></div>
 
-      // ---------- Autenticação ----------
-      abrirAuth(modo) { this.trocarAuth(modo); this.abrirModal('modal-auth'); }
-      
-      trocarAuth(modo) {
-        document.getElementById('bloco-login').classList.toggle('oculto', modo !== 'login');
-        document.getElementById('bloco-cadastro').classList.toggle('oculto', modo !== 'cadastro');
-        document.getElementById('auth-erro').classList.add('oculto');
-      }
+<script>
+class ImobiApp {
+  constructor() {
+    this.token = localStorage.getItem('imobi_token') || null;
+    this.usuario = JSON.parse(localStorage.getItem('imobi_user') || 'null');
+    this.apiBase = null;
+    this.ordem = 'recentes';
+    this.modalidadeAtiva = 'todas';
+    this.mediaPendente = [];       // {tipo,url,key} enviados agora
+    this.mediaExistente = [];      // {id,tipo,url} já salvos (modo edição)
+    this.editandoId = null;
+    this.leadAlvo = { tenant_id: null, listing_id: null };
+    this.detalheAtual = null;
+    this.detalheIndice = 0;
+    this.atualizarAreaConta();
+    this.inicializar();
+  }
 
-      async login() {
-        const email = document.getElementById('login-email').value.trim();
-        const senha = document.getElementById('login-senha').value;
-        try {
-          const dados = await this.chamarApi('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, senha }) });
-          this.definirSessao(dados.token, dados.user, dados.tenant);
-          this.fecharModal('modal-auth');
-        } catch (e) { this.mostrarErro('auth-erro', e.message); }
-      }
+  async inicializar() {
+    await this.resolverApiBase();
+    this.carregarStats();
+    this.carregarVitrine();
+    this.carregarPlanos();
+    this.capturarDeepLink();
+  }
 
-      async cadastro() {
-        const corpo = {
-          tipo_perfil: document.getElementById('cad-tipo').value,
-          nome_exibicao: document.getElementById('cad-nome-exibicao').value.trim(),
-          nome: document.getElementById('cad-nome').value.trim(),
-          creci: document.getElementById('cad-creci').value.trim(),
-          whatsapp: document.getElementById('cad-whatsapp').value.trim(),
-          chave_pix: document.getElementById('cad-pix').value.trim(),
-          email: document.getElementById('cad-email').value.trim(),
-          senha: document.getElementById('cad-senha').value,
-        };
-        try {
-          const dados = await this.chamarApi('/api/auth/cadastro', { method: 'POST', body: JSON.stringify(corpo) });
-          this.definirSessao(dados.token, { nome: corpo.nome, email: corpo.email }, dados.tenant);
-          this.fecharModal('modal-auth');
-        } catch (e) { this.mostrarErro('auth-erro', e.message); }
-      }
-
-      definirSessao(token, user, tenant) {
-        this.token = token; this.usuario = { ...user, tenant };
-        localStorage.setItem('imobi_token', token);
-        localStorage.setItem('imobi_user', JSON.stringify(this.usuario));
-        this.atualizarAreaConta();
-      }
-
-      logout() {
-        this.token = null; this.usuario = null;
-        localStorage.removeItem('imobi_token'); localStorage.removeItem('imobi_user');
-        this.atualizarAreaConta();
-      }
-
-      atualizarAreaConta() {
-        const logado = !!this.token;
-        document.getElementById('area-visitante').classList.toggle('oculto', logado);
-        document.getElementById('area-logado').classList.toggle('oculto', !logado);
-        if (logado) document.getElementById('nome-usuario-logado').innerText = this.usuario?.tenant?.nome_exibicao || this.usuario?.nome || '';
-      }
-
-      // ---------- Vitrine ----------
-      filtrar(modalidade) { 
-        document.getElementById('busca-modalidade').value = modalidade; 
-        this.carregarListings(); 
-      }
-
-      async carregarListings() {
-        const grade = document.getElementById('grade-imoveis');
-        const modalidade = document.getElementById('busca-modalidade').value;
-        const q = document.getElementById('busca-q').value.trim();
-        grade.innerHTML = '<div class="estado-vazio"><strong>Buscando…</strong>Consultando os imóveis publicados pela rede.</div>';
-        try {
-          const params = new URLSearchParams({ modalidade, ...(q ? { q } : {}) });
-          const dados = await this.chamarApi('/api/listings?' + params.toString());
-          this.renderizarListings(dados.listings || []);
-        } catch (e) {
-          grade.innerHTML = `<div class="estado-vazio"><strong>Não foi possível carregar a vitrine.</strong>Verifique se o backend foi implantado (wrangler deploy) e se o endereço em API_BASE está correto. Detalhe: ${e.message}</div>`;
-        }
-      }
-
-      renderizarListings(listings) {
-        const grade = document.getElementById('grade-imoveis');
-        document.getElementById('contador-resultados').innerText = listings.length ? `${listings.length} imóveis encontrados` : '';
-        
-        if (!listings.length) {
-          grade.innerHTML = '<div class="estado-vazio"><strong>Nenhum imóvel aqui ainda.</strong>Ajuste os filtros ou seja o primeiro a publicar nesta modalidade.</div>';
-          return;
-        }
-        
-        const rotulos = { agio: 'Ágio', venda_direta: 'Venda direta', locacao_residencial: 'Locação' };
-        
-        grade.innerHTML = listings.map(l => {
-          const foto = (l.media && l.media.find(m => m.tipo === 'foto'))?.url;
-          const estiloFoto = foto ? `style="background-image:url('${foto}')"` : '';
-          return `
-            <article class="card camada-viva" onclick='app.abrirLead(${JSON.stringify({ tenant_id: l.tenant_id, listing_id: l.id })})'>
-              <div class="card-foto" ${estiloFoto}><span class="card-tag">${rotulos[l.modalidade] || l.modalidade}</span></div>
-              <div class="card-corpo">
-                <h3>${this.escapar(l.titulo)}</h3>
-                <div class="card-local">${this.escapar(l.localizacao || '')}</div>
-                <div class="card-rodape">
-                  <div class="card-preco">R$ ${Number(l.preco_face).toLocaleString('pt-BR')}</div>
-                  <div class="card-anunciante">${this.escapar(l.tenant_nome || '')}</div>
-                </div>
-              </div>
-            </article>`;
-        }).join('');
-      }
-
-      escapar(texto) { 
-        const d = document.createElement('div'); 
-        d.innerText = texto || ''; 
-        return d.innerHTML; 
-      }
-
-      // ---------- Publicar imóvel ----------
-      abrirPublicar() { this.abrirModal('modal-publicar'); }
-      
-      alternarCamposAgio() {
-        document.getElementById('campos-agio').classList.toggle('oculto', document.getElementById('p-modalidade').value !== 'agio');
-      }
-
-      async enviarFotos(arquivos) {
-        const status = document.getElementById('p-fotos-status');
-        status.innerText = 'Enviando fotos...';
-        try {
-          for (const arquivo of arquivos) {
-            const form = new FormData(); 
-            form.append('file', arquivo);
-            const resp = await fetch(this.API_BASE + '/api/media/upload', { 
-              method: 'POST', 
-              headers: { Authorization: 'Bearer ' + this.token }, 
-              body: form 
-            });
-            const dados = await resp.json();
-            if (!resp.ok) throw new Error(dados.erro);
-            this.mediaPendente.push({ tipo: dados.tipo, url: dados.url });
-          }
-          status.innerText = `${this.mediaPendente.length} arquivo(s) prontos para publicar.`;
-        } catch (e) { 
-          status.innerText = 'Falha no envio: ' + e.message; 
-        }
-      }
-
-      async publicar() {
-        if (!this.token) { this.abrirAuth('login'); return; }
-        const corpo = {
-          titulo: document.getElementById('p-titulo').value.trim(),
-          modalidade: document.getElementById('p-modalidade').value,
-          preco_face: Number(document.getElementById('p-preco').value || 0),
-          localizacao: document.getElementById('p-local').value.trim(),
-          agio_pago: Number(document.getElementById('p-agio-pago').value || 0) || null,
-          saldo_devedor: Number(document.getElementById('p-saldo').value || 0) || null,
-          prestacao_mensal: Number(document.getElementById('p-prestacao').value || 0) || null,
-          banco_credor: document.getElementById('p-banco').value.trim() || null,
-          memorial_descritivo: document.getElementById('p-memorial').value.trim(),
-          video_tour_url: document.getElementById('p-video').value.trim(),
-          media_urls: this.mediaPendente,
-        };
-        try {
-          await this.chamarApi('/api/listings', { method: 'POST', body: JSON.stringify(corpo) });
-          document.getElementById('publicar-sucesso').innerText = 'Anúncio publicado! Já está visível na vitrine pública.';
-          document.getElementById('publicar-sucesso').classList.remove('oculto');
-          this.mediaPendente = [];
-          this.carregarListings();
-          setTimeout(() => this.fecharModal('modal-publicar'), 1400);
-        } catch (e) { 
-          this.mostrarErro('publicar-erro', e.message); 
-        }
-      }
-
-      // ---------- Leads ----------
-      abrirLead({ tenant_id, listing_id }) { 
-        this.leadAlvo = { tenant_id, listing_id }; 
-        this.abrirModal('modal-lead'); 
-      }
-      
-      async enviarLead() {
-        const corpo = {
-          ...this.leadAlvo,
-          nome: document.getElementById('lead-nome').value.trim(),
-          whatsapp: document.getElementById('lead-whatsapp').value.trim(),
-        };
-        try {
-          await this.chamarApi('/api/leads', { method: 'POST', body: JSON.stringify(corpo) });
-          const el = document.getElementById('lead-sucesso');
-          el.innerText = 'Recebemos seu contato. O anunciante vai falar com você em breve.';
-          el.classList.remove('oculto');
-        } catch (e) { 
-          alert(e.message); 
-        }
-      }
-
-      // ---------- Utilitários de modal ----------
-      abrirModal(id) { document.getElementById(id).classList.add('ativo'); }
-      
-      fecharModal(id) { 
-        document.getElementById(id).classList.remove('ativo'); 
-        document.getElementById(id).querySelectorAll('.msg-erro,.msg-sucesso').forEach(e => e.classList.add('oculto')); 
-      }
-      
-      mostrarErro(id, msg) { 
-        const el = document.getElementById(id); 
-        el.innerText = msg; 
-        el.classList.remove('oculto'); 
-      }
+  // ===== API =====
+  async resolverApiBase() {
+    const candidatos = [];
+    if (location.origin.startsWith('http')) candidatos.push(location.origin);
+    candidatos.push('https://imobi-api.contatodroppfy.workers.dev');
+    for (const c of candidatos) {
+      try {
+        const r = await fetch(c + '/api/health', { signal: AbortSignal.timeout(5000) });
+        if (r.ok) { this.apiBase = c; return; }
+      } catch (e) {}
     }
+    this.apiBase = 'https://imobi-api.contatodroppfy.workers.dev';
+  }
 
-    const app = new ImobiApp();
-  </script>
+  async chamarApi(caminho, opcoes = {}) {
+    if (!this.apiBase) await this.resolverApiBase();
+    const headers = { 'Content-Type': 'application/json', ...(opcoes.headers || {}) };
+    if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+    let resp;
+    try {
+      resp = await fetch(this.apiBase + caminho, { ...opcoes, headers });
+    } catch (e) {
+      throw new Error('Não foi possível conectar ao servidor. Verifique sua internet.');
+    }
+    const dados = await resp.json().catch(() => ({}));
+    if (!resp.ok) throw new Error(dados.erro || 'Não foi possível completar a ação.');
+    return dados;
+  }
+
+  // ===== Toasts =====
+  toast(mensagem, tipo = 'info') {
+    const el = document.createElement('div');
+    el.className = 'toast ' + tipo;
+    el.innerHTML = '<span>' + this.escapar(mensagem) + '</span>';
+    document.getElementById('toasts').appendChild(el);
+    setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .4s'; }, 3200);
+    setTimeout(() => el.remove(), 3700);
+  }
+
+  escapar(texto) {
+    const d = document.createElement('div');
+    d.innerText = texto == null ? '' : String(texto);
+    return d.innerHTML;
+  }
+  numero(n) { return Number(n || 0).toLocaleString('pt-BR'); }
+  dinheiro(n) { return 'R$ ' + Number(n || 0).toLocaleString('pt-BR', { minimumFractionDigits: 0 }); }
+
+  // ===== Sessão =====
+  definirSessao(token, user, tenant) {
+    this.token = token;
+    this.usuario = { ...user, tenant };
+    localStorage.setItem('imobi_token', token);
+    localStorage.setItem('imobi_user', JSON.stringify(this.usuario));
+    this.atualizarAreaConta();
+  }
+
+  logout() {
+    this.token = null; this.usuario = null;
+    localStorage.removeItem('imobi_token'); localStorage.removeItem('imobi_user');
+    this.atualizarAreaConta();
+    this.irPara('inicio');
+    this.toast('Sessão encerrada.', 'info');
+  }
+
+  atualizarAreaConta() {
+    const logado = !!this.token;
+    document.getElementById('area-visitante').classList.toggle('oculto', logado);
+    document.getElementById('area-logado').classList.toggle('oculto', !logado);
+    if (logado) {
+      document.getElementById('nome-usuario-logado').innerText =
+        this.usuario?.tenant?.nome_exibicao || this.usuario?.nome || '';
+    }
+  }
+
+  // ===== Navegação =====
+  irPara(view) {
+    if (view === 'dashboard' && !this.token) { this.abrirAuth('login'); return; }
+    document.getElementById('view-inicio').classList.toggle('oculto', view !== 'inicio');
+    document.getElementById('view-dashboard').classList.toggle('oculto', view !== 'dashboard');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (view === 'dashboard') this.carregarDashboard();
+  }
+  abrirDashboard() { this.irPara('dashboard'); }
+  rolarPara(id) { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+
+  // ===== Modais =====
+  abrirModal(id) { document.getElementById(id).classList.add('ativo'); }
+  fecharModal(id) {
+    document.getElementById(id).classList.remove('ativo');
+    document.getElementById(id).querySelectorAll('.msg-erro,.msg-sucesso').forEach(e => e.classList.add('oculto'));
+  }
+  mostrarErro(id, msg) { const el = document.getElementById(id); el.innerText = msg; el.classList.remove('oculto'); }
+
+  // ===== Auth =====
+  abrirAuth(modo) { this.trocarAuth(modo); this.abrirModal('modal-auth'); }
+  trocarAuth(modo) {
+    document.getElementById('bloco-login').classList.toggle('oculto', modo !== 'login');
+    document.getElementById('bloco-cadastro').classList.toggle('oculto', modo !== 'cadastro');
+    document.getElementById('auth-erro').classList.add('oculto');
+  }
+  async login() {
+    const email = document.getElementById('login-email').value.trim();
+    const senha = document.getElementById('login-senha').value;
+    if (!email || !senha) return this.mostrarErro('auth-erro', 'Preencha e-mail e senha.');
+    try {
+      const d = await this.chamarApi('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, senha }) });
+      this.definirSessao(d.token, d.user, d.tenant);
+      this.fecharModal('modal-auth');
+      this.toast('Bem-vindo(a) de volta!', 'ok');
+    } catch (e) { this.mostrarErro('auth-erro', e.message); }
+  }
+  async cadastro() {
+    const corpo = {
+      tipo_perfil: document.getElementById('cad-tipo').value,
+      nome_exibicao: document.getElementById('cad-nome-exibicao').value.trim(),
+      nome: document.getElementById('cad-nome').value.trim(),
+      creci: document.getElementById('cad-creci').value.trim(),
+      whatsapp: document.getElementById('cad-whatsapp').value.trim(),
+      chave_pix: document.getElementById('cad-pix').value.trim(),
+      email: document.getElementById('cad-email').value.trim(),
+      senha: document.getElementById('cad-senha').value,
+    };
+    if (!corpo.nome_exibicao || !corpo.nome || !corpo.email || !corpo.senha) {
+      return this.mostrarErro('auth-erro', 'Preencha os campos marcados com *.');
+    }
+    try {
+      const d = await this.chamarApi('/api/auth/cadastro', { method: 'POST', body: JSON.stringify(corpo) });
+      this.definirSessao(d.token, d.user, d.tenant);
+      this.fecharModal('modal-auth');
+      this.toast('Conta criada! Seu plano gratuito permite 3 anúncios.', 'ok');
+      this.carregarStats();
+    } catch (e) { this.mostrarErro('auth-erro', e.message); }
+  }
+
+  // ===== Vitrine =====
+  async carregarStats() {
+    try {
+      const d = await this.chamarApi('/api/stats');
+      document.getElementById('stat-imoveis').innerText = d.imoveis;
+      document.getElementById('stat-corretores').innerText = d.corretores;
+      document.getElementById('stat-leads').innerText = d.leads;
+    } catch (e) {}
+  }
+
+  filtrar(modalidade) {
+    this.modalidadeAtiva = modalidade;
+    document.getElementById('busca-modalidade').value = modalidade;
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('ativo'));
+    this.irPara('inicio');
+    this.carregarVitrine();
+  }
+  definirOrdem(ordem, btn) {
+    this.ordem = ordem;
+    document.querySelectorAll('#chips-ordem .chip').forEach(c => c.classList.remove('ativo'));
+    if (btn) btn.classList.add('ativo');
+    this.carregarVitrine();
+  }
+
+  async carregarVitrine() {
+    const grade = document.getElementById('grade-imoveis');
+    const modalidade = document.getElementById('busca-modalidade').value;
+    const q = document.getElementById('busca-q').value.trim();
+    const tipo = document.getElementById('busca-tipo').value;
+    grade.innerHTML = '<div class="estado-vazio"><strong>Buscando…</strong>Consultando a vitrine da rede.</div>';
+    try {
+      const params = new URLSearchParams({ modalidade, ordenar: this.ordem });
+      if (q) params.set('q', q);
+      if (tipo) params.set('tipo', tipo);
+      const d = await this.chamarApi('/api/listings?' + params.toString());
+      this.renderizarVitrine(d.listings || []);
+    } catch (e) {
+      grade.innerHTML = `<div class="estado-vazio"><strong>Não foi possível carregar a vitrine.</strong>${this.escapar(e.message)}</div>`;
+    }
+  }
+
+  renderizarVitrine(listings) {
+    const grade = document.getElementById('grade-imoveis');
+    document.getElementById('contador-resultados').innerText =
+      listings.length ? `${listings.length} imóvel(is) na vitrine` : '';
+    if (!listings.length) {
+      grade.innerHTML = '<div class="estado-vazio"><strong>Nenhum imóvel por aqui ainda.</strong>Ajuste os filtros ou seja o primeiro a publicar nesta categoria.</div>';
+      return;
+    }
+    const rotulos = { agio: 'Ágio', venda_direta: 'Venda direta', locacao_residencial: 'Locação' };
+    const tipos = { apartamento: 'Apartamento', casa: 'Casa', cobertura: 'Cobertura', kitnet: 'Kitnet', terreno: 'Terreno', comercial: 'Comercial' };
+    grade.innerHTML = listings.map((l, i) => {
+      const fotos = (l.media || []).filter(m => m.tipo === 'foto');
+      const temVideo = (l.media || []).some(m => m.tipo === 'video') || l.video_tour_url;
+      const specs = [l.quartos ? `${l.quartos} qtos` : '', l.banheiros ? `${l.banheiros} ban` : '', l.vagas ? `${l.vagas} vagas` : '', l.area_m2 ? `${l.area_m2} m²` : ''].filter(Boolean).join(' · ');
+      const precoLabel = l.modalidade === 'locacao_residencial' ? 'Aluguel / mês' : (l.modalidade === 'agio' ? 'Ágio' : 'Preço');
+      const urlId = `imovel-${l.id}`;
+      const foto0 = fotos.length ? `style="background-image:url('${this.escapar(fotos[0].url)}')"` : '';
+      return `
+        <article class="card" id="${urlId}" onclick="app.abrirDetalhe(${l.id})">
+          <div class="card-foto" ${foto0} onclick="app.abrirDetalhe(${l.id})">
+            ${fotos.length ? `<img src="${this.escapar(fotos[0].url)}" alt="${this.escapar(l.titulo)}" loading="lazy">` : ''}
+            <span class="card-tag">${rotulos[l.modalidade] || l.modalidade}</span>
+            ${l.tenant_plano === 'premium' ? '<span class="card-selo">✦ VERIFICADO</span>' : ''}
+            ${fotos.length > 1 ? `<button class="seta-foto esq" onclick="event.stopPropagation();app.girarFoto('${urlId}',${i},-1)">‹</button>
+              <button class="seta-foto dir" onclick="event.stopPropagation();app.girarFoto('${urlId}',${i},1)">›</button>
+              <div class="pontinhos">${fotos.map((_,fi) => `<i class="${fi===0?'on':''}"></i>`).join('')}</div>` : ''}
+            ${temVideo ? '<span class="card-video">▶ Tour</span>' : ''}
+          </div>
+          <div class="card-corpo">
+            <h3>${this.escapar(l.titulo)}</h3>
+            <div class="card-local">📍 ${this.escapar(l.localizacao || '')}${l.tipo_imovel && tipos[l.tipo_imovel] ? ' · ' + tipos[l.tipo_imovel] : ''}</div>
+            ${specs ? `<div class="card-specs">${specs}</div>` : ''}
+            <div class="card-rodape">
+              <div class="card-preco"><small>${precoLabel}</small>${this.dinheiro(l.preco_face)}</div>
+              <div class="card-anunciante">${this.escapar(l.tenant_nome || '')}</div>
+            </div>
+            ${l.modalidade === 'agio' && l.saldo_devedor ? `<div class="card-agio">Saldo devedor: ${this.dinheiro(l.saldo_devedor)} · Prestação: ${this.dinheiro(l.prestacao_mensal)}</div>` : ''}
+          </div>
+        </article>`;
+    }).join('');
+    window._imobiListings = listings;
+  }
+
+  girarFoto(urlId, idx, dir) {
+    const l = (window._imobiListings || [])[idx];
+    if (!l) return;
+    const fotos = (l.media || []).filter(m => m.tipo === 'foto');
+    if (fotos.length < 2) return;
+    if (!window._imobiFotoIdx) window._imobiFotoIdx = {};
+    const atual = window._imobiFotoIdx[l.id] || 0;
+    const novo = (atual + dir + fotos.length) % fotos.length;
+    window._imobiFotoIdx[l.id] = novo;
+    const card = document.getElementById(urlId);
+    if (!card) return;
+    card.querySelector('.card-foto img').src = fotos[novo].url;
+    card.querySelectorAll('.pontinhos i').forEach((p, fi) => p.classList.toggle('on', fi === novo));
+  }
+
+  // ===== Detalhe do imóvel =====
+  async abrirDetalhe(id) {
+    this.abrirModal('modal-detalhe');
+    document.getElementById('detalhe-conteudo').innerHTML = '<div class="carregando"><div class="spinner"></div> Abrindo imóvel…</div>';
+    try {
+      const d = await this.chamarApi('/api/listings/' + id);
+      this.detalheAtual = d.listing;
+      this.detalheIndice = 0;
+      this.renderizarDetalhe(d.listing);
+      history.replaceState(null, '', '#imovel=' + id);
+    } catch (e) {
+      document.getElementById('detalhe-conteudo').innerHTML =
+        `<div class="estado-vazio"><strong>Imóvel indisponível.</strong>${this.escapar(e.message)}</div>`;
+    }
+  }
+
+  renderizarDetalhe(l) {
+    const rotulos = { agio: 'Ágio', venda_direta: 'Venda direta', locacao_residencial: 'Locação' };
+    const itens = (l.media || []).slice();
+    const fotos = itens.filter(m => m.tipo === 'foto');
+    const videos = itens.filter(m => m.tipo === 'video');
+    const precoLabel = l.modalidade === 'locacao_residencial' ? 'Aluguel / mês' : (l.modalidade === 'agio' ? 'Valor do ágio' : 'Preço de venda');
+    const temMidia = itens.length > 0;
+
+    const midiaHtml = temMidia ? `
+      <div class="detalhe-galeria">
+        <div class="detalhe-principal" id="det-principal"></div>
+        <div class="detalhe-thumbs">
+          ${itens.map((m, i) => `
+            <div class="thumb ${i===0?'on':''}" onclick="app.trocarMidiaDetalhe(${i})">
+              ${m.tipo === 'video'
+                ? `<video preload="metadata" muted src="${this.escapar(m.url)}"></video><div class="icone-video">▶</div>`
+                : `<img src="${this.escapar(m.url)}" loading="lazy">`}
+            </div>`).join('')}
+        </div>
+      </div>` : `<div style="height:120px;display:flex;align-items:center;justify-content:center;color:var(--espresso-suave);background:var(--areia);border-radius:8px;">Sem fotos cadastradas</div>`;
+
+    const specs = `
+      <div class="specs-grade">
+        <div class="spec"><b>${l.quartos ?? '—'}</b><span>Quartos</span></div>
+        <div class="spec"><b>${l.banheiros ?? '—'}</b><span>Banheiros</span></div>
+        <div class="spec"><b>${l.vagas ?? '—'}</b><span>Vagas</span></div>
+        <div class="spec"><b>${l.area_m2 ? l.area_m2 + ' m²' : '—'}</b><span>Área útil</span></div>
+      </div>`;
+
+    const agioHtml = l.modalidade === 'agio' ? `
+      <div class="camadas-agio" style="background:rgba(205,160,95,.09);border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi1);margin-bottom:var(--phi1);">
+        <b style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);">Métricas da negociação de ágio</b>
+        <div class="linha-2" style="margin-top:.6rem;font-size:.88rem;color:var(--espresso-suave);">
+          <div>Ágio pago: <b style="color:var(--espresso);">${this.dinheiro(l.agio_pago)}</b></div>
+          <div>Saldo devedor: <b style="color:var(--espresso);">${this.dinheiro(l.saldo_devedor)}</b></div>
+          <div>Prestação: <b style="color:var(--espresso);">${this.dinheiro(l.prestacao_mensal)}/mês</b></div>
+          <div>Banco credor: <b style="color:var(--espresso);">${this.escapar(l.banco_credor || '—')}</b></div>
+        </div>
+      </div>` : '';
+
+    const simuladorDetalhe = l.modalidade !== 'locacao_residencial' ? `
+      <div style="border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi1);margin-bottom:var(--phi1);">
+        <b style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);">Simulador de financiamento Caixa</b>
+        <div style="display:flex;gap:1rem;margin-top:.7rem;flex-wrap:wrap;align-items:flex-end;">
+          <div class="campo" style="flex:1;min-width:130px;"><label>Entrada</label>
+            <select id="det-sim-entrada" onchange="app.simularDetalhe()">
+              <option value="10">10%</option><option value="20" selected>20%</option><option value="30">30%</option><option value="40">40%</option><option value="50">50%</option>
+            </select></div>
+          <div class="campo" style="flex:1;min-width:130px;"><label>Prazo</label>
+            <select id="det-sim-prazo" onchange="app.simularDetalhe()">
+              <option value="10">10 anos</option><option value="20">20 anos</option><option value="30" selected>30 anos</option><option value="35">35 anos</option>
+            </select></div>
+          <div style="text-align:right;">
+            <small style="display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--espresso-suave);">Prestação estimada</small>
+            <b id="det-sim-resultado" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--bronze);">R$ 0</b>
+          </div>
+        </div>
+      </div>` : '';
+
+    const whats = (l.tenant_whatsapp || '').replace(/\D/g, '');
+
+    document.getElementById('detalhe-conteudo').innerHTML = `
+      ${midiaHtml}
+      <div style="margin-top:var(--phi1);">
+        <div style="display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
+          <div>
+            <span class="card-tag" style="position:static;display:inline-block;margin-bottom:.5rem;">${rotulos[l.modalidade] || l.modalidade}</span>
+            <h2 style="margin-bottom:.3rem;">${this.escapar(l.titulo)}</h2>
+            <div class="card-local" style="font-size:.88rem;">📍 ${this.escapar(l.localizacao || '')}</div>
+          </div>
+          <div style="text-align:right;">
+            <small style="display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--espresso-suave);">${precoLabel}</small>
+            <div class="preco-detalhe">${this.dinheiro(l.preco_face)}</div>
+          </div>
+        </div>
+        ${specs}
+        ${agioHtml}
+        ${l.memorial_descritivo ? `<div class="memorial">${this.escapar(l.memorial_descritivo)}</div>` : '<p class="memorial" style="font-style:italic;">Sem memorial descritivo informado.</p>'}
+        ${simuladorDetalhe}
+        <div class="bloco-anunciante">
+          <div>
+            <div class="marca-nome">${this.escapar(l.tenant_nome || 'Anunciante')} ${l.tenant_plano === 'premium' ? '✦' : ''}</div>
+            <div class="marca-info">${l.tenant_creci ? 'CRECI ' + this.escapar(l.tenant_creci) + ' · ' : ''}Anúncio verificado na plataforma IMOBI</div>
+          </div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+            <button class="btn-ouro" onclick="app.abrirLead(${l.tenant_id}, ${l.id})">Falar com o anunciante</button>
+            ${whats ? `<a class="btn-fantasma" style="text-decoration:none;display:inline-block;" target="_blank" rel="noopener" href="https://wa.me/${whats}?text=${encodeURIComponent('Olá! Vi o anúncio "' + l.titulo + '" na IMOBI e tenho interesse.')}">WhatsApp direto</a>` : ''}
+            <button class="btn-fantasma" onclick="app.copiarLink(${l.id})">Copiar link</button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;">
+          <div style="border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi1);text-align:center;">
+            <b style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);">Prefere consórcio?</b>
+            <p style="font-size:.8rem;color:var(--espresso-suave);margin:.4rem 0 .7rem;">Planeje a compra sem juros com o consórcio Ademicon.</p>
+            <a class="btn-luxo" style="text-decoration:none;display:inline-block;" target="_blank" rel="noopener" href="https://www.ademicon.com.br">Simular consórcio</a>
+          </div>
+          <div style="border:1px solid var(--linha-ouro);border-radius:8px;padding:var(--phi1);text-align:center;">
+            <b style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);">Financiamento Caixa</b>
+            <p style="font-size:.8rem;color:var(--espresso-suave);margin:.4rem 0 .7rem;">Use FGTS e parcele em até 35 anos com as taxas da Caixa.</p>
+            <a class="btn-luxo" style="text-decoration:none;display:inline-block;" target="_blank" rel="noopener" href="https://www.caixa.gov.br/voce/habitacao/Paginas/default.aspx">Conhecer condições</a>
+          </div>
+        </div>
+      </div>`;
+    this.mostrarMidiaDetalhe(0);
+  }
+
+  trocarMidiaDetalhe(i) {
+    this.detalheIndice = i;
+    this.mostrarMidiaDetalhe(i);
+    document.querySelectorAll('.detalhe-thumbs .thumb').forEach((t, ti) => t.classList.toggle('on', ti === i));
+  }
+
+  mostrarMidiaDetalhe(i) {
+    const l = this.detalheAtual;
+    if (!l || !l.media || !l.media.length) return;
+    const m = l.media[i];
+    const alvo = document.getElementById('det-principal');
+    if (!alvo) return;
+    if (m.tipo === 'video') {
+      alvo.innerHTML = `<video controls autoplay playsinline src="${this.escapar(m.url)}"></video>`;
+    } else {
+      alvo.innerHTML = `<img src="${this.escapar(m.url)}" alt="${this.escapar(l.titulo)}">`;
+    }
+  }
+
+  simularDetalhe() {
+    const l = this.detalheAtual;
+    if (!l) return;
+    const entradaPct = Number(document.getElementById('det-sim-entrada')?.value || 20) / 100;
+    const anos = Number(document.getElementById('det-sim-prazo')?.value || 30);
+    const valor = Number(l.preco_face || 0);
+    const entrada = valor * entradaPct;
+    const financiado = Math.max(0, valor - entrada);
+    const taxaMensal = Math.pow(1.105, 1 / 12) - 1;
+    const n = anos * 12;
+    const prest = n > 0 && taxaMensal > 0 ? (financiado * taxaMensal) / (1 - Math.pow(1 + taxaMensal, -n)) : 0;
+    const el = document.getElementById('det-sim-resultado');
+    if (el) el.innerText = 'R$ ' + Math.round(prest).toLocaleString('pt-BR') + '/mês';
+  }
+
+  copiarLink(id) {
+    const url = location.origin + location.pathname + '#imovel=' + id;
+    navigator.clipboard.writeText(url).then(
+      () => this.toast('Link copiado! Compartilhe o imóvel com quem quiser.', 'ok'),
+      () => this.toast('Link: ' + url, 'info')
+    );
+  }
+
+  // ===== Leads =====
+  abrirLead(tenantId, listingId) {
+    this.leadAlvo = { tenant_id: tenantId, listing_id: listingId };
+    document.getElementById('lead-nome').value = '';
+    document.getElementById('lead-whatsapp').value = '';
+    document.getElementById('lead-sucesso').classList.add('oculto');
+    this.abrirModal('modal-lead');
+  }
+  async enviarLead() {
+    const corpo = {
+      ...this.leadAlvo,
+      nome: document.getElementById('lead-nome').value.trim(),
+      whatsapp: document.getElementById('lead-whatsapp').value.trim(),
+    };
+    if (!corpo.nome || !corpo.whatsapp) return this.toast('Informe seu nome e WhatsApp.', 'erro');
+    try {
+      await this.chamarApi('/api/leads', { method: 'POST', body: JSON.stringify(corpo) });
+      const el = document.getElementById('lead-sucesso');
+      el.innerText = 'Contato enviado! O anunciante vai falar com você em breve.';
+      el.classList.remove('oculto');
+      setTimeout(() => this.fecharModal('modal-lead'), 2200);
+      this.carregarStats();
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  // ===== Publicar / Editar =====
+  abrirPublicarPorId(id) {
+    const l = this.cacheAnuncios && this.cacheAnuncios[id];
+    if (!l) { this.toast('Anúncio não encontrado no cache. Recarregando…', 'info'); this.carregarMeusAnuncios(); return; }
+    this.abrirPublicar(l);
+  }
+
+  abrirPublicar(listing = null) {
+    if (!this.token) { this.abrirAuth('login'); return; }
+    this.editandoId = listing ? listing.id : null;
+    this.mediaPendente = [];
+    this.mediaExistente = (listing?.media || []).map(m => ({ id: m.id, tipo: m.tipo, url: m.url }));
+    document.getElementById('publicar-titulo').innerText = listing ? 'Editar anúncio' : 'Publicar imóvel';
+    document.getElementById('botao-publicar').innerText = listing ? 'Salvar alterações' : 'Publicar anúncio';
+    const ids = ['p-titulo','p-modalidade','p-tipo','p-preco','p-local','p-quartos','p-banheiros','p-vagas','p-area','p-agio-pago','p-saldo','p-prestacao','p-banco','p-memorial','p-video-link'];
+    ids.forEach(i => document.getElementById(i).value = '');
+    document.getElementById('p-status-upload').innerText = '';
+    document.getElementById('upload-barra').classList.add('oculto');
+    if (listing) {
+      document.getElementById('p-titulo').value = listing.titulo || '';
+      document.getElementById('p-modalidade').value = listing.modalidade || 'venda_direta';
+      document.getElementById('p-tipo').value = listing.tipo_imovel || 'apartamento';
+      document.getElementById('p-preco').value = listing.preco_face || '';
+      document.getElementById('p-local').value = listing.localizacao || '';
+      document.getElementById('p-quartos').value = listing.quartos ?? '';
+      document.getElementById('p-banheiros').value = listing.banheiros ?? '';
+      document.getElementById('p-vagas').value = listing.vagas ?? '';
+      document.getElementById('p-area').value = listing.area_m2 ?? '';
+      document.getElementById('p-agio-pago').value = listing.agio_pago ?? '';
+      document.getElementById('p-saldo').value = listing.saldo_devedor ?? '';
+      document.getElementById('p-prestacao').value = listing.prestacao_mensal ?? '';
+      document.getElementById('p-banco').value = listing.banco_credor || '';
+      document.getElementById('p-memorial').value = listing.memorial_descritivo || '';
+      document.getElementById('p-video-link').value = listing.video_tour_url || '';
+    }
+    this.alternarCamposAgio();
+    this.renderizarPreviews();
+    this.abrirModal('modal-publicar');
+  }
+
+  alternarCamposAgio() {
+    const ehAgio = document.getElementById('p-modalidade').value === 'agio';
+    document.getElementById('campos-agio').classList.toggle('oculto', !ehAgio);
+  }
+
+  async enviarArquivos(arquivos) {
+    const status = document.getElementById('p-status-upload');
+    const barra = document.getElementById('upload-barra');
+    const total = arquivos.length;
+    if (!total) return;
+    barra.classList.remove('oculto');
+    let feitos = 0, falhas = 0;
+    for (const arquivo of arquivos) {
+      status.innerText = `Enviando ${arquivo.name}…`;
+      try {
+        const form = new FormData();
+        form.append('file', arquivo);
+        const resp = await fetch(this.apiBase + '/api/media/upload', {
+          method: 'POST', headers: { Authorization: 'Bearer ' + this.token }, body: form,
+        });
+        const dados = await resp.json().catch(() => ({}));
+        if (!resp.ok) throw new Error(dados.erro || 'Falha no envio.');
+        this.mediaPendente.push({ tipo: dados.tipo, url: dados.url, key: dados.key });
+        feitos++;
+      } catch (e) { falhas++; }
+      const pct = Math.round(((feitos + falhas) / total) * 100);
+      barra.querySelector('i').style.width = pct + '%';
+    }
+    status.innerText = falhas
+      ? `${feitos} arquivo(s) enviados, ${falhas} falha(s).`
+      : `${feitos} arquivo(s) prontos para o anúncio.`;
+    document.getElementById('p-arquivos').value = '';
+    this.renderizarPreviews();
+  }
+
+  renderizarPreviews() {
+    const alvo = document.getElementById('p-previews');
+    const existentes = this.mediaExistente.map(m => `
+      <div class="item">
+        ${m.tipo === 'video' ? '<video muted src="' + this.escapar(m.url) + '"></video><span class="tipo-video">VÍDEO</span>' : '<img src="' + this.escapar(m.url) + '">'}
+        <button class="remover" onclick="app.removerMidiaExistente(${m.id})">✕</button>
+      </div>`).join('');
+    const novos = this.mediaPendente.map((m, i) => `
+      <div class="item">
+        ${m.tipo === 'video' ? '<video muted src="' + this.escapar(m.url) + '"></video><span class="tipo-video">VÍDEO</span>' : '<img src="' + this.escapar(m.url) + '">'}
+        <button class="remover" onclick="app.removerMidiaNova(${i})">✕</button>
+      </div>`).join('');
+    alvo.innerHTML = existentes + novos || '<span style="font-size:.76rem;color:var(--espresso-suave);">Nenhuma mídia ainda.</span>';
+  }
+
+  removerMidiaNova(i) { this.mediaPendente.splice(i, 1); this.renderizarPreviews(); }
+
+  async removerMidiaExistente(id) {
+    try {
+      await this.chamarApi('/api/media/' + id, { method: 'DELETE' });
+      this.mediaExistente = this.mediaExistente.filter(m => m.id !== id);
+      this.renderizarPreviews();
+      this.toast('Mídia removida.', 'ok');
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async publicar() {
+    const corpo = {
+      titulo: document.getElementById('p-titulo').value.trim(),
+      modalidade: document.getElementById('p-modalidade').value,
+      tipo_imovel: document.getElementById('p-tipo').value,
+      preco_face: Number(document.getElementById('p-preco').value || 0),
+      localizacao: document.getElementById('p-local').value.trim(),
+      quartos: Number(document.getElementById('p-quartos').value || 0) || null,
+      banheiros: Number(document.getElementById('p-banheiros').value || 0) || null,
+      vagas: Number(document.getElementById('p-vagas').value || 0) || null,
+      area_m2: Number(document.getElementById('p-area').value || 0) || null,
+      agio_pago: Number(document.getElementById('p-agio-pago').value || 0) || null,
+      saldo_devedor: Number(document.getElementById('p-saldo').value || 0) || null,
+      prestacao_mensal: Number(document.getElementById('p-prestacao').value || 0) || null,
+      banco_credor: document.getElementById('p-banco').value.trim() || null,
+      memorial_descritivo: document.getElementById('p-memorial').value.trim(),
+      video_tour_url: document.getElementById('p-video-link').value.trim(),
+      media_urls: this.mediaPendente,
+    };
+    if (!corpo.titulo || !corpo.localizacao || !corpo.preco_face) {
+      return this.mostrarErro('publicar-erro', 'Preencha título, preço e localização.');
+    }
+    try {
+      if (this.editandoId) {
+        await this.chamarApi('/api/listings/' + this.editandoId, { method: 'PATCH', body: JSON.stringify(corpo) });
+        this.toast('Anúncio atualizado! As mudanças já estão na vitrine pública.', 'ok');
+      } else {
+        await this.chamarApi('/api/listings', { method: 'POST', body: JSON.stringify(corpo) });
+        this.toast('Anúncio publicado! Já está visível para todos os visitantes.', 'ok');
+      }
+      this.mediaPendente = [];
+      this.editandoId = null;
+      this.fecharModal('modal-publicar');
+      this.carregarVitrine();
+      this.carregarStats();
+      this.carregarMeusAnuncios();
+    } catch (e) {
+      if (e.message.includes('limite') || e.message.includes('Limite')) {
+        this.fecharModal('modal-publicar');
+        this.abrirDashboard();
+        this.trocarPainel('paineis-planos', document.querySelector('[data-painel=paineis-planos]'));
+      }
+      this.mostrarErro('publicar-erro', e.message);
+      this.toast(e.message, 'erro');
+    }
+  }
+
+  // ===== Dashboard =====
+  trocarPainel(id, btn) {
+    document.querySelectorAll('.painel').forEach(p => p.classList.remove('ativo'));
+    document.getElementById(id).classList.add('ativo');
+    document.querySelectorAll('.dash-item').forEach(i => i.classList.remove('ativo'));
+    if (btn) btn.classList.add('ativo');
+    if (id === 'paineis-anuncios') this.carregarMeusAnuncios();
+    if (id === 'paineis-leads') this.carregarMeusLeads();
+    if (id === 'paineis-perfil') this.preencherPerfil();
+    if (id === 'paineis-planos') this.carregarFatura();
+  }
+
+  async carregarDashboard() {
+    if (!this.token) return;
+    this.carregarMeusAnuncios();
+    this.carregarMeusLeads();
+    this.carregarFatura();
+    this.preencherPerfil();
+    try {
+      const d = await this.chamarApi('/api/auth/me');
+      if (d.tenant) {
+        document.getElementById('dash-nome').innerText = d.tenant.nome_exibicao;
+        const plano = (d.tenant.plano || 'gratis').toUpperCase();
+        document.getElementById('dash-plano-badge').innerText =
+          'Plano ' + plano + ' · ' + d.tenant.limite_anuncios + ' anúncios';
+      }
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async carregarMeusAnuncios() {
+    const alvo = document.getElementById('meus-anuncios-lista');
+    if (!alvo) return;
+    try {
+      const d = await this.chamarApi('/api/listings/mine');
+      const lista = d.listings || [];
+      this.cacheAnuncios = {};
+      lista.forEach(l => { this.cacheAnuncios[l.id] = l; });
+      this.atualizarKpis(lista);
+      if (!lista.length) {
+        alvo.innerHTML = '<div class="estado-vazio"><strong>Você ainda não publicou imóveis.</strong>Clique em "+ Novo anúncio" para começar — tudo aparece na vitrine pública na hora.</div>';
+        return;
+      }
+      const rotulos = { agio: 'Ágio', venda_direta: 'Venda direta', locacao_residencial: 'Locação' };
+      const badges = { ativo: '<span class="badge badge-ativo">ATIVO</span>', inativo: '<span class="badge badge-inativo">PAUSADO</span>', vendido: '<span class="badge badge-vendido">VENDIDO</span>' };
+      alvo.innerHTML = `<div style="overflow-x:auto;"><table class="tabela">
+        <thead><tr><th>Imóvel</th><th>Modalidade</th><th>Preço</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody>${lista.map(l => {
+          const foto = (l.media || []).find(m => m.tipo === 'foto');
+          return `<tr>
+            <td><div style="display:flex;gap:.7rem;align-items:center;">${foto ? `<img class="mini-foto" src="${this.escapar(foto.url)}">` : '<div class="mini-foto" style="background:var(--areia);"></div>'}<div><b style="font-size:.86rem;">${this.escapar(l.titulo)}</b><div style="font-size:.74rem;color:var(--espresso-suave);">${this.escapar(l.localizacao || '')}</div></div></div></td>
+            <td>${rotulos[l.modalidade] || l.modalidade}</td>
+            <td>${this.dinheiro(l.preco_face)}</td>
+            <td>${badges[l.status] || l.status}</td>
+            <td><div class="acoes-td">
+              <button class="btn-mini" onclick="app.abrirPublicarPorId(${l.id})">Editar</button>
+              ${l.status === 'ativo'
+                ? `<button class="btn-mini" onclick="app.mudarStatus(${l.id},'inativo')">Pausar</button>`
+                : `<button class="btn-mini verde" onclick="app.mudarStatus(${l.id},'ativo')">Reativar</button>`}
+              <button class="btn-mini" onclick="app.mudarStatus(${l.id},'vendido')">Marcar vendido</button>
+              <button class="btn-mini perigo" onclick="app.excluirAnuncio(${l.id})">Excluir</button>
+            </div></td>
+          </tr>`;
+        }).join('')}</tbody></table></div>`;
+    } catch (e) {
+      alvo.innerHTML = `<div class="estado-vazio"><strong>Erro ao carregar.</strong>${this.escapar(e.message)}</div>`;
+    }
+  }
+
+  atualizarKpis(lista) {
+    const ativos = lista.filter(l => l.status === 'ativo').length;
+    document.getElementById('kpi-anuncios').innerText = ativos;
+    const me = this.usuario?.tenant || {};
+    document.getElementById('kpi-limite').innerText = me.limite_anuncios ?? 3;
+    const limiteAtingido = ativos >= (me.limite_anuncios ?? 3) && (me.plano || 'gratis') === 'gratis';
+    document.getElementById('aviso-limite').classList.toggle('oculto', !limiteAtingido);
+  }
+
+  async mudarStatus(id, status) {
+    try {
+      await this.chamarApi('/api/listings/' + id, { method: 'PATCH', body: JSON.stringify({ status }) });
+      this.toast('Status atualizado.', 'ok');
+      this.carregarMeusAnuncios();
+      this.carregarVitrine();
+      this.carregarStats();
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async excluirAnuncio(id) {
+    if (!confirm('Excluir este anúncio definitivamente? Essa ação não pode ser desfeita.')) return;
+    try {
+      await this.chamarApi('/api/listings/' + id, { method: 'DELETE' });
+      this.toast('Anúncio excluído.', 'ok');
+      this.carregarMeusAnuncios();
+      this.carregarVitrine();
+      this.carregarStats();
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async carregarMeusLeads() {
+    const alvo = document.getElementById('meus-leads-lista');
+    if (!alvo) return;
+    try {
+      const d = await this.chamarApi('/api/leads/mine');
+      const leads = d.leads || [];
+      const novos = leads.filter(l => l.status === 'novo').length;
+      document.getElementById('kpi-leads').innerText = leads.length;
+      document.getElementById('kpi-leads-novos').innerText = novos;
+      if (!leads.length) {
+        alvo.innerHTML = '<div class="estado-vazio"><strong>Nenhum lead ainda.</strong>Quando alguém demonstrar interesse nos seus imóveis, o contato aparece aqui.</div>';
+        return;
+      }
+      const badges = { novo: '<span class="badge badge-novo">NOVO</span>', agendado: '<span class="badge badge-agendado">AGENDADO</span>', convertido: '<span class="badge badge-convertido">CONVERTIDO</span>' };
+      alvo.innerHTML = leads.map(l => {
+        const whats = String(l.whatsapp || '').replace(/\D/g, '');
+        return `<div class="lead-card">
+          <div>
+            <h4>${this.escapar(l.nome)}</h4>
+            <div class="lead-meta">
+              <span>📱 ${this.escapar(l.whatsapp)}</span>
+              <span>🏠 ${this.escapar(l.listing_titulo || 'Contato geral da plataforma')}</span>
+              <span>🕐 ${new Date(String(l.created_at).replace(' ', 'T') + 'Z').toLocaleString('pt-BR')}</span>
+              <div style="margin-top:.4rem;">${badges[l.status] || l.status}</div>
+            </div>
+          </div>
+          <div class="acoes-td">
+            ${whats ? `<a class="btn-mini verde" style="text-decoration:none;" target="_blank" rel="noopener" href="https://wa.me/${whats}">WhatsApp</a>` : ''}
+            ${l.status !== 'agendado' ? `<button class="btn-mini" onclick="app.mudarLead(${l.id},'agendado')">Agendar</button>` : ''}
+            ${l.status !== 'convertido' ? `<button class="btn-mini verde" onclick="app.mudarLead(${l.id},'convertido')">Converter</button>` : ''}
+            <button class="btn-mini perigo" onclick="app.excluirLead(${l.id})">Excluir</button>
+          </div>
+        </div>`;
+      }).join('');
+    } catch (e) {
+      alvo.innerHTML = `<div class="estado-vazio"><strong>Erro ao carregar.</strong>${this.escapar(e.message)}</div>`;
+    }
+  }
+
+  async mudarLead(id, status) {
+    try {
+      await this.chamarApi('/api/leads/' + id, { method: 'PATCH', body: JSON.stringify({ status }) });
+      this.toast('Lead atualizado no funil.', 'ok');
+      this.carregarMeusLeads();
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async excluirLead(id) {
+    if (!confirm('Excluir este lead?')) return;
+    try {
+      await this.chamarApi('/api/leads/' + id, { method: 'DELETE' });
+      this.toast('Lead excluído.', 'ok');
+      this.carregarMeusLeads();
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async preencherPerfil() {
+    try {
+      const d = await this.chamarApi('/api/auth/me');
+      const t = d.tenant || {};
+      document.getElementById('pf-nome-exibicao').value = t.nome_exibicao || '';
+      document.getElementById('pf-nome').value = t.nome || '';
+      document.getElementById('pf-creci').value = t.creci || '';
+      document.getElementById('pf-whatsapp').value = t.whatsapp || '';
+      document.getElementById('pf-pix').value = t.chave_pix || '';
+      document.getElementById('pf-sobre').value = t.sobre || '';
+    } catch (e) {}
+  }
+
+  async salvarPerfil() {
+    const corpo = {
+      nome_exibicao: document.getElementById('pf-nome-exibicao').value.trim(),
+      nome: document.getElementById('pf-nome').value.trim(),
+      creci: document.getElementById('pf-creci').value.trim(),
+      whatsapp: document.getElementById('pf-whatsapp').value.trim(),
+      chave_pix: document.getElementById('pf-pix').value.trim(),
+      sobre: document.getElementById('pf-sobre').value.trim(),
+    };
+    try {
+      await this.chamarApi('/api/tenant/me', { method: 'PATCH', body: JSON.stringify(corpo) });
+      const el = document.getElementById('perfil-sucesso');
+      el.innerText = 'Marca atualizada com sucesso!';
+      el.classList.remove('oculto');
+      setTimeout(() => el.classList.add('oculto'), 2500);
+      this.toast('Perfil atualizado.', 'ok');
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  // ===== Planos e cobrança =====
+  async carregarPlanos() {
+    try {
+      const d = await this.chamarApi('/api/planos');
+      this.renderizarPlanos(d.planos || []);
+    } catch (e) {}
+  }
+  renderizarPlanos(planos) {
+    const alvo = document.getElementById('planos-grade');
+    if (!alvo) return;
+    const nomes = { gratis: 'Grátis', profissional: 'Profissional', premium: 'Premium' };
+    const infos = {
+      gratis: ['3 anúncios ativos', 'Fotos e vídeos', 'Recebimento de leads', 'PIX de recebimento próprio'],
+      profissional: ['30 anúncios ativos', 'Selo da sua marca', 'Destaque na busca', 'Suporte prioritário'],
+      premium: ['Anúncios ilimitados', 'Selo ✦ verificado', 'Destaque no topo da vitrine', 'Suporte VIP e página da marca'],
+    };
+    alvo.innerHTML = planos.map(p => `
+      <div class="plano ${p.nome === 'premium' ? 'destaque' : ''}">
+        ${p.nome === 'premium' ? '<span class="selo-plano">Mais completo</span>' : ''}
+        <h3>${nomes[p.nome] || p.titulo}</h3>
+        <div class="preco">${p.preco === 0 ? 'R$ 0' : 'R$ ' + p.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}<small>${p.preco === 0 ? ' para sempre' : '/mês'}</small></div>
+        <ul>${(infos[p.nome] || []).map(i => `<li>${i}</li>`).join('')}</ul>
+        ${p.nome === 'gratis'
+          ? `<button class="btn-fantasma" disabled style="opacity:.55;">Plano atual</button>`
+          : `<button class="btn-ouro" onclick="app.comprarPlano('${p.nome}')">Assinar via PIX</button>`}
+      </div>`).join('');
+  }
+
+  comprarPlano(plano) {
+    if (!this.token) { this.abrirAuth('login'); return; }
+    this.abrirModal('modal-pix');
+    document.getElementById('pix-titulo').innerText = 'Assinar plano ' + plano;
+    document.getElementById('pix-corpo').innerHTML = '<div class="carregando"><div class="spinner"></div> Gerando cobrança PIX…</div>';
+    this.chamarApi('/api/pagamentos/pix', { method: 'POST', body: JSON.stringify({ plano }) })
+      .then(d => {
+        if (d.demo) {
+          document.getElementById('pix-corpo').innerHTML = `
+            <div class="msg-info">O gateway de pagamento (Asaas) ainda não está conectado. Você pode ativar o plano agora em <b>modo demonstração</b> — a cobrança real entra em vigor assim que a chave for configurada.</div>
+            <button class="btn-ouro" style="width:100%;" onclick="app.confirmarDemo('${plano}')">Ativar agora (demonstração)</button>`;
+        } else if (d.pix) {
+          const copia = d.pix.copiaECola || '';
+          document.getElementById('pix-corpo').innerHTML = `
+            ${d.pix.imagem ? `<div style="text-align:center;"><img src="data:image/png;base64,${d.pix.imagem}" style="width:190px;height:190px;" alt="QR Code PIX"></div>` : ''}
+            <div class="pix-copia">${this.escapar(copia)}</div>
+            <button class="btn-luxo" style="width:100%;margin-bottom:.6rem;" onclick="app.copiarPix()">Copiar código PIX</button>
+            <button class="btn-fantasma" style="width:100%;" onclick="app.verificarPagamento()">Já paguei — verificar</button>`;
+          window._pixCopia = copia;
+        } else {
+          document.getElementById('pix-corpo').innerHTML = '<div class="msg-erro">Não foi possível gerar a cobrança agora. Tente novamente em instantes.</div>';
+        }
+      })
+      .catch(e => {
+        document.getElementById('pix-corpo').innerHTML = `<div class="msg-erro">${this.escapar(e.message)}</div>`;
+      });
+  }
+
+  copiarPix() {
+    if (!window._pixCopia) return;
+    navigator.clipboard.writeText(window._pixCopia).then(
+      () => this.toast('Código PIX copiado! Cole no app do seu banco.', 'ok'),
+      () => this.toast('Não foi possível copiar automaticamente.', 'erro')
+    );
+  }
+
+  async confirmarDemo(plano) {
+    try {
+      const d = await this.chamarApi('/api/pagamentos/demo', { method: 'POST', body: JSON.stringify({ plano }) });
+      this.toast(d.mensagem || 'Plano ativado!', 'ok');
+      this.fecharModal('modal-pix');
+      this.carregarFatura();
+      this.carregarDashboard();
+    } catch (e) { this.toast(e.message, 'erro'); }
+  }
+
+  async verificarPagamento() {
+    this.toast('Verificando pagamento…', 'info');
+    await this.carregarFatura();
+  }
+
+  async carregarFatura() {
+    const alvo = document.getElementById('pagamentos-lista');
+    if (!alvo) return;
+    try {
+      const d = await this.chamarApi('/api/me/fatura');
+      const t = d.tenant || {};
+      const status = t.status_licenca === 'ativo' ? 'Conta ativa' : (t.status_licenca === 'trial' ? 'Período de teste (grátis)' : 'Atenção necessária');
+      document.getElementById('status-licenca-texto').innerText =
+        `Plano ${(t.plano || 'gratis').toUpperCase()} · ${status} · Limite de ${t.limite_anuncios} anúncios simultâneos.`;
+      if (this.usuario) { this.usuario.tenant = { ...(this.usuario.tenant || {}), ...t }; localStorage.setItem('imobi_user', JSON.stringify(this.usuario)); }
+      const pag = d.pagamentos || [];
+      if (!pag.length) {
+        alvo.innerHTML = '<p style="font-size:.84rem;color:var(--espresso-suave);">Nenhum pagamento registrado ainda.</p>';
+        return;
+      }
+      alvo.innerHTML = pag.map(p => `
+        <div class="pagamento-item">
+          <div><b>Plano ${p.plano}</b> · ${this.dinheiro(p.valor)}<div style="font-size:.72rem;color:var(--espresso-suave);">${new Date(String(p.created_at).replace(' ', 'T') + 'Z').toLocaleString('pt-BR')}</div></div>
+          <span class="badge ${p.status === 'pago' ? 'badge-convertido' : 'badge-agendado'}">${p.status.toUpperCase()}</span>
+        </div>`).join('');
+    } catch (e) {
+      alvo.innerHTML = `<p style="font-size:.84rem;color:var(--erro);">${this.escapar(e.message)}</p>`;
+    }
+  }
+
+  // ===== Simulador da home =====
+  atualizarSimulador() {
+    const valor = Number(document.getElementById('sim-valor').value);
+    const entradaPct = Number(document.getElementById('sim-entrada').value) / 100;
+    const anos = Number(document.getElementById('sim-prazo').value);
+    document.getElementById('sim-valor-lbl').innerText = valor.toLocaleString('pt-BR');
+    document.getElementById('sim-entrada-lbl').innerText = entradaPct * 100 + '%';
+    document.getElementById('sim-prazo-lbl').innerText = anos + ' anos';
+    const financiado = valor * (1 - entradaPct);
+    const taxaMensal = Math.pow(1.105, 1 / 12) - 1;
+    const n = anos * 12;
+    const prest = (financiado * taxaMensal) / (1 - Math.pow(1 + taxaMensal, -n));
+    document.getElementById('sim-resultado').innerText = 'R$ ' + Math.round(prest).toLocaleString('pt-BR');
+  }
+
+  // ===== Deep link =====
+  capturarDeepLink() {
+    const m = location.hash.match(/^#imovel=(\d+)/);
+    if (m) this.abrirDetalhe(Number(m[1]));
+  }
+}
+
+const app = new ImobiApp();
+window.addEventListener('hashchange', () => app.capturarDeepLink());
+app.atualizarSimulador();
+</script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+name = "imobiliada"
+main = "src/index.js"
+compatibility_date = "2025-06-15"
+
+account_id = "533aa092c7f3571e13fdc103ba716bdf"
+workers_dev = true
+
+[assets]
+directory = "../frontend"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "imobiliaria"
+database_id = "0d2e89e3-f568-4972-babf-78863bd62e39"
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "imobi-media"
+
+[vars]
+JWT_SECRET = "imobi-jwt-secret-2026-7d9f4a2b1e8c5d0a3f6b9e2c7d4a1f0b"

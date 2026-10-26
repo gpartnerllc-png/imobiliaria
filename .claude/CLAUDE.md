@@ -1,59 +1,65 @@
-# Contexto do projeto — Claude Code
+# Contexto do projeto — IMOBI
 
 ## O que é
 IMOBI é uma vitrine imobiliária multi-marca para o Distrito Federal e entorno.
-Permite que corretores, imobiliárias, construtoras, incorporadoras, correspondentes Caixa e proprietários publiquem imóveis em uma vitrine única.
+Corretores, imobiliárias, construtoras, incorporadoras, correspondentes Caixa e proprietários
+publicam imóveis (venda, ágio, locação) em uma vitrine única. Cada marca tem conta própria,
+pasta de mídia própria, leads próprios e PIX de recebimento próprio — mas todos os imóveis
+aparecem para todos os visitantes em qualquer máquina.
 
-## Arquitetura
-- `frontend/` — site estático em HTML/CSS/JS vanilla.
-  - Aponta para `https://imobi-api.contatodroppfy.workers.dev`.
-  - Fluxos: listar imóveis, filtrar por modalidade, login/cadastro, publicar imóvel, enviar lead.
-- `worker/` — API no Cloudflare Worker (`imobi-api`), escrita em TypeScript com Hono.
-  - Banco: Cloudflare D1 (`imobi-db`).
-  - Mídia: Cloudflare R2 (`imobi-media`).
-  - Auth: JWT (`@tsndr/cloudflare-worker-jwt`) com senhas hasheadas via PBKDF2.
+## Arquitetura (versão atual)
+- `worker/src/index.js` — API completa em JavaScript puro (sem dependências, sem build).
+  - Banco: Cloudflare D1 (`imobiliaria`, id 0d2e89e3-f568-4972-babf-78863bd62e39).
+  - Mídia: Cloudflare R2 (`imobi-media`, binding `MEDIA_BUCKET`), servida via `/media/:key`.
+  - Auth: JWT próprio (WebCrypto HMAC-SHA256) + senhas PBKDF2 (120k iterações).
+  - Schema auto-migratório: `garantirSchema(env)` roda CREATE TABLE IF NOT EXISTS +
+    ALTER TABLE idempotentes na primeira requisição. **Não use `wrangler d1 migrations apply`** —
+    o schema se auto-corrige e migrations gerariam colunas duplicadas.
+  - Planos: gratis (3 anúncios) / profissional (R$49,90, 30) / premium (R$99,90, ilimitado).
+  - Cobrança: PIX via Asaas (`ASAAS_API_KEY` em secret, nunca no código) + fallback
+    `POST /api/pagamentos/demo` para ativar plano em modo demonstração.
+- `index.html` (raiz) — SPA completa em vanilla JS. É o mesmo arquivo servido pelo
+  Cloudflare Pages (`imobi.droppfy.com`) e copiado para `frontend/index.html`
+  (assets do worker `imobiliada`). Manter os dois em sincronia.
+  - Resolve a API dinamicamente: tenta `/api/health` na mesma origem; se falhar,
+    usa `https://imobi-api.contatodroppfy.workers.dev`.
 
 ## Rotas da API
-- `POST /api/auth/cadastro` — cria tenant + usuário.
-- `POST /api/auth/login` — autentica e retorna JWT.
-- `GET /api/listings?modalidade=&q=` — lista imóveis com mídia.
-- `POST /api/listings` — publica imóvel (requer JWT).
-- `POST /api/media/upload` — envia foto/vídeo para R2 (requer JWT).
-- `GET /media/:key` — serve mídia pública.
-- `POST /api/leads` — envia contato de interessado.
-- `GET /api/health` — healthcheck.
+- `GET /api/health`, `GET /api/stats`, `GET /api/planos`
+- `POST /api/auth/cadastro`, `POST /api/auth/login`, `GET /api/auth/me`
+- `PATCH /api/tenant/me`, `GET /api/tenants/:sub`
+- `GET /api/listings` (público, filtros `modalidade`/`q`/`tipo`/`ordenar`)
+- `GET /api/listings/mine`, `GET /api/listings/:id`
+- `POST /api/listings` (checa limite do plano → 402), `PATCH`/`DELETE /api/listings/:id`
+- `POST /api/media/upload` (até 150 MB, foto/vídeo), `DELETE /api/media/:id`
+- `POST /api/leads`, `GET /api/leads/mine`, `PATCH`/`DELETE /api/leads/:id`
+- `GET /api/me/fatura`, `POST /api/pagamentos/pix`, `POST /api/pagamentos/demo`,
+  `POST /api/webhooks/asaas`
 
-## Comandos úteis
-```bash
-# Desenvolver o Worker localmente
-cd worker
-npm install
-npm run dev
-
-# Aplicar migrations no banco local
-npm run db:migrate:local
-
-# Deploy manual do Worker
-npm run deploy
-```
+## Workers Cloudflare
+- `imobi-api` — API (config: `worker/wrangler.toml`).
+- `imobiliada` — serve o site (assets de `frontend/`) (config: `worker/wrangler.imobiliada.toml`).
+- O dashboard: https://dash.cloudflare.com/533aa092c7f3571e13fdc103ba716bdf
 
 ## CI/CD
-- `.github/workflows/deploy-worker.yml` — deploy automático do Worker ao fazer push em `main`.
-- `.github/workflows/deploy-frontend.yml` — deploy automático do frontend no Cloudflare Pages.
+- `.github/workflows/deploy-worker.yml` — no push em `main`, faz deploy dos DOIS workers
+  (`imobi-api` e `imobiliada`). O Pages atualiza `imobi.droppfy.com` pelo `index.html` da raiz.
 
-## Secrets necessários no GitHub
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+## Secrets necessários
+- GitHub Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (já configurados).
+- Cloudflare Workers (`wrangler secret put`): `JWT_SECRET` (fallback em código é só para dev),
+  `ASAAS_API_KEY` (chave de produção; sem ela, cobrança opera em modo demo).
 
-## Configurações do Worker
-Edite `worker/wrangler.toml` para ajustar:
-- `account_id`
-- `database_id` do D1
-- `bucket_name` do R2
-- `JWT_SECRET` (idealmente movido para secret via `wrangler secret put JWT_SECRET`)
+## Testes locais
+```bash
+node validar.mjs   # valida sintaxe do frontend e carrega o módulo do worker
+node testar.mjs    # 20 testes de fumaça com D1/R2 mockados em memória
+```
+`testar.mjs` usa um mock SQLite-like mínimo — não cobre SQL complexo, mas valida o fluxo
+completo (cadastro → login → publicar → vitrine → leads → planos → ativação).
 
 ## Regras de estilo
-- Prefira TypeScript estrito.
-- Mantenha o contrato da API compatível com `frontend/index.html`.
-- Valide entradas antes de tocar no banco.
-- Nunca logue senhas ou tokens.
+- JavaScript puro no worker (sem build). Frontend vanilla (sem frameworks).
+- Nunca embutir chaves/segredos no código (Asaas, JWT de produção) — usar secrets.
+- Manter `index.html` e `frontend/index.html` idênticos.
+- Nunca logar senhas ou tokens.
