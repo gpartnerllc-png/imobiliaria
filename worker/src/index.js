@@ -870,12 +870,21 @@ export default {
           transaction_nsu: b.transaction_nsu || null,
           slug: b.invoice_slug || b.slug || pag.slug || null,
         });
-        const confirmado = !!conf && (
-          conf.success === true || conf.paid === true ||
-          conf.status === "paid" || conf.status === "confirmed" || conf.status === "approved"
-        );
-        const valorOk = !conf || !conf.paid_amount ||
-          Number(conf.paid_amount || conf.amount || 0) >= Math.round(pag.valor * 100);
+        // Descontos configurados na conta InfinitePay (ex.: -5% PIX) podem reduzir o valor pago.
+        const minimo = Math.round(pag.valor * 100) * 0.9;
+        let confirmado = false;
+        let valorOk = true;
+        if (conf) {
+          confirmado = conf.success === true || conf.paid === true ||
+            conf.status === "paid" || conf.status === "confirmed" || conf.status === "approved";
+          if (conf.paid_amount || conf.amount) {
+            valorOk = Number(conf.paid_amount || conf.amount) >= minimo;
+          }
+        } else {
+          // Gateway indisponível: aceita o webhook se o valor bater com a assinatura.
+          const pagoWebhook = Number(b.paid_amount || b.amount || 0);
+          confirmado = pagoWebhook >= minimo;
+        }
 
         if (confirmado && valorOk) {
           await env.DB.prepare("UPDATE pagamentos SET status = 'pago', pago_em = datetime('now') WHERE id = ?").bind(pag.id).run();
