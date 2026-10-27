@@ -18,13 +18,20 @@ aparecem para todos os visitantes em qualquer máquina.
     ALTER TABLE idempotentes na primeira requisição. **Não use `wrangler d1 migrations apply`** —
     o schema se auto-corrige e migrations gerariam colunas duplicadas.
   - Planos: gratis (3 anúncios) / profissional (R$49,90, 30) / premium (R$99,90, ilimitado).
-  - Cobrança: PIX via Asaas (`ASAAS_API_KEY` em secret, nunca no código) + fallback
+  - Cobrança: InfinitePay (gateway ativo — `INFINITEPAY_API_KEY` em secret, nunca no código;
+    handle cadastrado `droppfy`; webhook `/api/webhooks/infinitepay`) + fallback
     `POST /api/pagamentos/demo` para ativar plano em modo demonstração.
 - `index.html` (raiz) — SPA completa em vanilla JS. É o mesmo arquivo servido pelo
-  Cloudflare Pages (`imobi.droppfy.com`) e copiado para `frontend/index.html`
-  (assets do worker `imobiliada`). Manter os dois em sincronia.
-  - Resolve a API dinamicamente: tenta `/api/health` na mesma origem; se falhar,
-    usa `https://imobi-api.contatodroppfy.workers.dev`.
+  **GitHub Pages** (`imobi.droppfy.com`, via arquivo `CNAME` na raiz — NÃO é Cloudflare Pages;
+  a zona `droppfy.com` não está na conta Cloudflare, então Workers Routes/functions não funcionam lá)
+  e copiado para `frontend/index.html` (assets do worker `imobiliada`). Manter os dois em sincronia.
+  - Resolve a API dinamicamente: tenta `/api/health` na mesma origem; depois
+    `https://imobiliada.contatodroppfy.workers.dev` e `https://imobi-api.contatodroppfy.workers.dev`.
+    O worker `imobiliada` roda o MESMO `src/index.js` (API completa + assets) e é o host preferido —
+    navegadores de alguns usuários não alcançam `imobi-api.contatodroppfy.workers.dev` (bloqueio
+    intermitente a subdomínios workers.dev).
+  - `chamarApi` normaliza URLs absolutas antigas (`imobi-api`/`imobiliada`) para a base ativa,
+    para fotos antigas carregarem.
 
 ## Rotas da API
 - `GET /api/health`, `GET /api/stats`, `GET /api/planos`
@@ -48,7 +55,8 @@ aparecem para todos os visitantes em qualquer máquina.
   (usa o `wrangler.toml` padrão de `worker/`). O token OAuth do GitHub **não tem escopo
   `workflow`** — não é possível editar o arquivo do workflow (push é rejeitado).
 - O worker `imobiliada` (site com assets) é feito via `npx wrangler deploy -c wrangler.imobiliada.toml`
-  a partir desta máquina (OAuth local). O Pages atualiza `imobi.droppfy.com` pelo `index.html` da raiz.
+  a partir desta máquina (OAuth local). O **GitHub Pages** atualiza `imobi.droppfy.com` pelo
+  `index.html` da raiz no push em `main` (deploy automático do Pages do GitHub).
 
 ## Secrets necessários
 - GitHub Actions: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` (já configurados).
