@@ -677,6 +677,9 @@ class ImobiApp {
   async resolverApiBase() {
     const candidatos = [];
     if (location.origin.startsWith('http')) candidatos.push(location.origin);
+    // imobiliada serve o site E a API (mesma origem) — prioridade para contornar
+    // bloqueios de navegador a hosts workers.dev específicos
+    candidatos.push('https://imobiliada.contatodroppfy.workers.dev');
     candidatos.push('https://imobi-api.contatodroppfy.workers.dev');
     for (const c of candidatos) {
       try {
@@ -684,7 +687,7 @@ class ImobiApp {
         if (r.ok) { this.apiBase = c; return; }
       } catch (e) {}
     }
-    this.apiBase = 'https://imobi-api.contatodroppfy.workers.dev';
+    this.apiBase = 'https://imobiliada.contatodroppfy.workers.dev';
   }
 
   async chamarApi(caminho, opcoes = {}) {
@@ -699,6 +702,16 @@ class ImobiApp {
     }
     const dados = await resp.json().catch(() => ({}));
     if (!resp.ok) throw new Error(dados.erro || 'Não foi possível completar a ação.');
+    // Mídias salvas com origem antiga (imobi-api) precisam carregar pelo host da API ativa
+    const normalizar = (v) => {
+      if (typeof v === 'string') return v
+        .replaceAll('https://imobi-api.contatodroppfy.workers.dev', this.apiBase)
+        .replaceAll('https://imobiliada.contatodroppfy.workers.dev', this.apiBase);
+      if (Array.isArray(v)) return v.map(normalizar);
+      if (v && typeof v === 'object') { for (const k in v) v[k] = normalizar(v[k]); }
+      return v;
+    };
+    normalizar(dados);
     return dados;
   }
 
